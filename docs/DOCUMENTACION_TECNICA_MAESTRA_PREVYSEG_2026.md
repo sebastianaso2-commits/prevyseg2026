@@ -127,51 +127,39 @@ El proyecto **PREVYSEG 2026** corresponde al desarrollo de una plataforma tecnol
 
 ---
 
-## 6. Etapas del Desarrollo, Insumos de la Empresa y Subsanación de Demandas
+## 6. Etapas del Desarrollo, Insumos de la Empresa, Subsanación de Demandas y Matriz de Hitos
 
-De acuerdo a la **Carta Gantt oficial** generada en el archivo `Carta_Gantt_Desarrollo_PrevySeg_2026.xlsx`, el proyecto abarca 8 etapas estructuradas:
+De acuerdo a la **Carta Gantt oficial maestra** generada en el archivo `Carta_Gantt_Desarrollo_PrevySeg_2026.xlsx`, el proyecto abarca 13 etapas estructuradas en 75 días calendario (Septiembre, Octubre y Noviembre 2026), complementadas por un **Tablero Ejecutivo de 11 Hitos Críticos (Milestones)**:
 
-### Resumen de Etapas e Insumos Necesarios de la Empresa:
-
-1. **Etapa 1: Levantamiento, Planificación e Insumos del Cliente**
-   * *Actividades:* Definición de alcance, marco legal SENCE/SPD y arquitectura inicial.
-   * *Insumos de la Empresa:* Manuales de procedimiento NCh 2728, organigrama OTEC y resoluciones exentas.
-2. **Etapa 2: Diseño de Arquitectura, UX/UI y Prototipado**
-   * *Actividades:* Wireframes, sistema de diseño Tailwind y modelado PostgreSQL.
-   * *Insumos de la Empresa:* Logotipos vectoriales, manual de marca corporativo y fotografías de sedes.
-3. **Etapa 3: Desarrollo Core Frontend y Portal Público**
-   * *Actividades:* Landing page, catálogo de los 20 cursos y fichas modales.
-   * *Insumos de la Empresa:* Fichas curriculares oficiales, temarios y valores arancelarios.
-4. **Etapa 4: Backend, Supabase PostgreSQL y Seguridad Bcrypt**
-   * *Actividades:* Despliegue de esquemas, hash Bcrypt, validación Módulo 11 y abono 50%.
-   * *Insumos de la Empresa:* Cuentas bancarias de la institución y credenciales de Supabase Cloud.
-5. **Etapa 5: Plataforma LMS Multi-Rol (Aula Virtual y Paneles)**
-   * *Actividades:* Paneles de Administrador, Docente, Alumno y Empresa.
-   * *Insumos de la Empresa:* Material didáctico en PDF/video, pautas docentes y convenios laborales.
-6. **Etapa 6: Auditoría, Trazabilidad SENCE, Calificaciones SPD y Logs**
-   * *Actividades:* Módulo de fiscalización, marcas horarias y libro de calificaciones SPD.
-   * *Insumos de la Empresa:* Pauta de ponderación 60/40 de Carabineros OS-10 y exigencias SENCE.
-7. **Etapa 7: Subsanar Demandas del Cliente o Mandatario (Observaciones Resueltas)**
-   * *Demanda 1:* **Regla estricta 1 alumno = 1 curso activo** (subsanada en backend PostgreSQL y frontend).
-   * *Demanda 2:* **Flujo especial CCTV con visto bueno, 30 días e historial** (subsanada al 100%).
-   * *Demanda 3:* **Gráficos en cada apartado de Auditoría y Live Logs reales** (subsanada al 100%).
-   * *Insumos de la Empresa:* Listado formal de observaciones y feedback de la contraparte técnica.
-8. **Etapa 8: Control de Calidad, Despliegue y Transferencia Tecnológica**
-   * *Actividades:* Pruebas E2E, generación de Carta Gantt en Excel (.xlsx), documentación técnica en Word (.docx) y deploy en Vercel.
-   * *Insumos de la Empresa:* Visto bueno final de entrega y confirmación de dominio web.
+### Cronograma de Fases y Puntos de Decisión (75 Días):
+* **Mes 1 (Septiembre 2026 - Días 1 al 30):** Arquitectura, Base de Datos Supabase Cloud, Core Frontend, LMS Multi-Rol y Auditoría SENCE/SPD.
+  * **Hito 1 (Día 4):** Cierre de Levantamiento Inicial y Formalización de Insumos Base (Logrado 100%).
+  * **Hito 2 (Día 8):** Aprobación de Arquitectura de Software, Tokens UI y Modelo Supabase (Logrado 100%).
+  * **Hito 3 (Día 14):** Despliegue de Portal Institucional Base, Catálogo Reactivo y Formulario (Logrado 100%).
+  * **Hito 4 (Día 18):** Backend Seguro, Hash Bcrypt, Validación RUT Módulo 11 y Abono 50% (Logrado 100%).
+  * **Hito 5 (Día 30 - Cierre Mes 1):** Plataforma LMS Multi-Rol y Motor de Fiscalización SENCE/SPD (Logrado 100%).
+* **Mes 2 (Octubre 2026 - Días 31 al 60):** Adaptaciones Normativas Ley 21.659, 3 Vistas Desacopladas (OTEC, Seguridad, Oficios), CMS Administrador en Vivo, 4 Tabs Curriculares, Pruebas UX (2 personas) y Desarrollos Evolutivos.
+  * **Hito 6 (Día 36):** Homologación Normativa Ley 21.659, Depuración CCTV y Resiliencia LMS (Logrado 100%).
+  * **Hito 7 (Día 44):** Desacoplamiento de Modalidades (Online/Presencial) y Fichas Interactivas (Logrado 100%).
+  * **Hito 8 (Día 54):** Validación de 3 Vistas, 4 Tabs, CMS Admin, Pruebas UX (2 personas) y Estética Neón (Logrado 100%).
+  * **Hito 9 (Día 60 - Cierre Mes 2):** Culminación de Desarrollos Evolutivos y Pasarela Webpay Plus Octubre (En curso 35%).
+* **Fase Final (Noviembre 2026 - Días 61 al 75):** Revisión Técnica, Auditoría de Calidad, Blindaje RLS, Marcha Blanca y Cierre Formal.
+  * **Hito 10 (Día 68):** Auditoría Exhaustiva de Calidad, Blindaje RLS y Rendimiento Web Cloud (Planificado).
+  * **Hito 11 (Día 75 - Cierre Proyecto):** Marcha Blanca Concluida, Acta de Aceptación y Entrega Formal 2026 (Planificado).
 
 ---
 
 ## 7. Archivos Entregables Generados
 
-1. **Carta Gantt Oficial en Excel:**  
+1. **Carta Gantt Oficial en Excel (Multi-hoja con Hitos):**  
    📁 `Carta_Gantt_Desarrollo_PrevySeg_2026.xlsx`  
-   *Contiene la programación en días, calendario de Septiembre 2026, columna explícita de "Insumos Necesarios de la Empresa / Mandatario", fase de "Subsanar Demandas del Cliente" y hoja de vinculación a GitHub.*
+   *Contiene 4 hojas ejecutivas: (1) Carta Gantt de Desarrollo a 75 días con simbología de rombos ◆ en la línea temporal; (2) Matriz de Insumos de la Empresa & Subsanación de Demandas; (3) Tablero de Control y Gestión de Hitos Críticos (Milestones) con KPIs; (4) Respaldo GitHub & Control de Versiones.*
 2. **Documentación Técnica Maestra en Word:**  
    📁 `Documentacion_Tecnica_Maestra_PrevySeg_2026.docx`  
-   *Documento ejecutivo formal con tablas de especificación de roles, vistas, arquitectura, base de datos y firma de responsabilidad técnica.*
+   *Documento formal con especificación de roles, vistas desacopladas, arquitectura cloud y normativas Ley 21.659 / SENCE.*
 3. **Documentación Markdown en Repositorio:**  
    📁 `docs/DOCUMENTACION_TECNICA_MAESTRA_PREVYSEG_2026.md`  
-   *Archivo legible directamente en el repositorio de GitHub.*
+   *Archivo sincronizado directamente en el repositorio oficial de GitHub.*
+
 4. **Repositorio Oficial de GitHub:**  
    🔗 [https://github.com/Sebastianaso/PrevySeg2026](https://github.com/Sebastianaso/PrevySeg2026)
