@@ -164,9 +164,9 @@ const EXTRA_COURSES_DATA = [
     status: 'Disponible'
   },
   {
-    id: 'seg-09',
-    title: 'Técnicas de operación CCTV y alarmas de seguridad privada',
-    shortTitle: 'Operador de Central de Cámaras de Televigilancia (CCTV)',
+    id: 'seg-08',
+    title: 'Técnicas de operación de circuitos cerrados de televisión (CCTV codificado por SENCE)',
+    shortTitle: 'Operador de Central de Cámaras de Televigilancia (CCTV SENCE)',
     category: 'Seguridad Privada',
     image: cctvOperatorImg,
     price: '$140.000 CLP',
@@ -177,7 +177,7 @@ const EXTRA_COURSES_DATA = [
     startDate: 'Autoestudio Individual Flexible (30 Días)',
     endDate: '30 días desde visto bueno',
     totalHours: '5 Manuales Técnicos',
-    senceCode: 'CCTV-ALARM-09',
+    senceCode: 'CCTV-SENCE-08',
     highlight: 'Autoestudio Individual • 30 Días',
     status: 'Disponible',
     isCctv: true
@@ -187,16 +187,16 @@ const EXTRA_COURSES_DATA = [
     title: 'Curso de formación Guardia de Seguridad',
     category: 'Seguridad Privada',
     image: securityGuardsImg,
-    price: '$120.000 CLP',
-    priceNumber: 120000,
-    priceDetail: 'Acreditado SPD (Subsecretaría de Prevención del Delito)',
-    days: 'Lunes a Viernes',
-    hours: '18:00 a 22:00 hrs',
-    startDate: '12 Octubre, 2026',
-    endDate: '12 Noviembre, 2026',
+    price: '$140.000 CLP',
+    priceNumber: 140000,
+    priceDetail: 'Facilidad de pago: 2 cuotas de 50% ($70.000 c/u) • Acreditado SPD / OS-10',
+    days: 'Lunes a Sábado (2 Semanas)',
+    hours: '08:30 a 12:30 y 14:30 a 18:30 hrs',
+    startDate: '14 Octubre, 2026',
+    endDate: '28 Octubre, 2026',
     totalHours: '90 Horas Cronológicas',
     senceCode: 'Acreditado SPD (Subsecretaría de Prevención del Delito)',
-    highlight: 'Online SENCE',
+    highlight: 'Presencial / Práctico Terreno',
     status: 'Disponible'
   },
   {
@@ -407,6 +407,7 @@ const ExtraCoursesView = ({ currentUser }) => {
   const isSelectedCctv = Boolean(
     selectedCourseForModal && (
       isCctvSpecialCourse(selectedCourseForModal) || 
+      selectedCourseForModal.id === 'seg-08' || 
       selectedCourseForModal.id === 'seg-09' || 
       selectedCourseForModal.id === 'extra-02' ||
       selectedCourseForModal.id === 'cctv-online' ||

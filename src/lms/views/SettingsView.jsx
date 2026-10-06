@@ -30,11 +30,14 @@ import {
   Building2,
   Laptop,
   Compass,
-  Sliders
+  Sliders,
+  EyeOff,
+  PlusCircle
 } from 'lucide-react';
 import { supabase, isCctvSpecialCourse } from '../../config/supabase';
 import { getSavedCourses, updateCourseItem } from '../../data/coursesData';
 import CourseManagerModal from '../../components/CourseManagerModal';
+import CreateCourseModal from '../../components/CreateCourseModal';
 import CctvActivationManager from '../components/CctvActivationManager';
 
 // =========================================================================
@@ -72,6 +75,7 @@ const SettingsView = ({ _isEditMode, _currentUser }) => {
   const [errorMessage, setErrorMessage] = useState('');
   const [testCity, setTestCity] = useState('Arica');
   const [isManagerOpen, setIsManagerOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
 
   useEffect(() => {
     selectedCourseIdRef.current = selectedCourseId;
@@ -284,7 +288,29 @@ const SettingsView = ({ _isEditMode, _currentUser }) => {
   useEffect(() => {
     const handleCoursesUpdated = (e) => {
       if (e.detail && Array.isArray(e.detail)) {
-        setCourses(e.detail);
+        setCourses(prev => {
+          if (!prev || prev.length === 0) return e.detail;
+          return prev.map(pCourse => {
+            const match = e.detail.find(d => d.id === pCourse.id || d.title === pCourse.titulo || d.title === pCourse.title);
+            if (!match) return pCourse;
+            return {
+              ...pCourse,
+              ...match,
+              id: pCourse.id, // Preservar el ID original de Supabase (UUID)
+              titulo: match.titulo || match.title || pCourse.titulo || pCourse.title,
+              title: match.title || match.titulo || pCourse.title || pCourse.titulo,
+              activo: typeof match.activo === 'boolean' ? match.activo : (typeof pCourse.activo === 'boolean' ? pCourse.activo : true),
+              codigo_sence: match.codigo_sence || pCourse.codigo_sence,
+              disponible: typeof match.disponible === 'boolean' ? match.disponible : pCourse.disponible,
+              proximamente: typeof match.proximamente === 'boolean' ? match.proximamente : pCourse.proximamente,
+              permitePresencial: typeof match.permitePresencial === 'boolean' ? match.permitePresencial : pCourse.permitePresencial,
+              permiteVirtual: typeof match.permiteVirtual === 'boolean' ? match.permiteVirtual : pCourse.permiteVirtual,
+              cupos: match.cupos !== undefined ? match.cupos : pCourse.cupos,
+              fecha_inicio: match.fecha_inicio || pCourse.fecha_inicio,
+              fecha_termino: match.fecha_termino || pCourse.fecha_termino,
+            };
+          });
+        });
       } else {
         fetchCourses();
       }
@@ -317,6 +343,9 @@ const SettingsView = ({ _isEditMode, _currentUser }) => {
       }
 
       updateCourseItem(course.id, {
+        title: course.titulo || course.title,
+        school: course.school,
+        activo: true,
         proximamente: nextVal,
         disponible: nextVal ? false : course.disponible
       });
@@ -409,7 +438,12 @@ const SettingsView = ({ _isEditMode, _currentUser }) => {
   // Filtrar cursos por escuela y buscador
   const filteredCourses = useMemo(() => {
     return courses.filter(c => {
-      const matchSchool = activeSchoolFilter === 'all' || c.school === activeSchoolFilter;
+      let matchSchool = true;
+      if (activeSchoolFilter === 'ocultos') {
+        matchSchool = c.activo === false;
+      } else if (activeSchoolFilter !== 'all') {
+        matchSchool = c.school === activeSchoolFilter;
+      }
       const title = (c.titulo || c.title || '').toLowerCase();
       const code = (c.codigo_sence || '').toLowerCase();
       const cat = (c.category || '').toLowerCase();
@@ -424,7 +458,8 @@ const SettingsView = ({ _isEditMode, _currentUser }) => {
     const seg = courses.filter(c => c.school === 'seguridad').length;
     const ofi = courses.filter(c => c.school === 'oficios').length;
     const prox = courses.filter(c => c.proximamente).length;
-    return { seg, ofi, prox, total: courses.length };
+    const ocultos = courses.filter(c => c.activo === false).length;
+    return { seg, ofi, prox, ocultos, total: courses.length };
   }, [courses]);
 
   // Guardar Cambios en Supabase PostgreSQL y localmente
@@ -475,9 +510,11 @@ const SettingsView = ({ _isEditMode, _currentUser }) => {
       // Sincronizar catálogo local para actualización reactiva en la app
       updateCourseItem(formData.id, {
         title: formData.nombreCompleto,
+        titulo: formData.nombreCompleto,
         category: formData.categoria,
         school: formData.school,
         codigo_sence: formData.idSence || formData.nombreCorto,
+        activo: formData.visibilidad === 'Mostrar',
         disponible: formData.disponible,
         proximamente: formData.proximamente,
         cupos: parseInt(formData.cupos, 10) || 0,
@@ -492,9 +529,12 @@ const SettingsView = ({ _isEditMode, _currentUser }) => {
       });
 
       // Actualizar estado local de la lista
-      setCourses(prev => prev.map(c => c.id === formData.id ? {
+      setCourses(prev => prev.map(c => (c.id === formData.id || c.titulo === formData.nombreCompleto || c.title === formData.nombreCompleto) ? {
         ...c,
         ...payload,
+        titulo: formData.nombreCompleto,
+        title: formData.nombreCompleto,
+        activo: formData.visibilidad === 'Mostrar',
         permitePresencial: formData.permitePresencial,
         permiteVirtual: formData.permiteVirtual
       } : c));
@@ -509,7 +549,7 @@ const SettingsView = ({ _isEditMode, _currentUser }) => {
     }
   };
 
-  const selectedCourse = courses.find(c => c.id === selectedCourseId);
+  const selectedCourse = courses.find(c => c.id === selectedCourseId || (formData.id && c.id === formData.id) || (formData.nombreCompleto && (c.titulo === formData.nombreCompleto || c.title === formData.nombreCompleto))) || courses[0];
 
   return (
     <div className="space-y-6 animate-in fade-in duration-200">
@@ -544,10 +584,26 @@ const SettingsView = ({ _isEditMode, _currentUser }) => {
               <Clock size={13} className="text-amber-400 animate-pulse" />
               Próximamente: <strong>{counts.prox}</strong>
             </span>
+            {counts.ocultos > 0 && (
+              <span className="bg-rose-500/30 text-rose-200 px-2.5 py-1 rounded-lg border border-rose-400/30 flex items-center gap-1.5 font-bold">
+                <EyeOff size={13} className="text-rose-400" />
+                Ocultos: <strong>{counts.ocultos}</strong>
+              </span>
+            )}
           </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-3 w-full md:w-auto justify-end">
+          <button
+            type="button"
+            onClick={() => setIsCreateModalOpen(true)}
+            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-gradient-to-r from-sky-500 to-cyan-400 text-slate-950 font-black text-xs shadow-md hover:brightness-110 transition-all cursor-pointer"
+            title="Crear un nuevo curso y definir si será Online, Presencial o Ambas"
+          >
+            <PlusCircle size={15} />
+            <span>＋ Crear Nuevo Curso</span>
+          </button>
+
           <button
             type="button"
             onClick={() => setIsManagerOpen(true)}
@@ -621,6 +677,23 @@ const SettingsView = ({ _isEditMode, _currentUser }) => {
                 {counts.ofi}
               </span>
             </button>
+
+            {counts.ocultos > 0 && (
+              <button
+                type="button"
+                onClick={() => setActiveSchoolFilter(activeSchoolFilter === 'ocultos' ? 'all' : 'ocultos')}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5 cursor-pointer ${activeSchoolFilter === 'ocultos'
+                    ? 'bg-rose-600 text-white shadow-md shadow-rose-600/20 scale-102'
+                    : 'bg-rose-50 text-rose-800 hover:bg-rose-100 border border-rose-200'
+                  }`}
+              >
+                <EyeOff size={14} />
+                <span>Ocultos en LMS</span>
+                <span className="ml-1 px-1.5 py-0.5 rounded-full text-[10px] bg-rose-200/60">
+                  {counts.ocultos}
+                </span>
+              </button>
+            )}
           </div>
 
           {/* Buscador de cursos */}
@@ -644,7 +717,7 @@ const SettingsView = ({ _isEditMode, _currentUser }) => {
             </span>
             <span className="text-[11px] text-slate-500">
               {selectedCourse ? (
-                <>Editando actualmente: <strong className="text-sky-700">{selectedCourse.titulo}</strong></>
+                <>Editando actualmente: <strong className="text-sky-700">{selectedCourse.titulo || selectedCourse.title}</strong></>
               ) : 'Ningún curso seleccionado'}
             </span>
           </div>
@@ -676,22 +749,30 @@ const SettingsView = ({ _isEditMode, _currentUser }) => {
                       <span>{isSeg ? 'Seguridad' : 'Oficios'}</span>
                     </span>
 
-                    {/* Botón / Badge Próximamente */}
-                    {isProx ? (
-                      <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-amber-500 text-white shadow-xs animate-pulse">
-                        <Clock size={10} />
-                        <span>PRONTO</span>
-                      </span>
-                    ) : (
-                      <span className="text-[10px] font-mono text-slate-500 font-semibold truncate max-w-[90px]">
-                        {course.codigo_sence || 'SENCE'}
-                      </span>
-                    )}
+                    {/* Botón / Badge Próximamente y Oculto */}
+                    <div className="flex items-center gap-1">
+                      {course.activo === false && (
+                        <span className="inline-flex items-center gap-1 text-[9px] font-black uppercase px-1.5 py-0.5 rounded-md bg-rose-100 text-rose-800 border border-rose-300 shadow-2xs">
+                          <EyeOff size={10} />
+                          <span>Oculto</span>
+                        </span>
+                      )}
+                      {isProx ? (
+                        <span className="inline-flex items-center gap-1 text-[10px] font-black uppercase px-2 py-0.5 rounded-md bg-amber-500 text-white shadow-xs animate-pulse">
+                          <Clock size={10} />
+                          <span>PRONTO</span>
+                        </span>
+                      ) : (
+                        <span className="text-[10px] font-mono text-slate-500 font-semibold truncate max-w-[90px]">
+                          {course.codigo_sence || 'SENCE'}
+                        </span>
+                      )}
+                    </div>
                   </div>
 
                   <h4 className={`text-xs font-bold line-clamp-2 leading-tight ${isSelected ? (isSeg ? 'text-sky-950' : 'text-amber-950') : 'text-slate-800'
                     }`}>
-                    {course.titulo}
+                    {course.titulo || course.title}
                   </h4>
 
                   {/* Etiquetas de Modalidad Asignadas con conmutación en 1 clic */}
@@ -1638,6 +1719,14 @@ const SettingsView = ({ _isEditMode, _currentUser }) => {
       <CourseManagerModal
         isOpen={isManagerOpen}
         onClose={() => setIsManagerOpen(false)}
+      />
+
+      {/* Modal Creación de Nuevos Cursos con Selección de Modalidad */}
+      <CreateCourseModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        initialSchool={activeSchoolFilter !== 'all' && activeSchoolFilter !== 'ocultos' ? activeSchoolFilter : 'seguridad'}
+        onSuccess={() => fetchCourses()}
       />
     </div>
   );

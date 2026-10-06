@@ -119,21 +119,30 @@ export const DEFAULT_COURSES = [
     school: 'oficios',
     category: 'Área Alimentación',
     title: 'Procedimientos de higiene, seguridad y prevención de riesgos en procesos de manipulación de alimentos',
-    duration: '40 Horas',
-    modality: 'Online + Taller Higiénico',
+    duration: '60 Horas pedagógicas',
+    modality: 'Presencial, teórico-práctica',
+    dias: '3 veces por semana',
+    horario: 'Martes, Miércoles y Jueves',
+    jornada: '16 hrs teóricas / 28 hrs prácticas / 16 hrs de implementación',
     permitePresencial: true,
-    permiteVirtual: true,
-    price: '$85.000 CLP',
-    depositPrice: '$42.500 CLP (50%)',
-    priceDetail: 'Acreditación Sanitaria Seremi de Salud',
+    permiteVirtual: false,
+    price: '$150.000 CLP',
+    depositPrice: '$75.000 CLP (50%)',
+    priceDetail: 'Acreditación Oficial • Incluye Materiales',
     disponible: true,
-    cupos: 25,
+    cupos: 20,
     fecha_inicio: '12 de Octubre, 2026',
     fecha_termino: '12 de Noviembre, 2026',
-    badgeText: 'Manipulación Higiénica',
-    highlight: 'Carné Sanitario',
+    badgeText: '60 Horas Teórico-Prácticas',
+    highlight: 'Emprendimiento Gastronómico',
     image: foodImg,
-    description: 'Buenas Prácticas de Manufactura (BPM), control de puntos críticos (HACCP), prevención de contaminación cruzada, cadena de frío y desinfección en cocinas e industrias.'
+    description: 'Aprende a elaborar alimentos de forma segura y desarrolla las competencias necesarias para iniciar o fortalecer tu emprendimiento gastronómico con herramientas de inocuidad y formalización.',
+    requisitos: [
+      'Cédula de Identidad chilena vigente (o extranjera con permanencia definitiva).',
+      'Mayor de 18 años.',
+      'Interés en iniciar o fortalecer un emprendimiento gastronómico.',
+      'Salud compatible con funciones de manipulación higiénica de alimentos.'
+    ]
   },
 
   // --- ÁREA ESTÉTICA Y SERVICIOS ---
@@ -185,12 +194,15 @@ export const DEFAULT_COURSES = [
     category: 'Área Estética y Servicios',
     title: 'Técnicas de maquillaje carnaval',
     duration: '30 Horas Prácticas',
-    modality: 'Presencial Especializado',
+    modality: 'Presencial Especializado (Teórico-Práctica)',
+    dias: 'Talleres Prácticos en Sede',
+    horario: 'Jornada Intensiva con Insumos',
+    jornada: 'Kit de Trabajo entregado desde el Día 1',
     permitePresencial: true,
     permiteVirtual: false,
     price: '$90.000 CLP',
     depositPrice: '$45.000 CLP (50%)',
-    priceDetail: 'Pigmentos, Glitter & Fijación',
+    priceDetail: 'Incluye Kit Completo de Insumos y Manual',
     disponible: true,
     cupos: 15,
     fecha_inicio: '02 de Noviembre, 2026',
@@ -198,7 +210,12 @@ export const DEFAULT_COURSES = [
     badgeText: 'Carnaval con la Fuerza del Sol',
     highlight: 'Tradición Macro Zona Norte',
     image: aestheticImg,
-    description: 'Técnicas de maquillaje artístico resistente al agua y sudor, aplicación de pedrería y glitter, difuminados de alta pigmentación para bailarines de carnavales y eventos.'
+    description: 'Formación técnica en colorimetría, peinados con ornamentación capilar y maquillaje artístico de alta fijación resistente al calor, sudor y movimiento para carnavales y eventos.',
+    requisitos: [
+      'Cédula de Identidad chilena vigente.',
+      'Mayor de 18 años.',
+      'No se requieren conocimientos previos en maquillaje ni estética.'
+    ]
   },
 
   // --- ÁREA DE SALUD ---
@@ -258,12 +275,15 @@ export const DEFAULT_COURSES = [
     category: 'Formación Inicial',
     title: 'Formación de guardias de seguridad',
     duration: '90 Horas Cronológicas',
+    dias: '2 semanas',
+    horario: '08:30 a 12:30 y 14:30 a 18:30 hrs',
+    jornada: 'Lunes a Sábado • Mañana: 08:30-12:30 | Tarde: 14:30-18:30',
     modality: 'Presencial y Práctica en Terreno',
     permitePresencial: true,
     permiteVirtual: true,
-    price: '$120.000 CLP',
-    depositPrice: '$60.000 CLP (50%)',
-    priceDetail: 'Examen Oficial SPD / Carabineros OS-10',
+    price: '$140.000 CLP',
+    depositPrice: '$70.000 CLP (2 cuotas de 50%)',
+    priceDetail: 'Facilidad de pago: 2 cuotas de 50% ($70.000 c/u) • Examen Oficial SPD / OS-10',
     disponible: true,
     cupos: 30,
     fecha_inicio: '14 de Octubre, 2026',
@@ -271,14 +291,26 @@ export const DEFAULT_COURSES = [
     badgeText: 'Credencial OS-10 SPD',
     highlight: 'Iniciación Obligatoria',
     image: securityGuardsImg,
-    description: 'Programa oficial exigido por la Ley 21.659. Prepara al alumno en legislación de seguridad privada, primeros auxilios, defensa personal y preparación para el examen ante la Autoridad Fiscalizadora.'
+    description: 'Programa oficial exigido por la Ley 21.659. Prepara al alumno en legislación de seguridad privada, primeros auxilios, defensa personal y preparación para el examen ante la Autoridad Fiscalizadora.',
+    requisitos: [
+      'Cédula de Identidad chilena vigente (ambos lados). Extranjeros: Permanencia Definitiva en Chile.',
+      'Tener 18 años cumplidos al momento de la matrícula.',
+      'Certificado de Estudios: Licencia de Enseñanza Media completa (4° Medio rendido) validada por Mineduc.',
+      'Certificado de Antecedentes para Fines Especiales (sin condenas por crímenes, simples delitos ni causas por Violencia Intrafamiliar - VIF).',
+      'Certificado Médico de Aptitud Física emitido por médico cirujano (inscrito en la Superintendencia de Salud).',
+      'Certificado Psicológico de Aptitud Mental (evaluación psicotécnica emitida por psicólogo habilitado).',
+      'Declaración jurada de idoneidad cívica y no haber sido sancionado por la Ley de Seguridad del Estado.'
+    ]
   },
   {
     id: 'seg-02',
     school: 'seguridad',
     category: 'Formación Inicial',
     title: 'Formación de vigilantes privados',
-    duration: '100 Horas',
+    duration: '106 Horas Cronológicas',
+    dias: '15 días hábiles',
+    horario: '08:30 a 13:00 y 14:30 a 17:30 hrs',
+    jornada: 'Lunes a Viernes • Incluye Polígono de Tiro',
     modality: 'Presencial con Instrucción de Tiro',
     permitePresencial: true,
     permiteVirtual: false,
@@ -292,14 +324,27 @@ export const DEFAULT_COURSES = [
     badgeText: 'Alta Seguridad & Armamento',
     highlight: 'Banca & Valores',
     image: securitySupervisorImg,
-    description: 'Instrucción especializada para entidades bancarias, transporte de caudales y recintos estratégicos de alto riesgo, con polígono de tiro y protocolos de defensa armada.'
+    description: 'Instrucción especializada para entidades bancarias, transporte de caudales y recintos estratégicos de alto riesgo, con polígono de tiro y protocolos de defensa armada.',
+    requisitos: [
+      'Cédula de Identidad chilena vigente (nacionalidad chilena o permanencia definitiva según normativa).',
+      'Tener 21 años cumplidos al inicio de la instrucción.',
+      'Situación Militar al día (Certificado de cumplimiento de Servicio Militar o exención legal).',
+      'Licencia de Educación Media completa (4° Medio rendido y aprobado por Mineduc).',
+      'Certificado de Antecedentes para Fines Especiales intachable (sin condenas ni formalizaciones vigentes).',
+      'Evaluación Psiquiátrica y Psicotécnica rigurosa para Porte y Uso de Armas de Fuego.',
+      'Certificado Médico de Aptitud Física compatible con instrucción de tiro y esfuerzo.',
+      'Informe Comercial (Boletín Comercial / Dicom) sin morosidades ni protestos graves vigentes.'
+    ]
   },
   {
     id: 'seg-03',
     school: 'seguridad',
     category: 'Formación Inicial',
     title: 'Formación de guardia de seguridad marítimo portuario',
-    duration: '90 Horas',
+    duration: '90 Horas Cronológicas',
+    dias: '12 días',
+    horario: '08:30 a 12:30 y 14:30 a 16:30 hrs',
+    jornada: 'Lunes a Sábado • Práctica en Terminales Portuarios',
     modality: 'Presencial / Recintos Portuarios',
     permitePresencial: true,
     permiteVirtual: true,
@@ -313,7 +358,16 @@ export const DEFAULT_COURSES = [
     badgeText: 'Acreditación Directemar',
     highlight: 'Puertos del Norte',
     image: portImg,
-    description: 'Instrucción en resguardo y control de accesos en muelles, terminales marítimos y recintos portuarios de la Macro Zona Norte bajo las directivas de la Autoridad Marítima.'
+    description: 'Instrucción en resguardo y control de accesos en muelles, terminales marítimos y recintos portuarios de la Macro Zona Norte bajo las directivas de la Autoridad Marítima.',
+    requisitos: [
+      'Cédula de Identidad chilena vigente (o Permanencia Definitiva).',
+      'Mayor de 18 años.',
+      'Licencia de Enseñanza Media completa acreditada por Mineduc.',
+      'Certificado de Antecedentes para Fines Especiales limpio.',
+      'Examen Médico de Aptitud Física compatible con faenas marítimo-portuarias y borde costero.',
+      'Evaluación psicológica de idoneidad y control de impulsos.',
+      'Cumplimiento de estándares del Código Internacional PBIP / Autoridad Marítima (Directemar).'
+    ]
   },
   {
     id: 'seg-04',
@@ -321,6 +375,9 @@ export const DEFAULT_COURSES = [
     category: 'Formación Inicial',
     title: 'Formación para porteros, nocheros, rondines u otro de similar carácter',
     duration: '50 Horas',
+    dias: '8 días hábiles',
+    horario: '09:00 a 13:00 hrs o Vespertino 18:00 a 21:30 hrs',
+    jornada: 'Lunes a Viernes • Turnos Flexibles Diurno o Vespertino',
     modality: 'Online Asíncrono + Prácticas',
     permitePresencial: true,
     permiteVirtual: true,
@@ -334,7 +391,14 @@ export const DEFAULT_COURSES = [
     badgeText: 'Control de Accesos',
     highlight: 'Rápida Inserción',
     image: conflictImg,
-    description: 'Manejo de libro de novedades, rondas nocturnas perimetrales, control de accesos peatonales y vehiculares, y protocolos ante emergencias en condominios y empresas.'
+    description: 'Manejo de libro de novedades, rondas nocturnas perimetrales, control de accesos peatonales y vehiculares, y protocolos ante emergencias en condominios y empresas.',
+    requisitos: [
+      'Cédula de Identidad chilena vigente (o Permanencia Definitiva).',
+      'Mayor de 18 años.',
+      'Certificado de Educación Básica completa o Enseñanza Media.',
+      'Certificado de Antecedentes para Fines Especiales sin condenas penales vigentes.',
+      'Salud compatible con funciones de control de acceso y rondas en condominios residenciales.'
+    ]
   },
 
   // --- PERFECCIONAMIENTO ---
@@ -343,7 +407,10 @@ export const DEFAULT_COURSES = [
     school: 'seguridad',
     category: 'Perfeccionamiento',
     title: 'Perfeccionamiento de guardias de seguridad',
-    duration: '36 Horas',
+    duration: '36 Horas Cronológicas',
+    dias: '5 días hábiles intensivos',
+    horario: '08:30 a 13:00 y 14:30 a 17:00 hrs',
+    jornada: 'Lunes a Viernes • Reentrenamiento Trienal',
     modality: 'Semipresencial (Reentrenamiento Trienal)',
     permitePresencial: true,
     permiteVirtual: true,
@@ -357,14 +424,24 @@ export const DEFAULT_COURSES = [
     badgeText: 'Renovación Trienal',
     highlight: 'Revalidación Rápida',
     image: securityGuardsImg,
-    description: 'Actualización jurídica de la Ley 21.659, reentrenamiento físico, primeros auxilios actualizados y preparación inmediata para renovar la credencial oficial ante la SPD.'
+    description: 'Actualización jurídica de la Ley 21.659, reentrenamiento físico, primeros auxilios actualizados y preparación inmediata para renovar la credencial oficial ante la SPD.',
+    requisitos: [
+      'Copia de Tarjeta / Credencial OS-10 anterior (vencida o próxima a expirar).',
+      'Cédula de Identidad chilena vigente.',
+      'Certificado de Antecedentes para Fines Especiales al día y sin anotaciones.',
+      'Certificado Médico y Psicológico de aptitud física y mental renovado.',
+      'Certificado de Enseñanza Media rendida (o registro previo validado ante Carabineros OS-10).'
+    ]
   },
   {
     id: 'seg-06',
     school: 'seguridad',
     category: 'Perfeccionamiento',
     title: 'Perfeccionamiento de guardia de seguridad marítimo portuario',
-    duration: '40 Horas',
+    duration: '40 Horas Cronológicas',
+    dias: '6 días hábiles',
+    horario: '08:30 a 13:00 y 14:30 a 16:30 hrs',
+    jornada: 'Lunes a Sábado • Revalidación Directemar',
     modality: 'Presencial / Código PBIP',
     permitePresencial: true,
     permiteVirtual: true,
@@ -378,7 +455,13 @@ export const DEFAULT_COURSES = [
     badgeText: 'Actualización Portuaria',
     highlight: 'Terminales TPA',
     image: portImg,
-    description: 'Revisión y actualización de protocolos de inspección de naves, verificación de contenedores y resguardo de faenas portuarias para guardias con vigencia por expirar.'
+    description: 'Revisión y actualización de protocolos de inspección de naves, verificación de contenedores y resguardo de faenas portuarias para guardias con vigencia por expirar.',
+    requisitos: [
+      'Copia de Credencial Marítima Portuaria previa Directemar.',
+      'Cédula de Identidad chilena vigente.',
+      'Certificado de Antecedentes para Fines Especiales limpio.',
+      'Examen de salud ocupacional vigente para faenas en recintos portuarios.'
+    ]
   },
   {
     id: 'seg-07',
@@ -386,6 +469,9 @@ export const DEFAULT_COURSES = [
     category: 'Perfeccionamiento',
     title: 'Perfeccionamiento para porteros, nocheros, rondines u otro de similar carácter',
     duration: '30 Horas',
+    dias: '4 días hábiles',
+    horario: 'Vespertino 18:30 a 21:45 hrs o Intensivo Sábados 08:30 a 16:30 hrs',
+    jornada: 'Vespertino o Sábados Intensivos',
     modality: 'Online Flexible',
     permitePresencial: true,
     permiteVirtual: true,
@@ -399,7 +485,12 @@ export const DEFAULT_COURSES = [
     badgeText: 'Actualización Periódica',
     highlight: 'Flexibilidad de Turno',
     image: conflictImg,
-    description: 'Reentrenamiento en técnicas preventivas, resolución de incidentes vecinales, ciberseguridad básica para conserjerías y primeros auxilios en recintos residenciales.'
+    description: 'Reentrenamiento en técnicas preventivas, resolución de incidentes vecinales, ciberseguridad básica para conserjerías y primeros auxilios en recintos residenciales.',
+    requisitos: [
+      'Cédula de Identidad chilena vigente.',
+      'Acreditación de experiencia previa en conserjería o certificado de curso anterior.',
+      'Certificado de Antecedentes para Fines Especiales al día.'
+    ]
   },
 
   // --- TECNOLOGÍA Y SISTEMAS DE SEGURIDAD (CURSOS DE ESPECIALIZACIÓN) ---
@@ -408,49 +499,43 @@ export const DEFAULT_COURSES = [
     school: 'seguridad',
     category: 'Tecnología y Sistemas de Seguridad',
     title: 'Técnicas de operación de circuitos cerrados de televisión (CCTV codificado por SENCE)',
+    codigo_sence: 'CCTV-ALARM-09',
     duration: '60 Horas',
+    dias: '10 días hábiles',
+    horario: 'Diurno: 09:00 a 13:00 hrs | Vespertino: 18:00 a 21:30 hrs',
+    jornada: 'Lunes a Viernes • Diurno o Vespertino',
     modality: 'Online Sincrónico + Software VMS',
     permitePresencial: true,
     permiteVirtual: true,
     price: '$140.000 CLP',
     depositPrice: '$70.000 CLP (50%)',
     priceDetail: 'Codificación SENCE Oficial',
-    disponible: true,
+    disponible: false,
+    proximamente: true,
+    activo: true,
     cupos: 18,
     fecha_inicio: '19 de Octubre, 2026',
     fecha_termino: '28 de Noviembre, 2026',
     badgeText: 'CCTV SENCE',
     highlight: 'Especialización Tecnológica',
     image: cctvOperatorImg,
-    description: 'Operación avanzada de software VMS, cámaras domo PTZ, reconocimiento de matrículas y rostros, resguardo de evidencia digital y trazabilidad forense para salas de control.'
-  },
-  {
-    id: 'seg-09',
-    school: 'seguridad',
-    category: 'Tecnología y Sistemas de Seguridad',
-    title: 'Técnicas de operación CCTV y alarmas de seguridad privada',
-    duration: '65 Horas',
-    modality: 'Semipresencial con Paneles de Alarma',
-    permitePresencial: true,
-    permiteVirtual: true,
-    price: '$150.000 CLP',
-    depositPrice: '$75.000 CLP (50%)',
-    priceDetail: 'Sistemas Electrónicos Integrados',
-    disponible: true,
-    cupos: 16,
-    fecha_inicio: '26 de Octubre, 2026',
-    fecha_termino: '05 de Diciembre, 2026',
-    badgeText: 'CCTV & Alarmas IP',
-    highlight: 'Sistemas Integrales',
-    image: cyberImg,
-    description: 'Integración de centrales de alarma perimetral e interior, sensores infrarrojos, barreras fotoeléctricas, televigilancia IP y gestión de respuesta ante intrusiones.'
+    description: 'Operación avanzada de software VMS, cámaras domo PTZ, reconocimiento de matrículas y rostros, resguardo de evidencia digital y trazabilidad forense para salas de control.',
+    requisitos: [
+      'Cédula de Identidad chilena vigente.',
+      'Licencia de Enseñanza Media completa (requisito código SENCE).',
+      'Certificado de Antecedentes sin observaciones penales.',
+      'Manejo de usuario en computación y sistemas operativos Windows.'
+    ]
   },
   {
     id: 'seg-10',
     school: 'seguridad',
     category: 'Tecnología y Sistemas de Seguridad',
     title: 'Supervisor de seguridad privada',
-    duration: '120 Horas',
+    duration: '120 Horas Cronológicas',
+    dias: '16 días hábiles',
+    horario: 'Vespertino: 18:30 a 21:45 hrs y Sábados 09:00 a 14:00 hrs',
+    jornada: 'Vespertino y Sábados • Compatible con Turnos de Trabajo',
     modality: '100% Online Aula Virtual',
     permitePresencial: true,
     permiteVirtual: true,
@@ -464,11 +549,42 @@ export const DEFAULT_COURSES = [
     badgeText: 'Rango de Jefatura',
     highlight: 'Gestión y Mando',
     image: securitySupervisorImg,
-    description: 'Planificación de turnos y cuadrantes, confección de Directivas de Funcionamiento conforme a la Ley 21.659, supervisión operativa en terreno y liderazgo de equipos de guardias.'
+    description: 'Planificación de turnos y cuadrantes, confección de Directivas de Funcionamiento conforme a la Ley 21.659, supervisión operativa en terreno y liderazgo de equipos de guardias.',
+    requisitos: [
+      'Cédula de Identidad chilena vigente y mayor de 21 años.',
+      'Licencia de Enseñanza Media completa (deseable título técnico o superior).',
+      'Experiencia laboral comprobable en seguridad privada o funciones de mando en FF.AA. / Carabineros.',
+      'Certificado de Antecedentes para Fines Especiales intachable.',
+      'Currículum Vitae actualizado con referencias laborales.',
+      'Evaluación psicológica de liderazgo, templanza y toma de decisiones.'
+    ]
   }
 ];
 
-const STORAGE_KEY = 'prevyseg_custom_courses_v2';
+const STORAGE_KEY = 'prevyseg_custom_courses_v5';
+
+// Helper robusto para comparar si dos referencias de curso apuntan al mismo curso académico
+export function coursesMatch(a, b) {
+  if (!a || !b) return false;
+  const idA = (a.id || '').toString().toLowerCase().trim();
+  const idB = (b.id || '').toString().toLowerCase().trim();
+  if (idA && idB && idA === idB) return true;
+
+  const codeA = (a.codigo_sence || a.code || a.idSence || a.nombreCorto || '').toString().toLowerCase().trim();
+  const codeB = (b.codigo_sence || b.code || b.idSence || b.nombreCorto || '').toString().toLowerCase().trim();
+  if (codeA && codeB && codeA === codeB) return true;
+
+  const titleA = (a.title || a.titulo || a.nombreCompleto || '').toLowerCase().trim();
+  const titleB = (b.title || b.titulo || b.nombreCompleto || '').toLowerCase().trim();
+  if (titleA && titleB && titleA === titleB) return true;
+
+  // Coincidencia semántica especializada para cursos de CCTV
+  const isCctvA = titleA.includes('cctv') || titleA.includes('circuitos cerrados') || codeA.includes('cctv');
+  const isCctvB = titleB.includes('cctv') || titleB.includes('circuitos cerrados') || codeB.includes('cctv');
+  if (isCctvA && isCctvB) return true;
+
+  return false;
+}
 
 // Helper oficial para obtener y verificar las modalidades de un curso
 export function getCourseModalities(course) {
@@ -495,30 +611,45 @@ export function getSavedCourses() {
     }
 
     // Merge con datos por defecto para preservar imágenes, modalidades y campos requeridos
-    return DEFAULT_COURSES.map(defCourse => {
-      const match = parsed.find(p => p.id === defCourse.id || p.title === defCourse.title);
+    const mergedDefaults = DEFAULT_COURSES.map(defCourse => {
+      const match = parsed.find(p => coursesMatch(p, defCourse));
       if (!match) return {
         ...defCourse,
+        titulo: defCourse.title,
+        activo: typeof defCourse.activo === 'boolean' ? defCourse.activo : true,
         permitePresencial: typeof defCourse.permitePresencial === 'boolean' ? defCourse.permitePresencial : true,
         permiteVirtual: typeof defCourse.permiteVirtual === 'boolean' ? defCourse.permiteVirtual : true,
       };
       return {
         ...defCourse,
+        titulo: match.titulo || match.title || defCourse.title,
+        activo: typeof match.activo === 'boolean' ? match.activo : (typeof defCourse.activo === 'boolean' ? defCourse.activo : true),
         disponible: typeof match.disponible === 'boolean' ? match.disponible : defCourse.disponible,
         proximamente: typeof match.proximamente === 'boolean' ? match.proximamente : Boolean(defCourse.proximamente),
         cupos: typeof match.cupos === 'number' ? match.cupos : (parseInt(match.cupos, 10) || defCourse.cupos),
         fecha_inicio: match.fecha_inicio || defCourse.fecha_inicio,
         fecha_termino: match.fecha_termino || defCourse.fecha_termino,
-        price: match.price || defCourse.price,
-        depositPrice: match.depositPrice || defCourse.depositPrice,
+        duration: defCourse.duration,
+        price: ((defCourse.id === 'of-05' && match.price === '$85.000 CLP') || (defCourse.id === 'seg-01')) ? defCourse.price : (match.price || defCourse.price),
+        depositPrice: ((defCourse.id === 'of-05' && match.depositPrice === '$42.500 CLP (50%)') || (defCourse.id === 'seg-01')) ? defCourse.depositPrice : (match.depositPrice || defCourse.depositPrice),
+        dias: (defCourse.id === 'seg-01') ? defCourse.dias : (defCourse.dias || match.dias),
+        horario: (defCourse.id === 'seg-01') ? defCourse.horario : (defCourse.horario || match.horario),
+        jornada: (defCourse.id === 'seg-01') ? defCourse.jornada : (defCourse.jornada || match.jornada),
+        requisitos: defCourse.requisitos || match.requisitos || [],
         permitePresencial: typeof match.permitePresencial === 'boolean' 
           ? match.permitePresencial 
           : (typeof defCourse.permitePresencial === 'boolean' ? defCourse.permitePresencial : true),
         permiteVirtual: typeof match.permiteVirtual === 'boolean' 
           ? match.permiteVirtual 
           : (typeof defCourse.permiteVirtual === 'boolean' ? defCourse.permiteVirtual : true),
+        school: match.school || defCourse.school,
+        category: match.category || defCourse.category,
       };
     });
+
+    // Cursos adicionales que no existían en DEFAULT_COURSES
+    const extraCourses = parsed.filter(p => !DEFAULT_COURSES.some(d => coursesMatch(p, d)));
+    return [...mergedDefaults, ...extraCourses];
   } catch (e) {
     console.error('Error al leer cursos de localStorage:', e);
     return DEFAULT_COURSES;
@@ -531,17 +662,54 @@ export function updateCourseItem(courseId, updates) {
   try {
     const current = getSavedCourses();
     let updatedTarget = null;
+    let found = false;
 
     const updated = current.map(c => {
-      const matchById = c.id === courseId;
-      const matchByTitle = updates.title && (c.title === updates.title || c.titulo === updates.title);
-      const matchByTitulo = updates.titulo && (c.title === updates.titulo || c.titulo === updates.titulo);
-      if (matchById || matchByTitle || matchByTitulo) {
-        updatedTarget = { ...c, ...updates };
+      const match = coursesMatch(c, { id: courseId, ...updates });
+      if (match) {
+        found = true;
+        updatedTarget = { 
+          ...c, 
+          ...updates,
+          titulo: updates.titulo || updates.title || c.titulo || c.title,
+          title: updates.title || updates.titulo || c.title || c.titulo,
+          activo: typeof updates.activo === 'boolean' ? updates.activo : (typeof c.activo === 'boolean' ? c.activo : true),
+          proximamente: typeof updates.proximamente === 'boolean' ? updates.proximamente : Boolean(c.proximamente),
+          disponible: typeof updates.disponible === 'boolean' ? updates.disponible : (updates.proximamente ? false : c.disponible),
+          permitePresencial: typeof updates.permitePresencial === 'boolean' ? updates.permitePresencial : c.permitePresencial,
+          permiteVirtual: typeof updates.permiteVirtual === 'boolean' ? updates.permiteVirtual : c.permiteVirtual,
+          school: updates.school || c.school,
+        };
         return updatedTarget;
       }
       return c;
     });
+
+    if (!found && (updates.title || updates.titulo)) {
+      const isCctv = (updates.title || updates.titulo || '').toLowerCase().includes('cctv');
+      updatedTarget = {
+        id: courseId || `course-${Date.now()}`,
+        school: updates.school || 'seguridad',
+        category: updates.category || 'Tecnología y Sistemas de Seguridad',
+        title: updates.title || updates.titulo || 'Curso',
+        titulo: updates.titulo || updates.title || 'Curso',
+        duration: updates.duration || '60 Horas',
+        modality: updates.modality || 'Online Sincrónico + Software VMS',
+        permitePresencial: typeof updates.permitePresencial === 'boolean' ? updates.permitePresencial : true,
+        permiteVirtual: typeof updates.permiteVirtual === 'boolean' ? updates.permiteVirtual : true,
+        price: updates.price || '$140.000 CLP',
+        depositPrice: updates.depositPrice || '$70.000 CLP (50%)',
+        disponible: typeof updates.disponible === 'boolean' ? updates.disponible : !updates.proximamente,
+        proximamente: Boolean(updates.proximamente),
+        cupos: updates.cupos || 18,
+        fecha_inicio: updates.fecha_inicio || '',
+        fecha_termino: updates.fecha_termino || '',
+        activo: updates.activo !== false,
+        image: isCctv ? cctvOperatorImg : (updates.school === 'seguridad' ? securityGuardsImg : conflictImg),
+        description: updates.description || ''
+      };
+      updated.push(updatedTarget);
+    }
 
     localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
     window.dispatchEvent(new CustomEvent('prevyseg-courses-updated', { detail: updated }));
@@ -549,6 +717,9 @@ export function updateCourseItem(courseId, updates) {
     // Persistir asíncronamente en PostgreSQL en Supabase
     if (supabase) {
       const dbPayload = {};
+      if (typeof updates.activo === 'boolean') {
+        dbPayload.activo = updates.activo;
+      }
       if (typeof updates.permitePresencial === 'boolean') {
         dbPayload.permite_presencial = updates.permitePresencial;
       }
@@ -577,10 +748,16 @@ export function updateCourseItem(courseId, updates) {
           supabase.from('courses').update(dbPayload).eq('id', courseId).then(({ error }) => {
             if (error) console.warn('Error sincronizando curso con Supabase:', error);
           });
-        } else if (updatedTarget && updatedTarget.title) {
-          supabase.from('courses').update(dbPayload).ilike('titulo', `%${updatedTarget.title}%`).then(({ error }) => {
+        }
+        if (updatedTarget && (updatedTarget.title || updatedTarget.titulo)) {
+          const targetTitle = updatedTarget.title || updatedTarget.titulo;
+          supabase.from('courses').update(dbPayload).ilike('titulo', `%${targetTitle}%`).then(({ error }) => {
             if (error) console.warn('Error sincronizando curso con Supabase:', error);
           });
+          if (targetTitle.toLowerCase().includes('cctv') || targetTitle.toLowerCase().includes('circuitos cerrados')) {
+            supabase.from('courses').update(dbPayload).ilike('titulo', '%cctv%').catch(() => {});
+            supabase.from('courses').update(dbPayload).ilike('titulo', '%circuitos cerrados%').catch(() => {});
+          }
         }
       }
     }
@@ -588,6 +765,78 @@ export function updateCourseItem(courseId, updates) {
     return updated;
   } catch (e) {
     console.error('Error guardando curso:', e);
+  }
+}
+
+// Agregar un nuevo curso permanentemente en LocalStorage y Supabase
+export function addNewCourse(courseData) {
+  if (typeof window === 'undefined') return;
+  try {
+    const current = getSavedCourses();
+    const newId = courseData.id || `course-${Date.now()}`;
+    const isVirtualOnly = courseData.permiteVirtual && !courseData.permitePresencial;
+    const isPresencialOnly = courseData.permitePresencial && !courseData.permiteVirtual;
+
+    const newCourse = {
+      id: newId,
+      school: courseData.school || 'seguridad',
+      category: courseData.category || (courseData.school === 'seguridad' ? 'Seguridad Privada' : 'Área General'),
+      title: courseData.title || courseData.titulo || 'Nuevo Curso Capacitación',
+      titulo: courseData.titulo || courseData.title || 'Nuevo Curso Capacitación',
+      duration: courseData.duration || '40 Horas',
+      modality: courseData.modality || (isVirtualOnly ? '100% Online Asíncrono' : isPresencialOnly ? 'Presencial en Sede' : 'Semipresencial'),
+      permitePresencial: courseData.permitePresencial !== false,
+      permiteVirtual: courseData.permiteVirtual !== false,
+      price: courseData.price || '$120.000 CLP',
+      depositPrice: courseData.depositPrice || '$60.000 CLP (50%)',
+      disponible: courseData.disponible !== false,
+      proximamente: Boolean(courseData.proximamente),
+      cupos: Number(courseData.cupos) || 20,
+      fecha_inicio: courseData.fecha_inicio || '15 de Noviembre, 2026',
+      fecha_termino: courseData.fecha_termino || '15 de Diciembre, 2026',
+      badgeText: courseData.badgeText || (isVirtualOnly ? '100% Online' : isPresencialOnly ? 'Presencial en Sede' : 'Online / Presencial'),
+      highlight: courseData.highlight || 'Nuevo',
+      image: courseData.image || (courseData.school === 'seguridad' ? DEFAULT_COURSES[0].image : DEFAULT_COURSES[10].image),
+      description: courseData.description || 'Programa oficial de formación y capacitación técnica con certificación oficial OTEC PrevySeg.',
+      requisitos: courseData.requisitos || [
+        'Cédula de Identidad chilena vigente.',
+        'Mayor de 18 años.'
+      ],
+      activo: true,
+      ...courseData
+    };
+
+    const updated = [newCourse, ...current];
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    window.dispatchEvent(new CustomEvent('prevyseg-courses-updated', { detail: updated }));
+
+    // Persistir asíncronamente en Supabase si está disponible
+    if (supabase) {
+      supabase.from('courses').insert({
+        id: newId,
+        titulo: newCourse.title,
+        school: newCourse.school,
+        category: newCourse.category,
+        modalidad: newCourse.modality,
+        duracion: newCourse.duration,
+        precio: parseFloat(String(newCourse.price).replace(/[^0-9]/g, '')) || 0,
+        permite_presencial: newCourse.permitePresencial,
+        permite_virtual: newCourse.permiteVirtual,
+        disponible: newCourse.disponible,
+        proximamente: newCourse.proximamente,
+        cupos: newCourse.cupos,
+        fecha_inicio: newCourse.fecha_inicio,
+        fecha_termino: newCourse.fecha_termino,
+        descripcion: newCourse.description,
+        activo: true
+      }).then(({ error }) => {
+        if (error) console.warn('Aviso: inserción directa en tabla courses Supabase:', error.message);
+      });
+    }
+
+    return updated;
+  } catch (e) {
+    console.error('Error creando nuevo curso:', e);
   }
 }
 
@@ -602,12 +851,14 @@ export async function syncCoursesWithDatabase() {
     let hasChanges = false;
 
     const merged = current.map(localCourse => {
-      const dbMatch = data.find(d => 
-        d.id === localCourse.id || 
-        d.titulo === localCourse.title || 
-        (d.codigo_sence && d.codigo_sence === localCourse.codigo_sence)
-      );
-      if (!dbMatch) return localCourse;
+      // Buscar todas las filas en BD que coincidan con este curso
+      const matchingDbRows = data.filter(d => coursesMatch(localCourse, d));
+      if (matchingDbRows.length === 0) return localCourse;
+
+      // Priorizar la fila que esté activa y configurada como próximamente (ej. CCTV)
+      const dbMatch = matchingDbRows.find(d => d.activo && d.proximamente) ||
+                      matchingDbRows.find(d => d.activo) ||
+                      matchingDbRows[0];
 
       const p = typeof dbMatch.permite_presencial === 'boolean' 
         ? dbMatch.permite_presencial 
@@ -621,13 +872,18 @@ export async function syncCoursesWithDatabase() {
       const disp = typeof dbMatch.disponible === 'boolean' 
         ? dbMatch.disponible 
         : localCourse.disponible;
+      const act = typeof dbMatch.activo === 'boolean'
+        ? dbMatch.activo
+        : (typeof localCourse.activo === 'boolean' ? localCourse.activo : true);
 
-      if (p !== localCourse.permitePresencial || v !== localCourse.permiteVirtual || prox !== localCourse.proximamente || disp !== localCourse.disponible) {
+      if (p !== localCourse.permitePresencial || v !== localCourse.permiteVirtual || prox !== localCourse.proximamente || disp !== localCourse.disponible || act !== localCourse.activo) {
         hasChanges = true;
       }
 
       return {
         ...localCourse,
+        titulo: localCourse.titulo || localCourse.title || dbMatch.titulo,
+        activo: act,
         permitePresencial: p !== undefined ? p : true,
         permiteVirtual: v !== undefined ? v : true,
         proximamente: prox !== undefined ? prox : false,

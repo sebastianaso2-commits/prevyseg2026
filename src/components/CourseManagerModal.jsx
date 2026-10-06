@@ -16,13 +16,16 @@ import {
   AlertCircle,
   MapPin,
   Building2,
-  Laptop
+  Laptop,
+  PlusCircle
 } from 'lucide-react';
 import { getSavedCourses, updateCourseItem, resetCoursesToDefault } from '../data/coursesData';
+import CreateCourseModal from './CreateCourseModal';
 
 const CourseManagerModal = ({ isOpen, onClose }) => {
   const [courses, setCourses] = useState([]);
   const [selectedSchool, setSelectedSchool] = useState('seguridad');
+  const [isCreateOpen, setIsCreateOpen] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editForm, setEditForm] = useState({
     disponible: true,
@@ -68,7 +71,11 @@ const CourseManagerModal = ({ isOpen, onClose }) => {
       pres = true;
       virt = true;
     }
+    const targetCourse = courses.find(c => c.id === courseId);
     const updated = updateCourseItem(courseId, {
+      title: targetCourse?.title || targetCourse?.titulo,
+      school: targetCourse?.school,
+      activo: true,
       disponible: editForm.disponible,
       proximamente: Boolean(editForm.proximamente),
       cupos: Number(editForm.cupos),
@@ -86,7 +93,12 @@ const CourseManagerModal = ({ isOpen, onClose }) => {
 
   const handleQuickToggleAvailability = (course) => {
     const newStatus = !course.disponible;
-    const updated = updateCourseItem(course.id, { disponible: newStatus, proximamente: false });
+    const updated = updateCourseItem(course.id, { 
+      title: course.title || course.titulo,
+      school: course.school,
+      disponible: newStatus, 
+      proximamente: false 
+    });
     if (updated) {
       setCourses(updated);
       showToast(`Estado cambiado a: ${newStatus ? 'Disponible' : 'No Disponible'}`);
@@ -96,6 +108,9 @@ const CourseManagerModal = ({ isOpen, onClose }) => {
   const handleQuickToggleProximamente = (course) => {
     const nextProx = !course.proximamente;
     const updated = updateCourseItem(course.id, { 
+      title: course.title || course.titulo,
+      school: course.school,
+      activo: true,
       proximamente: nextProx, 
       disponible: nextProx ? false : course.disponible 
     });
@@ -208,14 +223,25 @@ const CourseManagerModal = ({ isOpen, onClose }) => {
             </button>
           </div>
 
-          <button
-            onClick={handleResetAll}
-            className="text-xs font-semibold text-slate-500 hover:text-red-600 flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
-            title="Restablecer cupos y fechas originales"
-          >
-            <RotateCcw size={13} />
-            <span>Restablecer Fábrica</span>
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={() => setIsCreateOpen(true)}
+              className="text-xs font-bold text-white bg-gradient-to-r from-[#0A4DA2] to-[#00A896] hover:from-[#071626] hover:to-[#00FFE0] hover:text-slate-900 flex items-center gap-1.5 px-3.5 py-2 rounded-xl transition-all cursor-pointer shadow-xs"
+              title="Crear un nuevo curso y definir su modalidad (Online, Presencial o Ambas)"
+            >
+              <PlusCircle size={14} />
+              <span>＋ Crear Nuevo Curso</span>
+            </button>
+
+            <button
+              onClick={handleResetAll}
+              className="text-xs font-semibold text-slate-500 hover:text-red-600 flex items-center gap-1.5 px-3 py-1.5 rounded-lg hover:bg-red-50 transition-colors cursor-pointer"
+              title="Restablecer cupos y fechas originales"
+            >
+              <RotateCcw size={13} />
+              <span>Restablecer Fábrica</span>
+            </button>
+          </div>
         </div>
 
         {/* Toast Notification */}
@@ -591,6 +617,17 @@ const CourseManagerModal = ({ isOpen, onClose }) => {
           </button>
         </div>
       </motion.div>
+
+      {/* Modal de Creación de Curso con Selector de Modalidad */}
+      <CreateCourseModal
+        isOpen={isCreateOpen}
+        onClose={() => setIsCreateOpen(false)}
+        initialSchool={selectedSchool}
+        onSuccess={() => {
+          setCourses(getSavedCourses());
+          showToast('¡Curso creado exitosamente!');
+        }}
+      />
     </div>
   );
 };

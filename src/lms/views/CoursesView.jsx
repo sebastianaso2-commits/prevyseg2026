@@ -15,10 +15,12 @@ import {
 } from 'lucide-react';
 import { getSavedCourses } from '../../data/coursesData';
 import CourseManagerModal from '../../components/CourseManagerModal';
+import CreateCourseModal from '../../components/CreateCourseModal';
 
 const CoursesView = ({ onSelectCourse, isEditMode }) => {
   const [courses, setCourses] = useState(getSavedCourses());
   const [isManagerOpen, setIsManagerOpen] = useState(false);
+  const [isCreateModalOpen, setIsCreateModalOpen] = useState(false);
   const [schoolFilter, setSchoolFilter] = useState('all'); // 'all' | 'seguridad' | 'oficios'
   const [modalityFilter, setModalityFilter] = useState('all'); // 'all' | 'presencial' | 'virtual' | 'ambas'
 
@@ -31,8 +33,12 @@ const CoursesView = ({ onSelectCourse, isEditMode }) => {
     return () => window.removeEventListener('prevyseg-courses-updated', handleUpdate);
   }, []);
 
+  const visibleCourses = useMemo(() => {
+    return courses.filter(course => isEditMode || course.activo !== false);
+  }, [courses, isEditMode]);
+
   const filteredCourses = useMemo(() => {
-    return courses.filter(course => {
+    return visibleCourses.filter(course => {
       // Filtro de escuela
       if (schoolFilter !== 'all' && course.school !== schoolFilter) {
         return false;
@@ -52,7 +58,7 @@ const CoursesView = ({ onSelectCourse, isEditMode }) => {
       }
       return true;
     });
-  }, [courses, schoolFilter, modalityFilter]);
+  }, [visibleCourses, schoolFilter, modalityFilter]);
 
   return (
     <div className="space-y-6">
@@ -81,15 +87,14 @@ const CoursesView = ({ onSelectCourse, isEditMode }) => {
             <span>Modificar Modalidades, Cupos y Fechas</span>
           </button>
 
-          {isEditMode && (
-            <button 
-              onClick={() => alert("Crear nueva cohorte o curso SENCE")}
-              className="bg-[#0284c7] hover:bg-[#0369a1] text-white text-xs font-bold px-4 py-3 rounded-xl shadow-md flex items-center gap-2 cursor-pointer flex-shrink-0"
-            >
-              <Edit3 size={15} />
-              <span>Crear Nuevo Curso</span>
-            </button>
-          )}
+          <button 
+            onClick={() => setIsCreateModalOpen(true)}
+            className="bg-[#0284c7] hover:bg-[#0369a1] text-white text-xs font-bold px-4 py-3 rounded-xl shadow-md flex items-center gap-2 cursor-pointer flex-shrink-0"
+            title="Crear un nuevo curso y definir si será Online, Presencial o Ambas"
+          >
+            <Edit3 size={15} />
+            <span>＋ Crear Nuevo Curso</span>
+          </button>
         </div>
       </div>
 
@@ -109,7 +114,7 @@ const CoursesView = ({ onSelectCourse, isEditMode }) => {
                 : 'bg-slate-100 text-slate-600 hover:bg-slate-200'
             }`}
           >
-            Todas ({courses.length})
+            Todas ({visibleCourses.length})
           </button>
           <button
             onClick={() => setSchoolFilter('seguridad')}
@@ -120,7 +125,7 @@ const CoursesView = ({ onSelectCourse, isEditMode }) => {
             }`}
           >
             <Shield size={13} />
-            <span>Seguridad ({courses.filter(c => c.school === 'seguridad').length})</span>
+            <span>Seguridad ({visibleCourses.filter(c => c.school === 'seguridad').length})</span>
           </button>
           <button
             onClick={() => setSchoolFilter('oficios')}
@@ -131,7 +136,7 @@ const CoursesView = ({ onSelectCourse, isEditMode }) => {
             }`}
           >
             <Wrench size={13} />
-            <span>Oficios ({courses.filter(c => c.school === 'oficios').length})</span>
+            <span>Oficios ({visibleCourses.filter(c => c.school === 'oficios').length})</span>
           </button>
         </div>
 
@@ -287,6 +292,12 @@ const CoursesView = ({ onSelectCourse, isEditMode }) => {
       <CourseManagerModal
         isOpen={isManagerOpen}
         onClose={() => setIsManagerOpen(false)}
+      />
+
+      <CreateCourseModal
+        isOpen={isCreateModalOpen}
+        onClose={() => setIsCreateModalOpen(false)}
+        initialSchool={schoolFilter !== 'all' ? schoolFilter : 'seguridad'}
       />
     </div>
   );

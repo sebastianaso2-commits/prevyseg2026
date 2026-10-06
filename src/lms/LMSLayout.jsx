@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Bell, 
@@ -104,6 +104,13 @@ const LMSLayout = ({ currentUser, onLogout, onReturnHome, initialTab }) => {
   const [isEditMode, setIsEditMode] = useState(false);
   const [mobileSidebarOpen, setMobileSidebarOpen] = useState(false);
 
+  // Redireccionar si se desactiva el Modo Edición estando en Banco de Preguntas o Contenido
+  useEffect(() => {
+    if (!isEditMode && (activeNavTab === 'preguntas' || activeNavTab === 'contenido')) {
+      setActiveNavTab('ajustes-sitio');
+    }
+  }, [isEditMode, activeNavTab]);
+
   // 3. Definición de Menús Laterales Específicos para cada Rol con Iconos Intuitivos
   
   // A. MENÚ ADMINISTRADOR (Tema Morado / Indigo)
@@ -143,20 +150,23 @@ const LMSLayout = ({ currentUser, onLogout, onReturnHome, initialTab }) => {
       icon: FileText,
       color: 'text-cyan-400'
     },
-    { 
-      id: 'preguntas', 
-      label: 'Banco de Preguntas', 
-      desc: 'Exámenes y Reactivos',
-      icon: HelpCircle,
-      color: 'text-pink-400'
-    },
-    { 
-      id: 'contenido', 
-      label: 'Banco de Contenido', 
-      desc: 'Archivos y SCORM',
-      icon: Layers,
-      color: 'text-indigo-400'
-    },
+    // Secciones avanzadas: sólo visibles cuando el Administrador activa el "Modo Edición"
+    ...(isEditMode ? [
+      { 
+        id: 'preguntas', 
+        label: 'Banco de Preguntas', 
+        desc: 'Exámenes y Reactivos',
+        icon: HelpCircle,
+        color: 'text-pink-400'
+      },
+      { 
+        id: 'contenido', 
+        label: 'Banco de Contenido', 
+        desc: 'Archivos y SCORM',
+        icon: Layers,
+        color: 'text-indigo-400'
+      },
+    ] : [])
   ];
 
   // B. MENÚ PROFESOR / DOCENTE (Tema Azul Cielo / Marino)
