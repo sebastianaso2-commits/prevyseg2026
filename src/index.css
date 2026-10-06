@@ -1,32 +1,39 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-DEFAULT: #0A4DA2;
-  --color-brand: #0A4DA2;
-  --color-brand-light: #2a6dc2;
-  --color-brand-dark: #073570;
-  
-  --color-secondary-DEFAULT: #00A896;
-  --color-secondary-light: #23cebd;
-  --color-secondary-dark: #007a6c;
-  
-  --color-accent-DEFAULT: #F2A900;
-  --color-accent-light: #ffbf2b;
-  --color-accent-dark: #cc8d00;
-  
-  --color-navy-dark: #072B4F;
-  --color-navy-deep: #041d35;
-  
-  --color-teal-vibrant: #00A896;
-  --color-teal-soft: #e0f2f1;
+  /* PALETA CORPORATIVA OFICIAL PREVYSEG */
+  /* Swatch 1: Azul Noche Profundo */
+  --color-prevyseg-midnight: #161630;
+  /* Swatch 2: Azul Corporativo PrevySeg */
+  --color-prevyseg-navy: #1b3761;
+  /* Swatch 3: Turquesa / Teal Vibrante PrevySeg */
+  --color-prevyseg-teal: #0a969b;
+  --color-prevyseg-teal-light: #12b4ba;
+  --color-prevyseg-teal-dark: #077478;
+
+  --color-brand-DEFAULT: #1b3761;
+  --color-brand: #1b3761;
+  --color-brand-light: #264e88;
+  --color-brand-dark: #161630;
+
+  --color-secondary-DEFAULT: #0a969b;
+  --color-secondary-light: #12b4ba;
+  --color-secondary-dark: #077478;
+
+  --color-navy-dark: #161630;
+  --color-navy-deep: #0f1021;
+
+  --color-teal-vibrant: #0a969b;
+  --color-teal-soft: #e6f6f7;
 }
 
 @layer base {
   :root {
     --bg-main: #ffffff;
     --bg-card: #ffffff;
-    --brand-blue: #0284c7;
-    --brand-cyan: #0d9488;
+    --brand-blue: #1b3761;
+    --brand-teal: #0a969b;
+    --brand-midnight: #161630;
     --brand-green: #16a34a;
   }
 
@@ -34,10 +41,15 @@
     font-family: 'Inter', system-ui, -apple-system, sans-serif;
     scroll-behavior: smooth;
     background-color: #ffffff;
-    color: #0f172a;
+    color: #161630;
   }
 
-  h1, h2, h3, h4, h5, h6 {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
     font-family: 'Montserrat', sans-serif;
   }
 }
@@ -57,22 +69,37 @@
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #0284c7;
+  background: #0a969b;
 }
 
 /* Constellation network canvas background */
 .network-overlay {
-  background-image: 
-    radial-gradient(circle at 20% 35%, rgba(2, 132, 199, 0.05) 0%, transparent 40%),
-    radial-gradient(circle at 80% 70%, rgba(13, 148, 136, 0.05) 0%, transparent 40%);
+  background-image:
+    radial-gradient(circle at 20% 35%, rgba(27, 55, 97, 0.06) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(10, 150, 155, 0.06) 0%, transparent 40%);
 }
 
 /* Subtle glowing and hover transitions */
 .glass-panel {
-  background: rgba(255, 255, 255, 0.88);
+  background: rgba(255, 255, 255, 0.94);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(226, 232, 240, 0.8);
+  border: 1px solid rgba(226, 232, 240, 0.85);
+}
+
+.glass-dark {
+  background: rgba(22, 22, 48, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.glow-cyan {
+  box-shadow: 0 0 20px -4px rgba(10, 150, 155, 0.45);
+}
+
+.glow-cyan-lg {
+  box-shadow: 0 0 30px -4px rgba(0, 255, 224, 0.35), 0 0 15px -2px rgba(10, 150, 155, 0.5);
 }
 
 .card-hover {
@@ -81,13 +108,20 @@
 
 .card-hover:hover {
   transform: translateY(-4px);
-  box-shadow: 0 12px 28px -8px rgba(0, 0, 0, 0.08), 0 0 20px -6px rgba(2, 132, 199, 0.15);
+  box-shadow: 0 14px 30px -10px rgba(22, 22, 48, 0.12), 0 0 22px -4px rgba(10, 150, 155, 0.28);
 }
 
 /* Custom pulse animations */
 @keyframes floatSlow {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-8px); }
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-8px);
+  }
 }
 
 .animate-float {

@@ -13,7 +13,9 @@ import {
   Check,
   ChevronRight,
   Building2,
-  Laptop
+  Laptop,
+  FileCheck,
+  BookOpen
 } from 'lucide-react';
 import { 
   SecuritySchoolLogo, 
@@ -24,6 +26,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SenceTramosSection from './SenceTramosSection';
 import { DEFAULT_COURSES, getSavedCourses } from '../data/coursesData';
+import CourseCurriculumModal from './CourseCurriculumModal';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -33,7 +36,13 @@ export const COURSES_DATA = DEFAULT_COURSES;
 const Services = ({ onSelectCourse, onOpenSchoolDetail, activeSchool = 'seguridad', onSwitchSchool }) => {
   const [coursesList, setCoursesList] = useState(getSavedCourses());
   const [selectedCategory, setSelectedCategory] = useState('Todos');
+  const [expandedReqs, setExpandedReqs] = useState({});
+  const [selectedCourseForCurriculum, setSelectedCourseForCurriculum] = useState(null);
   const sectionRef = useRef(null);
+
+  const toggleReqs = (id) => {
+    setExpandedReqs(prev => ({ ...prev, [id]: !prev[id] }));
+  };
 
   // Escuchar actualizaciones en tiempo real de cupos, fechas y disponibilidad
   useEffect(() => {
@@ -48,8 +57,8 @@ const Services = ({ onSelectCourse, onOpenSchoolDetail, activeSchool = 'segurida
     return () => window.removeEventListener('prevyseg-courses-updated', handleCoursesUpdate);
   }, []);
 
-  // Cursos filtrados por la escuela activa
-  const schoolCourses = coursesList.filter(c => c.school === activeSchool);
+  // Cursos filtrados por la escuela activa (ocultar borradores/desactivados)
+  const schoolCourses = coursesList.filter(c => c.school === activeSchool && c.activo !== false);
 
   // Categorías de la escuela activa
   const categories = ['Todos', ...new Set(schoolCourses.map(c => c.category))];
@@ -80,10 +89,11 @@ const Services = ({ onSelectCourse, onOpenSchoolDetail, activeSchool = 'segurida
     <section 
       id="servicios" 
       ref={sectionRef} 
-      className="py-20 px-4 sm:px-8 bg-gradient-to-b from-white via-slate-50 to-white relative border-t border-slate-200 overflow-hidden"
+      className="py-20 px-4 sm:px-8 bg-gradient-to-b from-white via-slate-50 to-white relative border-t border-slate-200 overflow-hidden scroll-mt-24"
     >
-      {/* Anchor compatible para enlaces previos que apunten a #escuelas */}
+      {/* Anchor compatible para enlaces previos que apunten a #escuelas o #cursos */}
       <div id="escuelas" className="absolute -top-20 left-0" />
+      <div id="cursos" className="absolute -top-20 left-0" />
 
       {/* Fondos luminosos decorativos con la paleta de los trípticos oficiales */}
       <div className={`absolute top-0 right-0 w-[600px] h-[600px] rounded-full blur-[140px] pointer-events-none -translate-y-1/3 translate-x-1/3 transition-colors duration-700 ${
@@ -228,21 +238,31 @@ const Services = ({ onSelectCourse, onOpenSchoolDetail, activeSchool = 'segurida
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.25 }}
                   whileHover={{ y: -6 }}
-                  className={`rounded-3xl overflow-hidden bg-white border shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group ${
+                  onClick={() => setSelectedCourseForCurriculum(course)}
+                  className={`rounded-3xl overflow-hidden bg-white border shadow-md hover:shadow-2xl transition-all duration-300 flex flex-col justify-between group cursor-pointer ${
                     course.school === 'seguridad'
-                      ? 'border-slate-200 hover:border-[#00C4D8]/50'
-                      : 'border-slate-200 hover:border-[#00A896]/50'
+                      ? 'border-slate-200 hover:border-[#00C4D8]/60 hover:shadow-sky-500/10'
+                      : 'border-slate-200 hover:border-[#00A896]/60 hover:shadow-emerald-500/10'
                   }`}
+                  title="Haz clic para ver la información completa, horas, modalidad y módulos de este curso"
                 >
                   <div>
                     {/* Imagen y Badges */}
-                    <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">
+                    <div className="relative aspect-[16/10] overflow-hidden bg-slate-900 group">
                       <img 
                         src={course.image} 
                         alt={course.title} 
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
+
+                      {/* Hint visual interactivo al posar el cursor */}
+                      <div className="absolute inset-0 bg-slate-950/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center pointer-events-none">
+                        <span className="px-3.5 py-1.5 rounded-full bg-white/95 text-slate-900 font-extrabold text-[11px] shadow-lg flex items-center gap-1.5 transform translate-y-2 group-hover:translate-y-0 transition-transform">
+                          <BookOpen size={13} className={course.school === 'seguridad' ? 'text-[#0284c7]' : 'text-[#00A896]'} />
+                          <span>Más Información y Contenido</span>
+                        </span>
+                      </div>
 
                       {/* Badge Superior Izquierdo con el Logo de la Escuela */}
                       <div className="absolute top-3 left-3 z-10 flex flex-col gap-1.5 items-start">
@@ -355,10 +375,95 @@ const Services = ({ onSelectCourse, onOpenSchoolDetail, activeSchool = 'segurida
                         </span>
                       </div>
 
+                      {/* Horario y Días */}
+                      {course.horario && (
+                        <div className="flex items-start gap-2 text-xs text-sky-950 bg-gradient-to-r from-sky-50 to-blue-50 border border-sky-200/90 px-3 py-2 rounded-xl shadow-2xs">
+                          <Clock size={15} className="text-[#0284c7] flex-shrink-0 mt-0.5" />
+                          <div className="min-w-0">
+                            <span className="font-extrabold text-[#072B4F] text-xs block leading-tight">
+                              {course.dias ? `${course.dias} • ` : ''}{course.horario}
+                            </span>
+                            {course.jornada && (
+                              <span className="text-[10px] text-sky-700 font-medium block leading-tight mt-0.5">
+                                {course.jornada}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      )}
+
                       {/* Descripción Breve */}
                       <p className="text-xs text-slate-500 line-clamp-2 leading-relaxed">
                         {course.description}
                       </p>
+
+                      {/* Botón Destacado: Más Información y Contenido Completo */}
+                      <button
+                        type="button"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          setSelectedCourseForCurriculum(course);
+                        }}
+                        className={`w-full flex items-center justify-between px-3.5 py-2.5 rounded-xl text-xs font-black transition-all cursor-pointer border shadow-xs ${
+                          course.school === 'seguridad'
+                            ? 'bg-sky-50/90 hover:bg-sky-100 text-sky-950 border-sky-300/80 hover:border-sky-400'
+                            : 'bg-emerald-50/90 hover:bg-emerald-100 text-emerald-950 border-emerald-300/80 hover:border-emerald-400'
+                        }`}
+                        title="Ver contenido, horas, modalidad y temario completo"
+                      >
+                        <span className="flex items-center gap-2">
+                          <BookOpen size={15} className={course.school === 'seguridad' ? 'text-[#0284c7]' : 'text-[#00A896]'} />
+                          <span className="font-extrabold text-xs">Más Información (Horas, Modalidad y Módulos)</span>
+                        </span>
+                        <span className={`text-[10px] font-black uppercase flex items-center gap-0.5 tracking-wider ${
+                          course.school === 'seguridad' ? 'text-[#0284c7]' : 'text-[#00A896]'
+                        }`}>
+                          <span>Ver Ficha</span>
+                          <ChevronRight size={13} />
+                        </span>
+                      </button>
+
+                      {/* Requisitos Legales Exigidos en Chile */}
+                      {course.requisitos && course.requisitos.length > 0 && (
+                        <div className="pt-1">
+                          <button
+                            type="button"
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              toggleReqs(course.id);
+                            }}
+                            className="w-full flex items-center justify-between px-3 py-2 rounded-xl bg-slate-100/90 hover:bg-slate-200/80 text-slate-800 text-[11px] font-bold transition-all cursor-pointer border border-slate-200"
+                          >
+                            <span className="flex items-center gap-1.5">
+                              <FileCheck size={13} className="text-[#0A7D8C]" />
+                              <span>Requisitos exigidos en Chile ({course.requisitos.length})</span>
+                            </span>
+                            <span className="text-[#0A7D8C] text-[10px] font-extrabold">
+                              {expandedReqs[course.id] ? '▲ Ocultar' : '▼ Ver Requisitos'}
+                            </span>
+                          </button>
+                          <AnimatePresence>
+                            {expandedReqs[course.id] && (
+                              <motion.div
+                                initial={{ opacity: 0, height: 0 }}
+                                animate={{ opacity: 1, height: 'auto' }}
+                                exit={{ opacity: 0, height: 0 }}
+                                className="mt-2 p-3.5 rounded-xl bg-sky-50/70 border border-sky-200/80 text-[11px] space-y-2 overflow-hidden"
+                              >
+                                <div className="font-extrabold text-[#072B4F] flex items-center gap-1.5">
+                                  <Shield size={12} className="text-[#0284c7]" />
+                                  <span>Requisitos según normativa chilena (Ley 21.659 / OS-10):</span>
+                                </div>
+                                <ul className="space-y-1.5 pl-3 list-disc text-slate-700 leading-snug">
+                                  {course.requisitos.map((req, rIdx) => (
+                                    <li key={rIdx}>{req}</li>
+                                  ))}
+                                </ul>
+                              </motion.div>
+                            )}
+                          </AnimatePresence>
+                        </div>
+                      )}
                     </div>
                   </div>
 
@@ -382,7 +487,10 @@ const Services = ({ onSelectCourse, onOpenSchoolDetail, activeSchool = 'segurida
                       <motion.button
                         whileHover={{ scale: 1.04 }}
                         whileTap={{ scale: 0.96 }}
-                        onClick={() => onSelectCourse(course.title)}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          onSelectCourse(course.title);
+                        }}
                         className="text-white text-xs font-black py-2.5 px-4 rounded-xl shadow-md flex items-center gap-1.5 flex-shrink-0 transition-all bg-gradient-to-r from-amber-600 via-amber-500 to-amber-600 hover:from-amber-700 hover:to-amber-600 shadow-amber-600/30 border border-amber-300/40 cursor-pointer"
                         title="Consultar fecha y preinscribirse"
                       >
@@ -394,7 +502,8 @@ const Services = ({ onSelectCourse, onOpenSchoolDetail, activeSchool = 'segurida
                         whileHover={{ scale: isAvailable ? 1.04 : 1 }}
                         whileTap={{ scale: isAvailable ? 0.96 : 1 }}
                         disabled={!isAvailable}
-                        onClick={() => {
+                        onClick={(e) => {
+                          e.stopPropagation();
                           if (isAvailable) {
                             onSelectCourse(course.title);
                           }
@@ -418,12 +527,18 @@ const Services = ({ onSelectCourse, onOpenSchoolDetail, activeSchool = 'segurida
           </AnimatePresence>
         </div>
 
-        {/* =========================================================================
-            SECCIÓN SENCE: FRANQUICIA TRIBUTARIA
-        ========================================================================= */}
-        <SenceTramosSection />
-
       </div>
+
+      {/* Modal Interactivo de Ficha Curricular y Módulos Oficiales */}
+      <CourseCurriculumModal
+        isOpen={Boolean(selectedCourseForCurriculum)}
+        onClose={() => setSelectedCourseForCurriculum(null)}
+        course={selectedCourseForCurriculum}
+        onSelectCourse={(courseTitle) => {
+          setSelectedCourseForCurriculum(null);
+          onSelectCourse(courseTitle);
+        }}
+      />
     </section>
   );
 };

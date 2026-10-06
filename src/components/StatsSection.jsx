@@ -46,7 +46,7 @@ const StatsSection = () => {
 
   return (
     <section className="py-12 bg-white border-y border-slate-100 shadow-sm relative z-10 overflow-hidden">
-      
+
       {/* Decorative Blur Backgrounds */}
       <div className="absolute inset-0 opacity-40 pointer-events-none">
         <div className="absolute top-0 right-1/4 w-[300px] h-[300px] bg-sky-500/5 rounded-full blur-[80px]" />
@@ -54,7 +54,7 @@ const StatsSection = () => {
       </div>
 
       <div className="relative max-w-[100vw] overflow-hidden">
-        
+
         {/* Gradient fades on the edges for seamless carousel look */}
         <div className="absolute inset-y-0 left-0 w-12 sm:w-32 bg-gradient-to-r from-white to-transparent z-20 pointer-events-none" />
         <div className="absolute inset-y-0 right-0 w-12 sm:w-32 bg-gradient-to-l from-white to-transparent z-20 pointer-events-none" />
@@ -64,25 +64,25 @@ const StatsSection = () => {
           {infiniteStats.map((stat, idx) => {
             const IconComp = stat.icon;
             return (
-              <div 
+              <div
                 key={idx}
                 className="group flex flex-col sm:flex-row items-start sm:items-center gap-5 p-6 mx-3 w-[300px] sm:w-[420px] rounded-3xl bg-white border border-slate-100 shadow-lg shadow-slate-200/40 hover:shadow-2xl transition-all duration-300 hover:-translate-y-1 cursor-default relative overflow-hidden"
               >
                 {/* Active Highlight Line */}
-                <div 
+                <div
                   className="absolute top-0 left-0 right-0 h-1 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   style={{ backgroundColor: stat.color }}
                 />
 
-                <div 
+                <div
                   className="w-16 h-16 rounded-2xl flex items-center justify-center flex-shrink-0 transition-transform duration-500 group-hover:scale-110 group-hover:rotate-3 shadow-sm border"
                   style={{ backgroundColor: stat.bg, color: stat.color, borderColor: stat.border }}
                 >
                   <IconComp size={32} strokeWidth={2.5} />
                 </div>
-                
+
                 <div className="flex-1 min-w-0">
-                  <div 
+                  <div
                     className="text-4xl sm:text-[2.5rem] font-black tracking-tight leading-none mb-1 transition-colors duration-300"
                     style={{ color: '#0f172a' }}
                   >
@@ -103,7 +103,8 @@ const StatsSection = () => {
       </div>
 
       {/* Inline Styles for Marquee Animation */}
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         @keyframes marquee {
           0% { transform: translateX(0); }
           100% { transform: translateX(calc(-33.3333%)); }

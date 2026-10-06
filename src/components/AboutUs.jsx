@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { 
-  PieChart, 
-  BarChart3, 
-  SlidersHorizontal, 
+import {
+  PieChart,
+  BarChart3,
+  SlidersHorizontal,
   Star,
   ArrowRight,
   Shield,
@@ -159,7 +159,7 @@ const AboutUs = ({ onSelectSchool }) => {
       // Header entrance animation
       gsap.fromTo('.about-title',
         { opacity: 0, y: 30 },
-        { 
+        {
           opacity: 1, y: 0, duration: 0.7, ease: 'power3.out',
           scrollTrigger: { trigger: '.about-title', start: 'top 85%', once: true }
         }
@@ -168,7 +168,7 @@ const AboutUs = ({ onSelectSchool }) => {
       // Staggered cards entrance
       gsap.fromTo('.about-card',
         { opacity: 0, y: 30, scale: 0.98 },
-        { 
+        {
           opacity: 1, y: 0, scale: 1, duration: 0.5, stagger: 0.12, ease: 'power2.out',
           scrollTrigger: { trigger: '.about-cards-container', start: 'top 85%', once: true }
         }
@@ -179,11 +179,13 @@ const AboutUs = ({ onSelectSchool }) => {
   }, [activeTab]);
 
   return (
-    <section 
+    <section
       ref={sectionRef}
-      id="quienes-somos" 
-      className="relative py-24 sm:py-28 px-4 sm:px-8 bg-white overflow-hidden border-t border-slate-100"
+      id="quienes-somos"
+      className="relative py-24 sm:py-28 px-4 sm:px-8 bg-white overflow-hidden border-t border-slate-100 scroll-mt-24"
     >
+      {/* Anchor compatible para enlaces #informacion */}
+      <div id="informacion" className="absolute -top-20 left-0" />
       {/* Decorative background elements */}
       <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-slate-200 to-transparent" />
       <div className="absolute top-20 right-[5%] w-[400px] h-[400px] bg-sky-500/5 rounded-full blur-[100px] pointer-events-none" />
@@ -197,16 +199,16 @@ const AboutUs = ({ onSelectSchool }) => {
             <Star size={12} className="fill-[#0284c7]" />
             Nuestra Identidad Institucional
           </span>
-          
+
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-slate-900 tracking-tight">
             Pilares de{' '}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0284c7] via-[#0A4DA2] to-[#00A896]">
               PrevySeg
             </span>
           </h2>
-          
+
           <p className="text-slate-600 text-sm sm:text-base max-w-2xl mx-auto leading-relaxed">
-            Organismo Técnico de Capacitación (OTEC) acreditado por SENCE y certificado bajo la 
+            Organismo Técnico de Capacitación (OTEC) acreditado por SENCE y certificado bajo la
             <strong className="text-slate-900 font-bold"> Norma Chilena de Calidad NCh 2728:2015 SGS</strong>.
           </p>
         </div>
@@ -214,16 +216,15 @@ const AboutUs = ({ onSelectSchool }) => {
         {/* ================= SELECTOR DE 3 PESTAÑAS (REQUERIMIENTO OFICIAL) ================= */}
         <div className="flex justify-center mb-10">
           <div className="inline-flex p-1.5 rounded-2xl bg-slate-100 border border-slate-200 shadow-inner max-w-full overflow-x-auto gap-1">
-            
+
             {/* Pestaña 1: Información General OTEC */}
             <button
               type="button"
               onClick={() => setActiveTab('otec')}
-              className={`flex items-center gap-2 px-4 sm:px-6 py-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer whitespace-nowrap ${
-                activeTab === 'otec'
+              className={`flex items-center gap-2 px-4 sm:px-6 py-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer whitespace-nowrap ${activeTab === 'otec'
                   ? 'bg-white text-[#0A4DA2] shadow-md border border-slate-200/80'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
-              }`}
+                }`}
             >
               <Building2 size={16} className={activeTab === 'otec' ? 'text-[#0A4DA2]' : 'text-slate-400'} />
               <span>Información General OTEC</span>
@@ -233,11 +234,10 @@ const AboutUs = ({ onSelectSchool }) => {
             <button
               type="button"
               onClick={() => setActiveTab('oficios')}
-              className={`flex items-center gap-2 px-4 sm:px-6 py-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer whitespace-nowrap ${
-                activeTab === 'oficios'
+              className={`flex items-center gap-2 px-4 sm:px-6 py-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer whitespace-nowrap ${activeTab === 'oficios'
                   ? 'bg-gradient-to-r from-[#00A896] to-[#008B8B] text-white shadow-md'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
-              }`}
+                }`}
             >
               <Wrench size={16} className={activeTab === 'oficios' ? 'text-white' : 'text-[#00A896]'} />
               <span>Escuela de Oficios</span>
@@ -247,11 +247,10 @@ const AboutUs = ({ onSelectSchool }) => {
             <button
               type="button"
               onClick={() => setActiveTab('seguridad')}
-              className={`flex items-center gap-2 px-4 sm:px-6 py-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer whitespace-nowrap ${
-                activeTab === 'seguridad'
+              className={`flex items-center gap-2 px-4 sm:px-6 py-3 rounded-xl text-xs sm:text-sm font-black transition-all cursor-pointer whitespace-nowrap ${activeTab === 'seguridad'
                   ? 'bg-[#071626] text-white shadow-md'
                   : 'text-slate-600 hover:text-slate-900 hover:bg-white/50'
-              }`}
+                }`}
             >
               <Shield size={16} className={activeTab === 'seguridad' ? 'text-[#00C4D8]' : 'text-[#0A4DA2]'} />
               <span>Escuela de Seguridad</span>
@@ -262,7 +261,7 @@ const AboutUs = ({ onSelectSchool }) => {
         {/* ================= BANNER INFORMATIVO CLAVE (DEFINICIÓN OTEC & CALIDAD NCh 2728) ================= */}
         <div className="mb-12 bg-gradient-to-r from-slate-50 via-sky-50/50 to-teal-50/30 rounded-3xl p-6 sm:p-8 border border-slate-200 shadow-sm relative overflow-hidden">
           <div className="w-full space-y-4 relative z-10">
-            
+
             <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
               <div className="space-y-2">
                 <div className="flex flex-wrap items-center gap-2">
@@ -284,20 +283,27 @@ const AboutUs = ({ onSelectSchool }) => {
                 </h3>
               </div>
 
-              {/* Acceso directo opcional si es Oficios o Seguridad */}
+              {/* Acceso directo a la vista correspondiente al seleccionar Oficios o Seguridad */}
               {activeTab !== 'otec' && onSelectSchool && (
                 <div className="flex-shrink-0">
                   <button
                     type="button"
-                    onClick={() => onSelectSchool(activeTab)}
-                    className={`px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-black flex items-center gap-2 shadow-lg transition-all cursor-pointer ${
-                      activeTab === 'oficios'
-                        ? 'bg-gradient-to-r from-[#00A896] to-[#008B8B] hover:brightness-110 text-white shadow-teal-900/20'
-                        : 'bg-[#071626] hover:bg-[#0B2032] text-[#00C4D8] shadow-slate-900/20'
-                    }`}
+                    onClick={() => {
+                      const targetSchool = activeTab === 'oficios' ? 'oficios' : 'seguridad';
+                      const targetSection = activeTab === 'oficios' ? 'catalogo-oficios' : 'catalogo-seguridad';
+                      onSelectSchool(targetSchool, targetSection);
+                    }}
+                    className={`px-6 py-3.5 rounded-2xl text-xs sm:text-sm font-black flex items-center gap-2 shadow-lg transition-all cursor-pointer hover:scale-[1.03] active:scale-[0.97] ${activeTab === 'oficios'
+                        ? 'bg-gradient-to-r from-[#00A896] to-[#008B8B] hover:brightness-110 text-white shadow-teal-900/20 ring-2 ring-[#00FFE0]/30'
+                        : 'bg-[#071626] hover:bg-[#0B2032] text-[#00FFE0] shadow-slate-900/20 ring-2 ring-[#00C4D8]/30'
+                      }`}
                   >
-                    <span>Ver todas las capacitaciones de esta Escuela</span>
-                    <ArrowRight size={15} />
+                    <span>
+                      {activeTab === 'oficios'
+                        ? 'Ver todas las capacitaciones de Escuela de Oficios'
+                        : 'Ver todas las capacitaciones de Escuela de Seguridad'}
+                    </span>
+                    <ArrowRight size={16} />
                   </button>
                 </div>
               )}
@@ -329,13 +335,13 @@ const AboutUs = ({ onSelectSchool }) => {
             const IconComp = card.icon;
             const isHovered = hoveredCard === index;
             return (
-              <div 
+              <div
                 key={card.title}
                 className="about-card"
                 onMouseEnter={() => setHoveredCard(index)}
                 onMouseLeave={() => setHoveredCard(null)}
               >
-                <div 
+                <div
                   className="relative flex flex-col items-center text-center p-8 lg:p-10 rounded-3xl border-2 transition-all duration-300 group overflow-hidden h-full"
                   style={{
                     borderColor: isHovered ? card.color : '#e2e8f0',
@@ -347,37 +353,37 @@ const AboutUs = ({ onSelectSchool }) => {
                   }}
                 >
                   {/* Top accent line */}
-                  <div 
+                  <div
                     className="absolute top-0 left-1/2 -translate-x-1/2 h-1 rounded-b-full transition-all duration-500"
-                    style={{ 
+                    style={{
                       backgroundColor: card.color,
                       width: isHovered ? '60%' : '20%',
                     }}
                   />
 
                   {/* Icon Container */}
-                  <div 
+                  <div
                     className="w-18 h-18 sm:w-20 sm:h-20 rounded-2xl flex items-center justify-center mb-6 transition-all duration-300 relative"
-                    style={{ 
+                    style={{
                       backgroundColor: `${card.color}15`,
                       transform: isHovered ? 'scale(1.08) rotate(-2deg)' : 'scale(1)',
                     }}
                   >
-                    <IconComp 
-                      size={34} 
+                    <IconComp
+                      size={34}
                       style={{ color: card.color }}
                       className="transition-all duration-300"
                     />
                   </div>
 
                   {/* Title & Subtitle */}
-                  <h3 
+                  <h3
                     className="text-2xl font-black mb-1.5 tracking-tight transition-colors duration-300"
                     style={{ color: isHovered ? card.color : '#0f172a' }}
                   >
                     {card.title}
                   </h3>
-                  
+
                   {card.subtitle && (
                     <p className="text-[11px] uppercase tracking-wider font-bold text-slate-600 mb-4">
                       {card.subtitle}
@@ -385,7 +391,7 @@ const AboutUs = ({ onSelectSchool }) => {
                   )}
 
                   {/* Stat badge */}
-                  <div 
+                  <div
                     className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold mb-5 transition-all duration-300"
                     style={{
                       backgroundColor: `${card.color}15`,

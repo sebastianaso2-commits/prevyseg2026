@@ -22,231 +22,14 @@ import {
   Check,
   AlertTriangle,
   HelpCircle,
-  ExternalLink
+  ExternalLink,
+  Percent
 } from 'lucide-react';
 import { SecuritySchoolEmblem, TradesSchoolEmblem } from './logos/SchoolLogos';
 import { COURSES_DATA } from './Services';
 
-// Módulos y temarios detallados para cada curso por escuela
-const SYLLABUS_DETAILS = {
-  // ================= SEGURIDAD PRIVADA =================
-  'seg-01': {
-    modules: [
-      'Módulo 1: Legislación de Seguridad Privada (Ley N° 21.659 y decretos complementarios)',
-      'Módulo 2: Prevención de Riesgos y Primeros Auxilios de Emergencia en el Puesto de Trabajo',
-      'Módulo 3: Técnicas de Control de Accesos, Identificación de Personas y Resguardo Perimetral',
-      'Módulo 4: Defensa Personal Aplicada y Reducción No Letal de Sujetos Conflictivos',
-      'Módulo 5: Ética Profesional, Manejo de Crisis, Derechos Humanos y Preparación para el Examen SPD'
-    ],
-    requirements: [
-      'Cédula de Identidad chilena vigente (ambos lados)',
-      'Certificado de Antecedentes para Fines Especiales (sin anotaciones penales)',
-      'Certificado de Estudios: Licencia de Enseñanza Media completa (Mineduc)',
-      'Certificado Médico y Psicológico de aptitud física para funciones de seguridad'
-    ],
-    examType: 'Examen Externo Presencial ante la Subsecretaría de Prevención del Delito (SPD) / Carabineros OS-10'
-  },
-  'seg-02': {
-    modules: [
-      'Módulo 1: Marco Normativo de Transporte de Valores y Entidades Bancarias',
-      'Módulo 2: Armamento y Tiro Práctico Regulado conforme a la Ley de Armas',
-      'Módulo 3: Tácticas de Protección de Activos Críticos y Valores en Tránsito',
-      'Módulo 4: Protocolos de Comunicación Segura y Coordinación Operativa Policial',
-      'Módulo 5: Gestión de Incidentes de Alto Impacto y Procedimientos Anti-Asalto'
-    ],
-    requirements: [
-      'Haber cumplido con el Servicio Militar o contar con instrucción previa homologada',
-      'Licencia de Enseñanza Media',
-      'Certificado de Antecedentes para Fines Especiales sin anotaciones',
-      'Evaluación psiquiátrica y psicotécnica rigurosa para porte de armas'
-    ],
-    examType: 'Examen Oficial Teórico-Práctico de Tiro y Seguridad ante la Autoridad Fiscalizadora'
-  },
-  'seg-03': {
-    modules: [
-      'Módulo 1: Código PBIP (Protección de Buques e Instalaciones Portuarias)',
-      'Módulo 2: Legislación Marítima y Atribuciones de la Autoridad Marítima (Directemar)',
-      'Módulo 3: Inspección de Cargas, Contenedores y Detección de Contrabando en Terminales',
-      'Módulo 4: Seguridad y Supervivencia en Faenas Portuarias e Industriales'
-    ],
-    requirements: [
-      'Licencia de Enseñanza Media',
-      'Certificado de Antecedentes limpio',
-      'Certificado médico apto para faenas marítimas'
-    ],
-    examType: 'Examen Oficial ante la Dirección General del Territorio Marítimo (Directemar)'
-  },
-  'seg-04': {
-    modules: [
-      'Módulo 1: Libro de Novedades y Registro de Visitas en Comunidades y Edificios',
-      'Módulo 2: Rondas Perimetrales y Manejo Seguro de Puntos Ciegos',
-      'Módulo 3: Primeros Auxilios y Evacuación ante Incendios y Sismos',
-      'Módulo 4: Comunicación con Carabineros y Plan Cuadrante'
-    ],
-    requirements: ['Cédula de Identidad vigente', 'Certificado de Antecedentes', 'Enseñanza básica completa'],
-    examType: 'Certificación OTEC PrevySeg con Reconocimiento SENCE'
-  },
-  'seg-05': {
-    modules: [
-      'Módulo 1: Actualizaciones Jurisprudenciales de la Ley 21.659',
-      'Módulo 2: Actualización en Derechos Humanos y Protocolos de Detención Ciudadana',
-      'Módulo 3: Reentrenamiento en Primeros Auxilios y Reanimación Cardiopulmonar (RCP)',
-      'Módulo 4: Simulacros de Examen Teórico SPD para Renovación de Tarjeta'
-    ],
-    requirements: ['Tarjeta de Guardia OS-10 previa (vencida o por vencer)', 'Certificado de Antecedentes al día'],
-    examType: 'Rendición de Examen Trienal de Renovación ante la SPD'
-  },
-  'seg-06': {
-    modules: [
-      'Módulo 1: Actualización de Normas PBIP y Procedimientos Portuarios TPA',
-      'Módulo 2: Control de Accesos y Detección de Ilícitos en Faenas Portuarias',
-      'Módulo 3: Revalidación de Credencial Directemar'
-    ],
-    requirements: ['Credencial Marítima previa', 'Certificado de Antecedentes'],
-    examType: 'Revalidación ante la Autoridad Marítima Directemar'
-  },
-  'seg-07': {
-    modules: [
-      'Módulo 1: Reentrenamiento en Seguridad de Instalaciones Nocturnas',
-      'Módulo 2: Protocolos de Actuación y Enlace con Centrales de Emergencia',
-      'Módulo 3: Manejo Seguro de Llaves, Portones y Sistemas de Acceso'
-    ],
-    requirements: ['Cédula de Identidad', 'Certificado de Antecedentes'],
-    examType: 'Certificación Directa OTEC PrevySeg'
-  },
-  'seg-08': {
-    modules: [
-      'Módulo 1: Arquitectura de Sistemas de Televigilancia y Centrales de Monitoreo',
-      'Módulo 2: Operación Profesional de Cámaras PTZ, Fijas y Domos Térmicos',
-      'Módulo 3: Software VMS de Gestión de Video y Búsqueda Forense de Evidencias',
-      'Módulo 4: Cadena de Custodia de Grabaciones y Protocolos Legales'
-    ],
-    requirements: ['Licencia de Enseñanza Media', 'Conocimientos básicos de computación'],
-    examType: 'Certificación Oficial SENCE OTEC PrevySeg'
-  },
-  'seg-09': {
-    modules: [
-      'Módulo 1: Sensores Perimetrales, Microondas, Infrarrojos y Barreras Fotoeléctricas',
-      'Módulo 2: Integración de Centrales de Alarma con Sistemas CCTV y Monitoreo Remoto',
-      'Módulo 3: Control y Depuración de Falsas Alarmas y Verificación por Video',
-      'Módulo 4: Pautas Técnicas de Despacho de Seguridad'
-    ],
-    requirements: ['Licencia de Enseñanza Media', 'Certificado de Antecedentes'],
-    examType: 'Certificación SENCE OTEC PrevySeg'
-  },
-  'seg-10': {
-    modules: [
-      'Módulo 1: Ley 21.659 y Responsabilidades Legales del Supervisor de Seguridad',
-      'Módulo 2: Elaboración y Presentación de Directivas de Funcionamiento ante la Autoridad',
-      'Módulo 3: Gestión y Liderazgo de Turnos Operativos de Vigilancia',
-      'Módulo 4: Análisis de Vulnerabilidades y Planes de Continuidad de Operaciones'
-    ],
-    requirements: ['Enseñanza Media completa', 'Experiencia en seguridad privada', 'Certificado de Antecedentes'],
-    examType: 'Certificación de Competencias de Supervisor OTEC PrevySeg'
-  },
-
-  // ================= OFICIOS Y HABILIDADES =================
-  'of-01': {
-    modules: [
-      'Módulo 1: Psicología del Conflicto y Dinámicas de Tensión Laboral',
-      'Módulo 2: Comunicación Asertiva, Escucha Activa y Lenguaje No Verbal',
-      'Módulo 3: Técnicas de Negociación Basada en Principios y Mediación',
-      'Módulo 4: Contención Emocional y Manejo de Clientes o Usuarios Hostiles'
-    ],
-    requirements: ['Cédula de Identidad', 'Mayor de 18 años', 'Acceso a internet'],
-    examType: 'Certificación Laboral OTEC PrevySeg con Código SENCE'
-  },
-  'of-02': {
-    modules: [
-      'Módulo 1: Identificación Rápida de Detonantes de Conflicto en Terreno',
-      'Módulo 2: Desescalamiento Verbal y Protocolos de Seguridad Personal',
-      'Módulo 3: Talleres Prácticos y Roleplaying de Situaciones Reales',
-      'Módulo 4: Cierre Asertivo de Acuerdos y Seguimiento Laboral'
-    ],
-    requirements: ['Cédula de Identidad', 'Asistencia 100% presencial'],
-    examType: 'Certificado de Taller Práctico Intensivo OTEC PrevySeg'
-  },
-  'of-03': {
-    modules: [
-      'Módulo 1: Toxicología, Clasificación y Etiquetado de Plaguicidas según SAG',
-      'Módulo 2: Manejo de EPP (Equipos de Protección Personal) y Triple Lavado',
-      'Módulo 3: Calibración de Pulverizadores y Técnicas de Aplicación en Campo',
-      'Módulo 4: Primeros Auxilios y Protocolos ante Intoxicaciones Químicas'
-    ],
-    requirements: ['Cédula de Identidad', 'Mayor de 18 años', 'Salud compatible con campo'],
-    examType: 'Certificación Preparatoria para Credencial de Aplicador SAG'
-  },
-  'of-04': {
-    modules: [
-      'Módulo 1: Seguridad y Salud en el Trabajo Portuario y Código PBIP',
-      'Módulo 2: Técnicas de Carga, Descarga, Trincaje y Desestiba en Muelles',
-      'Módulo 3: Uso Seguro de Eslingas, Grilletes, Estrobos y Señales de Grúa',
-      'Módulo 4: Manejo de Cargas Peligrosas (Código IMDG) en Recintos Portuarios'
-    ],
-    requirements: ['Cédula de Identidad', 'Mayor de 18 años', 'Salud compatible con faena'],
-    examType: 'Certificación de Competencias Laborales OTEC PrevySeg'
-  },
-  'of-05': {
-    modules: [
-      'Módulo 1: Microbiología Básica, Enfermedades Transmitidas por Alimentos (ETA)',
-      'Módulo 2: Buenas Prácticas de Manufactura (BPM) y Cadena de Frío',
-      'Módulo 3: Control de Puntos Críticos (HACCP), Limpieza y Sanitización',
-      'Módulo 4: Prevención de Riesgos en Cocinas y Plantas de Procesamiento'
-    ],
-    requirements: ['Cédula de Identidad vigente', 'Exámenes médicos básicos de manipulador'],
-    examType: 'Certificación Oficial para Carnet de Manipulación Seremi de Salud'
-  },
-  'of-06': {
-    modules: [
-      'Módulo 1: Fisiología de la Piel, Folículo Piloso y Ciclo de Crecimiento',
-      'Módulo 2: Preparación, Calentamiento Seguro y Propiedades de la Cera Miel',
-      'Módulo 3: Protocolo Técnico de Depilación en Rostro, Brazos, Piernas y Zona Íntima',
-      'Módulo 4: Asepsia, Bioseguridad y Tratamientos Calmantes Post-Depilación'
-    ],
-    requirements: ['Cédula de Identidad', 'Mayor de 18 años'],
-    examType: 'Diploma de Competencia Práctica OTEC PrevySeg'
-  },
-  'of-07': {
-    modules: [
-      'Módulo 1: Anatomía de la Uña, Afecciones Comunes y Esterilización de Instrumental',
-      'Módulo 2: Manicure Clásica, Limado Anatómico y Tratamiento de Cutícula',
-      'Módulo 3: Técnicas de Esmaltado Permanente con Lámpara UV/LED',
-      'Módulo 4: Cuidado de la Uña Natural y Retiro Higiénico de Esmalte'
-    ],
-    requirements: ['Cédula de Identidad', 'Mayor de 18 años'],
-    examType: 'Diploma de Competencia Práctica OTEC PrevySeg'
-  },
-  'of-08': {
-    modules: [
-      'Módulo 1: Teoría del Color, Preparación de la Piel y Fijación de Larga Duración',
-      'Módulo 2: Técnicas de Sombreado de Alto Impacto y Delineados Artísticos',
-      'Módulo 3: Adherencia Segura de Pedrería, Glitter, Plumas y Apliques',
-      'Módulo 4: Maquillaje Resistente a la Transpiración y Retiro Seguro'
-    ],
-    requirements: ['Cédula de Identidad', 'Mayor de 18 años'],
-    examType: 'Diploma de Competencia Práctica OTEC PrevySeg'
-  },
-  'of-09': {
-    modules: [
-      'Módulo 1: Gerontología Básica y Cambios Biopsicosociales en el Envejecimiento',
-      'Módulo 2: Técnicas Ergonómicas de Movilización y Prevención de Úlceras (Escaras)',
-      'Módulo 3: Aseo y Confort en Cama, Control de Signos Vitales y Alimentación Asistida',
-      'Módulo 4: Administración Asistida de Medicamentos y Primeros Auxilios en el Hogar'
-    ],
-    requirements: ['Cédula de Identidad', 'Mayor de 18 años', 'Vocación de cuidado'],
-    examType: 'Certificación Asistencial OTEC PrevySeg con Respaldo SENCE'
-  },
-  'of-10': {
-    modules: [
-      'Módulo 1: Nueva Ley de Copropiedad Inmobiliaria N° 21.442 y Reglamento de Copropiedad',
-      'Módulo 2: Procedimientos de Caja, Detección de Billetes Falsos y Arqueo Cuadrado',
-      'Módulo 3: Cálculo y Facturación de Gastos Comunes, Fondos de Reserva y Multas',
-      'Módulo 4: Atención a Copropietarios, Proveedores y Solución de Controversias'
-    ],
-    requirements: ['Licencia de Enseñanza Media', 'Conocimientos básicos de computación y matemáticas'],
-    examType: 'Certificación OTEC PrevySeg de Cajero y Administrador de Condominios'
-  }
-};
+import { SYLLABUS_DETAILS, getCourseSyllabus } from '../data/syllabusData';
+import CourseCurriculumModal from './CourseCurriculumModal';
 
 const SchoolDetailModal = ({ 
   school, 
@@ -259,6 +42,7 @@ const SchoolDetailModal = ({
   const [selectedCategory, setSelectedCategory] = useState('Todos');
   const [searchQuery, setSearchQuery] = useState('');
   const [expandedCourseId, setExpandedCourseId] = useState(null);
+  const [selectedCourseForCurriculum, setSelectedCourseForCurriculum] = useState(null);
 
   if (!isOpen || !school) return null;
 
@@ -502,6 +286,16 @@ const SchoolDetailModal = ({
                             </span>
                           </div>
 
+                          {/* Días y Horarios del Curso */}
+                          {(course.horario || syllabus?.schedule) && (
+                            <div className="flex items-center gap-2 text-xs font-bold text-sky-950 bg-sky-50/90 px-3 py-1.5 rounded-xl border border-sky-200/80">
+                              <Clock size={14} className="text-[#0284c7] flex-shrink-0" />
+                              <span className="truncate">
+                                <strong>{course.dias ? `${course.dias} • ` : ''}</strong>{course.horario || syllabus?.schedule}
+                              </span>
+                            </div>
+                          )}
+
                           {/* Precios & Abono 50% */}
                           <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-200 flex items-center justify-between text-xs">
                             <div>
@@ -524,7 +318,7 @@ const SchoolDetailModal = ({
                               >
                                 <span className="flex items-center gap-1.5">
                                   <BookOpen size={14} className="text-[#0284c7]" />
-                                  <span>{isExpanded ? 'Ocultar Temario y Requisitos' : 'Ver Temario Oficial y Requisitos'}</span>
+                                  <span>{isExpanded ? 'Ocultar Temario y Requisitos' : 'Ver Temario Oficial, Horarios y Requisitos'}</span>
                                 </span>
                                 <span className="text-[11px] text-[#0284c7] font-semibold">
                                   {isExpanded ? '▲ Menos' : '▼ Detallar'}
@@ -538,17 +332,65 @@ const SchoolDetailModal = ({
                                   exit={{ opacity: 0, height: 0 }}
                                   className="mt-3 p-4 rounded-xl bg-sky-50/60 border border-sky-100 text-xs space-y-3.5"
                                 >
-                                  {/* Módulos */}
+                                  {/* Horarios y Días Oficiales */}
+                                  {(syllabus.schedule || course.horario) && (
+                                    <div className="p-3 rounded-xl bg-gradient-to-r from-sky-50 to-blue-50 border border-sky-200/90 text-slate-800 flex items-start gap-2.5">
+                                      <Clock size={16} className="text-[#0284c7] flex-shrink-0 mt-0.5" />
+                                      <div className="space-y-0.5">
+                                        <span className="font-extrabold text-[#072B4F] text-xs block">
+                                          Horario y Régimen de Días:
+                                        </span>
+                                        <p className="text-slate-800 text-xs font-semibold leading-snug">
+                                          {syllabus.schedule || `${course.dias ? `${course.dias} • ` : ''}${course.horario}`}
+                                        </p>
+                                      </div>
+                                    </div>
+                                  )}
+
+                                  {/* Objetivo si existe */}
+                                  {syllabus.objective && (
+                                    <div className="p-3 rounded-xl bg-sky-50 border border-sky-200/80 text-[11px] text-slate-700">
+                                      <strong className="text-[#072B4F] block font-bold mb-0.5">Objetivo del Curso:</strong>
+                                      <p className="leading-snug">{syllabus.objective}</p>
+                                    </div>
+                                  )}
+
+                                  {/* Módulos Formativos */}
                                   <div>
                                     <h4 className="font-bold text-slate-900 flex items-center gap-1.5 mb-2">
                                       <FileText size={13} className="text-[#0284c7]" />
                                       <span>Módulos Formativos (Plan de Estudio):</span>
                                     </h4>
-                                    <ul className="space-y-1.5 pl-4 list-disc text-slate-700">
-                                      {syllabus.modules.map((mod, idx) => (
-                                        <li key={idx} className="leading-tight">{mod}</li>
-                                      ))}
-                                    </ul>
+                                    <div className="space-y-2">
+                                      {syllabus.modules?.map((mod, idx) => {
+                                        const isObj = typeof mod === 'object' && mod !== null;
+                                        const num = isObj ? mod.number : String(idx + 1).padStart(2, '0');
+                                        const title = isObj ? mod.title : mod;
+                                        const topics = isObj ? mod.topics || [] : [];
+                                        return (
+                                          <div key={idx} className="p-2.5 bg-white rounded-xl border border-sky-100 shadow-2xs space-y-1">
+                                            <div className="flex items-center gap-2">
+                                              <span className="w-5 h-5 rounded-md bg-[#071626] text-[#00FFE0] text-[10px] font-black flex items-center justify-center font-mono flex-shrink-0">
+                                                {num}
+                                              </span>
+                                              <span className="font-extrabold text-slate-900 text-xs">
+                                                {title}
+                                              </span>
+                                            </div>
+                                            {topics.length > 0 && (
+                                              <ul className="pl-7 space-y-0.5 text-[11px] text-slate-600">
+                                                {topics.map((t, ti) => (
+                                                  <li key={ti} className="flex items-start gap-1 leading-snug">
+                                                    <span className="w-1 h-1 rounded-full bg-sky-400 mt-1.5 flex-shrink-0" />
+                                                    <span>{t}</span>
+                                                  </li>
+                                                ))}
+                                              </ul>
+                                            )}
+                                          </div>
+                                        );
+                                      })}
+                                    </div>
                                   </div>
 
                                   {/* Requisitos */}
@@ -569,6 +411,16 @@ const SchoolDetailModal = ({
                                     <strong className="text-slate-800">Tipo de Certificación: </strong>
                                     <span>{syllabus.examType}</span>
                                   </div>
+
+                                  {/* Botón Ver Ficha Oficial Ampliada */}
+                                  <button
+                                    type="button"
+                                    onClick={() => setSelectedCourseForCurriculum(course)}
+                                    className="w-full py-2.5 px-3 rounded-xl bg-gradient-to-r from-sky-600 to-[#0A7D8C] text-white text-xs font-black flex items-center justify-center gap-2 hover:brightness-110 shadow-sm transition-all cursor-pointer mt-2"
+                                  >
+                                    <BookOpen size={14} />
+                                    <span>Ver Ficha Oficial Ampliada (Metodología, Evaluación y Módulos)</span>
+                                  </button>
                                 </motion.div>
                               )}
                             </div>
@@ -640,6 +492,18 @@ const SchoolDetailModal = ({
 
         </motion.div>
       </motion.div>
+
+      {/* Modal Ficha Curricular Detallada */}
+      <CourseCurriculumModal
+        isOpen={Boolean(selectedCourseForCurriculum)}
+        onClose={() => setSelectedCourseForCurriculum(null)}
+        course={selectedCourseForCurriculum}
+        onSelectCourse={(courseTitle) => {
+          setSelectedCourseForCurriculum(null);
+          onClose();
+          if (onSelectCourse) onSelectCourse(courseTitle);
+        }}
+      />
     </AnimatePresence>
   );
 };

@@ -83,13 +83,16 @@ export const SenceTramosSection = () => {
   ];
 
   return (
-    <div 
+    <section 
+      id="beneficios-sence"
       ref={sectionRef}
-      className="relative bg-white border border-slate-200 rounded-[2rem] p-6 sm:p-10 mt-16 shadow-2xl shadow-slate-200/50 overflow-hidden"
+      className="py-20 px-4 sm:px-8 bg-gradient-to-b from-slate-100 via-sky-50/20 to-slate-100 relative border-t border-slate-200 scroll-mt-24 overflow-hidden"
     >
-      {/* Decorative background blur */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-500/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
-      <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-teal-500/5 rounded-full blur-[80px] pointer-events-none translate-y-1/3 -translate-x-1/3" />
+      <div className="max-w-7xl mx-auto relative z-10">
+        <div className="relative bg-white border border-slate-200 rounded-[2rem] p-6 sm:p-10 shadow-xl shadow-slate-200/50 overflow-hidden">
+          {/* Decorative background blur */}
+          <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-500/5 rounded-full blur-[100px] pointer-events-none -translate-y-1/2 translate-x-1/3" />
+          <div className="absolute bottom-0 left-0 w-[300px] h-[300px] bg-teal-500/5 rounded-full blur-[80px] pointer-events-none translate-y-1/3 -translate-x-1/3" />
       
       {/* Section Subheader */}
       <div className="sence-header flex flex-col sm:flex-row justify-between items-start sm:items-center gap-6 pb-8 relative z-10">
@@ -177,7 +180,9 @@ export const SenceTramosSection = () => {
         <span>Todos los cursos de <strong className="text-slate-900">PrevySeg</strong> cuentan con código SENCE activo y registro validado ante la Subsecretaría de Prevención del Delito (SPD).</span>
       </div>
 
-    </div>
+        </div>
+      </div>
+    </section>
   );
 };
 

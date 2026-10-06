@@ -129,50 +129,114 @@ const ExecutionSection = ({ onLearnMore, activeSchool = 'seguridad' }) => {
   const TagIcon = schoolContent.tagIcon;
 
   useEffect(() => {
+    const refreshTimer = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 150);
+
     const ctx = gsap.context(() => {
       // Badge and Heading animation
-      gsap.fromTo('.exec-heading',
-        { opacity: 0, y: 30 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out', scrollTrigger: { trigger: '.exec-heading', start: 'top 85%', once: true } }
+      gsap.fromTo(
+        '.exec-heading',
+        { opacity: 0, y: 25 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.7, 
+          ease: 'power3.out', 
+          scrollTrigger: { 
+            trigger: sectionRef.current, 
+            start: 'top 85%', 
+            once: true 
+          } 
+        }
       );
 
       // Checkmarks stagger animation
-      gsap.fromTo('.exec-check',
-        { opacity: 0, x: -30, rotateX: 45 },
-        { opacity: 1, x: 0, rotateX: 0, duration: 0.6, stagger: 0.08, ease: 'back.out(1.5)', scrollTrigger: { trigger: '.exec-check-container', start: 'top 80%', once: true } }
+      gsap.fromTo(
+        '.exec-check',
+        { opacity: 0, y: 15 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.5, 
+          stagger: 0.06, 
+          ease: 'power2.out', 
+          scrollTrigger: { 
+            trigger: sectionRef.current, 
+            start: 'top 80%', 
+            once: true 
+          } 
+        }
       );
 
       // Button animation
-      gsap.fromTo('.exec-btn',
-        { opacity: 0, scale: 0.8 },
-        { opacity: 1, scale: 1, duration: 0.6, ease: 'back.out(1.5)', scrollTrigger: { trigger: '.exec-btn', start: 'top 90%', once: true } }
+      gsap.fromTo(
+        '.exec-btn',
+        { opacity: 0, scale: 0.95 },
+        { 
+          opacity: 1, 
+          scale: 1, 
+          duration: 0.5, 
+          ease: 'power2.out', 
+          scrollTrigger: { 
+            trigger: sectionRef.current, 
+            start: 'top 85%', 
+            once: true 
+          } 
+        }
       );
 
       // Right image container animation
-      gsap.fromTo('.exec-img-container',
-        { opacity: 0, scale: 0.9, rotation: -2 },
-        { opacity: 1, scale: 1, rotation: 0, duration: 1, ease: 'power3.out', scrollTrigger: { trigger: '.exec-img-container', start: 'top 75%', once: true } }
+      gsap.fromTo(
+        '.exec-img-container',
+        { opacity: 0, scale: 0.96 },
+        { 
+          opacity: 1, 
+          scale: 1, 
+          duration: 0.8, 
+          ease: 'power3.out', 
+          scrollTrigger: { 
+            trigger: sectionRef.current, 
+            start: 'top 80%', 
+            once: true 
+          } 
+        }
       );
 
       // Floating badge animation
-      gsap.fromTo('.exec-floating-badge',
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 0.8, delay: 0.5, ease: 'elastic.out(1, 0.5)', scrollTrigger: { trigger: '.exec-img-container', start: 'top 75%', once: true } }
+      gsap.fromTo(
+        '.exec-floating-badge',
+        { opacity: 0, y: 30 },
+        { 
+          opacity: 1, 
+          y: 0, 
+          duration: 0.7, 
+          delay: 0.3, 
+          ease: 'power3.out', 
+          scrollTrigger: { 
+            trigger: sectionRef.current, 
+            start: 'top 80%', 
+            once: true 
+          } 
+        }
       );
 
       // Floating animation loop for the badge
       gsap.to('.exec-floating-badge', {
-        y: -10,
-        duration: 2,
+        y: -8,
+        duration: 2.2,
         ease: 'sine.inOut',
         yoyo: true,
         repeat: -1,
-        delay: 1.5
+        delay: 1.2
       });
       
     }, sectionRef);
 
-    return () => ctx.revert();
+    return () => {
+      clearTimeout(refreshTimer);
+      ctx.revert();
+    };
   }, [activeSchool]);
 
   return (
