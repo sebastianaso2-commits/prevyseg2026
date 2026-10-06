@@ -806,7 +806,7 @@ export const SearchModal = ({ isOpen, onClose, onSelectCourse }) => {
   const coursesList = [
     { name: '_2_66_2026 Resolución de Conflictos y Manejo de Situaciones Difíciles Código Sence: 1238088725', category: 'Seguridad Privada', price: '$85.000 CLP' },
     { name: 'Técnicas de operación CCTV y alarmas de seguridad privada', category: 'Seguridad Privada', price: '$140.000 CLP' },
-    { name: 'Curso de formación Guardia de Seguridad', category: 'Seguridad Privada', price: '$120.000 CLP' },
+    { name: 'Curso de formación Guardia de Seguridad', category: 'Seguridad Privada', price: '$140.000 CLP' },
     { name: 'Formación de Supervisor de Seguridad Privada *ONLINE*', category: 'Seguridad Privada', price: '$180.000 CLP' },
     { name: 'Capacitación ITIC', category: 'Sistemas internos', price: '$75.000 CLP' },
     { name: 'Asistencia Curso - Código Sence: 1238087964 ID Acción: 6731273', category: 'Asistencias', price: '$60.000 CLP' },

@@ -5,7 +5,7 @@ import AboutUs from './components/AboutUs';
 import Services from './components/Services';
 import ExecutionSection from './components/ExecutionSection';
 import StatsSection from './components/StatsSection';
-import ExperiencesSection from './components/ExperiencesSection';
+import NewsSection from './components/NewsSection';
 import ContactFooter from './components/ContactFooter';
 import NetworkBackground from './components/NetworkBackground';
 import ScrollToTop from './components/ScrollToTop';
@@ -19,8 +19,15 @@ import {
   EnrollmentModal
 } from './components/Modals';
 import SchoolDetailModal from './components/SchoolDetailModal';
+import OnlineCoursesView from './components/OnlineCoursesView';
+import PresencialCoursesView from './components/PresencialCoursesView';
+import SenceExecutiveSummary from './components/SenceExecutiveSummary';
+import SecuritySchoolView from './components/SecuritySchoolView';
+import TradesSchoolView from './components/TradesSchoolView';
+import SchoolsPreviewSection from './components/SchoolsPreviewSection';
 
 function App() {
+  const [currentView, setCurrentView] = useState('home'); // 'home' | 'seguridad' | 'oficios' | 'online' | 'presencial'
   const [activeSchool, setActiveSchool] = useState('seguridad'); // 'seguridad' | 'oficios'
   const [isContactOpen, setIsContactOpen] = useState(false);
   const [isEnrollmentOpen, setIsEnrollmentOpen] = useState(false);
@@ -153,6 +160,76 @@ function App() {
     setIsLMSActive(false);
   };
 
+  // Manejo de navegación entre vistas principales (Inicio, Seguridad, Oficios, Online, Presencial)
+  const handleNavigateView = (view, targetSection) => {
+    setCurrentView(view);
+    if (view === 'home') {
+      if (targetSection) {
+        window.history.pushState(null, '', `#${targetSection}`);
+        setTimeout(() => {
+          const el = document.getElementById(targetSection);
+          if (el) {
+            el.scrollIntoView({ behavior: 'smooth' });
+          } else {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+          }
+        }, 120);
+      } else {
+        window.history.pushState(null, '', '#inicio');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (view === 'seguridad') {
+      window.history.pushState(null, '', targetSection ? `#${targetSection}` : '#seguridad');
+      if (targetSection) {
+        setTimeout(() => {
+          const el = document.getElementById(targetSection);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          else window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 140);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (view === 'oficios') {
+      window.history.pushState(null, '', targetSection ? `#${targetSection}` : '#oficios');
+      if (targetSection) {
+        setTimeout(() => {
+          const el = document.getElementById(targetSection);
+          if (el) el.scrollIntoView({ behavior: 'smooth' });
+          else window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 140);
+      } else {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      }
+    } else if (view === 'online') {
+      window.history.pushState(null, '', '#online');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (view === 'presencial') {
+      window.history.pushState(null, '', '#presencial');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
+
+  // Soporte para navegación vía Hash URL (#inicio, #seguridad, #oficios, #online, #presencial, etc.)
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'seguridad' || hash === 'escuela-seguridad') {
+        setCurrentView('seguridad');
+      } else if (hash === 'oficios' || hash === 'escuela-oficios') {
+        setCurrentView('oficios');
+      } else if (hash === 'online' || hash === 'cursos-online') {
+        setCurrentView('online');
+      } else if (hash === 'presencial' || hash === 'cursos-presenciales') {
+        setCurrentView('presencial');
+      } else if (hash === 'inicio' || hash === 'noticias' || hash === 'quienes-somos' || hash === 'contacto' || hash === 'escuelas') {
+        setCurrentView('home');
+      }
+    };
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
   // Solo si el usuario explícitamente activó el LMS tras iniciar sesión, mostramos el LMS Layout
   if (isLMSActive && currentLMSUser) {
     return (
@@ -181,49 +258,75 @@ function App() {
         onOpenSchoolDetail={(school) => setSelectedSchoolModal(school)}
         activeSchool={activeSchool}
         onSwitchSchool={setActiveSchool}
+        currentView={currentView}
+        onNavigateView={handleNavigateView}
       />
 
       {/* Main Page Layout */}
       <main className="flex-grow relative z-10">
 
-        {/* Section #inicio (Hero con Switcher Intercambiable de Escuela) */}
-        <Hero
-          onOpenContact={() => handleOpenContactWithCourse('')}
-          onOpenEnrollment={() => handleOpenEnrollmentWithCourse('')}
-          onOpenSchoolDetail={(school) => setSelectedSchoolModal(school)}
-          activeSchool={activeSchool}
-          onSwitchSchool={setActiveSchool}
-        />
+        {currentView === 'seguridad' && (
+          <SecuritySchoolView
+            onSelectCourse={(course) => handleOpenEnrollmentWithCourse(course)}
+            onReturnHome={() => handleNavigateView('home')}
+            onGoToTrades={() => handleNavigateView('oficios')}
+          />
+        )}
 
-        {/* Section #quienes-somos (About Us: Misión Oficial PrevySeg, Visión, Valores) */}
-        <AboutUs
-          onSelectSchool={(school) => {
-            setActiveSchool(school);
-            setSelectedSchoolModal(school);
-          }}
-        />
+        {currentView === 'oficios' && (
+          <TradesSchoolView
+            onSelectCourse={(course) => handleOpenEnrollmentWithCourse(course)}
+            onReturnHome={() => handleNavigateView('home')}
+            onGoToSecurity={() => handleNavigateView('seguridad')}
+          />
+        )}
 
-        {/* Section #servicios (Catálogo de Cursos de la Escuela Activa con Apertura de Ficha al Inscribirse) */}
-        <Services
-          onSelectCourse={(course) => handleOpenEnrollmentWithCourse(course)}
-          onOpenSchoolDetail={(school) => setSelectedSchoolModal(school)}
-          activeSchool={activeSchool}
-          onSwitchSchool={setActiveSchool}
-        />
+        {currentView === 'online' && (
+          <OnlineCoursesView
+            onSelectCourse={(course) => handleOpenEnrollmentWithCourse(course)}
+            onReturnHome={() => handleNavigateView('home')}
+            onOpenSchoolDetail={(school) => setSelectedSchoolModal(school)}
+          />
+        )}
 
-        {/* Execution Section (Cyan Checkmarks, Action, and Promo Image adaptables a la Escuela activa) */}
-        <ExecutionSection
-          onLearnMore={handleLearnMore}
-          activeSchool={activeSchool}
-        />
+        {currentView === 'presencial' && (
+          <PresencialCoursesView
+            onSelectCourse={(course) => handleOpenEnrollmentWithCourse(course)}
+            onReturnHome={() => handleNavigateView('home')}
+            onOpenSchoolDetail={(school) => setSelectedSchoolModal(school)}
+          />
+        )}
 
-        {/* Stats Section (Light Contrast 4 Indicators) */}
-        <StatsSection />
+        {currentView === 'home' && (
+          <>
+            {/* Section #inicio (Hero Institucional OTEC PrevySeg) */}
+            <Hero
+              onOpenContact={() => handleOpenContactWithCourse('')}
+              onOpenEnrollment={() => handleOpenEnrollmentWithCourse('')}
+              onOpenSchoolDetail={(school) => handleNavigateView(school)}
+              activeSchool={activeSchool}
+              onSwitchSchool={setActiveSchool}
+            />
 
-        {/* Experiences Section (3 Blog/News Cards) */}
-        <ExperiencesSection
-          onReadArticle={(article) => setSelectedArticle(article)}
-        />
+            {/* Resumen Ejecutivo Corto de Beneficios SENCE al Inicio */}
+            <SenceExecutiveSummary
+              onOpenContact={() => handleOpenContactWithCourse('')}
+            />
+
+            {/* Section #quienes-somos (Presentación OTEC: Misión Oficial, Visión, Valores, NCh 2728 SGS) */}
+            <AboutUs
+              onSelectSchool={(school, targetSection) => handleNavigateView(school, targetSection)}
+            />
+
+            {/* Presentación Ejecutiva de las 2 Escuelas con Acceso Directo */}
+            <SchoolsPreviewSection
+              onNavigateSchool={(school) => handleNavigateView(school)}
+            />
+
+            {/* Stats Section (Indicadores y Métricas Oficiales de la OTEC) */}
+            <StatsSection />
+          </>
+        )}
 
       </main>
 
