@@ -86,10 +86,10 @@ export const OFFICIAL_COURSES = [
     type: 'spd',
     school: 'seguridad',
     category: 'Formación Inicial SPD',
-    hours: '90 Horas Cronológicas',
-    price: 120000,
-    cuota1: 60000,
-    cuota2: 60000,
+    hours: '90 Horas Cronológicas (2 Semanas • Lun a Sáb)',
+    price: 140000,
+    cuota1: 70000,
+    cuota2: 70000,
     modality: 'Presencial / Semipresencial',
     description: 'Curso oficial exigido por la Ley 21.659. Prepara al alumno en legislación, primeros auxilios, defensa personal y examen ante la Autoridad Fiscalizadora.',
     certificationNote: 'PrevySeg entrega la capacitación preparatoria completa. La credencial oficial SPD es otorgada tras rendir el examen ante Carabineros OS-10.'
@@ -198,21 +198,6 @@ export const OFFICIAL_COURSES = [
     modality: 'Online Sincrónico + Software VMS',
     description: 'Operación profesional de software VMS, cámaras domo PTZ, reconocimiento facial y trazabilidad forense para centrales de monitoreo.',
     certificationNote: 'Certificación Oficial SENCE OTEC PrevySeg.'
-  },
-  {
-    id: 'seg-09',
-    name: 'Técnicas de operación CCTV y alarmas de seguridad privada',
-    code: 'CCTV-ALARM-09',
-    type: 'spd',
-    school: 'seguridad',
-    category: 'Tecnología y Sistemas de Seguridad',
-    hours: '65 Horas',
-    price: 150000,
-    cuota1: 75000,
-    cuota2: 75000,
-    modality: 'Semipresencial con Paneles de Alarma',
-    description: 'Integración de centrales de alarma perimetral, sensores infrarrojos y respuesta ante intrusiones.',
-    certificationNote: 'Certificación Técnica SENCE OTEC PrevySeg.'
   },
   {
     id: 'seg-10',
