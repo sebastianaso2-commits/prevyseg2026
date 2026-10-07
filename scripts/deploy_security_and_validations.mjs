@@ -1,8 +1,12 @@
 import pg from 'pg';
 const { Client } = pg;
+if (!process.env.DATABASE_URL && !process.env.SUPABASE_DB_URL) {
+  console.warn('[AVISO] Para ejecutar este script define DATABASE_URL o SUPABASE_DB_URL en tu entorno.');
+}
+
 
 const client = new Client({
-  connectionString: 'postgresql://postgres.clmamemnvttgdvebjnbw:7Li6eH2JQ8uZ9SyC@aws-0-sa-east-1.pooler.supabase.com:6543/postgres',
+  connectionString: process.env.DATABASE_URL || process.env.SUPABASE_DB_URL || '',
   ssl: { rejectUnauthorized: false }
 });
 
