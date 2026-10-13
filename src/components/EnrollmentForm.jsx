@@ -385,7 +385,10 @@ export const OFFICIAL_DOCUMENTS = [
 // Funciones de Normalización y Búsqueda Robusta de Cursos
 export const normalizeCourseName = (str) => {
   if (!str) return '';
-  return str
+  if (typeof str === 'object' && str !== null) {
+    str = str.name || str.title || str.id || '';
+  }
+  return String(str)
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
@@ -393,6 +396,17 @@ export const normalizeCourseName = (str) => {
 };
 
 export const findMatchingCourse = (query) => {
+  if (!query) return OFFICIAL_COURSES[0];
+
+  // Si es un objeto, intentar buscar por su ID o extraer su título/nombre
+  if (typeof query === 'object' && query !== null) {
+    if (query.id) {
+      const matchById = OFFICIAL_COURSES.find(c => c.id === query.id);
+      if (matchById) return matchById;
+    }
+    query = query.name || query.title || query.id || '';
+  }
+
   if (!query) return OFFICIAL_COURSES[0];
   
   // 1. Por ID directo
@@ -414,7 +428,7 @@ export const findMatchingCourse = (query) => {
   if (subMatch) return subMatch;
 
   // 4. Por palabras clave relevantes (longitud >= 4 caracteres)
-  const words = query
+  const words = String(query)
     .toLowerCase()
     .normalize('NFD')
     .replace(/[\u0300-\u036f]/g, '')
@@ -443,7 +457,14 @@ export const findMatchingCourse = (query) => {
   return OFFICIAL_COURSES[0];
 };
 
-const EnrollmentForm = ({ defaultCourseName = '', onFinished, onOpenPlatform }) => {
+const EnrollmentForm = ({ 
+  defaultCourseName = '', 
+  onFinished, 
+  onOpenPlatform, 
+  prefilledData = null, 
+  isEmailVerified = false,
+  onBackToVerification = null 
+}) => {
   // 1. Selector de Curso con sincronización reactiva
   const [selectedCourseId, setSelectedCourseId] = useState(() => {
     return findMatchingCourse(defaultCourseName).id;
@@ -487,24 +508,39 @@ const EnrollmentForm = ({ defaultCourseName = '', onFinished, onOpenPlatform }) 
   const courseFullName = currentCourse.name;
 
   // 2. Datos del Alumno (Alumno Dependiente) y Cuenta de Acceso
-  const [formData, setFormData] = useState({
-    nombre: '',
-    rut: '',
+  const [formData, setFormData] = useState(() => ({
+    nombre: prefilledData?.nombre || '',
+    rut: prefilledData?.rut || '',
     fechaNacimiento: '',
     pais: 'Chile',
-    region: 'Región de Arica y Parinacota (XV)',
-    ciudad: 'Arica',
+    region: prefilledData?.region || 'Región de Arica y Parinacota (XV)',
+    ciudad: prefilledData?.ciudad || 'Arica',
     modalidadPreferencia: 'presencial_virtual', // 'presencial_virtual' | 'virtual_total'
-    telefono: '',
+    telefono: prefilledData?.telefono || '',
     domicilio: '',
-    email: '',
+    email: prefilledData?.email || '',
     password: '',
     confirmPassword: '',
     lugarTrabajo: 'Particular',
     condicionLaboral: 'particular', // 'particular' | 'empresa'
     empresaNombre: '',
     observaciones: ''
-  });
+  }));
+
+  // Sincronizar si cambian los datos precargados y verificados
+  useEffect(() => {
+    if (prefilledData) {
+      setFormData(prev => ({
+        ...prev,
+        nombre: prefilledData.nombre || prev.nombre,
+        rut: prefilledData.rut || prev.rut,
+        email: prefilledData.email || prev.email,
+        telefono: prefilledData.telefono || prev.telefono,
+        region: prefilledData.region || prev.region,
+        ciudad: prefilledData.ciudad || prev.ciudad,
+      }));
+    }
+  }, [prefilledData]);
 
   const [otherCityName, setOtherCityName] = useState('');
 
@@ -1122,15 +1158,54 @@ const EnrollmentForm = ({ defaultCourseName = '', onFinished, onOpenPlatform }) 
 
           {/* ================= 2.- ALUMNO DEPENDIENTE (DATOS PERSONALES) ================= */}
           <div className="space-y-4 border-t border-slate-200 pt-6">
-            <div className="flex items-center justify-between border-b border-slate-200 pb-2">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-200 pb-2">
               <h2 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2.5">
                 <span className="w-7 h-7 rounded-xl bg-sky-50 text-[#0284c7] flex items-center justify-center text-xs font-black border border-sky-200">
                   2
                 </span>
                 <span>2.- ALUMNO DEPENDIENTE (DATOS PERSONALES)</span>
               </h2>
-              <span className="text-xs text-slate-500 font-mono">Ficha física Sección 2</span>
+              {isEmailVerified ? (
+                <span className="text-xs text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200 font-bold flex items-center gap-1.5 w-fit">
+                  <ShieldCheck size={14} className="text-emerald-600" />
+                  Identidad y Correo Verificados ✓
+                </span>
+              ) : (
+                <span className="text-xs text-slate-500 font-mono">Ficha física Sección 2</span>
+              )}
             </div>
+
+            {/* Banner destacado de verificación exitosa con Supabase */}
+            {isEmailVerified && (
+              <div className="p-4 sm:p-5 rounded-2xl bg-gradient-to-r from-emerald-50 via-teal-50/70 to-emerald-50 border-2 border-emerald-300 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-2xl bg-emerald-600 text-white flex items-center justify-center font-black flex-shrink-0 shadow-sm">
+                    <CheckCircle2 size={22} />
+                  </div>
+                  <div>
+                    <span className="text-[10px] font-black uppercase text-emerald-800 tracking-wider block">
+                      ✓ Correo Electrónico y 6 Datos Oficialmente Validados
+                    </span>
+                    <h4 className="text-xs sm:text-sm font-black text-emerald-950">
+                      Postulante: {formData.nombre} • {formData.email}
+                    </h4>
+                    <p className="text-[11px] text-emerald-800/80">
+                      Tus 6 datos han quedado certificados para asegurar tu cupo oficial en {courseFullName}.
+                    </p>
+                  </div>
+                </div>
+
+                {onBackToVerification && (
+                  <button
+                    type="button"
+                    onClick={onBackToVerification}
+                    className="text-xs font-bold text-emerald-800 hover:text-emerald-950 underline self-start sm:self-auto cursor-pointer flex-shrink-0"
+                  >
+                    Modificar datos iniciales
+                  </button>
+                )}
+              </div>
+            )}
 
             <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-xs">
               

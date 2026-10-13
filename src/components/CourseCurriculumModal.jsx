@@ -1,15 +1,15 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  X, 
-  BookOpen, 
-  Clock, 
-  Award, 
-  CheckCircle2, 
-  Calendar, 
-  Sparkles, 
-  Shield, 
-  Wrench, 
+import {
+  X,
+  BookOpen,
+  Clock,
+  Award,
+  CheckCircle2,
+  Calendar,
+  Sparkles,
+  Shield,
+  Wrench,
   ArrowRight,
   GraduationCap,
   Layers,
@@ -35,11 +35,11 @@ import { getCourseSyllabus } from '../data/syllabusData';
 import ConvinceBossModal from './ConvinceBossModal';
 import UserTestingModal from './UserTestingModal';
 
-const CourseCurriculumModal = ({ 
-  isOpen, 
-  onClose, 
-  course, 
-  onSelectCourse 
+const CourseCurriculumModal = ({
+  isOpen,
+  onClose,
+  course,
+  onSelectCourse
 }) => {
   // Pestañas exactas: 'resumen' | 'objetivos' | 'requisitos' | 'temario' | 'profesores' | 'video'
   const [activeTab, setActiveTab] = useState('resumen');
@@ -66,8 +66,9 @@ const CourseCurriculumModal = ({
   const nextDateText = syllabus?.nextDate || course.fecha_inicio || '19/10/2026';
 
   const handleEnrollClick = () => {
+    const targetTitle = course?.title || course?.name || (typeof course === 'string' ? course : '') || '';
     if (onSelectCourse) {
-      onSelectCourse(course);
+      onSelectCourse(targetTitle);
     }
     onClose();
   };
@@ -158,11 +159,10 @@ const CourseCurriculumModal = ({
               <button
                 type="button"
                 onClick={() => setActiveTab('resumen')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-2xs ${
-                  activeTab === 'resumen'
-                    ? 'bg-[#0a969b] text-white shadow-sm border-b-2 border-[#161630]'
-                    : 'bg-white text-[#1b3761] hover:bg-[#0a969b]/10 border border-slate-200'
-                }`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-2xs ${activeTab === 'resumen'
+                  ? 'bg-[#0a969b] text-white shadow-sm border-b-2 border-[#161630]'
+                  : 'bg-white text-[#1b3761] hover:bg-[#0a969b]/10 border border-slate-200'
+                  }`}
               >
                 <span>Resumen</span>
               </button>
@@ -171,11 +171,10 @@ const CourseCurriculumModal = ({
               <button
                 type="button"
                 onClick={() => setActiveTab('objetivos')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-2xs ${
-                  activeTab === 'objetivos'
-                    ? 'bg-[#0a969b] text-white shadow-sm border-b-2 border-[#161630]'
-                    : 'bg-white text-[#1b3761] hover:bg-[#0a969b]/10 border border-slate-200'
-                }`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-2xs ${activeTab === 'objetivos'
+                  ? 'bg-[#0a969b] text-white shadow-sm border-b-2 border-[#161630]'
+                  : 'bg-white text-[#1b3761] hover:bg-[#0a969b]/10 border border-slate-200'
+                  }`}
               >
                 <span>Objetivos</span>
               </button>
@@ -184,11 +183,10 @@ const CourseCurriculumModal = ({
               <button
                 type="button"
                 onClick={() => setActiveTab('requisitos')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-2xs ${
-                  activeTab === 'requisitos'
-                    ? 'bg-[#0a969b] text-white shadow-sm border-b-2 border-[#161630]'
-                    : 'bg-white text-[#1b3761] hover:bg-[#0a969b]/10 border border-slate-200'
-                }`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-2xs ${activeTab === 'requisitos'
+                  ? 'bg-[#0a969b] text-white shadow-sm border-b-2 border-[#161630]'
+                  : 'bg-white text-[#1b3761] hover:bg-[#0a969b]/10 border border-slate-200'
+                  }`}
               >
                 <span>Requisitos</span>
               </button>
@@ -197,11 +195,10 @@ const CourseCurriculumModal = ({
               <button
                 type="button"
                 onClick={() => setActiveTab('temario')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-2xs ${
-                  activeTab === 'temario'
-                    ? 'bg-[#0a969b] text-white shadow-sm border-b-2 border-[#161630]'
-                    : 'bg-white text-[#1b3761] hover:bg-[#0a969b]/10 border border-slate-200'
-                }`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-2xs ${activeTab === 'temario'
+                  ? 'bg-[#0a969b] text-white shadow-sm border-b-2 border-[#161630]'
+                  : 'bg-white text-[#1b3761] hover:bg-[#0a969b]/10 border border-slate-200'
+                  }`}
               >
                 <span>Temario ({modulesList.length})</span>
               </button>
@@ -210,11 +207,10 @@ const CourseCurriculumModal = ({
               <button
                 type="button"
                 onClick={() => setActiveTab('profesores')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-2xs ${
-                  activeTab === 'profesores'
-                    ? 'bg-[#1b3761] text-white shadow-sm border-b-2 border-[#0a969b]'
-                    : 'bg-white text-[#1b3761] hover:bg-[#0a969b]/10 border border-slate-200'
-                }`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-2xs ${activeTab === 'profesores'
+                  ? 'bg-[#1b3761] text-white shadow-sm border-b-2 border-[#0a969b]'
+                  : 'bg-white text-[#1b3761] hover:bg-[#0a969b]/10 border border-slate-200'
+                  }`}
               >
                 <GraduationCap size={13} className={activeTab === 'profesores' ? 'text-[#00FFE0]' : 'text-[#0a969b]'} />
                 <span>Docentes & Bibliografía</span>
@@ -224,11 +220,10 @@ const CourseCurriculumModal = ({
               <button
                 type="button"
                 onClick={() => setActiveTab('video')}
-                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-2xs ${
-                  activeTab === 'video'
-                    ? 'bg-[#161630] text-white shadow-sm border-b-2 border-[#0a969b]'
-                    : 'bg-white text-[#161630] hover:bg-[#0a969b]/10 border border-slate-200'
-                }`}
+                className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap shadow-2xs ${activeTab === 'video'
+                  ? 'bg-[#161630] text-white shadow-sm border-b-2 border-[#0a969b]'
+                  : 'bg-white text-[#161630] hover:bg-[#0a969b]/10 border border-slate-200'
+                  }`}
               >
                 <Video size={13} className={activeTab === 'video' ? 'text-[#00FFE0]' : 'text-[#0a969b]'} />
                 <span>Video Explicativo RRSS</span>
@@ -393,7 +388,7 @@ const CourseCurriculumModal = ({
                         const modTopics = isObject ? mod.topics || [] : [];
 
                         return (
-                          <div 
+                          <div
                             key={idx}
                             className="p-4 rounded-2xl bg-white border border-slate-200 hover:border-[#0a969b]/50 transition-all shadow-2xs space-y-2"
                           >
@@ -435,8 +430,8 @@ const CourseCurriculumModal = ({
                         {teachers.map((tea, idx) => (
                           <div key={idx} className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-2">
                             <div className="flex items-center gap-3">
-                              <img 
-                                src={tea.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80'} 
+                              <img
+                                src={tea.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80'}
                                 alt={tea.name}
                                 className="w-12 h-12 rounded-xl object-cover border border-[#1b3761]/20 shadow-xs"
                               />
@@ -508,13 +503,13 @@ const CourseCurriculumModal = ({
                         </div>
                       ) : (
                         <>
-                          <img 
-                            src={course.image || 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&auto=format&fit=crop&q=80'} 
+                          <img
+                            src={course.image || 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&auto=format&fit=crop&q=80'}
                             alt="Video Thumbnail"
                             className="w-full h-full object-cover opacity-45 group-hover:scale-105 transition-all duration-500"
                           />
                           <div className="absolute inset-0 bg-gradient-to-t from-[#161630] via-[#161630]/50 to-transparent" />
-                          
+
                           <button
                             type="button"
                             onClick={() => setIsPlayingVideo(true)}
@@ -566,7 +561,7 @@ const CourseCurriculumModal = ({
               {/* COLUMNA DERECHA: CARD LATERAL DE COMPRA Y CONVOCATORIA (PALETA OFICIAL PREVYSEG) */}
               <div className="lg:col-span-5 xl:col-span-4 h-full overflow-y-auto pr-1 custom-scrollbar">
                 <div className="rounded-2xl bg-white border border-slate-200 shadow-md overflow-hidden flex flex-col">
-                  
+
                   {/* Banner Superior con Gradiente PrevySeg */}
                   <div className="bg-gradient-to-r from-[#1b3761] to-[#0a969b] text-white font-black text-[11px] text-center py-2 px-3 uppercase tracking-wide">
                     Próxima convocatoria: {nextDateText}
@@ -612,8 +607,8 @@ const CourseCurriculumModal = ({
 
                     {/* Checkbox: Contratar gestión bonificación / SENCE (+10%) */}
                     <label className="flex items-start gap-2 p-2 rounded-lg bg-slate-50 border border-slate-200 cursor-pointer select-none hover:bg-slate-100 transition-all">
-                      <input 
-                        type="checkbox" 
+                      <input
+                        type="checkbox"
                         checked={bonificacionSence}
                         onChange={(e) => setBonificacionSence(e.target.checked)}
                         className="mt-0.5 w-3.5 h-3.5 rounded text-[#0a969b] focus:ring-[#0a969b] border-slate-300 cursor-pointer"
@@ -698,7 +693,7 @@ const CourseCurriculumModal = ({
       </AnimatePresence>
 
       {/* Modal ¡Convence a tu Jefe! */}
-      <ConvinceBossModal 
+      <ConvinceBossModal
         isOpen={showConvinceBoss}
         onClose={() => setShowConvinceBoss(false)}
         course={course}
@@ -706,7 +701,7 @@ const CourseCurriculumModal = ({
       />
 
       {/* Modal de Pruebas de Uso (2 Personas) */}
-      <UserTestingModal 
+      <UserTestingModal
         isOpen={showUserTesting}
         onClose={() => setShowUserTesting(false)}
         courseTitle={syllabus?.subtitle || course.title}

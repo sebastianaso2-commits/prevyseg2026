@@ -1,20 +1,20 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Laptop, 
-  Shield, 
-  Wrench, 
-  Clock, 
-  Calendar, 
-  Search, 
-  CheckCircle2, 
-  ArrowRight, 
-  ChevronRight, 
-  BookOpen, 
-  Globe, 
-  Sparkles, 
-  Home, 
-  Check, 
+import {
+  Laptop,
+  Shield,
+  Wrench,
+  Clock,
+  Calendar,
+  Search,
+  CheckCircle2,
+  ArrowRight,
+  ChevronRight,
+  BookOpen,
+  Globe,
+  Sparkles,
+  Home,
+  Check,
   AlertCircle,
   FileCheck
 } from 'lucide-react';
@@ -150,17 +150,16 @@ const OnlineCoursesView = ({ onSelectCourse, onReturnHome, onOpenSchoolDetail })
 
         {/* Barra de Filtros */}
         <div className="bg-white p-4 sm:p-5 rounded-2xl border border-slate-200 shadow-sm flex flex-col md:flex-row justify-between items-center gap-4">
-          
+
           {/* Switch de Escuelas */}
           <div className="flex items-center gap-2 w-full md:w-auto overflow-x-auto pb-1 md:pb-0">
             <button
               type="button"
               onClick={() => setSelectedSchool('all')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${
-                selectedSchool === 'all'
-                  ? 'bg-slate-900 text-white shadow'
-                  : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-              }`}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer whitespace-nowrap ${selectedSchool === 'all'
+                ? 'bg-slate-900 text-white shadow'
+                : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
+                }`}
             >
               Todos los Cursos Online ({courses.filter(c => c.activo !== false && c.permiteVirtual !== false).length})
             </button>
@@ -168,11 +167,10 @@ const OnlineCoursesView = ({ onSelectCourse, onReturnHome, onOpenSchoolDetail })
             <button
               type="button"
               onClick={() => setSelectedSchool('seguridad')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
-                selectedSchool === 'seguridad'
-                  ? 'bg-[#0A7D8C] text-white shadow'
-                  : 'bg-sky-50 text-sky-900 hover:bg-sky-100 border border-sky-200'
-              }`}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${selectedSchool === 'seguridad'
+                ? 'bg-[#0A7D8C] text-white shadow'
+                : 'bg-sky-50 text-sky-900 hover:bg-sky-100 border border-sky-200'
+                }`}
             >
               <Shield size={14} />
               <span>Seguridad Privada Online</span>
@@ -181,11 +179,10 @@ const OnlineCoursesView = ({ onSelectCourse, onReturnHome, onOpenSchoolDetail })
             <button
               type="button"
               onClick={() => setSelectedSchool('oficios')}
-              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${
-                selectedSchool === 'oficios'
-                  ? 'bg-[#00A896] text-white shadow'
-                  : 'bg-teal-50 text-teal-900 hover:bg-teal-100 border border-teal-200'
-              }`}
+              className={`px-4 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 whitespace-nowrap ${selectedSchool === 'oficios'
+                ? 'bg-[#00A896] text-white shadow'
+                : 'bg-teal-50 text-teal-900 hover:bg-teal-100 border border-teal-200'
+                }`}
             >
               <Wrench size={14} />
               <span>Oficios SENCE Online</span>
@@ -246,19 +243,18 @@ const OnlineCoursesView = ({ onSelectCourse, onReturnHome, onOpenSchoolDetail })
                   transition={{ duration: 0.2 }}
                   whileHover={{ y: -6 }}
                   onClick={() => setSelectedCourseForCurriculum(course)}
-                  className={`rounded-3xl overflow-hidden bg-white border shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer ${
-                    isSecurity
-                      ? 'border-slate-200 hover:border-[#00C4D8]/60 hover:shadow-sky-500/10'
-                      : 'border-slate-200 hover:border-[#00A896]/60 hover:shadow-emerald-500/10'
-                  }`}
+                  className={`rounded-3xl overflow-hidden bg-white border shadow-md hover:shadow-xl transition-all duration-300 flex flex-col justify-between group cursor-pointer ${isSecurity
+                    ? 'border-slate-200 hover:border-[#00C4D8]/60 hover:shadow-sky-500/10'
+                    : 'border-slate-200 hover:border-[#00A896]/60 hover:shadow-emerald-500/10'
+                    }`}
                   title="Haz clic para ver toda la información y módulos del curso"
                 >
                   <div>
                     {/* Imagen y Badges */}
                     <div className="relative aspect-[16/10] overflow-hidden bg-slate-900">
-                      <img 
-                        src={course.image} 
-                        alt={course.title} 
+                      <img
+                        src={course.image}
+                        alt={course.title}
                         className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-500"
                         loading="lazy"
                       />
@@ -285,11 +281,10 @@ const OnlineCoursesView = ({ onSelectCourse, onReturnHome, onOpenSchoolDetail })
 
                       {/* Badge Superior Derecho: Escuela */}
                       <div className="absolute top-3 right-3 z-10">
-                        <span className={`text-white text-[10px] font-extrabold px-2.5 py-1 rounded-md shadow-md border ${
-                          isSecurity
-                            ? 'bg-[#0A7D8C] border-[#00C4D8]/40'
-                            : 'bg-[#00A896] border-[#00FFE0]/40'
-                        }`}>
+                        <span className={`text-white text-[10px] font-extrabold px-2.5 py-1 rounded-md shadow-md border ${isSecurity
+                          ? 'bg-[#0A7D8C] border-[#00C4D8]/40'
+                          : 'bg-[#00A896] border-[#00FFE0]/40'
+                          }`}>
                           {isSecurity ? 'Seguridad' : 'Oficios'}
                         </span>
                       </div>
@@ -388,11 +383,10 @@ const OnlineCoursesView = ({ onSelectCourse, onReturnHome, onOpenSchoolDetail })
                             onSelectCourse(course.title);
                           }
                         }}
-                        className={`text-white text-xs font-black py-2.5 px-4 rounded-xl shadow-md flex items-center gap-1.5 flex-shrink-0 transition-all ${
-                          !isAvailable
-                            ? 'bg-slate-300 text-slate-500 cursor-not-allowed border border-slate-300 shadow-none'
-                            : 'bg-gradient-to-r from-[#071626] to-[#0A7D8C] hover:from-[#0B2032] hover:to-[#009688] shadow-[#071626]/30 border border-[#00C4D8]/30 cursor-pointer'
-                        }`}
+                        className={`text-white text-xs font-black py-2.5 px-4 rounded-xl shadow-md flex items-center gap-1.5 flex-shrink-0 transition-all ${!isAvailable
+                          ? 'bg-slate-300 text-slate-500 cursor-not-allowed border border-slate-300 shadow-none'
+                          : 'bg-gradient-to-r from-[#071626] to-[#0A7D8C] hover:from-[#0B2032] hover:to-[#009688] shadow-[#071626]/30 border border-[#00C4D8]/30 cursor-pointer'
+                          }`}
                       >
                         <span>{isAvailable ? 'Inscribirme Online' : 'Sin Cupos'}</span>
                         <ArrowRight size={14} />

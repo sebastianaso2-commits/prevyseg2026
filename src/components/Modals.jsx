@@ -957,14 +957,31 @@ export const ArticleModal = ({ article, onClose, onOpenContact }) => {
   );
 };
 
-// 5. Modal Ficha de Inscripción & Abono 50% (Pop-up directo)
+// 5. Modal Ficha de Inscripción & Abono 50% (Flujo Seguro de 2 Pasos con Verificación Supabase)
 import EnrollmentForm from './EnrollmentForm';
+import PreEnrollmentStep from './PreEnrollmentStep';
 
 export const EnrollmentModal = ({ isOpen, onClose, defaultCourse = '', onOpenPlatform }) => {
+  const [modalStep, setModalStep] = useState('PRE_ENROLLMENT'); // 'PRE_ENROLLMENT' | 'FULL_ENROLLMENT'
+  const [verifiedStudentData, setVerifiedStudentData] = useState(null);
+
+  // Cada vez que se abra el modal desde una card de curso, iniciar en la Ficha Reducida
+  useEffect(() => {
+    if (isOpen) {
+      setModalStep('PRE_ENROLLMENT');
+      setVerifiedStudentData(null);
+    }
+  }, [isOpen, defaultCourse]);
+
   if (!isOpen) return null;
 
+  const handleVerified = (verifiedData) => {
+    setVerifiedStudentData(verifiedData);
+    setModalStep('FULL_ENROLLMENT');
+  };
+
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-2 sm:p-4 bg-slate-900/60 backdrop-blur-sm overflow-y-auto">
+    <div className="fixed inset-0 z-[70] flex items-center justify-center p-2 sm:p-4 bg-slate-900/60 backdrop-blur-sm overflow-y-auto">
       <motion.div 
         initial={{ opacity: 0, scale: 0.93, y: 20 }}
         animate={{ opacity: 1, scale: 1, y: 0 }}
@@ -984,10 +1001,26 @@ export const EnrollmentModal = ({ isOpen, onClose, defaultCourse = '', onOpenPla
         </motion.button>
 
         <div className="-mt-12">
-          <EnrollmentForm defaultCourseName={defaultCourse} onFinished={onClose} onOpenPlatform={onOpenPlatform} />
+          {modalStep === 'PRE_ENROLLMENT' ? (
+            <PreEnrollmentStep
+              defaultCourseName={defaultCourse}
+              onVerified={handleVerified}
+              onClose={onClose}
+            />
+          ) : (
+            <EnrollmentForm 
+              defaultCourseName={defaultCourse} 
+              onFinished={onClose} 
+              onOpenPlatform={onOpenPlatform}
+              prefilledData={verifiedStudentData}
+              isEmailVerified={true}
+              onBackToVerification={() => setModalStep('PRE_ENROLLMENT')}
+            />
+          )}
         </div>
       </motion.div>
     </div>
   );
 };
+
 

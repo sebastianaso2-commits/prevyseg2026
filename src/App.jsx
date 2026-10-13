@@ -113,8 +113,11 @@ function App() {
     setIsContactOpen(true);
   };
 
-  const handleOpenEnrollmentWithCourse = (courseName) => {
-    setSelectedCourse(courseName || '');
+  const handleOpenEnrollmentWithCourse = (courseInput) => {
+    const courseTitle = typeof courseInput === 'object' && courseInput !== null
+      ? (courseInput.title || courseInput.name || courseInput.id || '')
+      : (courseInput || '');
+    setSelectedCourse(courseTitle);
     setIsEnrollmentOpen(true);
   };
 
