@@ -564,7 +564,17 @@ export const PlatformModal = ({ isOpen, onClose, onLoginSuccess, initialMode = '
                   <span className="font-mono text-slate-500 text-[10px]">15.692.858-5</span>
                 </button>
 
-                {/* 2. Empresa / Empleador */}
+                {/* 2. Profesor / Docente Instructor */}
+                <button
+                  type="button"
+                  onClick={() => handleFillDemo('12345678-5', 'profesor2026')}
+                  className="text-left text-sky-700 hover:text-sky-900 flex justify-between items-center cursor-pointer p-2 rounded-lg hover:bg-sky-50 border border-sky-200 transition-colors"
+                >
+                  <span className="font-semibold">👨‍🏫 Prof. Carlos Mendoza (DOCENTE INSTRUCTOR)</span>
+                  <span className="font-mono text-slate-500 text-[10px]">12.345.678-5</span>
+                </button>
+
+                {/* 3. Empresa / Empleador */}
                 <button
                   type="button"
                   onClick={() => handleFillDemo('76543210-K', 'prevyseg2026')}

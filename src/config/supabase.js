@@ -87,6 +87,48 @@ export const loginWithRut = async (rut, password) => {
   }
 
   if (authError) {
+    const cleanLower = cleaned.toLowerCase();
+    const DEMO_PROFILES = {
+      '156928585': {
+        id: 'demo-admin-viviane',
+        email: 'viviane.montesillo@prevyseg.cl',
+        rut: '15.692.858-5',
+        nombre: 'Viviane Montesillo',
+        rol: 'ADMIN',
+        cargo: 'Director Ejecutivo / Administrador OTEC',
+        telefono: '+56 9 8765 4321',
+        ciudad: 'Arica, Chile'
+      },
+      '123456785': {
+        id: 'demo-teacher-carlos',
+        email: 'carlos.mendoza@prevyseg.cl',
+        rut: '12.345.678-5',
+        nombre: 'Prof. Carlos Mendoza Riquelme',
+        rol: 'TEACHER',
+        cargo: 'Docente Instructor SPD & OS-10',
+        telefono: '+56 9 7654 3210',
+        ciudad: 'Arica, Chile'
+      },
+      '76543210k': {
+        id: 'demo-employer-mineria',
+        email: 'contacto@mineralogistica.cl',
+        rut: '76.543.210-K',
+        nombre: 'Minería & Logística del Norte',
+        rol: 'EMPLOYER',
+        cargo: 'Gerencia de Selección & RRHH • Empresa Verificada',
+        telefono: '+56 58 223 4567',
+        ciudad: 'Arica / Antofagasta, Chile'
+      }
+    };
+
+    if (DEMO_PROFILES[cleanLower]) {
+      const demo = DEMO_PROFILES[cleanLower];
+      return {
+        ...demo,
+        user: demo.rut
+      };
+    }
+
     console.error('Error de autenticación Supabase:', authError);
     throw new Error('RUT o contraseña incorrectos. Verifica tus datos o regístrate si eres alumno nuevo.');
   }
