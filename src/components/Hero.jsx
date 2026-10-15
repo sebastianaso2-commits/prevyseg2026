@@ -199,7 +199,7 @@ const Hero = ({
             className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed max-w-3xl"
             style={{ textShadow: '0 1px 8px rgba(0,0,0,0.4)' }}
           >
-            <strong className="font-bold text-white">PrevySeg Capacitaciones:</strong> Organismo Técnico de Capacitación líder en Arica y la Macro Zona Norte. Impartimos programas de formación técnica y profesional con los más altos estándares pedagógicos y normativos bajo acreditación oficial SENCE y certificación de calidad internacional SGS NCh 2728:2015.
+            Organismo Técnico de Capacitación líder en Arica y la Macro Zona Norte. Impartimos programas de capacitaciones con los más altos estándares pedagógicos y normativos bajo acreditación oficial SENCE y certificación de calidad internacional SGS NCh 2728:2015.
           </p>
 
           {/* Badges de Confianza Institucional en Tarjetas Pulidas */}
