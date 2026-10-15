@@ -32,7 +32,7 @@ const ExecutionSection = ({ onLearnMore, activeSchool = 'seguridad' }) => {
     waveColor: 'text-[#00C4D8]/40',
     leadText: (
       <>
-        En <strong className="text-[#0284c7] font-black">PrevySeg</strong> formamos guardias, vigilantes y supervisores con una preparación rigurosa, táctica y jurídica conforme a la Ley 21.659 y exigencias de Carabineros OS-10 y Directemar.
+        En <strong className="text-[#0284c7] font-black">PrevySeg</strong> formamos guardias, vigilantes y supervisores con una preparación rigurosa, táctica y jurídica conforme a la Ley 21.659 y exigencias de la Subsecretaría de Prevención del Delito (SPD), Carabineros OS-10, OS-11 y Directemar.
       </>
     ),
     checkmarks: [
