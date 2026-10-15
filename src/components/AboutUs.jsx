@@ -33,7 +33,7 @@ const AboutUs = ({ onSelectSchool }) => {
       subtitle: 'Acreditados por SENCE bajo la Norma Chilena de Calidad NCh 2728:2015 SGS',
       accentColor: '#0A4DA2',
       badgeBg: 'bg-blue-50 text-[#0A4DA2] border-blue-200',
-      noticeText: 'Impartimos acciones de capacitación de corta duración: Oficios operativos, normas de seguridad, tecnologías de la información, formación de guardias de seguridad y habilidades blandas con validez oficial SENCE.',
+      noticeText: 'Somos un Organismo Técnico de Capacitación acreditado en Chile por el Servicio Nacional de Capacitación y Empleo (Sence) para ofrecer cursos y programas de formación laboral con validez oficial.',
       qualityHighlight: 'Nuestro fuerte institucional es estar certificados bajo la Norma Chilena NCh 2728:2015 por la casa certificadora internacional SGS (Certificado CL 13/20100689), garantizando un Sistema de Gestión de Calidad con auditorías periódicas y mejora continua.',
       cards: [
         {
