@@ -85,7 +85,7 @@ const AboutUs = ({ onSelectSchool }) => {
           lightBg: 'rgba(0, 168, 150, 0.05)',
           stat: '100%',
           statLabel: 'Práctico en Taller',
-          text: 'Instruir y entrenar a técnicos y operarios en habilidades manuales e industriales de alta demanda, asegurando que adquieran destrezas reales para desempeñarse eficazmente en faenas, talleres y servicios.'
+          text: 'Instruir y entrenar a Personas en habilidades manuales e industriales de alta demanda, asegurando que adquieran destrezas reales para desempeñarse eficazmente en faenas, talleres y servicios.'
         },
         {
           title: 'Visión de Oficios',
