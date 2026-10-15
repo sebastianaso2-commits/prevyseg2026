@@ -91,8 +91,8 @@ const SenceExecutiveSummary = ({ onOpenContact }) => {
                   100% SENCE (Costo $0)
                 </span>
               </div>
-              <p className="text-[11px] text-slate-600 mt-2 leading-relaxed">
-                <strong>Financiamiento íntegro gratuito:</strong> Para la mayoría de guardias, conserjes y operarios. La empresa descuenta el 100% del arancel en sus impuestos.
+              <p className="text-[11px] text-slate-500 mt-2 leading-relaxed">
+                Financiamiento íntegro sin desembolso neto para la empresa.
               </p>
             </div>
 
@@ -110,7 +110,7 @@ const SenceExecutiveSummary = ({ onOpenContact }) => {
                 </span>
               </div>
               <p className="text-[11px] text-slate-600 mt-2 leading-relaxed">
-                <strong>Cobertura de la mitad:</strong> Para supervisores y mandos medios. SENCE financia el 50% del valor hora oficial y la empresa copaga el otro 50%.
+                Cubre el 50% del valor hora SENCE para remuneraciones medias.
               </p>
             </div>
 
@@ -127,8 +127,8 @@ const SenceExecutiveSummary = ({ onOpenContact }) => {
                   15% SENCE
                 </span>
               </div>
-              <p className="text-[11px] text-slate-600 mt-2 leading-relaxed">
-                <strong>Tramo ejecutivo:</strong> Para gerencias y cargos de alta renta. Permite deducir un 15% del arancel como crédito tributario en la renta anual.
+              <p className="text-[11px] text-slate-500 mt-2 leading-relaxed">
+                Aporte imputable de 15% para rentas ejecutivas superiores.
               </p>
             </div>
 
@@ -145,8 +145,8 @@ const SenceExecutiveSummary = ({ onOpenContact }) => {
                   Descuento por Volumen
                 </span>
               </div>
-              <p className="text-[11px] text-slate-600 mt-2 leading-relaxed">
-                <strong>Aranceles corporativos rebajados:</strong> Para empresas que capacitan cuadrillas completas (5, 10 o más trabajadores) o pagan arancel directo.
+              <p className="text-[11px] text-slate-500 mt-2 leading-relaxed">
+                Aranceles preferenciales para cuadrillas y grupos de alumnos.
               </p>
             </div>
 

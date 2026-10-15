@@ -51,7 +51,7 @@ export const SenceTramosSection = () => {
     {
       pct: '100% SENCE (Costo $0)',
       utm: 'Sueldos hasta $1.660.000 / mes (Hasta 25 UTM)',
-      desc: 'Financiamiento del 100% sin costo para la empresa en personal con sueldos hasta $1,6M (guardias, operarios, conserjes). Se descuenta íntegramente de impuestos.',
+      desc: 'Financiamiento íntegro sin desembolso neto para la empresa.',
       color: '#0A4DA2',
       lightBg: 'rgba(10,77,162,0.05)',
       isHighlighted: false,
@@ -59,7 +59,7 @@ export const SenceTramosSection = () => {
     {
       pct: '50% SENCE',
       utm: 'Sueldos $1.660.000 a $3.330.000 (25 a 50 UTM)',
-      desc: 'Cubre el 50% del valor hora oficial para trabajadores de tramo medio (supervisores y jefes de turno). El 50% restante es copago de la empresa.',
+      desc: 'Cubre el 50% del valor hora SENCE para remuneraciones medias.',
       color: '#00A896',
       lightBg: 'rgba(0,168,150,0.05)',
       isHighlighted: true,
@@ -67,7 +67,7 @@ export const SenceTramosSection = () => {
     {
       pct: '15% SENCE',
       utm: 'Sueldos sobre $3.330.000 (+50 UTM)',
-      desc: 'Aporte de hasta el 15% imputable al impuesto corporativo para cargos gerenciales y directivos con sueldos superiores a $3,3 millones.',
+      desc: 'Aporte imputable de 15% para rentas ejecutivas superiores.',
       color: '#0284c7',
       lightBg: 'rgba(2,132,199,0.05)',
       isHighlighted: false,
@@ -75,7 +75,7 @@ export const SenceTramosSection = () => {
     {
       pct: 'Descuento Volumen',
       utm: 'Cuadrillas y Grupos (Convenios)',
-      desc: 'Convenios corporativos y aranceles preferenciales rebajados para empresas que capacitan grupos grandes con o sin franquicia SENCE.',
+      desc: 'Aranceles preferenciales para cuadrillas y grupos de alumnos.',
       color: '#F2A900',
       lightBg: 'rgba(242,169,0,0.05)',
       isHighlighted: false,
