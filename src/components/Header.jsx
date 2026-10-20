@@ -17,7 +17,7 @@ import {
   Shield,
   Wrench
 } from 'lucide-react';
-import { FacebookIcon, InstagramIcon, YoutubeIcon } from './SocialIcons';
+import { FacebookIcon, InstagramIcon, YoutubeIcon, WhatsAppIcon } from './SocialIcons';
 import prevysegLogo from '../assets/images/prevyseg_logo.png';
 
 // Icono de red/nodos idéntico al de Plataforma Virtual
@@ -101,7 +101,7 @@ const Header = ({
       <div
         className={`bg-[#161630] text-white overflow-hidden transition-all duration-300 border-b border-[#0a969b]/25 ${isScrolled
             ? 'max-h-0 opacity-0 -translate-y-2 py-0 border-none pointer-events-none'
-            : 'max-h-12 opacity-100 py-1.5 px-4 sm:px-8 text-[11px]'
+            : 'max-h-16 sm:max-h-12 opacity-100 py-1.5 px-3 sm:px-8 text-[11px]'
           }`}
       >
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
@@ -144,18 +144,35 @@ const Header = ({
           </div>
 
           {/* Información de Contacto Directa */}
-          <div className="flex items-center space-x-3 sm:space-x-4 text-white/90 font-medium">
+          <div className="flex items-center space-x-2.5 sm:space-x-3 text-white/90 font-medium">
             <a
-              href="tel:+56978691869"
+              href="https://wa.me/56982312128"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp +56 9 8231 2128"
+              title="Abrir chat de WhatsApp (+56 9 8231 2128)"
               className="flex items-center gap-1.5 hover:text-[#00FFE0] transition-colors"
             >
-              <Phone size={11} className="text-[#00FFE0]" />
+              <WhatsAppIcon size={12} className="text-[#00FFE0]" />
+              <span className="font-semibold">+56 9 8231 2128</span>
+            </a>
+            <span className="text-white/20">|</span>
+            <a
+              href="https://wa.me/56978691869"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="WhatsApp +56 9 7869 1869"
+              title="Abrir chat de WhatsApp (+56 9 7869 1869)"
+              className="flex items-center gap-1.5 hover:text-[#00FFE0] transition-colors"
+            >
+              <WhatsAppIcon size={12} className="text-[#00FFE0]" />
               <span className="font-semibold">+56 9 7869 1869</span>
             </a>
-            <span className="text-white/20 hidden sm:inline">|</span>
+            <span className="text-white/20 hidden md:inline">|</span>
             <a
               href="mailto:prevyseg.capacitaciones@gmail.com"
               className="hidden md:flex items-center gap-1.5 hover:text-[#00FFE0] transition-colors"
+              title="Enviar correo"
             >
               <Mail size={11} className="text-[#00FFE0]" />
               <span>prevyseg.capacitaciones@gmail.com</span>
