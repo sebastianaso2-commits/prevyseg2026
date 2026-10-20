@@ -428,18 +428,36 @@ const CourseCurriculumModal = ({
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {teachers.map((tea, idx) => (
-                          <div key={idx} className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-2">
-                            <div className="flex items-center gap-3">
-                              <img
-                                src={tea.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80'}
-                                alt={tea.name}
-                                className="w-12 h-12 rounded-xl object-cover border border-[#1b3761]/20 shadow-xs"
-                              />
-                              <div>
-                                <h4 className="text-xs sm:text-sm font-black text-[#161630]">{tea.name}</h4>
-                                <span className="text-[11px] font-bold text-[#0a969b] block">{tea.role}</span>
-                                <span className="text-[10px] text-slate-500 block leading-tight">{tea.credentials}</span>
+                          <div key={idx} className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-2.5 flex flex-col justify-between">
+                            <div className="space-y-2">
+                              <div className="flex items-start gap-3">
+                                <img
+                                  src={tea.avatar || 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80'}
+                                  alt={tea.name}
+                                  className="w-12 h-12 rounded-xl object-cover border border-[#1b3761]/20 shadow-xs flex-shrink-0"
+                                />
+                                <div className="min-w-0 flex-1">
+                                  <div className="flex items-center gap-1.5 flex-wrap">
+                                    <h4 className="text-xs sm:text-sm font-black text-[#161630]">{tea.name}</h4>
+                                    {tea.badge && (
+                                      <span className="text-[9px] font-black uppercase tracking-wider px-1.5 py-0.5 rounded bg-emerald-50 text-emerald-700 border border-emerald-200">
+                                        {tea.badge}
+                                      </span>
+                                    )}
+                                  </div>
+                                  <span className="text-[11px] font-bold text-[#0a969b] block leading-snug">{tea.role}</span>
+                                  <span className="text-[10px] text-slate-500 block leading-tight mt-0.5">{tea.credentials}</span>
+                                </div>
                               </div>
+                              {tea.areas && tea.areas.length > 0 && (
+                                <div className="flex flex-wrap gap-1 pt-0.5">
+                                  {tea.areas.map((area, aIdx) => (
+                                    <span key={aIdx} className="text-[9px] font-bold px-2 py-0.5 rounded-md bg-[#0a969b]/10 text-[#0a969b] border border-[#0a969b]/25">
+                                      ✓ {area}
+                                    </span>
+                                  ))}
+                                </div>
+                              )}
                             </div>
                             <p className="text-[11px] text-slate-600 leading-relaxed border-t border-slate-100 pt-2">
                               {tea.bio}

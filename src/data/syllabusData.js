@@ -93,20 +93,25 @@ export const SYLLABUS_DETAILS = {
         name: 'Mayor (R) Carlos Valenzuela Soto',
         role: 'Instructor Jefe de Seguridad Privada',
         credentials: 'Acreditado OS-10 Carabineros de Chile • Registro SPD N° 458-2024',
+        badge: 'OS-10 / SPD',
         bio: 'Ex-Oficial de Carabineros con 22 años de experiencia en seguridad pública, operaciones de orden urbano y dirección de academias de seguridad privada en la Región de Arica y Parinacota.',
         avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80'
       },
       {
-        name: 'Dra. Marcela Fuenzalida Rivas',
-        role: 'Especialista en Primeros Auxilios y Trauma',
-        credentials: 'Médico Cirujano • Instructora Certificada AHA en Soporte Vital (BLS/DEA)',
-        bio: 'Médico de emergencias con amplia trayectoria en capacitación de brigadas industriales, rescate urbano y primeros auxilios tácticos para personal operativo.',
-        avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&auto=format&fit=crop&q=80'
+        name: 'Marco Antonio Gallardo Sáez',
+        role: 'Relator Acreditado OS-10 • Primeros Auxilios, Administración y Ética',
+        credentials: 'Prefectura Carabineros Arica N° 1 • Res. Exenta N° 136 / Aut. N° 016 (Vigencia 2028)',
+        badge: 'Acreditado OS-10',
+        areas: ['Primeros Auxilios', 'Administración de Seguridad', 'Valores y Ética'],
+        bio: 'Capacitador autorizado por Carabineros de Chile (OS-10 Prefectura Arica N° 1, Res. Exenta N° 136 / Aut. N° 016, vigente hasta octubre 2028). Técnico de Nivel Superior en Enfermería (CFT Tarapacá), Diplomado en Alta Dirección de Seguridad Privada (CFT UDA) y formación en Desarrollo Humano y Ética Laboral por la Pontificia Universidad Católica de Chile.',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
       }
     ],
     bibliography: [
       'Ley N° 21.659 sobre Seguridad Privada en Chile (Ministerio del Interior y Seguridad Pública).',
       'Decreto Supremo N° 867/2017: Reglamento de Seguridad Privada.',
+      'Decreto Exento N° 32 (31.01.2024): Manual Operativo de Seguridad Privada.',
+      'Decreto Ley N° 3.607 (Art. 5° bis) y Resoluciones de la Autoridad Fiscalizadora OS-10 Carabineros de Chile.',
       'Manual Oficial de Doctrina y Procedimientos para Guardias de Seguridad (Depto. OS-10 Carabineros).',
       'Código Procesal Penal: Normas de flagrancia y detención ciudadana (Artículos 129 y 130).',
       'Guía Clínica de Reanimación Cardiopulmonar y Manejo de DEA (Ministerio de Salud de Chile).'
@@ -166,8 +171,18 @@ export const SYLLABUS_DETAILS = {
         name: 'Suboficial Mayor (R) Jorge Paredes Alarcón',
         role: 'Instructor Maestro de Tiro y Tácticas Armadas',
         credentials: 'Perito Armero • Acreditado OS-10 Carabineros de Chile',
+        badge: 'OS-10 Tiro',
         bio: 'Especialista en balística forense y tiro táctico con más de 25 años formando vigilantes bancarios e instructores de tiro en la zona norte.',
         avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+      },
+      {
+        name: 'Marco Antonio Gallardo Sáez',
+        role: 'Relator Acreditado OS-10 • Primeros Auxilios y Valores & Ética',
+        credentials: 'Prefectura Carabineros Arica N° 1 • Res. Exenta N° 136 / Aut. N° 016 (Vigencia 2028)',
+        badge: 'Acreditado OS-10',
+        areas: ['Primeros Auxilios', 'Valores y Ética', 'Administración de Seguridad'],
+        bio: 'Capacitador autorizado por Carabineros de Chile (OS-10 Prefectura Arica N° 1). Técnico de Nivel Superior en Enfermería (CFT Tarapacá), Diplomado en Alta Dirección de Seguridad Privada (CFT UDA) y postítulo en Ética Laboral por la Pontificia Universidad Católica de Chile.',
+        avatar: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=150&auto=format&fit=crop&q=80'
       }
     ],
     bibliography: [
@@ -261,7 +276,25 @@ export const SYLLABUS_DETAILS = {
       { number: '01', title: 'Marco Regulatorio y Rol del Nochero/Conserje', topics: ['Límites legales y Ley de Copropiedad Inmobiliaria', 'Responsabilidades en el turno'] },
       { number: '02', title: 'Control de Accesos y Manejo de Emergencias', topics: ['Sistemas de citofonía y bitácoras', 'Evacuación y red húmeda en edificios'] }
     ],
-    teachers: [{ name: 'Carlos Valenzuela Soto', role: 'Instructor de Seguridad', credentials: 'OS-10 Carabineros', bio: 'Instructor con amplia experiencia en capacitación de conserjería.', avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80' }],
+    teachers: [
+      {
+        name: 'Carlos Valenzuela Soto',
+        role: 'Instructor de Seguridad',
+        credentials: 'OS-10 Carabineros',
+        badge: 'OS-10 / SPD',
+        bio: 'Instructor con amplia experiencia en capacitación de conserjería.',
+        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80'
+      },
+      {
+        name: 'Marco Antonio Gallardo Sáez',
+        role: 'Relator Acreditado OS-10 • Primeros Auxilios y Ética en Servicios',
+        credentials: 'Prefectura Carabineros Arica N° 1 • Res. Exenta N° 136 (Vigencia 2028)',
+        badge: 'Acreditado OS-10',
+        areas: ['Primeros Auxilios', 'Valores y Ética', 'Administración de Seguridad'],
+        bio: 'Capacitador acreditado OS-10 en Primeros Auxilios, Administración y Ética. Técnico de Nivel Superior en Enfermería (CFT Tarapacá) y especialización en Ética Laboral por la Pontificia Universidad Católica de Chile.',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+      }
+    ],
     bibliography: ['Ley N° 21.442 de Copropiedad Inmobiliaria.', 'Ley N° 21.659 de Seguridad Privada.'],
     videoData: {
       title: 'Cápsula RRSS: La Nueva Ley de Seguridad y los Conserjes de Condominios',
@@ -294,7 +327,25 @@ export const SYLLABUS_DETAILS = {
       { number: '01', title: 'Actualización Jurídica Ley 21.659', topics: ['Modificaciones respecto al DL 3.607', 'Nuevo régimen sancionatorio'] },
       { number: '02', title: 'Reentrenamiento Táctico Operativo', topics: ['Procedimientos en retail y grandes tiendas', 'Manejo de crisis'] }
     ],
-    teachers: [{ name: 'Mayor (R) Carlos Valenzuela Soto', role: 'Instructor Jefe OS-10', credentials: 'Registro SPD N° 458-2024', bio: 'Especialista en legislación de seguridad.', avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80' }],
+    teachers: [
+      {
+        name: 'Mayor (R) Carlos Valenzuela Soto',
+        role: 'Instructor Jefe OS-10',
+        credentials: 'Registro SPD N° 458-2024',
+        badge: 'OS-10 / SPD',
+        bio: 'Especialista en legislación de seguridad.',
+        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80'
+      },
+      {
+        name: 'Marco Antonio Gallardo Sáez',
+        role: 'Relator Acreditado OS-10 • Actualización Primeros Auxilios y Deontología',
+        credentials: 'Prefectura Carabineros Arica N° 1 • Res. Exenta N° 136 / Aut. N° 016 (Vigencia 2028)',
+        badge: 'Acreditado OS-10',
+        areas: ['Primeros Auxilios', 'Administración de Seguridad', 'Valores y Ética'],
+        bio: 'Capacitador oficial de Carabineros de Chile (OS-10 Prefectura Arica N° 1, Res. Exenta N° 136). Especialista en reentrenamiento de soporte vital, administración de seguridad privada y actualización deontológica.',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+      }
+    ],
     bibliography: ['Ley N° 21.659 de Seguridad Privada.', 'Manual de Perfeccionamiento OS-10 Carabineros.'],
     videoData: {
       title: 'Cápsula RRSS: ¿Tienes tu credencial por vencer? Cómo renovar fácil con PrevySeg',
@@ -347,7 +398,25 @@ export const SYLLABUS_DETAILS = {
     certification: 'Diploma de Actualización Laboral OTEC PrevySeg',
     requirements: ['Cédula de Identidad.', 'Certificado de curso previo de conserjería o nochero.'],
     modules: [{ number: '01', title: 'Nuevos Métodos Preventivos y Tecnológicos', topics: ['Citofonía inteligente', 'Planes de contingencia vecinal'] }],
-    teachers: [{ name: 'Carlos Valenzuela Soto', role: 'Instructor de Seguridad', credentials: 'OS-10 Carabineros', bio: 'Instructor con amplia experiencia.', avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80' }],
+    teachers: [
+      {
+        name: 'Carlos Valenzuela Soto',
+        role: 'Instructor de Seguridad',
+        credentials: 'OS-10 Carabineros',
+        badge: 'OS-10 / SPD',
+        bio: 'Instructor con amplia experiencia en conserjería y vigilancia.',
+        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80'
+      },
+      {
+        name: 'Marco Antonio Gallardo Sáez',
+        role: 'Relator Acreditado OS-10 • Protocolos de Emergencia y Ética',
+        credentials: 'Prefectura Carabineros Arica N° 1 • Res. Exenta N° 136 (Vigencia 2028)',
+        badge: 'Acreditado OS-10',
+        areas: ['Primeros Auxilios', 'Administración de Seguridad', 'Valores y Ética'],
+        bio: 'Capacitador acreditado OS-10. Técnico de Nivel Superior en Enfermería (CFT Tarapacá) y Diplomado en Alta Dirección de Seguridad Privada (CFT UDA).',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+      }
+    ],
     bibliography: ['Ley N° 21.442 de Copropiedad Inmobiliaria.'],
     videoData: { title: 'Cápsula RRSS: Actualización para Conserjes y Nocheros', presenter: 'Camila Valenzuela', frequency: 'Cápsula mensual RRSS', duration: '02:40 min', description: 'Mejores prácticas para la seguridad en condominios.', topicsCovered: ['Nuevas tecnologías de acceso', 'Cierre de turnos'] }
   },
@@ -424,7 +493,25 @@ export const SYLLABUS_DETAILS = {
       { number: '02', title: 'Elaboración de Directivas de Funcionamiento OS-10', topics: ['Estudio de seguridad de instalaciones', 'Planes de contingencia y matrices de riesgo'] },
       { number: '03', title: 'Liderazgo, Resolución de Conflictos y Auditoría en Terreno', topics: ['Inspección de puestos de guardia', 'Manejo de sindicatos y clima laboral'] }
     ],
-    teachers: [{ name: 'Mayor (R) Carlos Valenzuela Soto', role: 'Director Académico de Seguridad', credentials: 'OS-10 y SPD', bio: 'Experto en mando y operaciones.', avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80' }],
+    teachers: [
+      {
+        name: 'Mayor (R) Carlos Valenzuela Soto',
+        role: 'Director Académico de Seguridad',
+        credentials: 'OS-10 y SPD',
+        badge: 'OS-10 / SPD',
+        bio: 'Experto en mando y operaciones.',
+        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80'
+      },
+      {
+        name: 'Marco Antonio Gallardo Sáez',
+        role: 'Relator Acreditado OS-10 • Alta Dirección y Supervisión de Seguridad',
+        credentials: 'Prefectura Carabineros Arica N° 1 • Res. Exenta N° 136 / Aut. N° 016 (Vigencia 2028)',
+        badge: 'Acreditado OS-10',
+        areas: ['Administración de Seguridad', 'Valores y Ética', 'Primeros Auxilios'],
+        bio: 'Diplomado en Alta Dirección de Seguridad Privada (CFT UDA) y certificación de Supervisor de Seguridad Privada. Capacitador acreditado por Carabineros de Chile en Administración de Seguridad y Ética Laboral por la Pontificia Universidad Católica de Chile.',
+        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+      }
+    ],
     bibliography: ['Ley N° 21.659 de Seguridad Privada.', 'Código del Trabajo de Chile: Jornadas excepcionales.'],
     videoData: {
       title: 'Cápsula RRSS: Da el salto a Supervisor de Seguridad con PrevySeg',
@@ -929,15 +1016,27 @@ export function getCourseSyllabus(course) {
         ]
       }
     ],
-    teachers: [
-      {
-        name: isSecurity ? 'Instructor Oficial PrevySeg' : 'Relator/a Especialista SENCE',
-        role: isSecurity ? 'Instructor Acreditado OS-10 / SPD' : 'Relator/a Certificado/a NCh 2728',
-        credentials: isSecurity ? 'Acreditación OS-10 Carabineros de Chile' : 'Registro Nacional de Relatores SENCE',
-        bio: 'Profesional con más de 10 años de experiencia técnica y pedagógica en capacitación laboral.',
-        avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80'
-      }
-    ],
+    teachers: isSecurity
+      ? [
+          {
+            name: 'Marco Antonio Gallardo Sáez',
+            role: 'Relator Oficial Acreditado OS-10 Carabineros de Chile',
+            credentials: 'Prefectura Carabineros Arica N° 1 • Res. Exenta N° 136 / Aut. N° 016 (Vigencia 2028)',
+            badge: 'Acreditado OS-10',
+            areas: ['Primeros Auxilios', 'Administración de Seguridad', 'Valores y Ética'],
+            bio: 'Capacitador autorizado por Carabineros de Chile en materias de Seguridad Privada. Técnico de Nivel Superior en Enfermería (CFT Tarapacá), Diplomado en Alta Dirección de Seguridad Privada (CFT UDA) y postítulo en Ética Laboral por la Pontificia Universidad Católica de Chile.',
+            avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+          }
+        ]
+      : [
+          {
+            name: 'Relator/a Especialista SENCE',
+            role: 'Relator/a Certificado/a NCh 2728',
+            credentials: 'Registro Nacional de Relatores SENCE',
+            bio: 'Profesional con más de 10 años de experiencia técnica y pedagógica en capacitación laboral.',
+            avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150&auto=format&fit=crop&q=80'
+          }
+        ],
     bibliography: [
       isSecurity ? 'Ley N° 21.659 de Seguridad Privada y Decretos complementarios.' : 'Norma Chilena NCh 2728:2015 sobre Sistemas de Gestión de Calidad para OTEC.',
       'Manuales técnicos y guías de procedimiento institucional OTEC PrevySeg.'
