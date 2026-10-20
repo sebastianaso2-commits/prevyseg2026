@@ -428,7 +428,12 @@ const CourseCurriculumModal = ({
 
                       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                         {teachers.map((tea, idx) => (
-                          <div key={idx} className="p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-2.5 flex flex-col justify-between">
+                          <div
+                            key={idx}
+                            className={`p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-2.5 flex flex-col justify-between ${
+                              teachers.length === 3 && idx === 2 ? 'sm:col-span-2' : ''
+                            }`}
+                          >
                             <div className="space-y-2">
                               <div className="flex items-start gap-3">
                                 <img

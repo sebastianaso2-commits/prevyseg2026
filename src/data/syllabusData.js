@@ -105,6 +105,15 @@ export const SYLLABUS_DETAILS = {
         areas: ['Primeros Auxilios', 'Administración de Seguridad', 'Valores y Ética'],
         bio: 'Capacitador autorizado por Carabineros de Chile (OS-10 Prefectura Arica N° 1, Res. Exenta N° 136 / Aut. N° 016, vigente hasta octubre 2028). Técnico de Nivel Superior en Enfermería (CFT Tarapacá), Diplomado en Alta Dirección de Seguridad Privada (CFT UDA) y formación en Desarrollo Humano y Ética Laboral por la Pontificia Universidad Católica de Chile.',
         avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+      },
+      {
+        name: 'Ing. Patricio Melgarejo Aranibar',
+        role: 'Relator Acreditado OS-10 • Prevención de Riesgos, Emergencias y Protección',
+        credentials: 'Prefectura Carabineros Arica N° 1 • Aut. N° 010103030013 • Registro Experto SNS N° AC/P 826',
+        badge: 'Acreditado OS-10',
+        areas: ['Prevención de Riesgos', 'Control de Emergencias', 'Protección de Instalaciones'],
+        bio: 'Ingeniero de Ejecución en Prevención de Riesgos (Universidad Arturo Prat, aprobado con distinción) y Experto Profesional Registro SNS N° AC/P 826. Capacitador acreditado por Carabineros de Chile (OS-10 Arica) en Prevención de Riesgos, Control de Emergencias y Protección de Instalaciones. Relator de la Mutual de Seguridad C.Ch.C. (desde 2008) e Instructor certificado de la Academia Nacional de Bomberos en rescate urbano, combate de incendios y materiales peligrosos.',
+        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
       }
     ],
     bibliography: [
@@ -236,8 +245,18 @@ export const SYLLABUS_DETAILS = {
         name: 'Oficial de Marina (R) Rodrigo Cisternas Vega',
         role: 'Relator Experto en Protección Portuaria PBIP',
         credentials: 'Oficial de Protección de la Instalación Portuaria (OPIP) Acreditado Directemar',
+        badge: 'OPIP Directemar',
         bio: 'Especialista en seguridad portuaria internacional con 18 años de servicio en la Armada de Chile y jefaturas de seguridad en terminales marítimos de Arica.',
         avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80'
+      },
+      {
+        name: 'Ing. Patricio Melgarejo Aranibar',
+        role: 'Relator Acreditado OS-10 • Prevención de Riesgos Portuarios y Emergencias Químicas',
+        credentials: 'Prefectura Carabineros Arica N° 1 • Aut. N° 010103030013 • Registro Experto SNS N° AC/P 826',
+        badge: 'Acreditado OS-10',
+        areas: ['Prevención de Riesgos', 'Control de Emergencias', 'Protección de Instalaciones'],
+        bio: 'Ingeniero en Prevención de Riesgos (U. Arturo Prat) y Experto SNS N° AC/P 826. Relator de la Mutual de Seguridad e Instructor de la Academia Nacional de Bomberos especializado en emergencias químicas, materiales peligrosos (IMDG) y seguridad en recintos portuarios.',
+        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
       }
     ],
     bibliography: [
@@ -293,6 +312,15 @@ export const SYLLABUS_DETAILS = {
         areas: ['Primeros Auxilios', 'Valores y Ética', 'Administración de Seguridad'],
         bio: 'Capacitador acreditado OS-10 en Primeros Auxilios, Administración y Ética. Técnico de Nivel Superior en Enfermería (CFT Tarapacá) y especialización en Ética Laboral por la Pontificia Universidad Católica de Chile.',
         avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+      },
+      {
+        name: 'Ing. Patricio Melgarejo Aranibar',
+        role: 'Relator Acreditado OS-10 • Prevención de Riesgos y Control de Incendios en Edificios',
+        credentials: 'Prefectura Carabineros Arica N° 1 • Aut. N° 010103030013 • Registro Experto SNS N° AC/P 826',
+        badge: 'Acreditado OS-10',
+        areas: ['Control de Emergencias', 'Protección de Instalaciones', 'Prevención de Riesgos'],
+        bio: 'Ingeniero en Prevención de Riesgos e Instructor de Bomberos. Capacitador acreditado OS-10 en manejo de redes húmedas, planes de evacuación comunitaria y protección de accesos residenciales.',
+        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
       }
     ],
     bibliography: ['Ley N° 21.442 de Copropiedad Inmobiliaria.', 'Ley N° 21.659 de Seguridad Privada.'],
@@ -344,6 +372,15 @@ export const SYLLABUS_DETAILS = {
         areas: ['Primeros Auxilios', 'Administración de Seguridad', 'Valores y Ética'],
         bio: 'Capacitador oficial de Carabineros de Chile (OS-10 Prefectura Arica N° 1, Res. Exenta N° 136). Especialista en reentrenamiento de soporte vital, administración de seguridad privada y actualización deontológica.',
         avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+      },
+      {
+        name: 'Ing. Patricio Melgarejo Aranibar',
+        role: 'Relator Acreditado OS-10 • Reentrenamiento en Prevención y Emergencias',
+        credentials: 'Prefectura Carabineros Arica N° 1 • Aut. N° 010103030013 • Registro Experto SNS N° AC/P 826',
+        badge: 'Acreditado OS-10',
+        areas: ['Prevención de Riesgos', 'Control de Emergencias', 'Protección de Instalaciones'],
+        bio: 'Ingeniero en Prevención de Riesgos (U. Arturo Prat) y Experto SNS N° AC/P 826. Relator acreditado OS-10 para la actualización de protocolos de evacuación, planes de emergencia y prevención ante la nueva Ley 21.659.',
+        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
       }
     ],
     bibliography: ['Ley N° 21.659 de Seguridad Privada.', 'Manual de Perfeccionamiento OS-10 Carabineros.'],
@@ -452,8 +489,18 @@ export const SYLLABUS_DETAILS = {
         name: 'Ing. Alejandro Morales Sepúlveda',
         role: 'Ingeniero de Telecomunicaciones y CCTV',
         credentials: 'Certificado Milestone VMS • Relator SENCE NCh 2728',
+        badge: 'CCTV / SENCE',
         bio: 'Ingeniero con 14 años de experiencia en diseño de centrales de monitoreo municipal, retail y minería en el norte grande.',
         avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
+      },
+      {
+        name: 'Ing. Patricio Melgarejo Aranibar',
+        role: 'Relator Acreditado OS-10 • Protección de Instalaciones y Seguridad Física',
+        credentials: 'Prefectura Carabineros Arica N° 1 • Aut. N° 010103030013 • Registro Experto SNS N° AC/P 826',
+        badge: 'Acreditado OS-10',
+        areas: ['Protección de Instalaciones', 'Prevención de Riesgos', 'Control de Emergencias'],
+        bio: 'Ingeniero en Prevención de Riesgos (Universidad Arturo Prat, aprobado con distinción) y Experto Profesional SNS N° AC/P 826. Capacitador acreditado OS-10 en Protección de Instalaciones, auditoría de vulnerabilidades y enlace de centrales de televigilancia ante emergencias.',
+        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
       }
     ],
     bibliography: [
@@ -510,6 +557,15 @@ export const SYLLABUS_DETAILS = {
         areas: ['Administración de Seguridad', 'Valores y Ética', 'Primeros Auxilios'],
         bio: 'Diplomado en Alta Dirección de Seguridad Privada (CFT UDA) y certificación de Supervisor de Seguridad Privada. Capacitador acreditado por Carabineros de Chile en Administración de Seguridad y Ética Laboral por la Pontificia Universidad Católica de Chile.',
         avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+      },
+      {
+        name: 'Ing. Patricio Melgarejo Aranibar',
+        role: 'Relator Acreditado OS-10 • Matrices de Riesgo, IPER y Planes de Contingencia',
+        credentials: 'Prefectura Carabineros Arica N° 1 • Aut. N° 010103030013 • Registro Experto SNS N° AC/P 826',
+        badge: 'Acreditado OS-10',
+        areas: ['Prevención de Riesgos', 'Control de Emergencias', 'Protección de Instalaciones'],
+        bio: 'Ingeniero en Prevención de Riesgos (U. Arturo Prat, aprobado con distinción) y Experto SNS N° AC/P 826. Relator de la Mutual de Seguridad C.Ch.C. Especialista en confección de directivas de funcionamiento OS-10, matrices IPER y protocolos de emergencia para supervisores y jefes de turno.',
+        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
       }
     ],
     bibliography: ['Ley N° 21.659 de Seguridad Privada.', 'Código del Trabajo de Chile: Jornadas excepcionales.'],
@@ -622,7 +678,25 @@ export const SYLLABUS_DETAILS = {
     certification: 'Certificado de Competencias Portuarias OTEC PrevySeg',
     requirements: ['Mayor de 18 años.', 'Salud física compatible con faenas portuarias pesadas.'],
     modules: [{ number: '01', title: 'Seguridad en Faenas de Estiba y Trincaje', topics: ['Aparejos, estrobos y grúas de muelle', 'Código IMDG de mercancías peligrosas'] }],
-    teachers: [{ name: 'Rodrigo Cisternas Vega', role: 'Instructor Portuario', credentials: 'Directemar PBIP', bio: 'Oficial de protección portuaria.', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80' }],
+    teachers: [
+      {
+        name: 'Rodrigo Cisternas Vega',
+        role: 'Instructor Portuario',
+        credentials: 'Directemar PBIP',
+        badge: 'OPIP Directemar',
+        bio: 'Oficial de protección portuaria con 18 años de trayectoria en operaciones marítimas.',
+        avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80'
+      },
+      {
+        name: 'Ing. Patricio Melgarejo Aranibar',
+        role: 'Experto en Prevención de Riesgos y Seguridad en Faenas Portuarias',
+        credentials: 'Registro Experto SNS N° AC/P 826 • Relator Mutual de Seguridad C.Ch.C.',
+        badge: 'Experto SNS',
+        areas: ['Seguridad en Faenas', 'Control de Emergencias', 'Manejo de EPP y Aparejos'],
+        bio: 'Ingeniero en Prevención de Riesgos (Universidad Arturo Prat) y Relator de la Mutual de Seguridad C.Ch.C. Especialista en seguridad operativa en faenas pesadas de muelle, prevención de accidentes en estiba y respuesta ante emergencias.',
+        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
+      }
+    ],
     bibliography: ['Código de Prácticas de Seguridad en Instalaciones Portuarias (OIT).'],
     videoData: { title: 'Cápsula RRSS: Empleo y Capacitación Portuaria en Arica', presenter: 'Camila Valenzuela', frequency: 'Cápsula mensual RRSS', duration: '03:10 min', description: 'Oportunidades de trabajo en carga y estiba en el puerto de Arica.', topicsCovered: ['Requisitos físicos', 'Faenas con grúas'] }
   },
