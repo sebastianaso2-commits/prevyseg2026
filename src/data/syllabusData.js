@@ -90,14 +90,6 @@ export const SYLLABUS_DETAILS = {
     ],
     teachers: [
       {
-        name: 'Mayor (R) Carlos Valenzuela Soto',
-        role: 'Instructor Jefe de Seguridad Privada',
-        credentials: 'Acreditado OS-10 Carabineros de Chile • Registro SPD N° 458-2024',
-        badge: 'OS-10 / SPD',
-        bio: 'Ex-Oficial de Carabineros con 22 años de experiencia en seguridad pública, operaciones de orden urbano y dirección de academias de seguridad privada en la Región de Arica y Parinacota.',
-        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80'
-      },
-      {
         name: 'Marco Antonio Gallardo Sáez',
         role: 'Relator Acreditado OS-10 • Primeros Auxilios, Administración y Ética',
         credentials: 'Prefectura Carabineros Arica N° 1 • Res. Exenta N° 136 / Aut. N° 016 (Vigencia 2028)',
@@ -297,14 +289,6 @@ export const SYLLABUS_DETAILS = {
     ],
     teachers: [
       {
-        name: 'Carlos Valenzuela Soto',
-        role: 'Instructor de Seguridad',
-        credentials: 'OS-10 Carabineros',
-        badge: 'OS-10 / SPD',
-        bio: 'Instructor con amplia experiencia en capacitación de conserjería.',
-        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80'
-      },
-      {
         name: 'Marco Antonio Gallardo Sáez',
         role: 'Relator Acreditado OS-10 • Primeros Auxilios y Ética en Servicios',
         credentials: 'Prefectura Carabineros Arica N° 1 • Res. Exenta N° 136 (Vigencia 2028)',
@@ -356,14 +340,6 @@ export const SYLLABUS_DETAILS = {
       { number: '02', title: 'Reentrenamiento Táctico Operativo', topics: ['Procedimientos en retail y grandes tiendas', 'Manejo de crisis'] }
     ],
     teachers: [
-      {
-        name: 'Mayor (R) Carlos Valenzuela Soto',
-        role: 'Instructor Jefe OS-10',
-        credentials: 'Registro SPD N° 458-2024',
-        badge: 'OS-10 / SPD',
-        bio: 'Especialista en legislación de seguridad.',
-        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80'
-      },
       {
         name: 'Marco Antonio Gallardo Sáez',
         role: 'Relator Acreditado OS-10 • Actualización Primeros Auxilios y Deontología',
@@ -437,14 +413,6 @@ export const SYLLABUS_DETAILS = {
     modules: [{ number: '01', title: 'Nuevos Métodos Preventivos y Tecnológicos', topics: ['Citofonía inteligente', 'Planes de contingencia vecinal'] }],
     teachers: [
       {
-        name: 'Carlos Valenzuela Soto',
-        role: 'Instructor de Seguridad',
-        credentials: 'OS-10 Carabineros',
-        badge: 'OS-10 / SPD',
-        bio: 'Instructor con amplia experiencia en conserjería y vigilancia.',
-        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80'
-      },
-      {
         name: 'Marco Antonio Gallardo Sáez',
         role: 'Relator Acreditado OS-10 • Protocolos de Emergencia y Ética',
         credentials: 'Prefectura Carabineros Arica N° 1 • Res. Exenta N° 136 (Vigencia 2028)',
@@ -452,6 +420,15 @@ export const SYLLABUS_DETAILS = {
         areas: ['Primeros Auxilios', 'Administración de Seguridad', 'Valores y Ética'],
         bio: 'Capacitador acreditado OS-10. Técnico de Nivel Superior en Enfermería (CFT Tarapacá) y Diplomado en Alta Dirección de Seguridad Privada (CFT UDA).',
         avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
+      },
+      {
+        name: 'Ing. Patricio Melgarejo Aranibar',
+        role: 'Relator Acreditado OS-10 • Prevención de Riesgos y Control de Incendios en Edificios',
+        credentials: 'Prefectura Carabineros Arica N° 1 • Aut. N° 010103030013 • Registro Experto SNS N° AC/P 826',
+        badge: 'Acreditado OS-10',
+        areas: ['Control de Emergencias', 'Protección de Instalaciones', 'Prevención de Riesgos'],
+        bio: 'Ingeniero en Prevención de Riesgos (U. Arturo Prat) y Experto Profesional SNS N° AC/P 826. Capacitador acreditado OS-10 en Control de Emergencias, manejo de extintores, redes húmedas y evacuación segura de condominios y edificios habitacionales.',
+        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
       }
     ],
     bibliography: ['Ley N° 21.442 de Copropiedad Inmobiliaria.'],
@@ -541,14 +518,6 @@ export const SYLLABUS_DETAILS = {
       { number: '03', title: 'Liderazgo, Resolución de Conflictos y Auditoría en Terreno', topics: ['Inspección de puestos de guardia', 'Manejo de sindicatos y clima laboral'] }
     ],
     teachers: [
-      {
-        name: 'Mayor (R) Carlos Valenzuela Soto',
-        role: 'Director Académico de Seguridad',
-        credentials: 'OS-10 y SPD',
-        badge: 'OS-10 / SPD',
-        bio: 'Experto en mando y operaciones.',
-        avatar: 'https://images.unsplash.com/photo-1560250097-0b93528c311a?w=150&auto=format&fit=crop&q=80'
-      },
       {
         name: 'Marco Antonio Gallardo Sáez',
         role: 'Relator Acreditado OS-10 • Alta Dirección y Supervisión de Seguridad',

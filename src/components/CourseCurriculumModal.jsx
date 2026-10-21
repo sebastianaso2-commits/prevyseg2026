@@ -431,7 +431,7 @@ const CourseCurriculumModal = ({
                           <div
                             key={idx}
                             className={`p-4 rounded-2xl bg-white border border-slate-200 shadow-2xs space-y-2.5 flex flex-col justify-between ${
-                              teachers.length === 3 && idx === 2 ? 'sm:col-span-2' : ''
+                              teachers.length % 2 === 1 && idx === teachers.length - 1 ? 'sm:col-span-2' : ''
                             }`}
                           >
                             <div className="space-y-2">
