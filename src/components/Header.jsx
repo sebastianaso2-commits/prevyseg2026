@@ -19,6 +19,7 @@ import {
 } from 'lucide-react';
 import { FacebookIcon, InstagramIcon, YoutubeIcon, WhatsAppIcon } from './SocialIcons';
 import prevysegLogo from '../assets/images/prevyseg_logo.png';
+import { redirectToExternalPlatform } from '../config/platformConfig';
 
 // Icono de red/nodos idéntico al de Plataforma Virtual
 const VirtualPlatformIcon = ({ className = "w-3.5 h-3.5 text-cyan-300" }) => (
@@ -55,6 +56,15 @@ const Header = ({
   const [coursesDropdownOpen, setCoursesDropdownOpen] = useState(false);
   const [mobileCoursesOpen, setMobileCoursesOpen] = useState(false);
   const coursesDropdownRef = useRef(null);
+
+  // Manejador del botón Plataforma Virtual: redirige directamente al sistema externo configurado
+  const handlePlatformClick = () => {
+    if (onOpenPlatform) {
+      onOpenPlatform();
+    } else {
+      redirectToExternalPlatform();
+    }
+  };
 
   // Escuchar scroll para colapsar suavemente la top bar
   useEffect(() => {
@@ -302,33 +312,26 @@ const Header = ({
               <Search size={14} />
             </motion.button>
 
-            {/* Botón Profesional PLATAFORMA VIRTUAL */}
+            {/* ========================================================================= */}
+            {/* [AQUÍ ESTÁ EL BOTÓN DE ESCRITORIO]: BOTÓN "PLATAFORMA VIRTUAL"            */}
+            {/* ------------------------------------------------------------------------- */}
+            {/* Ubicación: Header.jsx (Barra superior derecha)                            */}
+            {/* Acción: Al hacer clic, ejecuta handlePlatformClick() que redirige al      */}
+            {/* nuevo sistema externo (configurado en src/config/platformConfig.js).      */}
+            {/* Se han eliminado las ventanas emergentes (modales) consecuentes.          */}
+            {/* ========================================================================= */}
             <div className="flex items-center gap-1.5">
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={onOpenPlatform}
+                onClick={handlePlatformClick}
                 className="bg-gradient-to-r from-[#1b3761] via-[#161630] to-[#0a969b] hover:from-[#161630] hover:to-[#0a969b] text-white text-xs font-black uppercase tracking-wider py-2 px-3.5 sm:px-4 rounded-xl shadow-md hover:shadow-[0_0_20px_rgba(10,150,155,0.45)] border border-[#00FFE0]/35 hover:border-[#00FFE0] transition-all flex items-center gap-2 cursor-pointer"
                 title="Ingresar a la Plataforma Virtual"
               >
                 <VirtualPlatformIcon className="w-3.5 h-3.5 text-[#00FFE0]" />
                 <span className="hidden sm:inline font-black">PLATAFORMA VIRTUAL</span>
                 <span className="sm:hidden font-black">LMS</span>
-                {currentUser && (
-                  <span className="w-2 h-2 rounded-full bg-[#00FFE0] animate-ping ml-0.5" title="Sesión activa" />
-                )}
               </motion.button>
-
-              {currentUser && onLogout && (
-                <button
-                  onClick={onLogout}
-                  className="text-slate-400 hover:text-red-500 p-1.5 rounded-lg hover:bg-slate-100 transition-colors cursor-pointer"
-                  title="Cerrar sesión activa"
-                  aria-label="Cerrar sesión"
-                >
-                  <LogOut size={15} />
-                </button>
-              )}
             </div>
 
             {/* Botón Mobile Menú Hamburguesa */}
@@ -430,37 +433,26 @@ const Header = ({
                 </button>
               </div>
 
-              {/* Botón Plataforma Virtual Mobile */}
+              {/* ========================================================================= */}
+              {/* [AQUÍ ESTÁ EL BOTÓN MOBILE]: BOTÓN "PLATAFORMA VIRTUAL" EN MENÚ MÓVIL     */}
+              {/* ------------------------------------------------------------------------- */}
+              {/* Ubicación: Header.jsx (Menú desplegable móvil)                            */}
+              {/* Acción: Al hacer clic, cierra el menú móvil y redirige al nuevo sistema   */}
+              {/* externo configurado en src/config/platformConfig.js                       */}
+              {/* ========================================================================= */}
               <div className="pt-2 border-t border-slate-100">
                 <button
                   type="button"
                   onClick={() => {
                     setMobileMenuOpen(false);
-                    onOpenPlatform();
+                    handlePlatformClick();
                   }}
                   className="w-full bg-gradient-to-r from-[#072B4F] to-[#0A4DA2] text-white text-xs font-black uppercase tracking-wider py-3 px-4 rounded-xl shadow-md text-center flex items-center justify-center gap-2 cursor-pointer"
                 >
                   <VirtualPlatformIcon className="w-4 h-4 text-cyan-300" />
                   <span>PLATAFORMA VIRTUAL</span>
-                  {currentUser && (
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping ml-1" />
-                  )}
                 </button>
               </div>
-
-              {currentUser && onLogout && (
-                <div className="pt-1 text-center">
-                  <button
-                    onClick={() => {
-                      setMobileMenuOpen(false);
-                      onLogout();
-                    }}
-                    className="text-xs font-bold text-red-600 hover:text-red-700 py-1 cursor-pointer"
-                  >
-                    Cerrar sesión activa ({currentUser.user || currentUser.email})
-                  </button>
-                </div>
-              )}
             </motion.div>
           )}
         </AnimatePresence>

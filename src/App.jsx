@@ -11,6 +11,7 @@ import NetworkBackground from './components/NetworkBackground';
 import ScrollToTop from './components/ScrollToTop';
 import LMSLayout from './lms/LMSLayout';
 import { supabase, logoutUser } from './config/supabase';
+import { redirectToExternalPlatform } from './config/platformConfig';
 import {
   ContactModal,
   PlatformModal,
@@ -121,16 +122,14 @@ function App() {
     setIsEnrollmentOpen(true);
   };
 
-  const handleOpenPlatform = (mode = 'login', initialRut = '') => {
-    if (currentLMSUser) {
-      setIsLMSActive(true);
-    } else {
-      setPlatformModalMode(mode);
-      if (initialRut) {
-        setPlatformInitialRut(initialRut);
-      }
-      setIsPlatformOpen(true);
-    }
+  // ============================================================================
+  // [REDIRECCIÓN A PLATAFORMA VIRTUAL EXTERNA]
+  // ============================================================================
+  // Al presionar el botón "PLATAFORMA VIRTUAL", se eliminan las ventanas emergentes
+  // internas de inicio de sesión y aula virtual previa, redirigiendo directamente
+  // al nuevo sistema externo configurado en src/config/platformConfig.js.
+  const handleOpenPlatform = () => {
+    redirectToExternalPlatform();
   };
 
   const handleLearnMore = () => {
