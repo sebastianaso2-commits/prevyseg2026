@@ -1,18 +1,18 @@
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { 
-  Shield, 
+import {
+  Shield,
   Wrench,
-  Clock, 
-  Calendar, 
-  Search, 
-  CheckCircle2, 
-  ArrowRight, 
-  BookOpen, 
-  Building2, 
-  Laptop, 
-  Sparkles, 
-  Award, 
+  Clock,
+  Calendar,
+  Search,
+  CheckCircle2,
+  ArrowRight,
+  BookOpen,
+  Building2,
+  Laptop,
+  Sparkles,
+  Award,
   ArrowLeft,
   Users,
   Check,
@@ -124,18 +124,17 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900">
-      
+
       {/* ================= HERO COMPLETO: ESCUELA DE SEGURIDAD PRIVADA ================= */}
       <section className="relative min-h-[85vh] lg:min-h-[92vh] flex items-center justify-center overflow-hidden pt-16 pb-20 bg-[#071626]">
-        
+
         {/* Carrusel de Fondo Fotográfico */}
         <div className="absolute inset-0 z-0 overflow-hidden">
           {SECURITY_SLIDES.map((slide, idx) => (
             <div
               key={slide.title}
-              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-                idx === currentBg ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
-              }`}
+              className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${idx === currentBg ? 'opacity-100 scale-100' : 'opacity-0 scale-105'
+                }`}
               style={{
                 backgroundImage: `url(${slide.img})`,
                 backgroundPosition: 'center',
@@ -147,7 +146,7 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
         </div>
 
         {/* Degradado Superpuesto Oficial PrevySeg */}
-        <div 
+        <div
           className="absolute inset-0 z-[1] transition-all duration-700"
           style={{
             background: 'linear-gradient(135deg, rgba(22,22,48,0.96) 0%, rgba(27,55,97,0.90) 45%, rgba(10,150,155,0.80) 100%)'
@@ -183,7 +182,7 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
         {/* Contenido del Hero de Seguridad */}
         <div className="relative z-10 max-w-7xl mx-auto w-full px-4 sm:px-8 py-10 lg:py-16">
           <div className="max-w-3xl space-y-6">
-            
+
             {/* Barra Superior: Switcher de Escuelas (Exacto diseño solicitado) y Retorno a Portada */}
             <div className="flex flex-wrap items-center gap-3">
               <div className="inline-flex p-1.5 rounded-2xl bg-black/50 backdrop-blur-xl border border-white/25 shadow-2xl gap-1.5">
@@ -234,7 +233,7 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
             </div>
 
             {/* Título Principal */}
-            <h1 
+            <h1
               className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-black leading-[1.1] tracking-tight text-white"
               style={{ textShadow: '0 2px 25px rgba(0,0,0,0.6)' }}
             >
@@ -245,7 +244,7 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
             </h1>
 
             {/* Descripción oficial solicitada */}
-            <p 
+            <p
               className="text-white/90 text-sm sm:text-base lg:text-lg leading-relaxed max-w-2xl"
               style={{ textShadow: '0 1px 8px rgba(0,0,0,0.4)' }}
             >
@@ -280,14 +279,14 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
       </section>
 
       {/* ================= 2. APARTADO "GARANTIZAMOS ESTÁNDARES DE SEGURIDAD Y CONFIANZA" ================= */}
-      <ExecutionSection 
-        activeSchool="seguridad" 
+      <ExecutionSection
+        activeSchool="seguridad"
         onLearnMore={scrollToCourses}
       />
 
       {/* ================= 3. SECCIÓN DE CATÁLOGO Y SWITCHER DE MODALIDAD ================= */}
       <section id="catalogo-seguridad" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 space-y-8 scroll-mt-20">
-        
+
         {/* Cabecera del Catálogo con Selector de Modalidad */}
         <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 p-6 rounded-3xl bg-white border border-slate-200/90 shadow-lg shadow-slate-900/5">
           <div className="space-y-2">
@@ -308,11 +307,10 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
               <button
                 type="button"
                 onClick={() => setModalityFilter('all')}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${
-                  modalityFilter === 'all'
-                    ? 'bg-[#161630] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer ${modalityFilter === 'all'
+                  ? 'bg-[#161630] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+                  }`}
               >
                 Todas
               </button>
@@ -320,11 +318,10 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
               <button
                 type="button"
                 onClick={() => setModalityFilter('presencial')}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                  modalityFilter === 'presencial'
-                    ? 'bg-[#1b3761] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${modalityFilter === 'presencial'
+                  ? 'bg-[#1b3761] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+                  }`}
               >
                 <Building2 size={13} />
                 <span>Presencial</span>
@@ -333,11 +330,10 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
               <button
                 type="button"
                 onClick={() => setModalityFilter('online')}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                  modalityFilter === 'online'
-                    ? 'bg-[#0a969b] text-white shadow-xs'
-                    : 'text-slate-600 hover:text-slate-900'
-                }`}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${modalityFilter === 'online'
+                  ? 'bg-[#0a969b] text-white shadow-xs'
+                  : 'text-slate-600 hover:text-slate-900'
+                  }`}
               >
                 <Laptop size={13} />
                 <span>Online</span>
@@ -346,18 +342,16 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
               <button
                 type="button"
                 onClick={() => setModalityFilter('proximamente')}
-                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
-                  modalityFilter === 'proximamente'
-                    ? 'bg-amber-500 text-slate-950 shadow-xs'
-                    : 'text-amber-800 hover:text-amber-950 hover:bg-amber-100/60'
-                }`}
+                className={`px-3.5 py-2 rounded-xl text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${modalityFilter === 'proximamente'
+                  ? 'bg-amber-500 text-slate-950 shadow-xs'
+                  : 'text-amber-800 hover:text-amber-950 hover:bg-amber-100/60'
+                  }`}
               >
                 <Clock size={13} className={modalityFilter === 'proximamente' ? 'text-slate-950' : 'text-amber-700'} />
                 <span>Próximamente</span>
                 {upcomingSecurityCount > 0 && (
-                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${
-                    modalityFilter === 'proximamente' ? 'bg-black/20 text-slate-950' : 'bg-amber-200 text-amber-900'
-                  }`}>
+                  <span className={`text-[10px] px-1.5 py-0.2 rounded-full font-black ${modalityFilter === 'proximamente' ? 'bg-black/20 text-slate-950' : 'bg-amber-200 text-amber-900'
+                    }`}>
                     {upcomingSecurityCount}
                   </span>
                 )}
@@ -407,11 +401,10 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
               return (
                 <div
                   key={course.id}
-                  className={`rounded-3xl bg-white border shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group ${
-                    course.proximamente 
-                      ? 'border-amber-300 ring-2 ring-amber-200/60 shadow-amber-500/10' 
-                      : 'border-slate-200/90'
-                  }`}
+                  className={`rounded-3xl bg-white border shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group ${course.proximamente
+                    ? 'border-amber-300 ring-2 ring-amber-200/60 shadow-amber-500/10'
+                    : 'border-slate-200/90'
+                    }`}
                 >
                   {/* Imagen y Badges */}
                   <div className="relative h-48 overflow-hidden bg-slate-100">
@@ -421,7 +414,7 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#161630]/80 via-transparent to-transparent" />
-                    
+
                     {/* Badges de Modalidad Disponibles */}
                     <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
                       {allowsPresencial && (
@@ -551,7 +544,7 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
 
 
       {/* ================= 3. APARTADO "NOTICIAS Y ACTUALIDAD PREVYSEG (SEGURIDAD)" ================= */}
-      <NewsSection 
+      <NewsSection
         activeSchool="seguridad"
         hideSchoolSwitcher={true}
         onOpenEnrollmentWithCourse={(courseTitle) => {
