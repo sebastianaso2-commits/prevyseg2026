@@ -25,7 +25,7 @@ const UserTestingModal = ({ isOpen, onClose, courseTitle }) => {
           { task: 'Localizar horario de clases y cantidad de semanas', result: 'Completado con éxito en 4.2 segundos' },
           { task: 'Consultar requisitos legales de 4° medio y antecedentes', result: 'Completado con éxito en 6.1 segundos' },
           { task: 'Identificar modalidad de pago en 2 cuotas del 50%', result: 'Completado con éxito en 3.5 segundos' },
-          { task: 'Reproducir video explicativo de RRSS', result: 'Completado con éxito (interacción intuitiva)' }
+          { task: 'Consultar Ficha Técnica y Temario Oficial', result: 'Completado con éxito (interacción intuitiva)' }
         ],
         feedback: 'Me pareció muy cómodo que no esté todo el texto amontonado. Las pestañas de Resumen y Requisitos me dijeron exactamente lo que necesito llevar para matricularme, y la tarjeta al costado con el botón de WhatsApp me resolvió las dudas de inmediato.'
       },

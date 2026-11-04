@@ -15,7 +15,9 @@ import {
   Layers,
   Sparkles,
   Shield,
-  Wrench
+  Wrench,
+  HeartPulse,
+  GraduationCap
 } from 'lucide-react';
 import { FacebookIcon, InstagramIcon, YoutubeIcon, WhatsAppIcon } from './SocialIcons';
 import prevysegLogo from '../assets/images/prevyseg_logo.png';
@@ -106,12 +108,26 @@ const Header = ({
       >
         <div className="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
 
-          {/* Acreditación SPD & SENCE y Redes Sociales */}
-          <div className="flex items-center space-x-3 text-slate-200">
+          {/* Acreditación SPD & SENCE, Psicólogo Clínico y Redes Sociales */}
+          <div className="flex items-center space-x-2.5 sm:space-x-3 text-slate-200 flex-wrap gap-y-1">
             <span className="bg-[#0a969b]/20 text-[#00FFE0] text-[10px] font-black uppercase px-2.5 py-0.5 rounded-md border border-[#0a969b]/60 tracking-wider shadow-2xs">
               Acreditación SPD & SENCE
             </span>
             <div className="h-3 w-px bg-white/20 hidden sm:block" />
+            
+            {/* Contacto directo Psicólogo Clínico Felipe Cisterna */}
+            <a
+              href="https://wa.me/56972210629?text=Hola%20Felipe,%20te%20contacto%20desde%20la%20página%20web."
+              target="_blank"
+              rel="noopener noreferrer"
+              title="Contacto directo Psicólogo Clínico Felipe Cisterna"
+              className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full bg-emerald-500/20 hover:bg-emerald-500/30 text-emerald-300 hover:text-white border border-emerald-400/40 text-[10px] font-bold tracking-tight transition-all shadow-xs"
+            >
+              <HeartPulse size={11} className="text-emerald-300" />
+              <span>Consultas y Atención: Psicólogo Clínico Felipe Cisterna</span>
+            </a>
+
+            <div className="h-3 w-px bg-white/20 hidden md:block" />
             <div className="flex items-center space-x-2 text-white/80">
               <a
                 href="https://facebook.com"
@@ -261,7 +277,20 @@ const Header = ({
               <span>Escuela de Oficios</span>
             </button>
 
-            {/* 5. NOTICIAS (Actualidad OTEC y Leyes) */}
+            {/* 5. DOCENTES (Cuerpo Académico & Relatores) */}
+            <button
+              type="button"
+              onClick={() => handleNavClick('docentes')}
+              className={`px-3 py-1.5 rounded-xl transition-all cursor-pointer flex items-center gap-1.5 font-bold ${currentView === 'docentes'
+                  ? 'text-[#0a969b] font-black bg-[#0a969b]/10 ring-1 ring-[#0a969b]/30'
+                  : 'text-slate-600 hover:text-[#1b3761] hover:bg-slate-50'
+                }`}
+            >
+              <GraduationCap size={15} className={currentView === 'docentes' ? 'text-[#0a969b]' : 'text-slate-400'} />
+              <span>Docentes</span>
+            </button>
+
+            {/* 6. NOTICIAS (Actualidad OTEC y Leyes) */}
             <button
               type="button"
               onClick={() => handleNavClick('home', 'noticias')}
@@ -273,7 +302,7 @@ const Header = ({
               Noticias
             </button>
 
-            {/* 6. CONTACTO (Footer y Sedes) */}
+            {/* 7. CONTACTO (Footer y Sedes) */}
             <button
               type="button"
               onClick={() => handleNavClick('home', 'contacto')}
@@ -411,23 +440,55 @@ const Header = ({
                   </span>
                 </button>
 
-                {/* 5. Noticias */}
+                {/* 5. Docentes e Instructores */}
+                <button
+                  type="button"
+                  onClick={() => handleNavClick('docentes')}
+                  className={`w-full text-left text-xs font-bold px-3 py-2.5 rounded-xl transition-all cursor-pointer flex items-center justify-between ${currentView === 'docentes' ? 'bg-[#0a969b]/15 text-[#0a969b] font-black' : 'text-slate-700 hover:bg-slate-50'
+                    }`}
+                >
+                  <span className="flex items-center gap-2">
+                    <GraduationCap size={15} className="text-[#0a969b]" />
+                    <span>5. Cuerpo Docente & Relatores</span>
+                  </span>
+                  <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-slate-100 text-slate-700 font-bold">
+                    Equipo
+                  </span>
+                </button>
+
+                {/* 6. Noticias */}
                 <button
                   type="button"
                   onClick={() => handleNavClick('home', 'noticias')}
                   className="w-full text-left text-xs font-bold text-slate-700 hover:bg-slate-50 px-3 py-2 rounded-xl transition-all cursor-pointer"
                 >
-                  5. Noticias PrevySeg
+                  6. Noticias PrevySeg
                 </button>
 
-                {/* 6. Contacto */}
+                {/* 7. Contacto */}
                 <button
                   type="button"
                   onClick={() => handleNavClick('home', 'contacto')}
                   className="w-full text-left text-xs font-bold text-slate-700 hover:bg-slate-50 px-3 py-2 rounded-xl transition-all cursor-pointer"
                 >
-                  6. Contacto & Sede
+                  7. Contacto & Sede
                 </button>
+
+                {/* Acceso Psicólogo Clínico Mobile */}
+                <a
+                  href="https://wa.me/56972210629?text=Hola%20Felipe,%20te%20contacto%20desde%20la%20página%20web."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full flex items-center justify-between text-xs font-bold text-emerald-800 bg-emerald-50 border border-emerald-200 px-3 py-2.5 rounded-xl transition-all"
+                >
+                  <span className="flex items-center gap-2">
+                    <HeartPulse size={15} className="text-emerald-600" />
+                    <span>Psicólogo Clínico Felipe Cisterna</span>
+                  </span>
+                  <span className="text-[9px] uppercase px-1.5 py-0.5 rounded bg-emerald-100 text-emerald-800 font-extrabold">
+                    WhatsApp
+                  </span>
+                </a>
               </div>
 
               {/* Botón Plataforma Virtual Mobile */}

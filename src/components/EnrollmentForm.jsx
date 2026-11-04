@@ -86,12 +86,12 @@ export const OFFICIAL_COURSES = [
     type: 'spd',
     school: 'seguridad',
     category: 'Formación Inicial SPD',
-    hours: '90 Horas Cronológicas (2 Semanas • Lun a Sáb)',
+    hours: '90 Horas Cronológicas (60h Teóricas / 30h Prácticas • Lun a Sáb)',
     price: 140000,
     cuota1: 70000,
     cuota2: 70000,
     modality: 'Presencial / Semipresencial',
-    description: 'Curso oficial exigido por la Ley 21.659. Prepara al alumno en legislación, primeros auxilios, defensa personal y examen ante la Autoridad Fiscalizadora.',
+    description: 'Curso oficial exigido por la Ley N° 21.659. Prepara al alumno en legislación (Art. 46 / Art. 25), primeros auxilios, defensa personal y examen ante la Autoridad Fiscalizadora.',
     certificationNote: 'PrevySeg entrega la capacitación preparatoria completa. La credencial oficial SPD es otorgada tras rendir el examen ante Carabineros OS-10.'
   },
   {
@@ -101,13 +101,15 @@ export const OFFICIAL_COURSES = [
     type: 'spd',
     school: 'seguridad',
     category: 'Formación Inicial SPD',
-    hours: '100 Horas',
-    price: 190000,
-    cuota1: 95000,
-    cuota2: 95000,
-    modality: 'Presencial con Polígono de Tiro',
-    description: 'Instrucción especializada para entidades bancarias, transporte de valores y recintos estratégicos con porte de armas regulado.',
-    certificationNote: 'Instrucción con tiro práctico y examen ante la Autoridad Fiscalizadora.'
+    hours: '100 Horas Semipresenciales',
+    price: 0,
+    cuota1: 0,
+    cuota2: 0,
+    consultByWhatsappOnly: true,
+    legalNotice: 'Al aprobar el curso se otorga Certificado de Capacitación oficial. No se entrega credencial debido a la normativa vigente sobre porte de armas.',
+    modality: 'Semipresencial con Polígono de Tiro en Arica',
+    description: 'Instrucción semipresencial (Teoría 100% online en Aula Virtual; Práctica presencial en Arica: acondicionamiento físico, defensa personal, reducción, primeros auxilios, armamento y tiro). Exclusivo entidades con porte de armas.',
+    certificationNote: 'Al aprobar el curso se otorga Certificado de Capacitación oficial. No se entrega credencial debido a la normativa vigente sobre porte de armas.'
   },
   {
     id: 'seg-03',
@@ -186,18 +188,21 @@ export const OFFICIAL_COURSES = [
   },
   {
     id: 'seg-08',
-    name: 'Técnicas de operación de circuitos cerrados de televisión (CCTV codificado por SENCE)',
+    name: 'Especialización Operador de Cámaras de Televigilancia (CCTV)',
     code: 'CCTV-SENCE-08',
     type: 'spd',
     school: 'seguridad',
     category: 'Tecnología y Sistemas de Seguridad',
-    hours: '60 Horas',
-    price: 140000,
-    cuota1: 70000,
-    cuota2: 70000,
-    modality: 'Online Sincrónico + Software VMS',
-    description: 'Operación profesional de software VMS, cámaras domo PTZ, reconocimiento facial y trazabilidad forense para centrales de monitoreo.',
-    certificationNote: 'Certificación Oficial SENCE OTEC PrevySeg.'
+    hours: '40 Horas Asincrónicas + 2h Prácticas (1 Mes)',
+    price: 100000,
+    promoPrice: 70000,
+    soloPagoUnico: true,
+    hideSyllabusAndTeachers: true,
+    cuota1: 100000,
+    cuota2: 0,
+    modality: '100% Online Asincrónica (Aula Virtual 24/7)',
+    description: 'Modalidad 100% online y asincrónica a través de Aula Virtual. El estudiante gestiona su propio aprendizaje de forma autónoma con material interactivo disponible 24/7.',
+    certificationNote: 'Certificación Oficial OTEC PrevySeg con Reconocimiento SENCE.'
   },
   {
     id: 'seg-10',
@@ -219,17 +224,19 @@ export const OFFICIAL_COURSES = [
   {
     id: 'of-01',
     name: 'Resolución de conflictos y manejo de situaciones difíciles',
-    code: 'OF-CONF-01',
+    code: 'SENCE-1238088725',
     type: 'oficio',
     school: 'oficios',
     category: 'Desarrollo de Habilidades Laborales',
     hours: '40 Horas Online Asíncrona',
-    price: 95000,
-    cuota1: 47500,
-    cuota2: 47500,
+    price: 150000,
+    cuota1: 75000,
+    cuota2: 75000,
+    relator: 'Felipe I. Cisterna Farias (Psicólogo Clínico)',
+    relatorWhatsapp: '56972210629',
     modality: 'Online Asíncrona (Plataforma 24/7)',
-    description: 'Estrategias de negociación, contención emocional, mediación de controversias laborales y resolución constructiva en entornos de trabajo exigentes.',
-    certificationNote: 'Certificación Directa OTEC PrevySeg con Código SENCE.'
+    description: 'Resolución asertiva y mediación laboral a cargo del Psicólogo Clínico Felipe I. Cisterna Farias. Franquicia SENCE disponible (Código 1238088725).',
+    certificationNote: 'Certificación Directa OTEC PrevySeg con Código SENCE 1238088725.'
   },
   {
     id: 'of-02',
@@ -278,18 +285,18 @@ export const OFFICIAL_COURSES = [
   },
   {
     id: 'of-05',
-    name: 'Procedimientos de higiene, seguridad y prevención de riesgos en procesos de manipulación de alimentos',
-    code: 'OF-ALIM-05',
+    name: 'Manipulación de alimentos para el emprendimiento',
+    code: 'CHILEVALORA-P5629',
     type: 'oficio',
     school: 'oficios',
     category: 'Área Alimentación',
-    hours: '40 Horas',
-    price: 85000,
-    cuota1: 42500,
-    cuota2: 42500,
-    modality: 'Online + Taller Higiénico',
-    description: 'Buenas Prácticas de Manufactura (BPM), control de puntos críticos (HACCP), inocuidad y desinfección conforme a la Seremi de Salud.',
-    certificationNote: 'Certificación Oficial para Carnet de Manipulador de Alimentos.'
+    hours: '60 Horas (16h Teóricas / 44h Prácticas)',
+    price: 150000,
+    cuota1: 75000,
+    cuota2: 75000,
+    modality: '100% Presencial con Taller Práctico y Venta Piloto',
+    description: 'Basado en el Perfil Ocupacional ChileValora (Código: P-5629-9412-001-V02). Taller práctico intensivo, higiene BPM y simulación de venta piloto.',
+    certificationNote: 'Certificación de Capacitación OTEC PrevySeg basada en ChileValora.'
   },
   {
     id: 'of-06',
@@ -328,12 +335,12 @@ export const OFFICIAL_COURSES = [
     type: 'oficio',
     school: 'oficios',
     category: 'Área Estética y Servicios',
-    hours: '30 Horas Prácticas',
-    price: 90000,
-    cuota1: 45000,
-    cuota2: 45000,
-    modality: 'Presencial Especializado',
-    description: 'Técnicas de maquillaje artístico resistente a sudor y clima, aplicación de pedrería, glitter y pigmentos para bailarines de carnavales.',
+    hours: '24 Horas Presenciales (3 Semanas • 25% Teórico / 75% Práctico)',
+    price: 150000,
+    cuota1: 75000,
+    cuota2: 75000,
+    modality: 'Presencial Especializado (Kit Completo Incluido)',
+    description: 'Técnicas de maquillaje artístico resistente a sudor y clima. Incluye kit profesional completo desde el primer día, manual de estudio y diploma.',
     certificationNote: 'Diploma de Competencia Práctica OTEC PrevySeg.'
   },
   {
@@ -343,28 +350,28 @@ export const OFFICIAL_COURSES = [
     type: 'oficio',
     school: 'oficios',
     category: 'Área de Salud',
-    hours: '60 Horas Teórico-Prácticas',
-    price: 130000,
-    cuota1: 65000,
-    cuota2: 65000,
-    modality: 'Semipresencial con Prácticas Asistidas',
-    description: 'Movilización de personas postradas, prevención de úlceras por decúbito, aseo en cama, control de signos vitales y administración asistida de medicamentos.',
-    certificationNote: 'Certificación Asistencial OTEC PrevySeg con Respaldo SENCE.'
+    hours: '50 Horas (17 Sesiones en 2 Meses • 16 de 3h + 1 de 2h)',
+    price: 180000,
+    cuota1: 90000,
+    cuota2: 90000,
+    modality: 'Presencial (Mar, Mié y Jue 18:30 a 21:30)',
+    description: 'Alineado con el Perfil ChileValora P-8810-5322-001-V01 Nivel 3. 7 secciones temáticas, movilización y 85% de asistencia mínima obligatoria.',
+    certificationNote: 'Certificación Asistencial OTEC PrevySeg alineada con ChileValora.'
   },
   {
     id: 'of-10',
-    name: 'Cajero bancario, administración de condominios',
+    name: 'Administración de condominios y edificios',
     code: 'OF-ADM-10',
     type: 'oficio',
     school: 'oficios',
     category: 'Área de Administración',
-    hours: '50 Horas',
-    price: 110000,
-    cuota1: 55000,
-    cuota2: 55000,
-    modality: 'Online Sincrónico + Simulador',
-    description: 'Detección de billetes falsos, cuadratura diaria de caja, gestión de gastos comunes y administración bajo la Nueva Ley de Copropiedad Inmobiliaria.',
-    certificationNote: 'Certificación OTEC PrevySeg de Cajero y Administrador.'
+    hours: '75 Horas Presenciales (19 Sesiones en 7 Semanas)',
+    price: 180000,
+    cuota1: 90000,
+    cuota2: 90000,
+    modality: 'Presencial (Lun, Mié y Vie: 08:30-12:30 / 14:30-18:30)',
+    description: 'Formación para administradores bajo la Ley N° 21.442 / MINVU. Incluye gratis el curso de Resolución de Conflictos (Código SENCE 1238088725).',
+    certificationNote: 'Certificación OTEC PrevySeg de Administrador de Condominios y Edificios.'
   }
 ];
 
@@ -606,12 +613,23 @@ const EnrollmentForm = ({
   const [singleCourseError, setSingleCourseError] = useState(null);
   const [registeredSchool, setRegisteredSchool] = useState('seguridad');
   
-  // Cálculo de montos
-  const totalAmount = currentCourse.price;
-  const cuota1Amount = currentCourse.cuota1; // 50%
-  const cuota2Amount = currentCourse.cuota2; // 50%
-  const amountToPayNow = paymentOption === 'cuota1' ? cuota1Amount : totalAmount;
-  const pendingAmount = paymentOption === 'cuota1' ? cuota2Amount : 0;
+  // Cálculo de montos y banderas de cursos clave
+  const isCctvCourse = currentCourse.id === 'seg-08' || Boolean(currentCourse.soloPagoUnico) || (currentCourse.name && currentCourse.name.toLowerCase().includes('cctv'));
+  const isVigilanteCourse = currentCourse.id === 'seg-02' || Boolean(currentCourse.consultByWhatsappOnly) || (currentCourse.name && currentCourse.name.toLowerCase().includes('vigilante'));
+  const isCondominiosCourse = currentCourse.id === 'of-10' || (currentCourse.name && currentCourse.name.toLowerCase().includes('condominio'));
+
+  // Asegurar que CCTV siempre esté forzado a pago único ('total')
+  useEffect(() => {
+    if (isCctvCourse && paymentOption !== 'total') {
+      setPaymentOption('total');
+    }
+  }, [isCctvCourse, paymentOption]);
+
+  const totalAmount = currentCourse.price || 0;
+  const cuota1Amount = isCctvCourse ? totalAmount : (currentCourse.cuota1 || 0);
+  const cuota2Amount = isCctvCourse ? 0 : (currentCourse.cuota2 || 0);
+  const amountToPayNow = isVigilanteCourse ? 0 : (paymentOption === 'cuota1' ? cuota1Amount : totalAmount);
+  const pendingAmount = isVigilanteCourse ? 0 : (paymentOption === 'cuota1' ? cuota2Amount : 0);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -1122,22 +1140,77 @@ const EnrollmentForm = ({
 
                 {/* Arancel Oficial Total y Abono 50% */}
                 <div className="flex-shrink-0 flex sm:flex-col items-center sm:items-end justify-between sm:justify-center gap-2 p-4 bg-white rounded-2xl border border-slate-200 shadow-sm min-w-[220px]">
-                  <div className="text-left sm:text-right">
-                    <span className="text-[10px] uppercase font-bold text-slate-400 block">Arancel Oficial Total:</span>
-                    <span className="text-lg sm:text-xl font-black text-slate-900 font-mono">
-                      ${currentCourse.price.toLocaleString('es-CL')} CLP
-                    </span>
-                  </div>
-                  <div className={`px-3.5 py-1.5 rounded-xl border font-mono text-xs font-black flex items-center gap-1.5 ${
-                    currentCourse.school === 'seguridad'
-                      ? 'bg-sky-50 text-[#0284c7] border-sky-200'
-                      : 'bg-emerald-50 text-emerald-700 border-emerald-200'
-                  }`}>
-                    <span className="text-[10px] font-bold uppercase">Abono 50%:</span>
-                    <span>${currentCourse.cuota1.toLocaleString('es-CL')} CLP</span>
-                  </div>
+                  {isVigilanteCourse ? (
+                    <div className="text-left sm:text-right space-y-1">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Arancel Oficial:</span>
+                      <span className="text-sm font-black text-[#1b3761] block leading-tight">
+                        Consultar por WhatsApp
+                      </span>
+                      <span className="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 inline-block font-bold">
+                        SERNAC Cumplimiento
+                      </span>
+                    </div>
+                  ) : isCctvCourse ? (
+                    <div className="text-left sm:text-right space-y-1">
+                      <span className="text-[10px] uppercase font-bold text-slate-400 block">Arancel General:</span>
+                      <span className="text-lg sm:text-xl font-black text-slate-900 font-mono block">
+                        $100.000 CLP
+                      </span>
+                      <span className="text-[10px] text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200 inline-block font-bold">
+                        Promo Exalumnos: $70.000 CLP
+                      </span>
+                    </div>
+                  ) : (
+                    <>
+                      <div className="text-left sm:text-right">
+                        <span className="text-[10px] uppercase font-bold text-slate-400 block">Arancel Oficial Total:</span>
+                        <span className="text-lg sm:text-xl font-black text-slate-900 font-mono">
+                          ${currentCourse.price.toLocaleString('es-CL')} CLP
+                        </span>
+                      </div>
+                      <div className={`px-3.5 py-1.5 rounded-xl border font-mono text-xs font-black flex items-center gap-1.5 ${
+                        currentCourse.school === 'seguridad'
+                          ? 'bg-sky-50 text-[#0284c7] border-sky-200'
+                          : 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                      }`}>
+                        <span className="text-[10px] font-bold uppercase">Abono 50%:</span>
+                        <span>${currentCourse.cuota1.toLocaleString('es-CL')} CLP</span>
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
+
+              {/* Banners Normativos Específicos por Curso */}
+              {isVigilanteCourse && (
+                <div className="mt-4 p-3 rounded-xl bg-rose-50 border border-rose-300 text-rose-950 text-xs flex items-start gap-2.5">
+                  <AlertCircle size={16} className="text-rose-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="block font-bold">Aclaración Legal Obligatoria:</strong>
+                    <span>Al aprobar el curso se otorga Certificado de Capacitación oficial. No se entrega credencial debido a la normativa vigente sobre porte de armas.</span>
+                  </div>
+                </div>
+              )}
+
+              {isCctvCourse && (
+                <div className="mt-4 p-3 rounded-xl bg-amber-50 border border-amber-300 text-amber-950 text-xs flex items-start gap-2.5">
+                  <AlertCircle size={16} className="text-amber-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="block font-bold">Metodología 100% Online Asincrónica:</strong>
+                    <span>Modalidad 100% online y asincrónica a través de Aula Virtual. El estudiante gestiona su propio aprendizaje de forma autónoma con material interactivo disponible 24/7. Duración: 40 horas asincrónicas + 2 horas prácticas (plazo máximo de ejecución: 1 mes).</span>
+                  </div>
+                </div>
+              )}
+
+              {isCondominiosCourse && (
+                <div className="mt-4 p-3 rounded-xl bg-emerald-50 border border-emerald-300 text-emerald-950 text-xs flex items-start gap-2.5">
+                  <Sparkles size={16} className="text-emerald-600 flex-shrink-0 mt-0.5" />
+                  <div>
+                    <strong className="block font-bold">Beneficio Exclusivo Incluido:</strong>
+                    <span>Incluye sin costo adicional el Curso de Resolución de Conflictos (SENCE 1238088725), requisito clave para la gestión inmobiliaria bajo la Ley N° 21.442 / MINVU.</span>
+                  </div>
+                </div>
+              )}
 
               {/* Cuadro Normativo Acreditación */}
               <div className="mt-4 pt-3 border-t border-slate-200">
@@ -1706,80 +1779,141 @@ const EnrollmentForm = ({
               <span className="text-xs text-slate-500 font-mono">Ficha física Sección 3</span>
             </div>
 
-            {/* Selector de Plan de Abono */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              
-              {/* Cuota N° 1: 50% de Abono */}
-              <div 
-                onClick={() => setPaymentOption('cuota1')}
-                className={`p-5 rounded-3xl border-2 transition-all cursor-pointer flex flex-col justify-between gap-3 ${
-                  paymentOption === 'cuota1'
-                    ? 'bg-sky-50/80 border-[#0284c7] shadow-lg shadow-sky-500/10 ring-2 ring-[#0284c7]/30'
-                    : 'bg-slate-50 border-slate-200 hover:border-sky-300'
-                }`}
-              >
-                <div className="flex justify-between items-start">
+            {/* Selector de Plan de Abono / Pasarela Adaptada */}
+            {isVigilanteCourse ? (
+              <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200 text-center space-y-3">
+                <div className="w-12 h-12 bg-amber-100 text-amber-800 rounded-2xl flex items-center justify-center mx-auto">
+                  <MessageCircle size={24} />
+                </div>
+                <h4 className="text-base font-black text-slate-900">Arancel y Cupos Sujetos a Cotización Directa</h4>
+                <p className="text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
+                  Para el curso de Formación de Vigilantes Privados (100 hrs), el arancel y la reserva de cupos en polígono se gestionan directamente a través de nuestro canal comercial oficial conforme a las pautas del SERNAC.
+                </p>
+                <a
+                  href="https://wa.me/56982312128?text=Hola%20PrevySeg,%20deseo%20consultar%20el%20valor%20y%20cupos%20del%20curso%20de%20Formaci%C3%B3n%20de%20Vigilantes%20Privados."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
+                >
+                  <MessageCircle size={15} />
+                  <span>Consultar valor y cupos por WhatsApp (+56 9 8231 2128)</span>
+                </a>
+              </div>
+            ) : isCctvCourse ? (
+              /* CCTV: MODALIDAD DE PAGO ÚNICO OBLIGATORIO (1 CUOTA) */
+              <div className="space-y-4">
+                <div className="p-4 rounded-2xl bg-amber-50 border border-amber-300 text-xs text-amber-900 flex items-start gap-2.5">
+                  <AlertCircle size={16} className="text-amber-600 flex-shrink-0 mt-0.5" />
                   <div>
-                    <span className="inline-block bg-sky-100 text-sky-800 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full border border-sky-200 mb-1">
-                      OPCIÓN RECOMENDADA (50%)
-                    </span>
-                    <h4 className="text-sm font-black text-slate-900">CUOTA Nº 1 ENTREGA DE DOC. / RESERVA</h4>
-                    <p className="text-xs text-slate-600">Pagas el 50% ahora para abrir expediente y reservar cupo oficial SENCE.</p>
+                    <strong className="block font-bold">Modalidad de Pago Exclusiva CCTV:</strong>
+                    <span>Este programa cuenta con modalidad de pago único (1 cuota total). La opción de pago en 2 cuotas se encuentra bloqueada conforme a las directivas de la OTEC.</span>
                   </div>
-                  {paymentOption === 'cuota1' && (
+                </div>
+
+                <div className="p-5 rounded-3xl border-2 border-[#0284c7] bg-sky-50/80 shadow-lg shadow-sky-500/10 ring-2 ring-[#0284c7]/30 flex flex-col justify-between gap-3">
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <span className="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full border border-emerald-200 mb-1">
+                        PAGO ÚNICO (1 CUOTA TOTAL)
+                      </span>
+                      <h4 className="text-sm font-black text-slate-900">ARANCEL COMPLETO CURSO CCTV</h4>
+                      <p className="text-xs text-slate-600">Cancelas la totalidad del arancel en una sola transacción sin cuotas pendientes.</p>
+                    </div>
                     <div className="w-6 h-6 rounded-full bg-[#0284c7] text-white flex items-center justify-center font-bold shadow-sm">
                       <Check size={14} className="stroke-[3]" />
                     </div>
-                  )}
-                </div>
-
-                <div className="pt-2 border-t border-slate-200 flex justify-between items-end">
-                  <span className="text-xs text-slate-500 font-mono">Abono Inicial Hoy:</span>
-                  <div className="text-right">
-                    <span className="text-2xl font-black text-[#0284c7] font-mono">
-                      ${cuota1Amount.toLocaleString('es-CL')}
-                    </span>
-                    <span className="text-[10px] text-slate-500 block font-mono">Saldo 50% ($ {cuota2Amount.toLocaleString('es-CL')}) al inicio</span>
                   </div>
-                </div>
-              </div>
 
-              {/* Cuota Total: 100% */}
-              <div 
-                onClick={() => setPaymentOption('total')}
-                className={`p-5 rounded-3xl border-2 transition-all cursor-pointer flex flex-col justify-between gap-3 ${
-                  paymentOption === 'total'
-                    ? 'bg-sky-50/80 border-[#0284c7] shadow-lg shadow-sky-500/10 ring-2 ring-[#0284c7]/30'
-                    : 'bg-slate-50 border-slate-200 hover:border-sky-300'
-                }`}
-              >
-                <div className="flex justify-between items-start">
-                  <div>
-                    <span className="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full border border-emerald-200 mb-1">
-                      PAGO COMPLETO (100%)
-                    </span>
-                    <h4 className="text-sm font-black text-slate-900">CUOTA Nº 1 + CUOTA Nº 2 (TOTALIDAD)</h4>
-                    <p className="text-xs text-slate-600">Cancelas la totalidad del arancel en una sola transacción sin cuotas pendientes.</p>
-                  </div>
-                  {paymentOption === 'total' && (
-                    <div className="w-6 h-6 rounded-full bg-[#0284c7] text-white flex items-center justify-center font-bold shadow-sm">
-                      <Check size={14} className="stroke-[3]" />
+                  <div className="pt-2 border-t border-slate-200 flex justify-between items-end">
+                    <div>
+                      <span className="text-xs text-slate-500 font-mono">Total a Pagar Hoy:</span>
+                      <span className="text-[11px] text-emerald-700 block font-bold">Promo Exalumnos PrevySeg: $70.000 CLP</span>
                     </div>
-                  )}
-                </div>
-
-                <div className="pt-2 border-t border-slate-200 flex justify-between items-end">
-                  <span className="text-xs text-slate-500 font-mono">Total a Pagar Hoy:</span>
-                  <div className="text-right">
-                    <span className="text-2xl font-black text-slate-900 font-mono">
-                      ${totalAmount.toLocaleString('es-CL')}
-                    </span>
-                    <span className="text-[10px] text-emerald-600 block font-mono">Arancel 100% Cancelado</span>
+                    <div className="text-right">
+                      <span className="text-2xl font-black text-slate-900 font-mono">
+                        ${(totalAmount || 100000).toLocaleString('es-CL')}
+                      </span>
+                      <span className="text-[10px] text-emerald-600 block font-mono">Arancel 100% Cancelado</span>
+                    </div>
                   </div>
                 </div>
               </div>
+            ) : (
+              /* RESTO DE LOS PROGRAMAS (PLAN 50% O TOTALIDAD) */
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                
+                {/* Cuota N° 1: 50% de Abono */}
+                <div 
+                  onClick={() => setPaymentOption('cuota1')}
+                  className={`p-5 rounded-3xl border-2 transition-all cursor-pointer flex flex-col justify-between gap-3 ${
+                    paymentOption === 'cuota1'
+                      ? 'bg-sky-50/80 border-[#0284c7] shadow-lg shadow-sky-500/10 ring-2 ring-[#0284c7]/30'
+                      : 'bg-slate-50 border-slate-200 hover:border-sky-300'
+                  }`}
+                >
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <span className="inline-block bg-sky-100 text-sky-800 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full border border-sky-200 mb-1">
+                        OPCIÓN RECOMENDADA (50%)
+                      </span>
+                      <h4 className="text-sm font-black text-slate-900">CUOTA Nº 1 ENTREGA DE DOC. / RESERVA</h4>
+                      <p className="text-xs text-slate-600">Pagas el 50% ahora para abrir expediente y reservar cupo oficial SENCE.</p>
+                    </div>
+                    {paymentOption === 'cuota1' && (
+                      <div className="w-6 h-6 rounded-full bg-[#0284c7] text-white flex items-center justify-center font-bold shadow-sm">
+                        <Check size={14} className="stroke-[3]" />
+                      </div>
+                    )}
+                  </div>
 
-            </div>
+                  <div className="pt-2 border-t border-slate-200 flex justify-between items-end">
+                    <span className="text-xs text-slate-500 font-mono">Abono Inicial Hoy:</span>
+                    <div className="text-right">
+                      <span className="text-2xl font-black text-[#0284c7] font-mono">
+                        ${cuota1Amount.toLocaleString('es-CL')}
+                      </span>
+                      <span className="text-[10px] text-slate-500 block font-mono">Saldo 50% ($ {cuota2Amount.toLocaleString('es-CL')}) al inicio</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Cuota Total: 100% */}
+                <div 
+                  onClick={() => setPaymentOption('total')}
+                  className={`p-5 rounded-3xl border-2 transition-all cursor-pointer flex flex-col justify-between gap-3 ${
+                    paymentOption === 'total'
+                      ? 'bg-sky-50/80 border-[#0284c7] shadow-lg shadow-sky-500/10 ring-2 ring-[#0284c7]/30'
+                      : 'bg-slate-50 border-slate-200 hover:border-sky-300'
+                  }`}
+                >
+                  <div className="flex justify-between items-start">
+                    <div>
+                      <span className="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full border border-emerald-200 mb-1">
+                        PAGO COMPLETO (100%)
+                      </span>
+                      <h4 className="text-sm font-black text-slate-900">CUOTA Nº 1 + CUOTA Nº 2 (TOTALIDAD)</h4>
+                      <p className="text-xs text-slate-600">Cancelas la totalidad del arancel en una sola transacción sin cuotas pendientes.</p>
+                    </div>
+                    {paymentOption === 'total' && (
+                      <div className="w-6 h-6 rounded-full bg-[#0284c7] text-white flex items-center justify-center font-bold shadow-sm">
+                        <Check size={14} className="stroke-[3]" />
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="pt-2 border-t border-slate-200 flex justify-between items-end">
+                    <span className="text-xs text-slate-500 font-mono">Total a Pagar Hoy:</span>
+                    <div className="text-right">
+                      <span className="text-2xl font-black text-slate-900 font-mono">
+                        ${totalAmount.toLocaleString('es-CL')}
+                      </span>
+                      <span className="text-[10px] text-emerald-600 block font-mono">Arancel 100% Cancelado</span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            )}
 
             {/* Medios de Pago */}
             <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200 space-y-4">

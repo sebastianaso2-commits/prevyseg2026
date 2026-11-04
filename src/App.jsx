@@ -24,6 +24,7 @@ import PresencialCoursesView from './components/PresencialCoursesView';
 import SenceExecutiveSummary from './components/SenceExecutiveSummary';
 import SecuritySchoolView from './components/SecuritySchoolView';
 import TradesSchoolView from './components/TradesSchoolView';
+import TeachersView from './components/TeachersView';
 import SchoolsPreviewSection from './components/SchoolsPreviewSection';
 
 function App() {
@@ -209,10 +210,13 @@ function App() {
     } else if (view === 'presencial') {
       window.history.pushState(null, '', '#presencial');
       window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else if (view === 'docentes') {
+      window.history.pushState(null, '', '#docentes');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 
-  // Soporte para navegación vía Hash URL (#inicio, #seguridad, #oficios, #online, #presencial, etc.)
+  // Soporte para navegación vía Hash URL (#inicio, #seguridad, #oficios, #online, #presencial, #docentes, etc.)
   useEffect(() => {
     const handleHash = () => {
       const hash = window.location.hash.replace('#', '');
@@ -224,6 +228,8 @@ function App() {
         setCurrentView('online');
       } else if (hash === 'presencial' || hash === 'cursos-presenciales') {
         setCurrentView('presencial');
+      } else if (hash === 'docentes' || hash === 'profesores' || hash === 'equipo-docente') {
+        setCurrentView('docentes');
       } else if (hash === 'inicio' || hash === 'noticias' || hash === 'quienes-somos' || hash === 'contacto' || hash === 'escuelas') {
         setCurrentView('home');
       }
@@ -297,6 +303,15 @@ function App() {
             onSelectCourse={(course) => handleOpenEnrollmentWithCourse(course)}
             onReturnHome={() => handleNavigateView('home')}
             onOpenSchoolDetail={(school) => setSelectedSchoolModal(school)}
+          />
+        )}
+
+        {currentView === 'docentes' && (
+          <TeachersView
+            onReturnHome={() => handleNavigateView('home')}
+            onGoToSecurity={() => handleNavigateView('seguridad')}
+            onGoToTrades={() => handleNavigateView('oficios')}
+            onOpenEnrollment={(course) => handleOpenEnrollmentWithCourse(course)}
           />
         )}
 

@@ -1,0 +1,80 @@
+<!-- 
+  COMPONENTE: TARJETA DE INICIO DE SESIÓN OFICIAL PREVYSEG (CONECTADA A SUPABASE)
+  Diseño idéntico a la plataforma Moodle oficial PrevySeg con autenticación dinámica por RUT y Contraseña.
+-->
+
+<div class="login-card">
+  <!-- Cabecera con Logo Oficial PrevySeg -->
+  <div class="login-header">
+    <img 
+      src="components/prevyseg_logo.png" 
+      alt="PrevySeg Organismos Técnicos de Capacitación" 
+      class="login-logo-img"
+      onerror="this.onerror=null; this.src='../prevyseg_logo.png';"
+    >
+  </div>
+
+  <!-- Alerta de acceso (idéntica a la alerta roja de la imagen) -->
+  <div class="login-alert" id="loginAlert">
+    Acceso inválido. Por favor, inténtelo otra vez.
+  </div>
+
+  <form class="login-form" id="mainLoginForm" method="POST" autocomplete="on">
+    <!-- Campo Nombre de usuario (RUT) con auto-formateo dinámico -->
+    <div class="form-group">
+      <div class="input-wrapper">
+        <input 
+          type="text" 
+          id="username" 
+          name="username" 
+          placeholder="Nombre de usuario" 
+          autocomplete="username" 
+          required
+        >
+      </div>
+    </div>
+
+    <!-- Campo Contraseña -->
+    <div class="form-group">
+      <div class="input-wrapper">
+        <input 
+          type="password" 
+          id="password" 
+          name="password" 
+          placeholder="Contraseña" 
+          autocomplete="current-password" 
+          required
+        >
+      </div>
+    </div>
+
+    <!-- Botón Acceder -->
+    <button type="submit" class="btn-submit" id="btnAcceder">
+      Acceder
+    </button>
+
+    <!-- Enlace ¿Olvidó su contraseña? -->
+    <div class="moodle-forgot-container">
+      <a href="javascript:void(0)" id="btnOlvidastePass" class="forgot-password-link">
+        ¿Olvidó su contraseña?
+      </a>
+    </div>
+
+    <!-- Botón Entrar como persona invitada -->
+    <button type="button" class="btn-guest" id="btnInvitado">
+      Entrar como persona invitada
+    </button>
+  </form>
+
+  <!-- Pie de tarjeta con selector de idioma y cookies -->
+  <div class="login-card-footer">
+    <div class="lang-selector">
+      Español - Internacional (es) &#9662;
+    </div>
+    <div>
+      <a href="javascript:void(0)" id="btnAvisoCookies">
+        &#9432; Aviso de Cookies
+      </a>
+    </div>
+  </div>
+</div>

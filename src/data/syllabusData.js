@@ -1,3 +1,83 @@
+export const UNIFIED_TEACHERS_TEAM = [
+  {
+    area: "Dirección OTEC",
+    nombre: "Carolina Cataldo Ayala",
+    cargo: "Directora OTEC",
+    resena: "Ingeniera Comercial, Universidad de Tarapacá. 15 años de experiencia en formulación y gestión de proyectos públicos y privados. Diplomada en Formulación de Proyectos, Diplomado Gestión de Seguridad Privada.",
+    name: "Carolina Cataldo Ayala",
+    role: "Directora OTEC • Dirección General",
+    badge: "Directora OTEC",
+    credentials: "Ingeniera Comercial, UTA • Diplomada en Gestión de Seguridad Privada",
+    bio: "Ingeniera Comercial, Universidad de Tarapacá. 15 años de experiencia en formulación y gestión de proyectos públicos y privados. Diplomada en Formulación de Proyectos, Diplomado Gestión de Seguridad Privada."
+  },
+  {
+    area: "DDHH · Género · Normativa",
+    nombre: "Giovana Barbagelata J.",
+    cargo: "Relatora",
+    resena: "Abogada, UTA — Magíster Gerencia y Políticas Públicas (UBO) — Máster en Género y Derecho (España).",
+    name: "Giovana Barbagelata J.",
+    role: "Relatora • DDHH, Género y Normativa",
+    badge: "Abogada UTA",
+    credentials: "Magíster Gerencia y Políticas Públicas (UBO) • Máster en Género y Derecho (España)",
+    bio: "Abogada, UTA — Magíster Gerencia y Políticas Públicas (UBO) — Máster en Género y Derecho (España)."
+  },
+  {
+    area: "Legislación · Administración · Ética",
+    nombre: "Ignacio Mamani N.",
+    cargo: "Relator",
+    resena: "Abogado, UTA — Diplomado Gestión de Seguridad Privada 440 hrs — Acreditado OS-10.",
+    name: "Ignacio Mamani N.",
+    role: "Relator • Legislación, Administración y Ética",
+    badge: "Acreditado OS-10",
+    credentials: "Abogado UTA • Diplomado Gestión de Seguridad Privada 440 hrs",
+    bio: "Abogado, UTA — Diplomado Gestión de Seguridad Privada 440 hrs — Acreditado OS-10."
+  },
+  {
+    area: "Prevención · Instalaciones · Ética",
+    nombre: "Marlon Vargas C.",
+    cargo: "Relator",
+    resena: "Ing. en Prevención de Riesgos — Diplomado Gestión SP 440 hrs UTEM — Acreditado OS-10.",
+    name: "Marlon Vargas C.",
+    role: "Relator • Prevención, Instalaciones y Ética",
+    badge: "Acreditado OS-10",
+    credentials: "Ing. Prevención de Riesgos • Diplomado Gestión SP UTEM",
+    bio: "Ing. en Prevención de Riesgos — Diplomado Gestión SP 440 hrs UTEM — Acreditado OS-10."
+  },
+  {
+    area: "Prevención · Emergencias · Instalaciones",
+    nombre: "Patricio Melgarejo A.",
+    cargo: "Relator",
+    resena: "Ing. de Ejecución en Prevención de Riesgos — Acreditado OS-10.",
+    name: "Ing. Patricio Melgarejo A.",
+    role: "Relator • Prevención, Emergencias e Instalaciones",
+    badge: "Acreditado OS-10",
+    credentials: "Ing. de Ejecución en Prevención de Riesgos • Registro SNS",
+    bio: "Ing. de Ejecución en Prevención de Riesgos — Acreditado OS-10."
+  },
+  {
+    area: "Primeros Auxilios · Emergencias",
+    nombre: "Marcos Gallardo Saes",
+    cargo: "Relator",
+    resena: "Técnico Nivel Superior de Enfermería — Especializado en Primeros Auxilios y Emergencias.",
+    name: "Marcos Gallardo Saes",
+    role: "Relator • Primeros Auxilios y Emergencias",
+    badge: "TNS Enfermería",
+    credentials: "Técnico Nivel Superior de Enfermería • Especialista en Urgencias",
+    bio: "Técnico Nivel Superior de Enfermería — Especializado en Primeros Auxilios y Emergencias."
+  },
+  {
+    area: "Sistemas Alarmas · Telecomunicaciones",
+    nombre: "Ricardo Rocha Á.",
+    cargo: "Relator",
+    resena: "Ing. en Ejecución Electrónica, UTA — Acreditado OS-10.",
+    name: "Ricardo Rocha Á.",
+    role: "Relator • Sistemas de Alarmas y Telecomunicaciones",
+    badge: "Acreditado OS-10",
+    credentials: "Ing. en Ejecución Electrónica, Universidad de Tarapacá",
+    bio: "Ing. en Ejecución Electrónica, UTA — Acreditado OS-10."
+  }
+];
+
 // =========================================================================
 // PROGRAMAS Y TEMARIOS OFICIALES DETALLADOS DE PREVYSEG 2026
 // Malla Curricular Estandarizada para los Cursos de Seguridad y Oficios
@@ -10,195 +90,103 @@ export const SYLLABUS_DETAILS = {
   // =======================================================================
 
   'seg-01': {
-    subtitle: 'Curso de Formación de Guardias de Seguridad (OS-10 / SPD)',
-    summary: 'Programa oficial de formación integral habilitante para desempeñarse como Guardia de Seguridad en empresas públicas y privadas de todo Chile, acreditado bajo la nueva Ley N° 21.659 de Seguridad Privada y regulado por la Subsecretaría de Prevención del Delito (SPD) y Carabineros de Chile. Otorga credencial digital oficial con vigencia extendida de 4 años y acceso al seguro de vida obligatorio de 132 UF.',
-    objective: 'Capacitar y habilitar al alumno con las competencias operativas, tácticas, jurídicas y de primeros auxilios exigidas por la normativa chilena para resguardar personas, instalaciones y bienes patrimoniales.',
+    subtitle: 'Curso de Formación de Guardias de Seguridad (Ley N° 21.659 / SPD / OS-10)',
+    summary: 'Programa oficial de formación integral habilitante para desempeñarse como Guardia de Seguridad en todo el territorio nacional, acreditado bajo el nuevo marco de la Ley N° 21.659 de Seguridad Privada, regulado por la Subsecretaría de Prevención del Delito (SPD) y Carabineros de Chile OS-10.',
+    objective: 'Capacitar y habilitar al alumno con las competencias operativas, tácticas, jurídicas y de primeros auxilios exigidas por la Ley 21.659 para resguardar personas, instalaciones y bienes patrimoniales.',
     specificObjectives: [
       'Dominar el marco legal, derechos humanos y facultades del guardia de seguridad según la Ley 21.659.',
-      'Aplicar técnicas de control de accesos, patrullaje preventivo y resolución de incidentes críticos.',
-      'Ejecutar protocolos de primeros auxilios, soporte vital básico y uso de desfibrilador externo (DEA).',
-      'Operar sistemas de radiocomunicaciones y enlace con centrales de emergencia y Plan Cuadrante.',
-      'Aprobar con éxito el examen reglamentario ante la Autoridad Fiscalizadora OS-10 de Carabineros de Chile.'
+      'Aplicar técnicas de control de accesos, seguridad de instalaciones y telecomunicaciones.',
+      'Ejecutar protocolos de primeros auxilios y correcto uso de elementos defensivos y de protección.',
+      'Desarrollar acondicionamiento físico y técnicas de reducción sin daño físico.'
     ],
-    schedule: '2 semanas (Lunes a Sábado) • 08:30 a 12:30 y 14:30 a 18:30 hrs',
-    durationDetail: '90 horas cronológicas exigidas por Ley 21.659',
+    schedule: 'Jornadas: Mañana (08:30 a 12:30) y Tarde (14:30 a 19:00), Lunes a Sábado • Sede: Blanco Encalada #666, Arica + Aula Virtual',
+    durationDetail: '90 horas cronológicas (60 hrs teóricas / 30 hrs prácticas)',
     totalHours: 90,
     weeks: '2 semanas',
     classesCount: '12 jornadas intensivas',
     nextDate: '19/10/2026',
-    modality: 'Presencial Teórico-Práctica',
+    modality: 'Presencial Teórico-Práctica (Blanco Encalada #666, Arica + Aula Virtual)',
     price: '$140.000 CLP',
-    depositPrice: '$70.000 CLP (Cuota 1 de 50%)',
-    paymentFacility: 'Facilidad de pago en 2 cuotas del 50% ($70.000 c/u)',
-    certification: 'Certificado oficial OTEC PrevySeg habilitante para Examen OS-10 y Credencial SPD por 4 años',
+    depositPrice: '$70.000 CLP (2 cuotas de 50%)',
+    paymentFacility: 'Facilidad de pago en 2 cuotas de $70.000 c/u',
+    certification: 'Certificado oficial OTEC PrevySeg para Examen OS-10 y Credencial digital SPD por 4 años',
     requirements: [
-      'Cédula de Identidad chilena vigente o permanencia definitiva apostillada.',
-      'Mayor de 18 años de edad cumplidos.',
-      'Licencia de Enseñanza Media (4° Medio aprobado) certificada por Mineduc.',
-      'Certificado de Antecedentes para Fines Especiales sin condenas por crímenes, simples delitos ni VIF.',
-      'Certificado Médico de Aptitud Física emitido por profesional visado por la Superintendencia de Salud.',
-      'Certificado Psicológico de Aptitud Mental compatible con la función de seguridad privada.',
-      'Declaración Jurada simple de idoneidad cívica y no pertenencia a grupos violentistas.'
+      'Ser mayor de 18 años de edad cumplidos.',
+      'Haber aprobado la educación media o su equivalente (certificado Mineduc).',
+      'No haber sido condenado ni encontrarse formalizado por crimen o simple delito.',
+      'No haber dejado de pertenecer a las FFAA, de Orden o Gendarmería por sanciones disciplinarias.',
+      'No haber sido sancionado conforme a la Ley de Violencia Intrafamiliar (VIF).',
+      'Poseer idoneidad física y psíquica compatible con la función (certificados médico y psicológico vigentes).',
+      'Cumplir con los requisitos del Art. 46 (excepto numeral 11) y Art. 25 numerales 1 y 3 de la Ley N° 21.659.'
     ],
     modules: [
-      {
-        number: '01',
-        title: 'Legislación de Seguridad Privada y Derechos Humanos (Ley 21.659)',
-        topics: [
-          'Nueva institucionalidad y Subsecretaría de Prevención del Delito (SPD).',
-          'Derechos fundamentales, prohibición de tortura y no discriminación.',
-          'Legítima defensa, flagrancia y retención según el Código Procesal Penal.',
-          'Responsabilidad civil, penal y laboral del personal de seguridad.'
-        ]
-      },
-      {
-        number: '02',
-        title: 'Prevención de Riesgos, Control de Emergencias e Incendios',
-        topics: [
-          'Química del fuego y uso táctico de extintores portátiles PQS y CO2.',
-          'Planes de evacuación, zonas de seguridad y protocolos ante sismos/tsunamis.',
-          'Normas de seguridad laboral y prevención de accidentes en puestos de guardia.'
-        ]
-      },
-      {
-        number: '03',
-        title: 'Primeros Auxilios y Soporte Vital Básico (SVB)',
-        topics: [
-          'Evaluación primaria y secundaria del accidentado.',
-          'Reanimación Cardiopulmonar (RCP) y manejo del Desfibrilador Externo Automático (DEA).',
-          'Manejo de hemorragias, inmovilización de fracturas, quemaduras y shock.'
-        ]
-      },
-      {
-        number: '04',
-        title: 'Defensa Personal, Reducción Táctica y Manejo del Estrés',
-        topics: [
-          'Técnicas de sujeción, control y conducción de personas agresivas sin daño.',
-          'Uso proporcional de la fuerza y herramientas defensivas permitidas.',
-          'Manejo del pánico, autocontrol situacional y mediación de conflictos verbales.'
-        ]
-      },
-      {
-        number: '05',
-        title: 'Sistemas de Comunicación, Enlace Táctico y CCTV',
-        topics: [
-          'Claves radiales oficiales y coordinación con Carabineros de Chile.',
-          'Redacción de partes de servicio, libros de guardia y actas de novedades.',
-          'Familiarización con monitoreo de cámaras y sensores perimetrales.'
-        ]
-      }
+      { number: '01', title: 'Legislación aplicada a la seguridad privada', hours: '22h T', topics: ['Ley N° 21.659 de Seguridad Privada', 'Subsecretaría de Prevención del Delito (SPD)', 'Derechos constitucionales y Código Procesal Penal', 'Responsabilidades civiles y penales'] },
+      { number: '02', title: 'Respeto y promoción de los derechos humanos', hours: '2h T', topics: ['Estándares internacionales de DDHH', 'Trato digno y garantías fundamentales'] },
+      { number: '03', title: 'Probidad, no discriminación y perspectiva de género', hours: '2h T', topics: ['Principios de probidad pública y privada', 'Enfoque de género y no discriminación arbitraria'] },
+      { number: '04', title: 'Privacidad y uso de datos personales', hours: '2h T', topics: ['Protección de datos sensibles y registros', 'Límites normativos en el control de accesos'] },
+      { number: '05', title: 'Prevención de riesgos', hours: '9h T / 5h P', topics: ['Identificación de peligros y evaluación de riesgos', 'Planes de emergencia, evacuación y control de incendios', 'Uso táctico de extintores portátiles'] },
+      { number: '06', title: 'Seguridad de instalaciones', hours: '14h T', topics: ['Protección física de recintos e infraestructura crítica', 'Control perimetral y procedimientos de inspección', 'Libro de novedades y partes de novedades'] },
+      { number: '07', title: 'Seguridad electrónica', hours: '2h T / 2h P', topics: ['Sistemas de CCTV, sensores perimetrales y alarmas', 'Operación de paneles de intrusión y videovigilancia'] },
+      { number: '08', title: 'Sistema de telecomunicaciones', hours: '1h T / 1h P', topics: ['Protocolos de radiocomunicaciones y claves oficiales', 'Enlace directo con Carabineros de Chile y emergencias'] },
+      { number: '09', title: 'Instrucción física', hours: '6h P', topics: ['Acondicionamiento físico general', 'Resistencia aeróbica y movilidad articular adaptada'] },
+      { number: '10', title: 'Correcto uso de elementos defensivos y de protección', hours: '2h T / 4h P', topics: ['Uso táctico de bastón defensivo (luma) y chaleco anticorte', 'Principios de proporcionalidad y legítima defensa'] },
+      { number: '11', title: 'Primeros auxilios', hours: '2h T / 4h P', topics: ['Soporte vital básico (SVB) y maniobras RCP', 'Uso del Desfibrilador Externo Automático (DEA)', 'Control de hemorragias, quemaduras e inmovilización'] },
+      { number: '12', title: 'Técnicas de reducción', hours: '2h T / 8h P', topics: ['Técnicas de sujeción, retención y conducción sin daño', 'Desescalamiento físico de agresiones y control no letal'] }
     ],
-    teachers: [
-      {
-        name: 'Marco Antonio Gallardo Sáez',
-        role: 'Relator Acreditado OS-10 • Primeros Auxilios, Administración y Ética',
-        credentials: 'Prefectura Carabineros Arica N° 1 • Res. Exenta N° 136 / Aut. N° 016 (Vigencia 2028)',
-        badge: 'Acreditado OS-10',
-        areas: ['Primeros Auxilios', 'Administración de Seguridad', 'Valores y Ética'],
-        bio: 'Capacitador autorizado por Carabineros de Chile (OS-10 Prefectura Arica N° 1, Res. Exenta N° 136 / Aut. N° 016, vigente hasta octubre 2028). Técnico de Nivel Superior en Enfermería (CFT Tarapacá), Diplomado en Alta Dirección de Seguridad Privada (CFT UDA) y formación en Desarrollo Humano y Ética Laboral por la Pontificia Universidad Católica de Chile.',
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
-      },
-      {
-        name: 'Ing. Patricio Melgarejo Aranibar',
-        role: 'Relator Acreditado OS-10 • Prevención de Riesgos, Emergencias y Protección',
-        credentials: 'Prefectura Carabineros Arica N° 1 • Aut. N° 010103030013 • Registro Experto SNS N° AC/P 826',
-        badge: 'Acreditado OS-10',
-        areas: ['Prevención de Riesgos', 'Control de Emergencias', 'Protección de Instalaciones'],
-        bio: 'Ingeniero de Ejecución en Prevención de Riesgos (Universidad Arturo Prat, aprobado con distinción) y Experto Profesional Registro SNS N° AC/P 826. Capacitador acreditado por Carabineros de Chile (OS-10 Arica) en Prevención de Riesgos, Control de Emergencias y Protección de Instalaciones. Relator de la Mutual de Seguridad C.Ch.C. (desde 2008) e Instructor certificado de la Academia Nacional de Bomberos en rescate urbano, combate de incendios y materiales peligrosos.',
-        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
-      }
-    ],
+    teachers: UNIFIED_TEACHERS_TEAM,
     bibliography: [
-      'Ley N° 21.659 sobre Seguridad Privada en Chile (Ministerio del Interior y Seguridad Pública).',
-      'Decreto Supremo N° 867/2017: Reglamento de Seguridad Privada.',
-      'Decreto Exento N° 32 (31.01.2024): Manual Operativo de Seguridad Privada.',
-      'Decreto Ley N° 3.607 (Art. 5° bis) y Resoluciones de la Autoridad Fiscalizadora OS-10 Carabineros de Chile.',
-      'Manual Oficial de Doctrina y Procedimientos para Guardias de Seguridad (Depto. OS-10 Carabineros).',
-      'Código Procesal Penal: Normas de flagrancia y detención ciudadana (Artículos 129 y 130).',
-      'Guía Clínica de Reanimación Cardiopulmonar y Manejo de DEA (Ministerio de Salud de Chile).'
-    ],
-    videoData: {
-      title: 'Cápsula Informativa Oficial: Claves del Curso de Guardias OS-10 y Nueva Ley 21.659',
-      presenter: 'Camila Valenzuela — Conductora y Encargada de Comunicaciones y RRSS PrevySeg',
-      frequency: 'Cápsula 1 de 4 del ciclo mensual de orientación en Redes Sociales',
-      duration: '03:45 min',
-      description: 'En esta cápsula audiovisual nuestra encargada de RRSS te explica paso a paso los nuevos requisitos para postular a Guardia de Seguridad en Arica, cómo funciona la credencial digital con vigencia de 4 años, el nuevo seguro de vida obligatorio de 132 UF y la modalidad de pago en 2 cuotas.',
-      topicsCovered: [
-        'Documentos requeridos para matricularte sin observaciones.',
-        'Diferencias entre el antiguo curso OS-10 y la nueva malla de 90 horas.',
-        'Cómo se rinde el examen final ante Carabineros y obtención de credencial online.',
-        'Facilidades de pago y oportunidades de inserción laboral en empresas colaboradoras.'
-      ]
-    }
+      'Ley N° 21.659 sobre Seguridad Privada en Chile.',
+      'Decreto Supremo N° 867/2017 y Manual Operativo OS-10.',
+      'Manual Oficial de Doctrina y Procedimientos para Guardias de Seguridad (OS-10 Carabineros).',
+      'Código Procesal Penal: Normas de flagrancia y retención ciudadana (Art. 129 y 130).'
+    ]
   },
 
   'seg-02': {
-    subtitle: 'Formación de Vigilantes Privados (Porte de Armas / 106 Horas)',
-    summary: 'Programa especializado de alta exigencia táctica para personal destinado a entidades bancarias, transporte de valores, puertos y faenas mineras. Contempla polígono de tiro real, instrucción jurídica en legítima defensa con armamento de fuego y protocolos de reacción ante asaltos armados.',
-    objective: 'Preparar vigilantes privados con la destreza táctica, psicológica y jurídica necesaria para operar armamento letal en resguardo de recintos estratégicos según la normativa OS-10.',
+    subtitle: 'Formación de Vigilantes Privados (100 Horas Cronológicas)',
+    summary: 'Programa especializado semipresencial de 100 horas para personal destinado a entidades bancarias, transporte de valores, puertos y recintos estratégicos. Teoría 100% online en Aula Virtual (para Arica, Iquique o Antofagasta) y práctica presencial en Arica.',
+    objective: 'Preparar vigilantes privados con la destreza táctica, jurídica, física y de armamento requerida para el resguardo de entidades obligadas bajo la normativa vigente.',
     specificObjectives: [
-      'Dominar las normas de seguridad en el manejo, porte y custodia de armas de fuego.',
-      'Aprobar las prácticas de tiro de precisión y reacción en polígono autorizado.',
-      'Aplicar procedimientos de seguridad bancaria, custodia de remesas y transporte de valores.',
-      'Gestionar protocolos de seguridad preventiva ante situaciones de alto riesgo y asaltos.'
+      'Dominar el marco legal y de tiro defensivo regulado para entidades de alto riesgo.',
+      'Ejecutar acondicionamiento físico, primeros auxilios y técnicas de reducción táctica.',
+      'Aplicar procedimientos de seguridad bancaria, custodia de remesas y transporte de valores.'
     ],
-    schedule: '15 días hábiles • 08:30 a 13:00 y 14:30 a 17:30 hrs (incluye Polígono)',
-    durationDetail: '106 horas cronológicas con tiro práctico',
-    totalHours: 106,
+    schedule: 'Teoría 100% Online en Aula Virtual 24/7 (Arica, Iquique, Antofagasta) • Práctica presencial en Arica',
+    durationDetail: '100 horas cronológicas (Semipresencial)',
+    totalHours: 100,
     weeks: '3 semanas',
-    classesCount: '15 jornadas intensivas',
+    classesCount: 'Teoría Online + Jornadas Prácticas en Arica',
     nextDate: '26/10/2026',
-    modality: 'Presencial con Prácticas de Polígono',
-    price: '$220.000 CLP',
-    depositPrice: '$110.000 CLP (50%)',
-    paymentFacility: 'Facilidad en 2 cuotas del 50% ($110.000 c/u)',
-    certification: 'Certificado Oficial para Examen de Vigilante Privado OS-10 y Credencial de Porte de Armas',
+    modality: 'Semipresencial (Teoría 100% online en Aula Virtual / Práctica presencial en Arica)',
+    price: null,
+    depositPrice: null,
+    paymentFacility: 'Consultar valor y cupos por WhatsApp',
+    consultByWhatsappOnly: true,
+    legalNotice: 'Al aprobar el curso se otorga Certificado de Capacitación oficial. No se entrega credencial debido a la normativa vigente sobre porte de armas.',
+    certification: 'Certificado de Capacitación Oficial OTEC PrevySeg. No se entrega credencial debido a la normativa vigente sobre porte de armas.',
     requirements: [
-      '21 años de edad cumplidos.',
-      'Situación Militar al día (Servicio Militar cumplido o exención acreditada).',
-      'Licencia de Enseñanza Media completa.',
-      'Certificado de Antecedentes Especiales intachable sin anotaciones.',
-      'Examen psiquiátrico y psicotécnico de idoneidad para porte de armas de fuego.',
-      'Informe comercial (Dicom Platinum) sin morosidades ni protestos graves.',
-      'Certificado médico de salud física compatible con alto esfuerzo físico.'
+      'Cédula de Identidad chilena vigente.',
+      'Tener 21 años cumplidos al inicio de la instrucción.',
+      'Situación Militar al día (cumplido o exención legal).',
+      'Licencia de Educación Media completa validada por Mineduc.',
+      'Certificado de Antecedentes para Fines Especiales intachable.',
+      'Evaluación psiquiátrica y psicotécnica rigurosa para uso de armamento.',
+      'Certificado médico de aptitud física compatible.',
+      'Aviso legal obligatorio: Al aprobar el curso se otorga Certificado de Capacitación oficial. No se entrega credencial debido a la normativa vigente sobre porte de armas.'
     ],
     modules: [
-      { number: '01', title: 'Marco Legal del Vigilante y Legislación de Armas (Ley 17.798)', topics: ['Delitos contra la propiedad y legítima defensa con armamento', 'Responsabilidades penales y civiles en entidades financieras'] },
-      { number: '02', title: 'Técnicas de Armamento, Balística y Tiro Práctico', topics: ['Nomenclatura de revólver y pistola semiautomática', 'Medidas de seguridad en el desarme y limpieza', 'Instrucción de tiro en polígono homologado OS-10'] },
-      { number: '03', title: 'Seguridad en Entidades Financieras y Transporte de Valores', topics: ['Protocolos de bóveda y apertura retardada', 'Reacción ante toma de rehenes y asaltos coordinados', 'Custodia de valores en tránsito'] }
+      { number: '01', title: 'Marco Legal del Vigilante Privado y Entidades Obligadas', topics: ['Normativa OS-10, DS 867 y responsabilidades jurídicas', 'Legítima defensa privilegiada en recintos de seguridad'] },
+      { number: '02', title: 'Acondicionamiento Físico y Táctico', topics: ['Resistencia física y capacidad de reacción inmediata', 'Desplazamiento táctico y cobertura en situaciones de crisis'] },
+      { number: '03', title: 'Elementos Defensivos y Técnicas de Reducción', topics: ['Uso proporcional de elementos defensivos', 'Técnicas de sujeción, desarme y retención sin daño letal'] },
+      { number: '04', title: 'Primeros Auxilios y Control de Hemorragias Tácticas', topics: ['Soporte vital básico y atención en zonas de riesgo', 'Torniquetes y apósitos hemostáticos ante heridas por proyectil'] },
+      { number: '05', title: 'Conocimientos de Arma y Tiro Práctico', topics: ['Medidas de seguridad en la manipulación y porte de armas', 'Prácticas de polígono de tiro y precisión de combate'] }
     ],
-    teachers: [
-      {
-        name: 'Suboficial Mayor (R) Jorge Paredes Alarcón',
-        role: 'Instructor Maestro de Tiro y Tácticas Armadas',
-        credentials: 'Perito Armero • Acreditado OS-10 Carabineros de Chile',
-        badge: 'OS-10 Tiro',
-        bio: 'Especialista en balística forense y tiro táctico con más de 25 años formando vigilantes bancarios e instructores de tiro en la zona norte.',
-        avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80'
-      },
-      {
-        name: 'Marco Antonio Gallardo Sáez',
-        role: 'Relator Acreditado OS-10 • Primeros Auxilios y Valores & Ética',
-        credentials: 'Prefectura Carabineros Arica N° 1 • Res. Exenta N° 136 / Aut. N° 016 (Vigencia 2028)',
-        badge: 'Acreditado OS-10',
-        areas: ['Primeros Auxilios', 'Valores y Ética', 'Administración de Seguridad'],
-        bio: 'Capacitador autorizado por Carabineros de Chile (OS-10 Prefectura Arica N° 1). Técnico de Nivel Superior en Enfermería (CFT Tarapacá), Diplomado en Alta Dirección de Seguridad Privada (CFT UDA) y postítulo en Ética Laboral por la Pontificia Universidad Católica de Chile.',
-        avatar: 'https://images.unsplash.com/photo-1537368910025-700350fe46c7?w=150&auto=format&fit=crop&q=80'
-      }
-    ],
+    teachers: UNIFIED_TEACHERS_TEAM,
     bibliography: [
-      'Ley N° 17.798 sobre Control de Armas y Explosivos y su Reglamento complementario.',
-      'Decreto Ley N° 3.607: Normas sobre Vigilantes Privados en Chile.',
-      'Manual de Operaciones para el Transporte de Valores y Seguridad Bancaria (OS-10 Carabineros).'
-    ],
-    videoData: {
-      title: 'Cápsula RRSS: Todo lo que debes saber del Curso de Vigilantes Privados y Polígono',
-      presenter: 'Camila Valenzuela — Encargada de RRSS PrevySeg',
-      frequency: 'Cápsula de orientación en Redes Sociales PrevySeg',
-      duration: '04:10 min',
-      description: 'Video explicativo donde se abordan los requisitos de tiro, la situación militar al día y las oportunidades laborales de alta remuneración en bancos y minería.',
-      topicsCovered: ['Diferencias salariales entre guardia y vigilante', 'Cómo prepararse para el examen psicológico', 'Fechas de polígono de tiro en Arica']
-    }
+      'Decreto Ley N° 3.607 sobre Vigilantes Privados y normativas complementarias.',
+      'Decreto Supremo N° 867/2017: Reglamento de Seguridad Privada.',
+      'Manual Operativo de Armamento y Tiro de la Autoridad Fiscalizadora.'
+    ]
   },
 
   'seg-03': {
@@ -255,15 +243,7 @@ export const SYLLABUS_DETAILS = {
       'Código Internacional para la Protección de los Buques y de las Instalaciones Portuarias (Código PBIP/ISPS).',
       'Decreto Ley N° 2.222: Ley de Navegación de la República de Chile.',
       'Código Marítimo Internacional de Mercancías Peligrosas (Código IMDG).'
-    ],
-    videoData: {
-      title: 'Cápsula RRSS: Empleabilidad Portuaria y Certificación Directemar',
-      presenter: 'Camila Valenzuela — Encargada de RRSS PrevySeg',
-      frequency: 'Cápsula audiovisual mensual de difusión PrevySeg',
-      duration: '03:30 min',
-      description: 'Conoce los beneficios de capacitarte como guardia marítimo portuario en Arica, los trámites ante Capitanía de Puerto y las oportunidades en TPA y EPA.',
-      topicsCovered: ['Qué exige Directemar para otorgar la matrícula portuaria', 'Horarios de clases', 'Inserción laboral portuaria']
-    }
+    ]
   },
 
   'seg-04': {
@@ -307,15 +287,7 @@ export const SYLLABUS_DETAILS = {
         avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
       }
     ],
-    bibliography: ['Ley N° 21.442 de Copropiedad Inmobiliaria.', 'Ley N° 21.659 de Seguridad Privada.'],
-    videoData: {
-      title: 'Cápsula RRSS: La Nueva Ley de Seguridad y los Conserjes de Condominios',
-      presenter: 'Camila Valenzuela — Encargada de RRSS PrevySeg',
-      frequency: 'Cápsula mensual de orientación comunitaria',
-      duration: '03:15 min',
-      description: 'Aprende por qué los nocheros y conserjes ahora deben estar capacitados y cómo evitar sanciones de la Subsecretaría de Prevención del Delito.',
-      topicsCovered: ['Diferencia entre conserje y guardia', 'Acreditación requerida', 'Inscripción para comités de administración']
-    }
+    bibliography: ['Ley N° 21.442 de Copropiedad Inmobiliaria.', 'Ley N° 21.659 de Seguridad Privada.']
   },
 
   'seg-05': {
@@ -359,15 +331,7 @@ export const SYLLABUS_DETAILS = {
         avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
       }
     ],
-    bibliography: ['Ley N° 21.659 de Seguridad Privada.', 'Manual de Perfeccionamiento OS-10 Carabineros.'],
-    videoData: {
-      title: 'Cápsula RRSS: ¿Tienes tu credencial por vencer? Cómo renovar fácil con PrevySeg',
-      presenter: 'Camila Valenzuela — Encargada de RRSS PrevySeg',
-      frequency: 'Cápsula mensual de orientación profesional',
-      duration: '02:50 min',
-      description: 'Guía rápida para renovar tu credencial OS-10 por 4 años en solo 5 días de clases.',
-      topicsCovered: ['Plazos para renovar antes de que expire', 'Trámite digital con ClaveÚnica', 'Horarios de clases intensivas']
-    }
+    bibliography: ['Ley N° 21.659 de Seguridad Privada.', 'Manual de Perfeccionamiento OS-10 Carabineros.']
   },
 
   'seg-06': {
@@ -389,8 +353,7 @@ export const SYLLABUS_DETAILS = {
     requirements: ['Cédula de Identidad.', 'Matrícula portuaria anterior.', 'Certificado de antecedentes.'],
     modules: [{ number: '01', title: 'Actualización PBIP y Enlace Capitanía', topics: ['Protocolos de inspección', 'Reportes marítimos'] }],
     teachers: [{ name: 'Rodrigo Cisternas Vega', role: 'Relator OPIP Directemar', credentials: 'Certificación OPIP Armada', bio: 'Instructor portuario con 18 años de trayectoria.', avatar: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=150&auto=format&fit=crop&q=80' }],
-    bibliography: ['Código PBIP/ISPS.', 'Reglamentos Directemar.'],
-    videoData: { title: 'Cápsula RRSS: Revalidación Portuaria en Arica', presenter: 'Camila Valenzuela', frequency: 'Cápsula mensual RRSS', duration: '03:00 min', description: 'Todo sobre la renovación de matrícula marítima ante Capitanía de Puerto.', topicsCovered: ['Exámenes Directemar', 'Cupos y fechas'] }
+    bibliography: ['Código PBIP/ISPS.', 'Reglamentos Directemar.']
   },
 
   'seg-07': {
@@ -431,68 +394,45 @@ export const SYLLABUS_DETAILS = {
         avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
       }
     ],
-    bibliography: ['Ley N° 21.442 de Copropiedad Inmobiliaria.'],
-    videoData: { title: 'Cápsula RRSS: Actualización para Conserjes y Nocheros', presenter: 'Camila Valenzuela', frequency: 'Cápsula mensual RRSS', duration: '02:40 min', description: 'Mejores prácticas para la seguridad en condominios.', topicsCovered: ['Nuevas tecnologías de acceso', 'Cierre de turnos'] }
+    bibliography: ['Ley N° 21.442 de Copropiedad Inmobiliaria.']
   },
 
   'seg-08': {
-    subtitle: 'Operación Profesional de Cámaras CCTV (Código SENCE)',
-    summary: 'Formación técnica y operativa para operadores de salas de control y centros de monitoreo de televisión en circuito cerrado (CCTV) con software VMS, analítica con inteligencia artificial y cadena de custodia judicial de evidencias.',
-    objective: 'Capacitar operadores con las destrezas de patrullaje virtual, control de domos PTZ y gestión de video forense para la prevención y persecución del delito.',
+    subtitle: 'Especialización Operador de Cámaras de Televigilancia (CCTV)',
+    summary: 'Modalidad 100% online y asincrónica a través de Aula Virtual. El estudiante gestiona su propio aprendizaje de forma autónoma con material interactivo disponible 24/7.',
+    objective: 'Capacitar operadores profesionales en gestión de software VMS, analítica de video, domos PTZ y monitoreo preventivo continuo.',
     specificObjectives: [
-      'Operar cámaras PTZ, cámaras fijas y térmicas en consolas joystick y software VMS.',
-      'Detectar conductas sospechosas mediante analítica de video y patrones de comportamiento.',
-      'Preservar la cadena de custodia de grabaciones como prueba admisible en tribunales.'
+      'Gestionar plataformas VMS y monitoreo de múltiples cámaras en tiempo real.',
+      'Identificar conductas sospechosas y activar protocolos de respuesta.',
+      'Extraer evidencia digital cumpliendo la cadena de custodia legal.'
     ],
-    schedule: '10 días hábiles • Diurno: 09:00 a 13:00 hrs | Vespertino: 18:00 a 21:30 hrs',
-    durationDetail: '40 horas pedagógicas certificadas por SENCE',
-    totalHours: 40,
-    weeks: '2 semanas',
-    classesCount: '10 jornadas',
-    nextDate: '19/10/2026',
-    modality: 'Presencial con Simulador de Sala de Monitoreo',
-    price: '$120.000 CLP',
-    depositPrice: '$60.000 CLP (50%)',
-    paymentFacility: '2 cuotas del 50% ($60.000 c/u)',
-    certification: 'Certificado Oficial SENCE OTEC PrevySeg con Código de Franquicia Tributaria',
-    requirements: ['Cédula de Identidad chilena vigente.', 'Licencia de 4° Medio aprobada.', 'Conocimientos básicos de computación a nivel usuario.'],
-    modules: [
-      { number: '01', title: 'Topología de Redes y Arquitectura de Centrales CCTV', topics: ['Protocolos IP, códecs H.264/H.265 y NVRs', 'Diseño de videowall y ergonomía de puesto'] },
-      { number: '02', title: 'Operación de Cámaras PTZ y Software VMS', topics: ['Patrullaje programado, tours y zoom óptico', 'Gestión de alertas automáticas y sensores'] },
-      { number: '03', title: 'Extracción de Evidencias y Cadena de Custodia', topics: ['Exportación segura de video forense', 'Aspectos legales y protección de la privacidad'] }
+    schedule: 'Modalidad 100% online y asincrónica a través de Aula Virtual. Plataforma disponible 24/7.',
+    durationDetail: '40 horas asincrónicas + 2 horas prácticas (plazo máximo de ejecución: 1 mes)',
+    totalHours: 42,
+    weeks: '1 mes máximo',
+    classesCount: 'Autoestudio asincrónico 24/7 + 2h prácticas',
+    nextDate: 'Matrícula abierta / Acceso inmediato',
+    modality: '100% Online Asincrónica (Aula Virtual 24/7)',
+    price: '$100.000 CLP',
+    promoExalumnos: '$70.000 CLP',
+    depositPrice: '$100.000 CLP (Pago Único)',
+    paymentFacility: 'Pago único (1 cuota total). Bloqueada la opción de pago en 2 cuotas.',
+    soloPagoUnico: true,
+    hideSyllabusAndTeachers: true,
+    explanatoryNote: 'Modalidad 100% online y asincrónica a través de Aula Virtual. El estudiante gestiona su propio aprendizaje de forma autónoma con material interactivo disponible 24/7.',
+    certification: 'Certificado oficial de Especialización en Operación de Sistemas CCTV OTEC PrevySeg',
+    requirements: [
+      'Cédula de Identidad chilena vigente.',
+      'Licencia de Enseñanza Media completa.',
+      'Dispositivo informático con conexión a internet para el Aula Virtual.',
+      'Plazo máximo de ejecución: 1 mes desde la activación.'
     ],
-    teachers: [
-      {
-        name: 'Ing. Alejandro Morales Sepúlveda',
-        role: 'Ingeniero de Telecomunicaciones y CCTV',
-        credentials: 'Certificado Milestone VMS • Relator SENCE NCh 2728',
-        badge: 'CCTV / SENCE',
-        bio: 'Ingeniero con 14 años de experiencia en diseño de centrales de monitoreo municipal, retail y minería en el norte grande.',
-        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
-      },
-      {
-        name: 'Ing. Patricio Melgarejo Aranibar',
-        role: 'Relator Acreditado OS-10 • Protección de Instalaciones y Seguridad Física',
-        credentials: 'Prefectura Carabineros Arica N° 1 • Aut. N° 010103030013 • Registro Experto SNS N° AC/P 826',
-        badge: 'Acreditado OS-10',
-        areas: ['Protección de Instalaciones', 'Prevención de Riesgos', 'Control de Emergencias'],
-        bio: 'Ingeniero en Prevención de Riesgos (Universidad Arturo Prat, aprobado con distinción) y Experto Profesional SNS N° AC/P 826. Capacitador acreditado OS-10 en Protección de Instalaciones, auditoría de vulnerabilidades y enlace de centrales de televigilancia ante emergencias.',
-        avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
-      }
-    ],
+    modules: [],
+    teachers: [],
     bibliography: [
-      'Norma Técnica de Seguridad Privada Electrónica (Subsecretaría de Prevención del Delito).',
       'Manual de Operación de Sistemas de Videoprotección Urbana (Ministerio del Interior).',
-      'Guía Práctica de Cadena de Custodia de Evidencia Digital (Ministerio Público de Chile).'
-    ],
-    videoData: {
-      title: 'Cápsula RRSS: Conoce la Sala de Monitoreo CCTV de PrevySeg y Aprende con IA',
-      presenter: 'Camila Valenzuela — Encargada de RRSS PrevySeg',
-      frequency: 'Cápsula mensual de tecnología y seguridad RRSS',
-      duration: '03:55 min',
-      description: 'Te mostramos por dentro el taller de cámaras de PrevySeg y cómo aprenderás a usar domos motorizados y software de última generación.',
-      topicsCovered: ['Prácticas con cámaras reales', 'Campo laboral en retail y condominios', 'Certificado con código SENCE']
-    }
+      'Guía Técnica de Estándares de Grabación y Resguardo Forense de Evidencia Digital.'
+    ]
   },
 
   'seg-10': {
@@ -537,15 +477,7 @@ export const SYLLABUS_DETAILS = {
         avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
       }
     ],
-    bibliography: ['Ley N° 21.659 de Seguridad Privada.', 'Código del Trabajo de Chile: Jornadas excepcionales.'],
-    videoData: {
-      title: 'Cápsula RRSS: Da el salto a Supervisor de Seguridad con PrevySeg',
-      presenter: 'Camila Valenzuela — Encargada de RRSS PrevySeg',
-      frequency: 'Cápsula mensual de liderazgo laboral',
-      duration: '03:20 min',
-      description: 'Descubre cómo ascender en tu empresa de seguridad y dominar la confección de directivas de funcionamiento.',
-      topicsCovered: ['Requisitos para asumir jefatura de turno', 'Malla curricular ejecutiva', 'Convenios con empresas']
-    }
+    bibliography: ['Ley N° 21.659 de Seguridad Privada.', 'Código del Trabajo de Chile: Jornadas excepcionales.']
   },
 
   // =======================================================================
@@ -553,30 +485,54 @@ export const SYLLABUS_DETAILS = {
   // =======================================================================
 
   'of-01': {
-    subtitle: 'Resolución de Conflictos y Manejo de Situaciones Difíciles',
-    summary: 'Capacitación en habilidades blandas, negociación y contención emocional orientada a personal de atención al cliente, ejecutivos, guardias y trabajadores de entornos laborales de alta presión.',
-    objective: 'Desarrollar herramientas de comunicación asertiva y negociación para transformar controversias en acuerdos colaborativos y mitigar el estrés laboral.',
-    specificObjectives: ['Aplicar técnicas de desescalamiento verbal ante clientes o usuarios hostiles.', 'Fortalecer la empatía y la resiliencia en equipos de trabajo.'],
-    schedule: 'Plataforma Online 24/7 disponible las 4 semanas del mes',
-    durationDetail: '40 horas cronológicas e-learning asíncrono',
+    subtitle: 'Resolución de Conflictos y Manejo de Situaciones Difíciles (Código SENCE 1238088725)',
+    summary: 'Programa integral de capacitación en técnicas avanzadas de mediación, negociación asertiva, contención emocional y desescalamiento de situaciones conflictivas en el ámbito laboral y de atención al público.',
+    objective: 'Desarrollar competencias psicosociales y tácticas para resolver controversias, gestionar la presión y liderar acuerdos constructivos en momentos de crisis.',
+    specificObjectives: [
+      'Identificar la anatomía del conflicto y factores detonantes en entornos laborales.',
+      'Aplicar técnicas de comunicación asertiva, empatía y desescalamiento verbal.',
+      'Diseñar protocolos de negociación y contención emocional bajo la guía de un especialista.'
+    ],
+    schedule: 'Online Asíncrona (Aula Virtual 24/7) • Flexible a tu propio ritmo',
+    durationDetail: '40 Horas pedagógicas Asincrónicas',
     totalHours: 40,
     weeks: '4 semanas',
-    classesCount: 'Módulos interactivos 24/7',
+    classesCount: 'Material interactivo 24/7 en Aula Virtual',
     nextDate: '15/10/2026',
     modality: 'Online Asíncrona (Aula Virtual 24/7)',
-    price: '$95.000 CLP',
-    depositPrice: '$47.500 CLP (50%)',
-    paymentFacility: '2 cuotas de $47.500 CLP • Franquicia SENCE 100%',
-    certification: 'Diploma Oficial SENCE OTEC PrevySeg con Certificación de Competencias',
-    requirements: ['Cédula de Identidad chilena.', 'Mayor de 18 años.', 'Dispositivo con conexión a internet.'],
-    modules: [
-      { number: '01', title: 'Psicología del Conflicto y Dinámicas Laborales', topics: ['Factores detonantes del conflicto', 'Manejo de la frustración y clima laboral'] },
-      { number: '02', title: 'Comunicación Asertiva y Lenguaje No Verbal', topics: ['Escucha activa y validación emocional', 'Límites saludables'] },
-      { number: '03', title: 'Técnicas de Negociación Harvard y Acuerdos Ganar-Ganar', topics: ['Modelos de mediación', 'Resolución constructiva de disputas'] }
+    price: '$150.000 CLP',
+    depositPrice: '$75.000 CLP (50%)',
+    codigo_sence: '1238088725',
+    paymentFacility: 'Facilidad de pago en 2 cuotas de $75.000 c/u • Franquicia SENCE',
+    certification: 'Certificado Oficial SENCE (Código 1238088725) OTEC PrevySeg',
+    requirements: [
+      'Cédula de Identidad chilena vigente.',
+      'Mayor de 18 años.',
+      'Dispositivo con acceso a internet para interactuar en el Aula Virtual.'
     ],
-    teachers: [{ name: 'Ps. Andrea Cárdenas Godoy', role: 'Psicóloga Organizacional', credentials: 'Magíster en RRHH • Relatora SENCE', bio: 'Especialista en coaching de equipos y resolución de controversias laborales.', avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80' }],
-    bibliography: ['Método Harvard de Negociación (Fisher & Ury).', 'Inteligencia Emocional en el Trabajo (Daniel Goleman).'],
-    videoData: { title: 'Cápsula RRSS: Aprende a Resolver Conflictos con Éxito', presenter: 'Camila Valenzuela', frequency: 'Cápsula mensual de habilidades blandas', duration: '02:50 min', description: 'Cómo controlar situaciones difíciles en tu trabajo de forma profesional.', topicsCovered: ['Casos reales de clientes molestos', 'Aula virtual disponible 24/7'] }
+    modules: [
+      { number: '01', title: 'Bases Psicológicas del Conflicto y Percepción Humana', topics: ['Origen del conflicto interpersonal y laboral', 'Mecanismos de defensa y reactividad emocional', 'El rol de las expectativas en la dinámica laboral'] },
+      { number: '02', title: 'Comunicación Asertiva y Técnicas de Contención Emocional', topics: ['Escucha activa y reformulación positiva', 'Manejo del tono de voz, lenguaje no verbal y asertividad', 'Primeros auxilios psicológicos y contención en crisis'] },
+      { number: '03', title: 'Negociación Estratégica y Desescalamiento de Controversias', topics: ['Modelo Harvard de negociación: intereses vs. posiciones', 'Técnicas de desescalamiento ante usuarios o clientes molestos', 'Búsqueda de alternativas de mutuo beneficio (Método MAPAN)'] },
+      { number: '04', title: 'Protocolos de Mediación y Cierre Constructivo en el Trabajo', topics: ['Diseño de acuerdos sostenibles en equipos multidisciplinarios', 'Seguimiento y evaluación de la convivencia laboral', 'Resolución de casos reales en el Aula Virtual'] }
+    ],
+    teachers: [
+      {
+        nombre: 'Felipe I. Cisterna Farias',
+        name: 'Felipe I. Cisterna Farias',
+        cargo: 'Relator Asignado • Psicólogo Clínico',
+        role: 'Relator Asignado • Psicólogo Clínico',
+        area: 'Salud Mental & Mediación',
+        badge: 'Psicólogo Clínico',
+        credentials: 'Tu Espacio Terapéutico • felipecisternaf@gmail.com',
+        bio: 'Psicólogo Clínico de Tu Espacio Terapéutico. Especialista en mediación de controversias, desarrollo de habilidades blandas, contención emocional y salud mental laboral.',
+        whatsapp: 'https://wa.me/56972210629'
+      }
+    ],
+    bibliography: [
+      'Manual de Mediación y Resolución de Conflictos Organizacionales.',
+      'Guía Práctica de Negociación y Comunicación Asertiva en el Trabajo.'
+    ]
   },
 
   'of-02': {
@@ -598,8 +554,7 @@ export const SYLLABUS_DETAILS = {
     requirements: ['Cédula de Identidad chilena vigente.'],
     modules: [{ number: '01', title: 'Taller Dinámico de Roleplaying y Escalamiento', topics: ['Ejercicios vivenciales y contención en vivo'] }],
     teachers: [{ name: 'Ps. Andrea Cárdenas Godoy', role: 'Relatora de Habilidades', credentials: 'SENCE NCh 2728', bio: 'Psicóloga facilitadora.', avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80' }],
-    bibliography: ['Manual de Dinámicas Grupales y Mediación.'],
-    videoData: { title: 'Cápsula RRSS: Taller Vivencial de Conflictos en Arica', presenter: 'Camila Valenzuela', frequency: 'Cápsula mensual RRSS', duration: '02:30 min', description: 'Un vistazo al taller presencial más dinámico de Arica.', topicsCovered: ['Roleplaying práctico', 'Cupos limitados'] }
+    bibliography: ['Manual de Dinámicas Grupales y Mediación.']
   },
 
   'of-03': {
@@ -625,8 +580,7 @@ export const SYLLABUS_DETAILS = {
       { number: '03', title: 'Calibración de Equipos y Aplicación Agrícola', topics: ['Calibración de pulverizadores de espalda', 'Condiciones climáticas de aplicación'] }
     ],
     teachers: [{ name: 'Ing. Agrónomo Gonzalo Parra Morales', role: 'Ingeniero Agrónomo y Relator Fitosanitario', credentials: 'Acreditado SAG • Registro SENCE', bio: 'Especialista en manejo integrado de plagas en valles costeros.', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80' }],
-    bibliography: ['Resolución SAG N° 2.195 sobre Evaluaciones de Aplicadores.', 'Decreto Supremo N° 157: Reglamento de Plaguicidas (Minsal).'],
-    videoData: { title: 'Cápsula RRSS: Obtén tu Carnet SAG de Aplicador de Plaguicidas en Arica', presenter: 'Camila Valenzuela', frequency: 'Cápsula mensual del sector agrícola', duration: '03:40 min', description: 'Requisitos y salidas a terreno para acreditarte ante el SAG.', topicsCovered: ['Valle de Azapa y Lluta', 'Uso de EPP y examen SAG'] }
+    bibliography: ['Resolución SAG N° 2.195 sobre Evaluaciones de Aplicadores.', 'Decreto Supremo N° 157: Reglamento de Plaguicidas (Minsal).']
   },
 
   'of-04': {
@@ -666,122 +620,58 @@ export const SYLLABUS_DETAILS = {
         avatar: 'https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?w=150&auto=format&fit=crop&q=80'
       }
     ],
-    bibliography: ['Código de Prácticas de Seguridad en Instalaciones Portuarias (OIT).'],
-    videoData: { title: 'Cápsula RRSS: Empleo y Capacitación Portuaria en Arica', presenter: 'Camila Valenzuela', frequency: 'Cápsula mensual RRSS', duration: '03:10 min', description: 'Oportunidades de trabajo en carga y estiba en el puerto de Arica.', topicsCovered: ['Requisitos físicos', 'Faenas con grúas'] }
+    bibliography: ['Código de Prácticas de Seguridad en Instalaciones Portuarias (OIT).']
   },
 
   'of-05': {
-    subtitle: 'Curso de Manipulación de Alimentos y Técnicas Gastronómicas',
-    summary: 'Formación oficial e intensiva para personas interesadas en emprender o trabajar en restaurantes, cafeterías, casinos, panaderías y servicios de catering, cumpliendo las directrices del Reglamento Sanitario de los Alimentos (DTO 977/96) de la Seremi de Salud de Arica y Parinacota.',
-    objective: 'Formar a los participantes en los conocimientos, habilidades y acciones necesarias para elaborar y comercializar alimentos de manera segura, aplicando herramientas, presentación y formalización para desarrollar su propio emprendimiento.',
+    subtitle: 'Manipulación de Alimentos para el Emprendimiento (ChileValora P-5629-9412-001-V02)',
+    summary: 'Capacitación presencial integral de 60 horas (16h teóricas / 44h prácticas) basada en el perfil ocupacional oficial de ChileValora (Código: P-5629-9412-001-V02). Prepara al alumno en higiene alimentaria, costeo, planificación de la producción, elaboración higiénica, inocuidad y puesta en marcha con venta piloto.',
+    objective: 'Adquirir y demostrar las competencias laborales requeridas para elaborar alimentos de forma higiénica y rentable conforme a los estándares de ChileValora.',
     specificObjectives: [
-      'Aplicar Buenas Prácticas de Manufactura (BPM) y control de puntos críticos (HACCP).',
-      'Elaborar fichas técnicas de producción, costeo de recetas y control de mermas.',
-      'Gestionar la obtención de la Autorización Sanitaria de Alimentos y patentes comerciales.',
-      'Diseñar y envasar productos alimenticios con rotulado nutricional normativo.'
+      'Aplicar buenas prácticas de manufactura (BPM) e inocuidad alimentaria.',
+      'Controlar costos de insumos y estandarizar fichas técnicas con Mise en Place.',
+      'Elaborar, presentar y despachar productos en una jornada de taller y venta piloto.'
     ],
-    schedule: '3 veces por semana (Martes, Miércoles y Jueves) • 09:00 a 13:30 hrs',
-    durationDetail: '60 horas pedagógicas (16 hrs teóricas / 28 hrs prácticas en cocina / 16 hrs de proyecto)',
+    schedule: '100% Presencial en Taller Gastronómico • Martes, Miércoles y Jueves',
+    durationDetail: '60 horas (16h teóricas / 44h prácticas)',
     totalHours: 60,
     weeks: '4 semanas',
-    classesCount: '12 sesiones presenciales',
-    nextDate: '20/10/2026',
-    modality: 'Presencial Teórico-Práctica en Cocina-Taller',
+    classesCount: '12 jornadas de taller práctico con venta piloto',
+    nextDate: '12/10/2026',
+    modality: '100% Presencial con taller práctico y venta piloto',
     price: '$150.000 CLP',
     depositPrice: '$75.000 CLP (50%)',
-    paymentFacility: 'Facilidad de pago en 2 cuotas del 50% ($75.000 c/u)',
-    certification: 'Certificación Oficial para Carnet de Manipulador Seremi de Salud y Diploma OTEC PrevySeg',
+    paymentFacility: 'Facilidad de pago en 2 cuotas de $75.000 c/u',
+    avisoLegal: 'Capacitación basada en perfil ocupacional ChileValora (Código: P-5629-9412-001-V02). No certifica directamente Seremi de Salud.',
+    certification: 'Diploma de Capacitación OTEC PrevySeg basado en competencias ChileValora P-5629-9412-001-V02',
     requirements: [
-      'Cédula de Identidad chilena vigente (o extranjera con permanencia definitiva).',
-      'Mayor de 18 años cumplidos.',
-      'Interés en formalizar o iniciar un emprendimiento en el rubro gastronómico.',
-      'Salud compatible con funciones de manipulación de alimentos.'
+      'Cédula de Identidad chilena vigente.',
+      'Mayor de 18 años.',
+      'Interés en iniciar o formalizar un emprendimiento alimentario.',
+      'Aviso legal: Capacitación basada en perfil ocupacional ChileValora (Código: P-5629-9412-001-V02). No certifica directamente Seremi de Salud.'
     ],
     modules: [
-      {
-        number: '01',
-        title: 'Fundamentos de Higiene, Inocuidad y Microbiología de los Alimentos',
-        topics: [
-          'Reglamento Sanitario de los Alimentos (DTO 977/96).',
-          'Enfermedades Transmitidas por Alimentos (ETA) y bacterias de riesgo.',
-          'Higiene personal, lavado de manos clínico y uso de uniforme EPP reglamentario.',
-          'Contaminación cruzada directa e indirecta.'
-        ]
-      },
-      {
-        number: '02',
-        title: 'Abastecimiento, Selección de Insumos y Control de Costos',
-        topics: [
-          'Recepción y verificación de materias primas con control de temperatura.',
-          'Almacenamiento por zonas y rotación FIFO/FEFO (lo primero en entrar es lo primero en salir).',
-          'Control de mermas, cálculo de rendimientos y presupuestos de compras.'
-        ]
-      },
-      {
-        number: '03',
-        title: 'Planificación de la Producción y Buenas Prácticas de Manufactura (BPM)',
-        topics: [
-          'Organización de la línea de trabajo y mise en place profesional.',
-          'Elaboración de fichas técnicas de recetas estandarizadas.',
-          'Procedimientos Operativos Estandarizados de Sanitización (POES).'
-        ]
-      },
-      {
-        number: '04',
-        title: 'Elaboración, Técnicas de Cocción y Presentación Comercial',
-        topics: [
-          'Técnicas de cocción con puntos críticos de control térmico (>70°C).',
-          'Emplatado, montaje estético y porcionamiento para la venta.',
-          'Envasado al vacío, sellado térmico y técnicas de delivery seguro.'
-        ]
-      },
-      {
-        number: '05',
-        title: 'Permisología Sanitaria, Formalización y Emprendimiento',
-        topics: [
-          'Requisitos para la Autorización Sanitaria de Alimentos (Seremi de Salud).',
-          'Resolución sanitaria de elaboración, expendio y carros de comida (Foodtrucks).',
-          'Rotulado nutricional obligatorio según la Ley 20.606 (Sellos Altos En).'
-        ]
-      },
-      {
-        number: '06',
-        title: 'Implementación del Proyecto Piloto de Alimentos',
-        topics: [
-          'Desarrollo de un producto gastronómico comercial.',
-          'Prueba piloto y degustación con pauta de evaluación sensorial.',
-          'Portafolio final del emprendimiento con plan de comercialización.'
-        ]
-      }
+      { number: '01', title: 'Fundamentos de higiene e inocuidad alimentaria', hours: '6h', topics: ['Buenas Prácticas de Manufactura (BPM)', 'Peligros biológicos, químicos y físicos', 'Lavado de manos, indumentaria y desinfección de superficies'] },
+      { number: '02', title: 'Abastecimiento, selección de insumos y control de costos', hours: '9h', topics: ['Criterios de compra y recepción de materias primas', 'Rotación de inventarios y sistema FIFO / PEPS', 'Cálculo de rendimientos y control de mermas'] },
+      { number: '03', title: 'Planificación de la producción: Mise en Place, fichas técnicas y costeo', hours: '9h', topics: ['Diseño y estandarización de recetas', 'Elaboración de fichas técnicas de producción', 'Costeo directo, margen de utilidad y precio de venta'] },
+      { number: '04', title: 'Elaboración, presentación, envasado y despacho', hours: '11h', topics: ['Técnicas culinarias seguras y control de temperaturas', 'Tipos de envases inocuos y rotulado reglamentario', 'Manejo seguro en delivery y transporte de alimentos'] },
+      { number: '05', title: 'Inocuidad, calidad y cumplimiento normativo', hours: '9h', topics: ['Reglamento Sanitario de los Alimentos (RSA - Dto. 977/96)', 'Trazabilidad y procedimientos POES', 'Checklist de auditoría interna de inocuidad'] },
+      { number: '06', title: 'Puesta en marcha del emprendimiento alimentario: Taller y venta piloto', hours: '16h', topics: ['Simulación de producción a escala comercial', 'Estrategia de comercialización y atención al cliente', 'Jornada de venta piloto presencial con evaluación de resultados'] }
     ],
     teachers: [
       {
-        name: 'Chef Instructora Paola Fuentes Morales',
-        role: 'Chef Internacional y Relatora en Inocuidad Alimentaria',
-        credentials: 'Acreditada SENCE • Asesora HACCP para Empresas Gastronómicas',
-        bio: 'Chef ejecutiva con 16 años de trayectoria dirigiendo cocinas de alta gama, asesorando a microempresarios en resolución sanitaria y capacitando manipuladores en toda la región.',
-        avatar: 'https://images.unsplash.com/photo-1583394838336-acd977736f90?w=150&auto=format&fit=crop&q=80'
+        name: 'Chef Instructor Gastronómico',
+        role: 'Relator Especialista en Inocuidad y Emprendimiento Culinario',
+        badge: 'ChileValora',
+        credentials: 'Especialista en BPM, Costeo y Gestión de Alimentos',
+        bio: 'Instructor con amplia trayectoria en formación culinaria, gestión de inocuidad y asesoría en formulación de emprendimientos gastronómicos.'
       }
     ],
     bibliography: [
-      'Reglamento Sanitario de los Alimentos: Decreto Supremo N° 977/96 (Minsal).',
-      'Manual de Buenas Prácticas de Manufactura en Servicios Gastronómicos (ACHIPIA).',
-      'Ley N° 20.606 sobre Composición Nutricional de los Alimentos y su Publicidad.',
-      'Norma Técnica sobre Sistema de Análisis de Peligros y Puntos Críticos de Control (HACCP).'
-    ],
-    videoData: {
-      title: 'Cápsula RRSS: Todo sobre el Curso de Manipulación de Alimentos y Resolución Sanitaria',
-      presenter: 'Camila Valenzuela — Encargada de RRSS PrevySeg',
-      frequency: 'Cápsula mensual de oficios y gastronomía',
-      duration: '04:05 min',
-      description: 'Nuestra encargada de redes te muestra la cocina-taller equipada de PrevySeg, cómo aprenderás a preparar alimentos inocuos y cómo obtener tu carnet oficial de la Seremi para trabajar de inmediato.',
-      topicsCovered: [
-        'Aprenderás en cocina real con insumos incluidos.',
-        'Cómo sacar el carnet de manipulador de alimentos en Arica.',
-        'Cómo formalizar tu propio emprendimiento gastronómico o foodtruck.',
-        'Facilidades de pago en 2 cuotas del 50%.'
-      ]
-    }
+      'Reglamento Sanitario de los Alimentos (Decreto Supremo N° 977/96).',
+      'Perfil Ocupacional Manipulador de Alimentos ChileValora (P-5629-9412-001-V02).',
+      'Manual de Buenas Prácticas de Manufactura e Higiene en Servicios de Alimentación.'
+    ]
   },
 
   'of-06': {
@@ -806,8 +696,7 @@ export const SYLLABUS_DETAILS = {
       { number: '02', title: 'Técnicas de Aplicación de Cera Miel', topics: ['Zonas faciales, axilas, piernas y rebaje', 'Cuidados post depilatorios'] }
     ],
     teachers: [{ name: 'Daniela Tapia Silva', role: 'Cosmetóloga y Esteticista Integral', credentials: 'Certificada Seremi de Salud', bio: 'Especialista en depilación y estética.', avatar: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&auto=format&fit=crop&q=80' }],
-    bibliography: ['Manual de Cosmetología y Bioseguridad Cutánea.'],
-    videoData: { title: 'Cápsula RRSS: Aprende Depilación Profesional con Cera Miel', presenter: 'Camila Valenzuela', frequency: 'Cápsula mensual de estética', duration: '03:10 min', description: 'Emprende desde casa con servicios de depilación profesional.', topicsCovered: ['Kit inicial incluido', 'Prácticas en modelos reales'] }
+    bibliography: ['Manual de Cosmetología y Bioseguridad Cutánea.']
   },
 
   'of-07': {
@@ -833,137 +722,155 @@ export const SYLLABUS_DETAILS = {
       { number: '03', title: 'Estructuras Acrílicas y Gel Esculpido', topics: ['Uso de monómero y polímero', 'Limado y acabado gloss'] }
     ],
     teachers: [{ name: 'Javiera Monroy Castillo', role: 'Nail Artist y Educadora Master', credentials: 'Certificación Internacional Nail Pro', bio: 'Educadora con más de 8 años formando manicuristas exitosas en Arica.', avatar: 'https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&auto=format&fit=crop&q=80' }],
-    bibliography: ['Manual de Dermatología Básica y Bioseguridad en Manicura.'],
-    videoData: { title: 'Cápsula RRSS: Conviértete en Manicurista Profesional y Emprende', presenter: 'Camila Valenzuela', frequency: 'Cápsula mensual de estética', duration: '03:30 min', description: 'Descubre las técnicas de acrílico y esmaltado permanente con mayor demanda.', topicsCovered: ['Uso de torno', 'Prácticas desde la primera clase', 'Ingresos promedio de una manicurista'] }
+    bibliography: ['Manual de Dermatología Básica y Bioseguridad en Manicura.']
   },
 
   'of-08': {
-    subtitle: 'Curso de Maquillaje de Carnaval y Estilismo Festivo',
-    summary: 'Taller especializado para crear looks de alto impacto para el Carnaval con la Fuerza del Sol de Arica, eventos folclóricos y festivales. Enseña fijación extrema resistente a la sudoración, pegado de pedrería, trenzados y peinados de comparsa.',
-    objective: 'Dominar el arte del maquillaje artístico de carnaval y ornamentación capilar de alto impacto con fijación resistente a condiciones extremas de calor, movimiento y sudor.',
+    subtitle: 'Técnicas de Maquillaje Carnaval (24 Horas Cronológicas)',
+    summary: 'Capacitación presencial especializada de 24 horas cronológicas (25% teórico / 75% práctico) distribuidas en 9 días durante 3 semanas. Incluye kit completo de insumos y materiales desde el día 1, manual y certificado de participación.',
+    objective: 'Dominar las técnicas de colorimetría, peinados ornamentales y maquillaje de carnaval con sellado HD de máxima duración para bailarines y comparsas.',
     specificObjectives: [
-      'Diagnosticar la piel y aplicar protocolos de preparación cutánea para eventos de larga duración.',
-      'Diseñar y ejecutar looks de ojos de impacto con glitter, pedrería y sellado HD.',
-      'Elaborar peinados trenzados ornamentados con plumas, telas y accesorios festivos.'
+      'Preparar y proteger la piel para aplicaciones de maquillaje de alta fijación.',
+      'Diseñar peinados y tocados con ornamentación y trenzado capilar.',
+      'Ejecutar maquillaje artístico con pedrería, glitter y sellado resistente a sudor.'
     ],
-    schedule: 'Vespertino • Lunes, Miércoles y Viernes de 18:30 a 21:00 hrs',
-    durationDetail: '30 horas prácticas en taller estético',
-    totalHours: 30,
+    schedule: 'Presencial: Martes y Jueves (2h/clase) y Sábados (4h/clase) • 9 días en 3 semanas',
+    durationDetail: '24 horas cronológicas (25% teórico / 75% práctico)',
+    totalHours: 24,
     weeks: '3 semanas',
-    classesCount: '10 sesiones',
-    nextDate: '19/10/2026',
-    modality: 'Presencial Especializado (Teórico-Práctica)',
-    price: '$90.000 CLP',
-    depositPrice: '$45.000 CLP (50%)',
-    paymentFacility: 'Facilidad de pago en 2 cuotas del 50% ($45.000 c/u)',
-    certification: 'Certificado de Participación Oficial OTEC PrevySeg con Kit de Trabajo',
-    requirements: ['Cédula de Identidad chilena vigente.', 'Mayor de 18 años.', 'No se requieren conocimientos previos en maquillaje.'],
+    classesCount: '9 jornadas de taller práctico',
+    nextDate: '02/11/2026',
+    modality: 'Presencial (25% teórico / 75% práctico)',
+    price: '$150.000 CLP',
+    depositPrice: '$75.000 CLP (50%)',
+    paymentFacility: 'Facilidad de pago en 2 cuotas de $75.000 c/u • Incluye Kit de Insumos',
+    beneficios: 'Incluye kit completo de insumos y materiales desde el día 1, manual y certificado de participación.',
+    certification: 'Certificado de Participación y Competencia Práctica OTEC PrevySeg',
+    requirements: [
+      'Cédula de Identidad chilena vigente.',
+      'Mayor de 18 años.',
+      'No se requieren conocimientos previos en maquillaje.'
+    ],
     modules: [
-      {
-        number: '01',
-        title: 'Cuidado de la Piel, Colorimetría y Teoría del Color Festivo',
-        topics: [
-          'Diagnóstico cutáneo y preparación con primer fijador de alto rendimiento.',
-          'Círculo cromático, armonías de color y selección de paletas según el traje de comparsa.'
-        ]
-      },
-      {
-        number: '02',
-        title: 'Peinados de Carnaval y Ornamentación Capilar',
-        topics: [
-          'Técnicas de recogido trenzado (boxeadoras, trenzas africanas y holandesas).',
-          'Fijación extrema de plumas, pedrería y tocados resistentes al movimiento.'
-        ]
-      },
-      {
-        number: '03',
-        title: 'Maquillaje de Carnaval Teórico y Práctico con Acabado HD',
-        topics: [
-          'Bases de alta cobertura, contornos en crema y sellado waterproof.',
-          'Colocación de pedrería facial con adhesivo profesional hipoalergénico.',
-          'Labios 3D y evaluación final con modelo de comparsa.'
-        ]
-      }
+      { number: '01', title: 'Cuidado de la piel y colorimetría', hours: '6h', topics: ['Preparación y limpieza profunda de la piel', 'Teoría del color aplicada a vestuarios y comparsas', 'Prebases, primer de alta fijación y protección solar'] },
+      { number: '02', title: 'Peinados y ornamentación', hours: '3h', topics: ['Estructuras de trenzado resistente al movimiento', 'Fijación de tocados, plumas y ornamentación tradicional', 'Uso de geles y fijadores de alta resistencia térmica'] },
+      { number: '03', title: 'Maquillaje de carnaval profesional y sellado HD', hours: '11h', topics: ['Técnicas de esfumado artístico y contrastes de impacto', 'Aplicación de pedrería, perlas, glitter y pigmentos puros', 'Técnicas de sellado HD resistente a sudor, calor y humedad'] },
+      { number: '04', title: 'Evaluación final y presentación práctica', hours: '4h', topics: ['Montaje integral de maquillaje y peinado en modelo real', 'Evaluación de durabilidad, prolijidad y propuesta escénica'] }
     ],
     teachers: [
       {
-        name: 'Camila Valenzuela Pizarro',
-        role: 'Maquilladora Profesional y Directora de Estilismo',
-        credentials: 'Maquilladora Certificada en Efectos Especiales y Festivales',
-        bio: 'Maquilladora oficial de comparsas del Carnaval de Arica con 7 años liderando cuadrillas de estética para bailarines de Morenada y Caporales.',
-        avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=150&auto=format&fit=crop&q=80'
+        name: 'Instructora Estilista Profesional',
+        role: 'Maquilladora Artística Especializada en Danzas del Norte',
+        badge: 'Certificada',
+        credentials: 'Especialista en Maquillaje HD y Caracterización Escénica',
+        bio: 'Maquilladora profesional y estilista con amplia experiencia en comparsas del Carnaval con la Fuerza del Sol y producciones artísticas del norte de Chile.'
       }
     ],
     bibliography: [
-      'Manual de Maquillaje Profesional y Técnicas de Escenario.',
-      'Guía de Seguridad Dermatológica en Cosmética Artística (ISP Chile).'
-    ],
-    videoData: {
-      title: 'Cápsula RRSS: Prepárate para el Carnaval con el Curso de Maquillaje PrevySeg',
-      presenter: 'Camila Valenzuela — Encargada de RRSS PrevySeg',
-      frequency: 'Cápsula mensual de estilismo y cultura regional',
-      duration: '03:40 min',
-      description: 'Aprende a maquillar y peinar para el Carnaval con la Fuerza del Sol con técnicas resistentes al calor y sudor. ¡Inicia tu propio negocio de estilismo!',
-      topicsCovered: [
-        'Kit de insumos entregado desde el primer día.',
-        'Técnicas de fijación de pedrería y plumas.',
-        'Cómo cobrar tus servicios por bailarina en el carnaval.'
-      ]
-    }
+      'Manual Técnico de Maquillaje Social y Artístico Profesional.',
+      'Guía de Colorimetría y Fijación de Pigmentos en Condiciones Extremas.'
+    ]
   },
 
   'of-09': {
-    subtitle: 'Cuidados del Adulto Mayor y Personas Dependientes',
-    summary: 'Capacitación humana y técnica para desempeñarse como cuidador/a formal de adultos mayores en domicilios particulares, residencias de larga estadía (ELEAM) y centros de día.',
-    objective: 'Entregar herramientas de atención biopsicosocial, administración de medicamentos, movilización segura y primeros auxilios gerontológicos.',
-    specificObjectives: ['Aprender técnicas de traslado ergonómico para evitar caídas y lesiones.', 'Manejo de patologías frecuentes: demencias, diabetes e hipertensión.'],
-    schedule: 'Lunes a Jueves • 18:00 a 21:00 hrs',
-    durationDetail: '50 horas pedagógicas',
-    totalHours: 50,
-    weeks: '4 semanas',
-    classesCount: '16 sesiones',
-    nextDate: '26/10/2026',
-    modality: 'Presencial con Prácticas Clínicas en Taller',
-    price: '$120.000 CLP',
-    depositPrice: '$60.000 CLP (50%)',
-    paymentFacility: '2 cuotas de $60.000 CLP',
-    certification: 'Diploma de Cuidador/a de Personas Mayores OTEC PrevySeg',
-    requirements: ['Cédula de Identidad chilena vigente.', 'Mayor de 18 años.', 'Vocación de servicio y empatía.'],
-    modules: [
-      { number: '01', title: 'Gerontología Básica y Derechos de la Persona Mayor', topics: ['Envejecimiento activo y prevención de vulneración de derechos'] },
-      { number: '02', title: 'Cuidados Clínicos, Movilización y Prevención de UPP', topics: ['Cambios posturales, aseo y confort en cama', 'Prevención de úlceras por presión'] },
-      { number: '03', title: 'Administración de Medicamentos y Urgencias Médicas', topics: ['Control de signos vitales', 'Primeros auxilios geriátricos y atragantamiento'] }
+    subtitle: 'Cuidado del Adulto Mayor (ChileValora P-8810-5322-001-V01)',
+    summary: 'Programa presencial de 50 horas cronológicas (17 sesiones en 2 meses) alineado al perfil ocupacional ChileValora P-8810-5322-001-V01 (Nivel 3). Exige asistencia mínima del 85% para su aprobación y certificación.',
+    objective: 'Desarrollar competencias técnicas, asistenciales y humanas para brindar atención integral y digna a personas mayores autovalentes y dependientes.',
+    specificObjectives: [
+      'Asistir en las actividades básicas de la vida diaria respetando la autonomía.',
+      'Controlar signos vitales y administrar medicación por vía oral indicada.',
+      'Prevenir riesgos de caídas, úlceras por presión y situaciones de vulneración.'
     ],
-    teachers: [{ name: 'Enf. Patricia Morales Soto', role: 'Enfermera Universitaria Gerontóloga', credentials: 'Magíster en Salud Pública', bio: 'Enfermera clínica con 15 años de experiencia en cuidados geriátricos.', avatar: 'https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=150&auto=format&fit=crop&q=80' }],
-    bibliography: ['Manual de Cuidados del Adulto Mayor Dependiente (SENAMA).', 'Guía Clínica de Prevención de Caídas en Personas Mayores (Minsal).'],
-    videoData: { title: 'Cápsula RRSS: Fórmate como Cuidador/a de Adultos Mayores con PrevySeg', presenter: 'Camila Valenzuela', frequency: 'Cápsula mensual de salud y bienestar', duration: '03:15 min', description: 'Una carrera con alta demanda y enorme valor social en Arica.', topicsCovered: ['Técnicas de enfermería básica', 'Inserción laboral rápida'] }
+    schedule: 'Martes, Miércoles y Jueves (18:30 a 21:30 hrs) • 16 sesiones de 3h + 1 de 2h (2 meses)',
+    durationDetail: '50 horas cronológicas (17 sesiones presenciales)',
+    totalHours: 50,
+    weeks: '8 semanas (2 meses)',
+    classesCount: '17 sesiones (16 de 3h + 1 de 2h)',
+    nextDate: '16/10/2026',
+    modality: 'Presencial Teórico-Práctica (Asistencia mínima 85% obligatoria)',
+    price: '$180.000 CLP',
+    depositPrice: '$90.000 CLP (50%)',
+    paymentFacility: 'Facilidad de pago en 2 cuotas de $90.000 c/u',
+    certification: 'Certificado Oficial de Capacitación OTEC PrevySeg alineado a ChileValora P-8810-5322-001-V01 (Nivel 3)',
+    requirements: [
+      'Cédula de Identidad chilena vigente.',
+      'Mayor de 18 años.',
+      'Salud física y mental compatible con labores de cuidado asistencial.',
+      'Cumplir con el requisito de asistencia mínima obligatoria del 85% para aprobación.'
+    ],
+    modules: [
+      { number: '00', title: 'Inducción al rol del cuidador', hours: '3h', topics: ['Marco ético, envejecimiento activo y rol del cuidador formal', 'Derechos fundamentales de las personas mayores'] },
+      { number: '01', title: 'UCL 1: Asistencia en actividades de la vida diaria', hours: '12h', topics: ['Higiene, aseo en cama y confort del usuario', 'Técnicas de alimentación asistida e hidratación adecuada', 'Movilización segura, transferencias y uso de ayudas técnicas'] },
+      { number: '02', title: 'UCL 2: Área de salud y control de signos vitales', hours: '12h', topics: ['Control de presión arterial, frecuencia cardíaca, temperatura y saturación', 'Administración asistida de medicamentos según indicación médica', 'Reconocimiento temprano de descompensaciones clínicas'] },
+      { number: '03', title: 'UCL 3: Desarrollo socioafectivo y estimulación cognitiva', hours: '6h', topics: ['Técnicas de estimulación de la memoria y psicomotricidad', 'Escucha activa, empatía y prevención del aislamiento social', 'Manejo del duelo y acompañamiento afectivo'] },
+      { number: '04', title: 'UCL 4: Prevención de riesgos, caídas y maltrato', hours: '9h', topics: ['Adaptación del entorno doméstico seguro para prevenir caídas', 'Prevención y cuidado de úlceras por presión (escaras)', 'Detección, protocolo y denuncia ante sospechas de maltrato o abandono'] },
+      { number: '05', title: 'Módulo Transversal: Empleabilidad y autocuidado del cuidador', hours: '3h', topics: ['Habilidades de comunicación con la familia y equipos de salud', 'Prevención del síndrome de Burnout y técnicas de autocuidado'] },
+      { number: '06', title: 'Taller integrador de casos y evaluación final', hours: '5h', topics: ['Simulación clínica de casos complejos en aula taller', 'Evaluación práctica individual de competencias'] }
+    ],
+    teachers: [
+      {
+        nombre: 'Enfermera / Docente Clínica',
+        name: 'Enfermera / Docente Clínica',
+        cargo: 'Relatora Especialista en Geriatría',
+        role: 'Relatora Especialista en Geriatría',
+        badge: 'Área Salud',
+        credentials: 'Licenciada en Enfermería • Diplomada en Atención Gerontológica',
+        bio: 'Profesional de enfermería especializada en docencia para la salud, atención a la dependencia y cuidados paliativos.'
+      }
+    ],
+    bibliography: [
+      'Perfil Ocupacional Cuidador de Personas Mayores ChileValora (P-8810-5322-001-V01).',
+      'Manual de Cuidados para Personas Mayores en Situación de Dependencia (SENAMA).'
+    ]
   },
 
   'of-10': {
-    subtitle: 'Cajero Bancario y Comercial con Detección de Fraudes',
-    summary: 'Formación para desempeñarse en cajas de bancos, retail, supermercados y empresas de cobranza, aprendiendo cuadre de caja, arqueos, operación de terminales POS y detección de billetes falsos.',
-    objective: 'Entrenar cajeros comerciales y bancarios con alta precisión numérica y velocidad operativa.',
-    specificObjectives: ['Identificar marcas de seguridad en papel moneda nacional y dólares.', 'Dominar técnicas de arqueo rápido sin descuadres.'],
-    schedule: 'Lunes a Viernes • 18:30 a 21:30 hrs',
-    durationDetail: '45 horas pedagógicas presenciales',
-    totalHours: 45,
-    weeks: '3 semanas',
-    classesCount: '15 sesiones',
-    nextDate: '26/10/2026',
-    modality: 'Presencial con Simulador de Caja',
-    price: '$110.000 CLP',
-    depositPrice: '$55.000 CLP (50%)',
-    paymentFacility: '2 cuotas de $55.000 CLP',
-    certification: 'Certificado de Cajero Bancario y Comercial OTEC PrevySeg',
-    requirements: ['Cédula de Identidad chilena vigente.', 'Licencia de Enseñanza Media completa.'],
-    modules: [
-      { number: '01', title: 'Operatoria de Caja y Medios de Pago', topics: ['Efectivo, cheques, tarjetas bancarias y transferencias electrónicas'] },
-      { number: '02', title: 'Detección de Moneda Falsa y Medidas de Seguridad', topics: ['Billetes de la familia polímero y algodón', 'Luz UV y tacto'] },
-      { number: '03', title: 'Arqueo, Cuadre Diario y Atención al Cliente', topics: ['Procedimientos ante faltantes/sobrantes', 'Manejo del estrés en horas punta'] }
+    subtitle: 'Administración de Condominios y Edificios (Ley N° 21.442 / MINVU)',
+    summary: 'Capacitación presencial de 75 horas (19 sesiones en 7 semanas) bajo la Ley N° 21.442 de Copropiedad Inmobiliaria. Cubre las competencias mínimas exigidas por el Ministerio de Vivienda y Urbanismo (MINVU) para la inscripción en el Registro Nacional de Administradores de Condominios. Incluye sin costo adicional el curso de Resolución de Conflictos (SENCE 1238088725).',
+    objective: 'Capacitar administradores inmobiliarios y miembros de comités en el marco legal, financiero, laboral y operativo exigido por la nueva Ley de Copropiedad.',
+    specificObjectives: [
+      'Interpretar y aplicar el marco legal de la Ley N° 21.442 y su reglamento.',
+      'Diseñar planes de emergencia, seguridad y cumplimiento de la normativa laboral.',
+      'Calcular gastos comunes, fondos de reserva y liderar comités de convivencia.'
     ],
-    teachers: [{ name: 'Contador Auditor René Salgado Osses', role: 'Auditor Financiero', credentials: 'Ex Jefe de Cajas BancoEstado', bio: 'Especialista en control de tesorería y detección de fraudes comerciales.', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&auto=format&fit=crop&q=80' }],
-    bibliography: ['Manual de Billetes y Monedas en Circulación (Banco Central de Chile).'],
-    videoData: { title: 'Cápsula RRSS: Aprende Cajero Bancario y Trabaja en Retail o Bancos', presenter: 'Camila Valenzuela', frequency: 'Cápsula mensual de negocios', duration: '03:00 min', description: 'Cómo funciona la caja registradora, detección de billetes y salidas laborales.', topicsCovered: ['Simulador de caja', 'Detección de billetes con luz UV', 'Prácticas reales'] }
+    schedule: 'Lunes, Miércoles y Viernes • Mañana (08:30 a 12:30 hrs) o Tarde (14:30 a 18:30 hrs) • 19 sesiones en 7 semanas',
+    durationDetail: '75 horas presenciales (19 sesiones en 7 semanas)',
+    totalHours: 75,
+    weeks: '7 semanas',
+    classesCount: '19 sesiones presenciales',
+    nextDate: '19/10/2026',
+    modality: 'Presencial (Lunes, Miércoles y Viernes)',
+    price: '$180.000 CLP',
+    depositPrice: '$90.000 CLP (2 cuotas de $90.000: 50% al inscribirse y 50% al iniciar)',
+    paymentFacility: 'Facilidad de pago en 2 cuotas de $90.000 c/u (50% inscripción / 50% al iniciar)',
+    beneficioIncluido: 'Incluye sin costo adicional el curso de Resolución de Conflictos y Manejo de Situaciones Difíciles (Código SENCE 1238088725).',
+    certification: 'Certificado Oficial OTEC PrevySeg con acreditación de competencias para Registro Nacional de Administradores MINVU',
+    requirements: [
+      'Cédula de Identidad chilena vigente.',
+      'Licencia de Enseñanza Media completa.',
+      'Manejo de herramientas ofimáticas básicas (hojas de cálculo y correo electrónico).'
+    ],
+    modules: [
+      { number: '01', title: 'Marco normativo y Ley N° 21.442 de Copropiedad Inmobiliaria', hours: '16h', topics: ['Nueva institucionalidad y Registro Nacional de Administradores MINVU', 'Reglamento de copropiedad, asambleas ordinarias y extraordinarias', 'Responsabilidades civiles y penales del administrador y comité'] },
+      { number: '02', title: 'Plan de emergencia, evacuación y seguridad en condominios', hours: '16h', topics: ['Diseño y actualización del Plan de Emergencia y Evacuación', 'Inspección de redes húmedas, secas y sistemas contra incendios', 'Coordinación con Bomberos, Carabineros y empresas de mantenimiento'] },
+      { number: '03', title: 'Normativa laboral aplicada al personal de conserjería', hours: '12h', topics: ['Contratos de trabajo, jornadas, turnos 4x4 y horas extraordinarias', 'Obligaciones del empleador y Ley de Seguridad Laboral (Ley 16.744)', 'Finiquitos, fiscalizaciones de la Dirección del Trabajo y comités paritarios'] },
+      { number: '04', title: 'Gastos comunes, contabilidad y cobranza', hours: '16h', topics: ['Estructura del gasto común ordinario y extraordinario', 'Constitución y administración del fondo común de reserva', 'Procedimientos legales de cobranza, intereses y corte de suministros'] },
+      { number: '05', title: 'Convivencia comunitaria y resolución de conflictos', hours: '15h', topics: ['Mediación vecinal y gestión asertiva de reclamos', 'Uso de áreas comunes, ruidos molestos y tenencia responsable de mascotas', 'Taller vivencial de resolución de conflictos'] }
+    ],
+    teachers: [
+      {
+        name: 'Abogado Especialista en Copropiedad',
+        role: 'Relator Experto en Ley 21.442 y Derecho Inmobiliario',
+        badge: 'Derecho Inmobiliario',
+        credentials: 'Asesor Legal de Condominios y Administraciones',
+        bio: 'Abogado con más de 12 años de experiencia asesorando comités de administración y administradores bajo la nueva normativa MINVU.'
+      }
+    ],
+    bibliography: [
+      'Ley N° 21.442 de Copropiedad Inmobiliaria (MINVU).',
+      'Reglamento de la Ley N° 21.442 y Manual para Administradores de Condominios.',
+      'Código del Trabajo de Chile: Normas aplicadas a conserjes y personal de edificios.'
+    ]
   }
 };
 
@@ -1083,19 +990,7 @@ export function getCourseSyllabus(course) {
     bibliography: [
       isSecurity ? 'Ley N° 21.659 de Seguridad Privada y Decretos complementarios.' : 'Norma Chilena NCh 2728:2015 sobre Sistemas de Gestión de Calidad para OTEC.',
       'Manuales técnicos y guías de procedimiento institucional OTEC PrevySeg.'
-    ],
-    videoData: {
-      title: `Cápsula Informativa Oficial: Todo sobre el curso ${course.title}`,
-      presenter: 'Camila Valenzuela — Encargada de RRSS PrevySeg',
-      frequency: 'Cápsula del ciclo mensual de difusión en Redes Sociales',
-      duration: '03:00 min',
-      description: `Nuestra encargada de RRSS explica en video los aspectos clave de ${course.title}, campo laboral y facilidades de matrícula en Arica.`,
-      topicsCovered: [
-        'Requisitos de postulación.',
-        'Duración y modalidad de estudio.',
-        'Facilidades de pago y certificación oficial.'
-      ]
-    }
+    ]
   };
 
   return enrichSyllabusWithCourse(fallback, course);

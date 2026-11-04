@@ -1,0 +1,80 @@
+[
+  {
+    "id": 61,
+    "titulo": "Curso de formación Guardia de Seguridad Online",
+    "categoria": "Seguridad Privada",
+    "codigo_sence": "1238089912",
+    "progreso": 75,
+    "profesor": "Instructor Certificado OS-10",
+    "modulos": 8,
+    "modulos_completados": 6,
+    "estado": "en_progreso",
+    "moodle_url": "https://cysvirtual.cl/course/view.php?id=61",
+    "descripcion": "Formación integral para aspirantes y renovación de acreditación OS-10 en seguridad privada."
+  },
+  {
+    "id": 56,
+    "titulo": "Operador de Central de Cámaras de Televigilancia (C.C.T.V.)",
+    "categoria": "Seguridad Privada",
+    "codigo_sence": "1238087964",
+    "progreso": 40,
+    "profesor": "Esp. en Monitoreo y CCTV",
+    "modulos": 6,
+    "modulos_completados": 2,
+    "estado": "en_progreso",
+    "moodle_url": "https://cysvirtual.cl/course/view.php?id=56",
+    "descripcion": "Operación técnica, detección de incidentes y normativa legal para centros de monitoreo."
+  },
+  {
+    "id": 66,
+    "titulo": "Resolución de Conflictos y Manejo de Situaciones Difíciles",
+    "categoria": "Seguridad Privada",
+    "codigo_sence": "1238088725",
+    "progreso": 100,
+    "profesor": "Lic. en Psicología Laboral",
+    "modulos": 4,
+    "modulos_completados": 4,
+    "estado": "completado",
+    "moodle_url": "https://cysvirtual.cl/course/view.php?id=66",
+    "descripcion": "Técnicas de desescalada verbal, mediación y contención en situaciones de alta tensión."
+  },
+  {
+    "id": 59,
+    "titulo": "Curso de Supervisor de Seguridad Marítimo Portuario",
+    "categoria": "Seguridad Privada",
+    "codigo_sence": "1238088102",
+    "progreso": 20,
+    "profesor": "Oficial de Seguridad Portuaria",
+    "modulos": 10,
+    "modulos_completados": 2,
+    "estado": "en_progreso",
+    "moodle_url": "https://cysvirtual.cl/course/view.php?id=59",
+    "descripcion": "Procedimientos del código PBIP y coordinación de equipos de vigilancia en recintos portuarios."
+  },
+  {
+    "id": 71,
+    "titulo": "Manejo Seguro de Plaguicidas y Buenas Prácticas Agrícolas",
+    "categoria": "Agricola",
+    "codigo_sence": "1238086431",
+    "progreso": 0,
+    "profesor": "Ingeniero Agrónomo",
+    "modulos": 5,
+    "modulos_completados": 0,
+    "estado": "no_iniciado",
+    "moodle_url": "https://cysvirtual.cl/course/index.php?categoryid=7",
+    "descripcion": "Protocolos fitosanitarios, uso de EPP y normativas SAG para faenas agrícolas."
+  },
+  {
+    "id": 85,
+    "titulo": "Inducción y Protocolos de Prevención de Riesgos Laborales",
+    "categoria": "Sistemas internos",
+    "codigo_sence": "Interno",
+    "progreso": 90,
+    "profesor": "Experto en Prevención de Riesgos",
+    "modulos": 3,
+    "modulos_completados": 3,
+    "estado": "completado",
+    "moodle_url": "https://cysvirtual.cl/course/index.php?categoryid=6",
+    "descripcion": "Capacitación interna en normativas de seguridad y salud en el trabajo."
+  }
+]

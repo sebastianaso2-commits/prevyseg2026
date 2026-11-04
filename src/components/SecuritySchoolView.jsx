@@ -39,7 +39,7 @@ const SECURITY_SLIDES = [
   { img: securityGuards, title: 'Formación de Guardias de Seguridad (Ley 21.659)', tag: 'Acreditación Oficial SPD' },
   { img: securitySupervisor, title: 'Formación de Vigilantes Privados (Banca y Valores)', tag: 'Alta Seguridad' },
   { img: portImg, title: 'Formación de Seguridad Marítimo Portuaria (Directemar)', tag: 'Código PBIP TPA' },
-  { img: cctvOperator, title: 'Operador de CCTV Codificado por SENCE', tag: 'Tecnología & Sistemas' },
+  { img: cctvOperator, title: 'Especialización Operador de Cámaras (CCTV)', tag: 'Tecnología & Sistemas' },
   { img: cyberImg, title: 'CCTV y Alarmas de Seguridad Privada', tag: 'Sistemas Electrónicos' },
   { img: heroImg, title: 'Supervisor de Seguridad Privada', tag: 'Liderazgo y Turnos SPD' }
 ];
@@ -492,19 +492,46 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
                     {/* Precios y Botón de Ficha */}
                     <div className="pt-3 border-t border-slate-100 space-y-2.5">
                       <div className="flex items-center justify-between">
-                        <div>
-                          <span className="text-xs text-slate-400 block font-medium">Arancel Oficial</span>
-                          <span className="text-lg font-black text-[#161630]">{course.price}</span>
-                        </div>
-                        {course.depositPrice && (
+                        {course.consultByWhatsappOnly || !course.price ? (
+                          <div>
+                            <span className="text-xs text-slate-400 block font-medium">Arancel Oficial</span>
+                            <span className="text-sm font-black text-[#1b3761]">Consultar por WhatsApp</span>
+                          </div>
+                        ) : (
+                          <div>
+                            <span className="text-xs text-slate-400 block font-medium">Arancel Oficial</span>
+                            <span className="text-lg font-black text-[#161630]">{course.price}</span>
+                          </div>
+                        )}
+                        {course.depositPrice ? (
                           <div className="text-right">
-                            <span className="text-[10px] text-slate-400 block">Modalidad Cuotas</span>
-                            <span className="text-xs font-bold text-[#0a969b] bg-[#0a969b]/10 px-2 py-0.5 rounded-md">
+                            <span className="text-[10px] text-slate-400 block">
+                              {course.soloPagoUnico ? 'Modalidad' : 'Modalidad Cuotas'}
+                            </span>
+                            <span className={`text-xs font-bold px-2 py-0.5 rounded-md ${
+                              course.soloPagoUnico 
+                                ? 'text-amber-800 bg-amber-50 border border-amber-200' 
+                                : 'text-[#0a969b] bg-[#0a969b]/10'
+                            }`}>
                               {course.depositPrice}
                             </span>
                           </div>
-                        )}
+                        ) : course.consultByWhatsappOnly ? (
+                          <div className="text-right">
+                            <span className="text-[10px] text-slate-400 block">Atención</span>
+                            <span className="text-xs font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded-md border border-emerald-200">
+                              Cupos Regulados
+                            </span>
+                          </div>
+                        ) : null}
                       </div>
+
+                      {/* Aclaración legal si aplica (p. ej. Vigilante Privado) */}
+                      {course.legalNotice && (
+                        <p className="text-[10px] text-rose-800 bg-rose-50 p-2 rounded-lg border border-rose-200 font-semibold leading-tight">
+                          ⚠️ {course.legalNotice}
+                        </p>
+                      )}
 
                       {/* Botón Ver Ficha y Temario (Abre Modal de Pestañas con tamaño estable) */}
                       <button

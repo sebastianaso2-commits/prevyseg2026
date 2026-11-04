@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Aulas Virtuales | PrevySeg Capacitaciones</title>
+  
+  <!-- Tipografías Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Hojas de estilo -->
+  <link rel="stylesheet" href="components/styles.css">
+  <link rel="stylesheet" href="components/aulas.css">
+</head>
+<body class="lms-body">
+
+  <!-- NAVBAR SUPERIOR DEL PORTAL DE ESTUDIANTES -->
+  <header class="lms-navbar">
+    <div class="lms-brand">
+      <span class="lms-logo-badge">PREVYSEG</span>
+      <h2 class="lms-title">Plataforma Virtual</h2>
+    </div>
+
+    <div class="lms-user-menu">
+      <div class="lms-avatar">AG</div>
+      <div class="lms-user-info">
+        <span class="lms-user-name">Alumno Demostración</span>
+        <span class="lms-user-role">RUT: 18.452.931-K &bull; Estudiante Activo</span>
+      </div>
+      <a href="demo.html" class="lms-btn-logout" title="Cerrar Sesión">
+        Cerrar Sesión
+      </a>
+    </div>
+  </header>
+
+  <div class="lms-container">
+
+    <!-- BANNER DE BIENVENIDA Y RESUMEN ACADÉMICO -->
+    <section class="lms-header-banner">
+      <div>
+        <h1>Mis Aulas Virtuales</h1>
+        <p>Bienvenido a tu aula. Aquí encontrarás tus cursos activos, material de estudio y evaluaciones.</p>
+      </div>
+
+      <div class="lms-stats">
+        <div class="lms-stat-card">
+          <div class="lms-stat-num">4</div>
+          <div class="lms-stat-lbl">Inscritos</div>
+        </div>
+        <div class="lms-stat-card">
+          <div class="lms-stat-num">2</div>
+          <div class="lms-stat-lbl">Completados</div>
+        </div>
+        <div class="lms-stat-card">
+          <div class="lms-stat-num">72%</div>
+          <div class="lms-stat-lbl">Promedio</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HERRAMIENTAS: FILTROS POR CATEGORÍA Y BÚSQUEDA -->
+    <div class="lms-toolbar">
+      <div class="lms-filters">
+        <button class="lms-filter-btn active" data-filter="all">Todas las Aulas</button>
+        <button class="lms-filter-btn" data-filter="Seguridad Privada">Seguridad Privada</button>
+        <button class="lms-filter-btn" data-filter="Agricola">Agrícola</button>
+        <button class="lms-filter-btn" data-filter="Sistemas internos">Sistemas Internos</button>
+        <button class="lms-filter-btn" data-filter="en_progreso">En Progreso</button>
+        <button class="lms-filter-btn" data-filter="completado">Completadas</button>
+      </div>
+
+      <div class="lms-search-box">
+        <span class="lms-search-icon">&#128269;</span>
+        <input type="text" id="courseSearch" class="lms-search-input" placeholder="Buscar por nombre de curso...">
+      </div>
+    </div>
+
+    <!-- CUADRÍCULA DE AULAS VIRTUALES (CURSOS) -->
+    <div class="lms-grid" id="coursesGrid">
+
+      <!-- Aula 1: Guardia de Seguridad -->
+      <div class="lms-card" data-category="Seguridad Privada" data-status="en_progreso">
+        <div class="lms-card-thumb" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), #1e3a5f;">
+          <span class="lms-badge-category">Seguridad Privada</span>
+          <span class="lms-badge-sence">SENCE: 1238089912</span>
+        </div>
+        <div class="lms-card-body">
+          <h3 class="lms-course-title">Curso de Formación Guardia de Seguridad Online</h3>
+          <div class="lms-course-meta">
+            <span>&#128100; Instructor: OS-10 Certificado</span>
+            <span>&#128214; 8 Módulos (6 completados)</span>
+          </div>
+          <div class="lms-progress-wrapper">
+            <div class="lms-progress-info">
+              <span>Avance Académico</span>
+              <span>75%</span>
+            </div>
+            <div class="lms-progress-bar">
+              <div class="lms-progress-fill" style="width: 75%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="lms-card-footer">
+          <span style="font-size: 12px; color: #10b981; font-weight: 600;">&#9679; Aula Activa</span>
+          <button class="lms-btn-enter btn-open-aula-modal" data-moodle-link="https://cysvirtual.cl/course/view.php?id=61">
+            Entrar al Aula &rarr;
+          </button>
+        </div>
+      </div>
+
+      <!-- Aula 2: CCTV -->
+      <div class="lms-card" data-category="Seguridad Privada" data-status="en_progreso">
+        <div class="lms-card-thumb" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), #1e293b;">
+          <span class="lms-badge-category">Seguridad Privada</span>
+          <span class="lms-badge-sence">SENCE: 1238087964</span>
+        </div>
+        <div class="lms-card-body">
+          <h3 class="lms-course-title">Operador de Central de Cámaras de Televigilancia (C.C.T.V.)</h3>
+          <div class="lms-course-meta">
+            <span>&#128100; Instructor: Esp. en Monitoreo CCTV</span>
+            <span>&#128214; 6 Módulos (2 completados)</span>
+          </div>
+          <div class="lms-progress-wrapper">
+            <div class="lms-progress-info">
+              <span>Avance Académico</span>
+              <span>40%</span>
+            </div>
+            <div class="lms-progress-bar">
+              <div class="lms-progress-fill" style="width: 40%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="lms-card-footer">
+          <span style="font-size: 12px; color: #10b981; font-weight: 600;">&#9679; Aula Activa</span>
+          <button class="lms-btn-enter btn-open-aula-modal" data-moodle-link="https://cysvirtual.cl/course/view.php?id=56">
+            Entrar al Aula &rarr;
+          </button>
+        </div>
+      </div>
+
+      <!-- Aula 3: Resolución de Conflictos -->
+      <div class="lms-card" data-category="Seguridad Privada" data-status="completado">
+        <div class="lms-card-thumb" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), #064e3b;">
+          <span class="lms-badge-category">Seguridad Privada</span>
+          <span class="lms-badge-sence">SENCE: 1238088725</span>
+        </div>
+        <div class="lms-card-body">
+          <h3 class="lms-course-title">Resolución de Conflictos y Manejo de Situaciones Difíciles</h3>
+          <div class="lms-course-meta">
+            <span>&#128100; Instructor: Psicología Laboral</span>
+            <span>&#128214; 4 Módulos (4 completados)</span>
+          </div>
+          <div class="lms-progress-wrapper">
+            <div class="lms-progress-info">
+              <span>Completado al 100%</span>
+              <span style="color: #059669;">Aprobado</span>
+            </div>
+            <div class="lms-progress-bar">
+              <div class="lms-progress-fill" style="width: 100%; background: #10b981;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="lms-card-footer">
+          <span style="font-size: 12px; color: #059669; font-weight: 600;">&#10004; Certificado Emitido</span>
+          <button class="lms-btn-enter btn-open-aula-modal" data-moodle-link="https://cysvirtual.cl/course/view.php?id=66">
+            Ver Contenido &rarr;
+          </button>
+        </div>
+      </div>
+
+      <!-- Aula 4: Supervisor Marítimo -->
+      <div class="lms-card" data-category="Seguridad Privada" data-status="en_progreso">
+        <div class="lms-card-thumb" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), #0f172a;">
+          <span class="lms-badge-category">Seguridad Privada</span>
+          <span class="lms-badge-sence">SENCE: 1238088102</span>
+        </div>
+        <div class="lms-card-body">
+          <h3 class="lms-course-title">Curso de Supervisor de Seguridad Marítimo Portuario</h3>
+          <div class="lms-course-meta">
+            <span>&#128100; Instructor: Oficial PBIP</span>
+            <span>&#128214; 10 Módulos (2 completados)</span>
+          </div>
+          <div class="lms-progress-wrapper">
+            <div class="lms-progress-info">
+              <span>Avance Académico</span>
+              <span>20%</span>
+            </div>
+            <div class="lms-progress-bar">
+              <div class="lms-progress-fill" style="width: 20%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="lms-card-footer">
+          <span style="font-size: 12px; color: #f59e0b; font-weight: 600;">&#9679; En Curso</span>
+          <button class="lms-btn-enter btn-open-aula-modal" data-moodle-link="https://cysvirtual.cl/course/view.php?id=59">
+            Entrar al Aula &rarr;
+          </button>
+        </div>
+      </div>
+
+      <!-- Aula 5: Agrícola -->
+      <div class="lms-card" data-category="Agricola" data-status="no_iniciado">
+        <div class="lms-card-thumb" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), #365314;">
+          <span class="lms-badge-category">Agrícola</span>
+          <span class="lms-badge-sence">SENCE: 1238086431</span>
+        </div>
+        <div class="lms-card-body">
+          <h3 class="lms-course-title">Manejo Seguro de Plaguicidas y Buenas Prácticas Agrícolas</h3>
+          <div class="lms-course-meta">
+            <span>&#128100; Instructor: Ing. Agrónomo</span>
+            <span>&#128214; 5 Módulos</span>
+          </div>
+          <div class="lms-progress-wrapper">
+            <div class="lms-progress-info">
+              <span>Sin iniciar</span>
+              <span>0%</span>
+            </div>
+            <div class="lms-progress-bar">
+              <div class="lms-progress-fill" style="width: 0%;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="lms-card-footer">
+          <span style="font-size: 12px; color: #6b7280; font-weight: 600;">Inicia pronto</span>
+          <button class="lms-btn-enter btn-open-aula-modal" data-moodle-link="https://cysvirtual.cl/course/index.php?categoryid=7">
+            Ver Temario &rarr;
+          </button>
+        </div>
+      </div>
+
+      <!-- Aula 6: Sistemas Internos -->
+      <div class="lms-card" data-category="Sistemas internos" data-status="completado">
+        <div class="lms-card-thumb" style="background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.6)), #4c1d95;">
+          <span class="lms-badge-category">Sistemas Internos</span>
+          <span class="lms-badge-sence">Interno</span>
+        </div>
+        <div class="lms-card-body">
+          <h3 class="lms-course-title">Inducción y Protocolos de Prevención de Riesgos Laborales</h3>
+          <div class="lms-course-meta">
+            <span>&#128100; Instructor: Prevencionista de Riesgos</span>
+            <span>&#128214; 3 Módulos (3 completados)</span>
+          </div>
+          <div class="lms-progress-wrapper">
+            <div class="lms-progress-info">
+              <span>Completado al 100%</span>
+              <span style="color: #059669;">Aprobado</span>
+            </div>
+            <div class="lms-progress-bar">
+              <div class="lms-progress-fill" style="width: 100%; background: #10b981;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="lms-card-footer">
+          <span style="font-size: 12px; color: #059669; font-weight: 600;">&#10004; Aprobado</span>
+          <button class="lms-btn-enter btn-open-aula-modal" data-moodle-link="https://cysvirtual.cl/course/index.php?categoryid=6">
+            Ver Contenido &rarr;
+          </button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- VENTANA MODAL DE DETALLE DEL AULA / MÓDULOS -->
+  <div class="lms-modal-overlay" id="courseDetailModal">
+    <div class="lms-modal-container">
+      <div class="lms-modal-header">
+        <button class="lms-modal-close" id="closeCourseModal" aria-label="Cerrar">&times;</button>
+        <h2 id="modalCourseTitle" style="margin: 0 0 6px 0; font-size: 20px;">Título del Curso</h2>
+        <div id="modalCourseMeta" style="font-size: 13px; color: #dbeafe;"></div>
+      </div>
+
+      <div class="lms-modal-body">
+        <h4 style="margin: 0 0 15px 0; color: #043364; font-family: 'Montserrat', sans-serif;">Contenido del Aula Virtual</h4>
+        
+        <div class="lms-module-item">
+          <div class="lms-module-title">
+            <span>&#128214;</span> Módulo 1: Marco Normativo y Legislación de Seguridad
+          </div>
+          <span class="lms-status-badge completado">&#10004; Completado</span>
+        </div>
+
+        <div class="lms-module-item">
+          <div class="lms-module-title">
+            <span>&#127916;</span> Módulo 2: Procedimientos Operativos en Terreno (Video Clase)
+          </div>
+          <span class="lms-status-badge completado">&#10004; Completado</span>
+        </div>
+
+        <div class="lms-module-item">
+          <div class="lms-module-title">
+            <span>&#128221;</span> Módulo 3: Primeros Auxilios y Planes de Emergencia
+          </div>
+          <span class="lms-status-badge pendiente">&#9203; En progreso</span>
+        </div>
+
+        <div class="lms-module-item">
+          <div class="lms-module-title">
+            <span>&#127891;</span> Evaluación Final y Certificación SENCE
+          </div>
+          <span class="lms-status-badge" style="background: #e5e7eb; color: #4b5563;">Bloqueado</span>
+        </div>
+
+        <div style="margin-top: 25px; display: flex; gap: 12px; justify-content: flex-end;">
+          <a href="#" id="modalGoMoodleBtn" target="_blank" class="lms-btn-enter" style="padding: 10px 20px; font-size: 13px;">
+            Ir al Aula en cysvirtual.cl &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="components/aulas.js"></script>
+</body>
+</html>

@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Inicio de Sesión Oficial | PrevySeg Plataforma Virtual</title>
+  
+  <!-- Fuentes Google (Montserrat y Open Sans) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  
+  <!-- Estilos del módulo -->
+  <link rel="stylesheet" href="components/styles.css">
+
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background-color: #f0f2f5;
+      font-family: 'Open Sans', sans-serif;
+      color: #333;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Barra de navegación superior */
+    .demo-navbar {
+      background: #ffffff;
+      border-bottom: 2px solid #e5e7eb;
+      padding: 14px 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+    }
+
+    .demo-logo {
+      font-family: 'Montserrat', sans-serif;
+      font-weight: 800;
+      font-size: 19px;
+      color: #043364;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .demo-nav-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .demo-container {
+      max-width: 960px;
+      margin: 35px auto 50px auto;
+      padding: 0 20px;
+      flex: 1;
+    }
+
+    .demo-intro {
+      text-align: center;
+      margin-bottom: 35px;
+    }
+
+    .demo-intro h1 {
+      font-family: 'Montserrat', sans-serif;
+      color: #043364;
+      font-size: 26px;
+      margin-bottom: 8px;
+    }
+
+    .demo-intro p {
+      color: #64748b;
+      font-size: 14px;
+      margin: 0;
+    }
+
+    .demo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      align-items: start;
+    }
+
+    @media (max-width: 820px) {
+      .demo-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .demo-box {
+      background: #fff;
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,0.04);
+    }
+
+    .demo-box h3 {
+      margin-top: 0;
+      color: #043364;
+      font-family: 'Montserrat', sans-serif;
+      border-bottom: 2px solid #eef2f6;
+      padding-bottom: 10px;
+      font-size: 17px;
+    }
+
+    .code-preview {
+      background: #1e293b;
+      color: #f8fafc;
+      padding: 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      overflow-x: auto;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- BARRA DE NAVEGACIÓN SUPERIOR -->
+  <header class="demo-navbar">
+    <div class="demo-logo">
+      <span>PREVYSEG</span>
+      <span style="font-weight: 400; color: #94a3b8; font-size: 14px;">| Plataforma Virtual & LMS</span>
+    </div>
+    <div class="demo-nav-actions">
+      <!-- Botón que lleva a la vista de Aulas Virtuales -->
+      <a href="aulas-virtuales.html" class="btn-plataforma-virtual" style="background:#6ab43e; border-color:#478a41;">
+        VER AULAS VIRTUALES &rarr;
+      </a>
+
+      <!-- Botón que abre el modal emergente -->
+      <button type="button" class="btn-plataforma-virtual" data-open-login-modal>
+        LOGIN (MODAL)
+      </button>
+    </div>
+  </header>
+
+  <main class="demo-container">
+    <div class="demo-intro">
+      <h1>Módulo de Autenticación Oficial PrevySeg</h1>
+      <p>Acceso directo a la Base de Datos en Supabase utilizando tu <strong>RUT</strong> y <strong>Contraseña</strong>.</p>
+    </div>
+
+    <div class="demo-grid">
+      <!-- Tarjeta 1: Información -->
+      <div class="demo-box">
+        <h3>1. Instrucciones de Acceso</h3>
+        <p style="font-size: 13px; color: #64748b; line-height: 1.6;">
+          Ingresa con tu <strong>RUT</strong> y la <strong>contraseña</strong> que ya tienes registrada en la base de datos de Supabase.
+        </p>
+
+        <div style="background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 8px; padding: 14px; font-size: 12px; color: #475569; margin: 18px 0; line-height: 1.6;">
+          <strong>⚡ Formateo Dinámico de RUT:</strong><br>
+          Al escribir los números de tu RUT en el campo "Nombre de usuario", los puntos y el guión se colocarán solos automáticamente en tiempo real (ej: <code>21.778.425-5</code>).
+        </div>
+
+        <p style="font-size: 12px; color: #64748b; line-height: 1.5;">
+          El sistema valida tus credenciales directamente contra la base de datos en Supabase y te da acceso de inmediato a tu panel de aulas virtuales.
+        </p>
+      </div>
+
+      <!-- Tarjeta 2: Formulario Oficial idéntico al Moodle PrevySeg -->
+      <div>
+        <div class="login-card" style="margin: 0;">
+          <!-- Cabecera con Logo Oficial PrevySeg -->
+          <div class="login-header">
+            <img 
+              src="components/prevyseg_logo.png" 
+              alt="PrevySeg Organismos Técnicos de Capacitación" 
+              class="login-logo-img"
+              onerror="this.onerror=null; this.src='../prevyseg_logo.png';"
+            >
+          </div>
+
+          <!-- Alerta de acceso inválido (aparece solo si la clave es errónea) -->
+          <div class="login-alert" id="demoAlert">
+            Acceso inválido. Por favor, inténtelo otra vez.
+          </div>
+
+          <form class="login-form" id="demoLoginForm" method="POST" autocomplete="on">
+            <!-- Campo Nombre de usuario -->
+            <div class="form-group">
+              <div class="input-wrapper">
+                <input 
+                  type="text" 
+                  id="demo_user" 
+                  name="username" 
+                  placeholder="Nombre de usuario" 
+                  autocomplete="username" 
+                  required
+                >
+              </div>
+            </div>
+
+            <!-- Campo Contraseña -->
+            <div class="form-group">
+              <div class="input-wrapper">
+                <input 
+                  type="password" 
+                  id="demo_pass" 
+                  name="password" 
+                  placeholder="Contraseña" 
+                  autocomplete="current-password" 
+                  required
+                >
+              </div>
+            </div>
+
+            <!-- Botón Acceder -->
+            <button type="submit" class="btn-submit" id="btnDemoAcceder">
+              Acceder
+            </button>
+
+            <!-- ¿Olvidó su contraseña? -->
+            <div class="moodle-forgot-container">
+              <a href="javascript:void(0)" class="forgot-password-link">
+                ¿Olvidó su contraseña?
+              </a>
+            </div>
+
+            <!-- Botón Entrar como persona invitada -->
+            <button type="button" class="btn-guest">
+              Entrar como persona invitada
+            </button>
+          </form>
+
+          <!-- Pie de tarjeta -->
+          <div class="login-card-footer">
+            <div class="lang-selector">
+              Español - Internacional (es) &#9662;
+            </div>
+            <div>
+              <a href="javascript:void(0)" id="cookieNoticeLink">
+                &#9432; Aviso de Cookies
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- MODAL DE LOGIN (Se activa al presionar el botón) -->
+  <div class="login-modal-overlay" id="loginModal">
+    <div class="login-modal-content">
+      <button type="button" class="modal-close-btn" data-close-login-modal aria-label="Cerrar">&times;</button>
+      
+      <div class="login-card" style="box-shadow: none; margin: 0; padding-top: 24px; border: none;">
+        <!-- Cabecera con Logo Oficial PrevySeg -->
+        <div class="login-header">
+          <img 
+            src="components/prevyseg_logo.png" 
+            alt="PrevySeg Organismos Técnicos de Capacitación" 
+            class="login-logo-img"
+            onerror="this.onerror=null; this.src='../prevyseg_logo.png';"
+          >
+        </div>
+
+        <div class="login-alert">
+          Acceso inválido. Por favor, inténtelo otra vez.
+        </div>
+
+        <form class="login-form" method="POST" autocomplete="on">
+          <div class="form-group">
+            <div class="input-wrapper">
+              <input 
+                type="text" 
+                name="username" 
+                placeholder="Nombre de usuario" 
+                autocomplete="username" 
+                required
+              >
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-wrapper">
+              <input 
+                type="password" 
+                name="password" 
+                placeholder="Contraseña" 
+                autocomplete="current-password" 
+                required
+              >
+            </div>
+          </div>
+
+          <button type="submit" class="btn-submit">
+            Acceder
+          </button>
+
+          <div class="moodle-forgot-container">
+            <a href="javascript:void(0)" class="forgot-password-link">
+              ¿Olvidó su contraseña?
+            </a>
+          </div>
+
+          <button type="button" class="btn-guest">
+            Entrar como persona invitada
+          </button>
+        </form>
+
+        <div class="login-card-footer">
+          <div class="lang-selector">
+            Español - Internacional (es) &#9662;
+          </div>
+          <div>
+            <a href="javascript:void(0)">
+              &#9432; Aviso de Cookies
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="components/login.js"></script>
+</body>
+</html>

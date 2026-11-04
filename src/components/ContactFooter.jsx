@@ -10,7 +10,9 @@ import {
   ArrowRight,
   Shield,
   Clock,
-  Send
+  Send,
+  HeartPulse,
+  ExternalLink
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -302,6 +304,69 @@ const ContactFooter = ({ onOpenContactModal }) => {
             </div>
 
           </div>
+
+          {/* ========== BLOQUE PROFESIONAL: PSICÓLOGO CLÍNICO FELIPE CISTERNA ========== */}
+          <div className="mt-14 max-w-5xl mx-auto">
+            <div className="rounded-2xl p-6 sm:p-7 border border-teal-400/40 bg-gradient-to-r from-[#03172b] via-[#062c4f] to-[#03172b] shadow-2xl relative overflow-hidden flex flex-col md:flex-row items-center justify-between gap-6">
+              
+              {/* Información Profesional y Centro */}
+              <div className="flex items-center gap-4 text-left">
+                {/* Badge / Avatar neutro sin foto personal */}
+                <div className="w-14 h-14 rounded-2xl bg-teal-500/20 border border-teal-400/50 flex items-center justify-center text-teal-300 flex-shrink-0 shadow-inner">
+                  <HeartPulse size={28} className="text-teal-300" />
+                </div>
+                
+                <div className="space-y-1">
+                  <div className="flex items-center gap-2 flex-wrap">
+                    <span className="text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded bg-teal-400/20 text-teal-300 border border-teal-400/30">
+                      Profesional Asociado
+                    </span>
+                    <span className="text-[10px] text-sky-200 font-medium">Salud Mental & Capacitación</span>
+                  </div>
+                  <h3 className="text-lg sm:text-xl font-black text-white">
+                    Felipe I. Cisterna Farias <span className="text-teal-300 font-semibold text-sm sm:text-base">— Psicólogo Clínico</span>
+                  </h3>
+                  <p className="text-xs text-slate-300 flex items-center gap-1.5 flex-wrap">
+                    <span>Centro Profesional:</span>
+                    <a
+                      href="https://www.tuespacioterapeutico.cl"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-cyan-300 font-bold hover:underline inline-flex items-center gap-1"
+                      title="Visitar sitio oficial de Tu Espacio Terapéutico"
+                    >
+                      Tu Espacio Terapéutico
+                      <ExternalLink size={11} />
+                    </a>
+                  </p>
+                </div>
+              </div>
+
+              {/* Botones de Contacto Directo */}
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href="mailto:felipecisternaf@gmail.com"
+                  className="inline-flex items-center gap-2 px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/15 border border-white/20 text-xs font-semibold text-white transition-all"
+                  title="Enviar correo a Felipe Cisterna"
+                >
+                  <Mail size={14} className="text-teal-300" />
+                  <span>felipecisternaf@gmail.com</span>
+                </a>
+                <a
+                  href="https://wa.me/56972210629?text=Hola%20Felipe,%20te%20contacto%20desde%20la%20página%20web."
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#25D366] hover:bg-[#20ba5a] text-slate-900 text-xs font-black shadow-lg hover:shadow-emerald-500/30 transition-all cursor-pointer"
+                  title="Contactar vía WhatsApp a Felipe Cisterna"
+                >
+                  <WhatsAppIcon size={16} />
+                  <span>+56 9 7221 0629</span>
+                </a>
+              </div>
+
+            </div>
+          </div>
+
         </div>
       </div>
 
@@ -315,6 +380,10 @@ const ContactFooter = ({ onOpenContactModal }) => {
             © {new Date().getFullYear()} PrevySeg Capacitaciones OTEC. Todos los derechos reservados. Arica, Chile.
           </p>
           <div className="flex items-center gap-4">
+            <a href="#docentes" className="text-teal-300 hover:text-teal-200 transition-colors text-xs font-semibold">
+              Cuerpo Docente
+            </a>
+            <span className="text-white/20">|</span>
             <a href="https://www.instagram.com/otecprevyseg" target="_blank" rel="noreferrer" className="text-slate-300 hover:text-teal-300 transition-colors text-xs font-semibold">
               Instagram
             </a>

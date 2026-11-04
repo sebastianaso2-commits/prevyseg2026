@@ -1,0 +1,373 @@
+/* ==========================================================================
+   ESTILOS DEL MÓDULO DE INICIO DE SESIÓN Y PLATAFORMA VIRTUAL (PREVYSEG)
+   ========================================================================== */
+
+/* Variables de color */
+:root {
+    --color-primary: #043364;
+    --color-primary-hover: #07478a;
+    --color-accent: #6ab43e;
+    --color-text-dark: #222222;
+    --color-text-muted: #666666;
+    --color-bg-light: #f7f9fb;
+    --color-border: #ced4da;
+    --color-white: #ffffff;
+    --color-danger: #721c24;
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --shadow-card: 0 4px 20px rgba(0, 0, 0, 0.08);
+    --shadow-modal: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* --------------------------------------------------------------------------
+   1. BOTÓN "PLATAFORMA VIRTUAL"
+   -------------------------------------------------------------------------- */
+.btn-plataforma-virtual {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: var(--color-primary);
+    color: var(--color-white) !important;
+    font-family: 'Montserrat', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+    padding: 10px 20px;
+    border: 2px solid #000000;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    box-sizing: border-box;
+    transition: all 0.25s ease-in-out;
+}
+
+.btn-plataforma-virtual:hover {
+    background-color: var(--color-primary-hover);
+    border-color: var(--color-primary-hover);
+    color: var(--color-white) !important;
+    box-shadow: 0 4px 12px rgba(4, 51, 100, 0.3);
+}
+
+.btn-plataforma-virtual:active {
+    transform: scale(0.98);
+}
+
+/* --------------------------------------------------------------------------
+   2. TARJETA Y FORMULARIO DE LOGIN OFICIAL PREVYSEG (RÉPLICA EXACTA)
+   -------------------------------------------------------------------------- */
+.login-card {
+    max-width: 420px;
+    width: 100%;
+    margin: 20px auto;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-card);
+    padding: 36px 32px 28px 32px;
+    box-sizing: border-box;
+    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    border: 1px solid rgba(0,0,0,0.04);
+}
+
+.login-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.login-logo-img {
+    max-width: 280px;
+    width: 100%;
+    height: auto;
+    margin: 0 auto 12px auto;
+    display: block;
+}
+
+.login-header h2 {
+    font-family: 'Montserrat', sans-serif;
+    color: var(--color-primary);
+    font-size: 22px;
+    margin: 0 0 6px 0;
+    font-weight: 700;
+}
+
+.login-header p {
+    color: var(--color-text-muted);
+    font-size: 13px;
+    margin: 0;
+}
+
+.login-form .form-group {
+    margin-bottom: 14px;
+}
+
+.login-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #495057;
+}
+
+.login-form .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.login-form .input-wrapper input {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    color: #333333;
+    background-color: #ffffff;
+    box-sizing: border-box;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.login-form .input-wrapper input:focus {
+    outline: none;
+    border-color: #043364;
+    box-shadow: 0 0 0 3px rgba(4, 51, 100, 0.15);
+}
+
+.form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 13px;
+    margin: 12px 0 16px 0;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    color: var(--color-text-muted);
+}
+
+.forgot-password-link {
+    color: #004085;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.forgot-password-link:hover {
+    text-decoration: underline;
+}
+
+.moodle-forgot-container {
+    text-align: center;
+    margin: 16px 0 14px 0;
+}
+
+.moodle-forgot-container a {
+    color: #043364;
+    font-size: 13.5px;
+    text-decoration: none;
+}
+
+.moodle-forgot-container a:hover {
+    text-decoration: underline;
+}
+
+.btn-submit {
+    width: 100%;
+    padding: 12px;
+    background-color: #043364;
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--radius-sm);
+    font-family: 'Open Sans', 'Montserrat', sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    letter-spacing: 0.2px;
+}
+
+.btn-submit:hover {
+    background-color: #002244;
+}
+
+.btn-submit:active {
+    transform: scale(0.99);
+}
+
+.btn-guest {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 14px;
+    background-color: #ced4da;
+    color: #212529;
+    border: none;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    display: block;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.btn-guest:hover {
+    background-color: #adb5bd;
+    color: #111111;
+}
+
+.login-divider {
+    display: flex;
+    align-items: center;
+    margin: 18px 0;
+    color: var(--color-text-muted);
+    font-size: 12px;
+}
+
+.login-divider::before,
+.login-divider::after {
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.login-divider span {
+    padding: 0 10px;
+}
+
+/* Alerta de error idéntica a Moodle */
+.login-alert {
+    padding: 12px 16px;
+    border-radius: var(--radius-sm);
+    font-size: 13.5px;
+    margin-bottom: 16px;
+    display: none;
+    box-sizing: border-box;
+}
+
+.login-alert.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+.login-alert.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.login-alert.info {
+    background-color: #e2e3e5;
+    color: #383d41;
+    border: 1px solid #d6d8db;
+    display: block;
+}
+
+/* Footer de la tarjeta Moodle */
+.login-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+    padding-top: 14px;
+    font-size: 12px;
+    color: #6c757d;
+}
+
+.login-card-footer select,
+.login-card-footer .lang-selector {
+    background: transparent;
+    border: none;
+    color: #043364;
+    font-size: 12px;
+    cursor: pointer;
+    padding: 2px;
+}
+
+.login-card-footer a {
+    color: #043364;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.login-card-footer a:hover {
+    text-decoration: underline;
+}
+
+/* --------------------------------------------------------------------------
+   3. MODAL DE LOGIN
+   -------------------------------------------------------------------------- */
+.login-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(3px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.login-modal-overlay.active {
+    display: flex;
+}
+
+.login-modal-content {
+    position: relative;
+    width: 100%;
+    max-width: 440px;
+    background: var(--color-white);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-modal);
+    animation: modalFadeIn 0.25s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.96);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.modal-close-btn {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+    color: var(--color-text-muted);
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.modal-close-btn:hover {
+    background-color: var(--color-bg-light);
+    color: var(--color-text-dark);
+}
+
