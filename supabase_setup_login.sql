@@ -76,7 +76,7 @@ VALUES
   (
     '217784255',
     '21.778.425-5',
-    'seba123',
+    '[INGRESAR_PASSWORD_HASH]',
     'Sebastián',
     'sebastianmotox21@gmail.com',
     'STUDENT',

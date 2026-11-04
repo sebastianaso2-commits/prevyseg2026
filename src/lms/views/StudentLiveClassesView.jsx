@@ -114,7 +114,7 @@ export const StudentLiveClassesView = ({ currentUser, onSelectCourse }) => {
     return {
       zoomUrl: 'https://zoom.us/j/84920194821',
       meetingId: '849 2019 4821',
-      passcode: 'PrevySeg2026',
+      passcode: 'SALA-VIRTUAL',
       isLiveNow: true,
       title: 'Clase Nº 7: Legislación de Seguridad Privada y Nueva Ley Nº 21.659',
       module: 'Módulo 2: Marco Jurídico y Derechos Humanos',
@@ -168,7 +168,7 @@ export const StudentLiveClassesView = ({ currentUser, onSelectCourse }) => {
       meetingLinks: {
         zoomUrl: 'https://zoom.us/j/84920194821',
         meetingId: '849 2019 4821',
-        passcode: 'PrevySeg2026',
+        passcode: 'SALA-VIRTUAL',
         meetUrl: 'https://meet.google.com/qwa-prevyseg-2026',
         jitsiUrl: 'https://meet.jit.si/PrevySeg-AulaVirtual-OS10-2026'
       },

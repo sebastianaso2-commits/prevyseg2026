@@ -36,11 +36,11 @@ if (empty($username) || empty($password)) {
  * Ejemplo de validación básica:
  */
 
-// USUARIO DE PRUEBA (Reemplazar con tu consulta a base de datos)
-$usuario_valido = 'admin';
-$password_valida = 'admin123';
+// Validación segura con variables de entorno del servidor (o consulta a base de datos)
+$usuario_valido = getenv('PREVYSEG_ADMIN_USER');
+$password_valida = getenv('PREVYSEG_ADMIN_PASS');
 
-if ($username === $usuario_valido && $password === $password_valida) {
+if (!empty($usuario_valido) && !empty($password_valida) && $username === $usuario_valido && hash_equals($password_valida, $password)) {
     // Autenticación correcta: iniciamos sesión
     $_SESSION['usuario_autenticado'] = true;
     $_SESSION['usuario_nombre'] = $username;

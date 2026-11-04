@@ -413,10 +413,50 @@ export const PlatformModal = ({ isOpen, onClose, onLoginSuccess, initialMode = '
     }
   };
 
-  const handleFillDemo = (demoUser, demoPass) => {
-    setRut(formatRut(demoUser) || demoUser);
-    setPassword(demoPass);
+  const handleDemoRoleLogin = (roleKey) => {
     setError('');
+    let demoUser = null;
+    let targetTab = 'area-personal';
+
+    if (roleKey === 'ADMIN') {
+      demoUser = {
+        id: 'demo-admin-viviane',
+        rut: '15.692.858-5',
+        nombre: 'Viviane Montesillo',
+        email: 'viviane.montesillo@prevyseg.cl',
+        rol: 'ADMIN',
+        cargo: 'Directora OTEC Prevyseg'
+      };
+      targetTab = 'ajustes-sitio';
+    } else if (roleKey === 'TEACHER') {
+      demoUser = {
+        id: 'demo-teacher-carlos',
+        rut: '12.345.678-5',
+        nombre: 'Prof. Carlos Mendoza Riquelme',
+        email: 'carlos.mendoza@prevyseg.cl',
+        rol: 'TEACHER',
+        cargo: 'Docente Instructor SPD & OS-10'
+      };
+      targetTab = 'interaccion-materiales';
+    } else if (roleKey === 'EMPRESA') {
+      demoUser = {
+        id: 'demo-employer-mineria',
+        rut: '76.543.210-K',
+        nombre: 'Minería & Logística del Norte S.A.',
+        email: 'contacto@mineralogistica.cl',
+        rol: 'EMPRESA',
+        cargo: 'Gerencia de Selección & RRHH • Empresa Verificada'
+      };
+      targetTab = 'mis-ofertas';
+    }
+
+    if (demoUser) {
+      localStorage.setItem('prevyseg_lms_user', JSON.stringify(demoUser));
+      if (onLoginSuccess) {
+        onLoginSuccess(demoUser, targetTab);
+      }
+      onClose();
+    }
   };
 
   return (
@@ -557,31 +597,31 @@ export const PlatformModal = ({ isOpen, onClose, onLoginSuccess, initialMode = '
                 {/* 1. Administrador */}
                 <button
                   type="button"
-                  onClick={() => handleFillDemo('15692858-5', '15692858')}
+                  onClick={() => handleDemoRoleLogin('ADMIN')}
                   className="text-left text-purple-700 hover:text-purple-900 flex justify-between items-center cursor-pointer p-2 rounded-lg hover:bg-purple-50 border border-purple-200 transition-colors"
                 >
                   <span className="font-semibold">👑 Viviane Montesillo (ADMINISTRADOR OTEC)</span>
-                  <span className="font-mono text-slate-500 text-[10px]">15.692.858-5</span>
+                  <span className="font-mono text-slate-500 text-[10px]">Acceso 1-Click</span>
                 </button>
 
                 {/* 2. Profesor / Docente Instructor */}
                 <button
                   type="button"
-                  onClick={() => handleFillDemo('12345678-5', 'profesor2026')}
+                  onClick={() => handleDemoRoleLogin('TEACHER')}
                   className="text-left text-sky-700 hover:text-sky-900 flex justify-between items-center cursor-pointer p-2 rounded-lg hover:bg-sky-50 border border-sky-200 transition-colors"
                 >
                   <span className="font-semibold">👨‍🏫 Prof. Carlos Mendoza (DOCENTE INSTRUCTOR)</span>
-                  <span className="font-mono text-slate-500 text-[10px]">12.345.678-5</span>
+                  <span className="font-mono text-slate-500 text-[10px]">Acceso 1-Click</span>
                 </button>
 
                 {/* 3. Empresa / Empleador */}
                 <button
                   type="button"
-                  onClick={() => handleFillDemo('76543210-K', 'prevyseg2026')}
+                  onClick={() => handleDemoRoleLogin('EMPRESA')}
                   className="text-left text-amber-700 hover:text-amber-900 flex justify-between items-center cursor-pointer p-2 rounded-lg hover:bg-amber-50 border border-amber-200 transition-colors"
                 >
                   <span className="font-semibold">🏢 Minería & Logística del Norte (EMPRESA / EMPLEADOR)</span>
-                  <span className="font-mono text-slate-500 text-[10px]">76.543.210-K</span>
+                  <span className="font-mono text-slate-500 text-[10px]">Acceso 1-Click</span>
                 </button>
 
               </div>

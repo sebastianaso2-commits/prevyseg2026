@@ -7,26 +7,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const SUPABASE_ANON_KEY = 'sb_publishable__6Wz6iIQr9iWg4aL0PRfhg_geJLzXLw';
 
     // ====================================================
-    // TABLA DE USUARIOS LOCALES (sincronizada con Supabase)
-    // Agrega aquí cada usuario que debe poder ingresar.
-    // rut: solo dígitos y K mayúscula
-    // ====================================================
-    const USUARIOS_LOCALES = [
-        {
-            rut: '217784255',
-            rut_formatted: '21.778.425-5',
-            password: 'seba123',
-            nombre: 'Sebastián',
-            email: 'sebastianmotox21@gmail.com',
-            rol: 'STUDENT',
-            cargo: 'Estudiante Activo • Técnicas de operación CCTV y alarmas',
-            user_id: 'b48995f6-6aec-4e86-813b-22524cc2f769'
-        }
-        // Para agregar más usuarios copia este bloque:
-        // { rut: '182345678', rut_formatted: '18.234.567-8', password: 'su_clave', nombre: 'Carlos Muñoz Rivera', email: '', rol: 'STUDENT', cargo: 'Estudiante Activo', user_id: '' }
-    ];
-
-    // ====================================================
     // Funciones de formateo de RUT
     // ====================================================
     function cleanRut(rut) {
@@ -180,11 +160,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (!candidateEmails.includes(sEmail)) candidateEmails.push(sEmail);
                 }
 
-                // 3. Armar lista de contraseñas candidatas
+                // 3. Armar lista de contraseñas candidatas (la ingresada o RUT como clave inicial)
                 const candidatePasswords = [rawPass];
-                if (clean === '217784255') {
-                    ['seba123', 'seba'].forEach(p => { if (!candidatePasswords.includes(p)) candidatePasswords.push(p); });
-                }
                 if (clean) {
                     [clean, formatted].forEach(p => { if (!candidatePasswords.includes(p)) candidatePasswords.push(p); });
                 }
@@ -210,7 +187,7 @@ document.addEventListener('DOMContentLoaded', () => {
                                     authenticatedUser = {
                                         id: authData.user.id,
                                         rut: dbStudent?.rut || meta.rut || formatted || rawUser,
-                                        nombre: dbStudent?.nombre || ((meta.nombre && !meta.nombre.includes('@')) ? meta.nombre : 'Sebastián'),
+                                        nombre: dbStudent?.nombre || ((meta.nombre && !meta.nombre.includes('@')) ? meta.nombre : 'Estudiante PrevySeg'),
                                         email: dbStudent?.email || authData.user.email,
                                         rol: meta.rol || 'STUDENT',
                                         cargo: `Estudiante Activo • ${dbStudent?.curso_nombre || 'Técnicas de operación CCTV y alarmas'}`
@@ -229,7 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // 5. Validación con la base de datos si el estudiante existe en escuela_seguridad
                 if (!authenticatedUser && dbStudent) {
                     const validPass = candidatePasswords.some(cp =>
-                        cp === rawPass || cp === 'seba123' || cp === clean || cp === formatted
+                        cp === rawPass || cp === clean || cp === formatted
                     );
                     if (validPass) {
                         authenticatedUser = {
@@ -242,21 +219,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         };
                         authToken = 'db_session_' + Date.now();
                         console.log('[SUPABASE BD] ✅ Autenticado directamente contra registro de escuela_seguridad');
-                    }
-                }
-
-                // 6. Respaldo garantizado para la cuenta de Sebastián
-                if (!authenticatedUser && (clean === '217784255' || rawUser.toLowerCase().includes('sebastian'))) {
-                    if (rawPass.toLowerCase() === 'seba123' || rawPass === '217784255') {
-                        authenticatedUser = {
-                            id: 'b48995f6-6aec-4e86-813b-22524cc2f769',
-                            rut: '21.778.425-5',
-                            nombre: 'Sebastián',
-                            email: 'sebastianmotox21@gmail.com',
-                            rol: 'STUDENT',
-                            cargo: 'Estudiante Activo • Técnicas de operación CCTV y alarmas'
-                        };
-                        authToken = 'local_session_' + Date.now();
                     }
                 }
 

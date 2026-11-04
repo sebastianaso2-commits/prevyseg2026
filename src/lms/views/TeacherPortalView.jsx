@@ -105,7 +105,7 @@ const TeacherPortalView = ({ currentUser, onSelectCourse, activeTab: propActiveT
     return {
       zoomUrl: 'https://zoom.us/j/84920194821',
       meetingId: '849 2019 4821',
-      passcode: 'PrevySeg2026',
+      passcode: 'SALA-VIRTUAL',
       isLiveNow: true,
       title: 'Clase Nº 7: Legislación de Seguridad Privada y Nueva Ley Nº 21.659',
       module: 'Módulo 2: Marco Jurídico y Derechos Humanos',
@@ -939,7 +939,7 @@ const TeacherPortalView = ({ currentUser, onSelectCourse, activeTab: propActiveT
                         value={zoomConfig.passcode}
                         onChange={(e) => setZoomConfig({ ...zoomConfig, passcode: e.target.value })}
                         className="w-full bg-slate-50 border border-slate-300 rounded-xl px-3.5 py-2.5 text-xs text-slate-900 font-mono font-bold focus:outline-none focus:border-sky-500 focus:bg-white"
-                        placeholder="PrevySeg2026"
+                        placeholder="SALA-VIRTUAL"
                       />
                     </div>
                   </div>
