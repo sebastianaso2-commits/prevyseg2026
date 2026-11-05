@@ -1,27 +1,5 @@
 export const UNIFIED_TEACHERS_TEAM = [
   {
-    area: "Dirección OTEC",
-    nombre: "Carolina Cataldo Ayala",
-    cargo: "Directora OTEC",
-    resena: "Ingeniera Comercial, Universidad de Tarapacá. 15 años de experiencia en formulación y gestión de proyectos públicos y privados. Diplomada en Formulación de Proyectos, Diplomado Gestión de Seguridad Privada.",
-    name: "Carolina Cataldo Ayala",
-    role: "Directora OTEC • Dirección General",
-    badge: "Directora OTEC",
-    credentials: "Ingeniera Comercial, UTA • Diplomada en Gestión de Seguridad Privada",
-    bio: "Ingeniera Comercial, Universidad de Tarapacá. 15 años de experiencia en formulación y gestión de proyectos públicos y privados. Diplomada en Formulación de Proyectos, Diplomado Gestión de Seguridad Privada."
-  },
-  {
-    area: "DDHH · Género · Normativa",
-    nombre: "Giovana Barbagelata J.",
-    cargo: "Relatora",
-    resena: "Abogada, UTA — Magíster Gerencia y Políticas Públicas (UBO) — Máster en Género y Derecho (España).",
-    name: "Giovana Barbagelata J.",
-    role: "Relatora • DDHH, Género y Normativa",
-    badge: "Abogada UTA",
-    credentials: "Magíster Gerencia y Políticas Públicas (UBO) • Máster en Género y Derecho (España)",
-    bio: "Abogada, UTA — Magíster Gerencia y Políticas Públicas (UBO) — Máster en Género y Derecho (España)."
-  },
-  {
     area: "Legislación · Administración · Ética",
     nombre: "Ignacio Mamani N.",
     cargo: "Relator",
