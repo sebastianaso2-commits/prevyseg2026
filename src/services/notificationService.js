@@ -35,7 +35,60 @@ export const generatePaymentQrUrl = () => {
 };
 
 /**
- * 3. Construye el enlace directo a WhatsApp (+56 9 7869 1869) con la ficha formateada
+ * 3. Genera el bloque HTML idéntico con el boceto oficial de "DATOS DE TRANSFERENCIA BANCARIA" y código QR.
+ * Este mismo apartado y boceto visual se incluye tanto en el correo del cliente como en el de la empresa.
+ */
+export const generateOfficialTransferHtmlBlock = (abonoMonto = null) => {
+  const qrUrl = generatePaymentQrUrl();
+  const abonoText = abonoMonto ? ` (Abono 50% de Reserva: $${Number(abonoMonto).toLocaleString('es-CL')} CLP)` : '';
+
+  return `
+    <div style="background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 16px; padding: 24px; margin: 24px 0; border: 1px solid #cbd5e1; text-align: center;">
+      <span style="display: inline-block; background-color: #1b3761; color: #ffffff; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 5px 14px; border-radius: 6px; margin-bottom: 12px;">
+        Datos Oficiales de Transferencia Bancaria
+      </span>
+      <h3 style="margin: 0 0 16px 0; color: #161630; font-size: 18px; font-weight: 800;">
+        Abono de Reserva / Matrícula${abonoText}
+      </h3>
+
+      <table align="center" border="0" cellpadding="8" cellspacing="0" style="font-size: 13px; color: #334155; text-align: left; margin: 0 auto 18px auto; max-width: 460px; width: 100%; background-color: #ffffff; border-radius: 10px; border: 1px solid #cbd5e1;">
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="font-weight: 700; color: #64748b; padding: 8px 12px; width: 38%;">Razón Social:</td>
+          <td style="font-weight: 800; color: #0f172a; padding: 8px 12px;">${PREVYSEG_COMPANY_INFO.nombre}</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="font-weight: 700; color: #64748b; padding: 8px 12px;">RUT:</td>
+          <td style="font-weight: 800; color: #0f172a; padding: 8px 12px; font-family: monospace;">${PREVYSEG_COMPANY_INFO.rut}</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="font-weight: 700; color: #64748b; padding: 8px 12px;">Tipo de Cuenta:</td>
+          <td style="font-weight: 800; color: #0f172a; padding: 8px 12px;">${PREVYSEG_COMPANY_INFO.tipoCuenta}</td>
+        </tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="font-weight: 700; color: #64748b; padding: 8px 12px;">N° de Cuenta:</td>
+          <td style="font-weight: 800; color: #0284c7; padding: 8px 12px; font-family: monospace; font-size: 15px;">${PREVYSEG_COMPANY_INFO.numeroCuenta}</td>
+        </tr>
+        <tr>
+          <td style="font-weight: 700; color: #64748b; padding: 8px 12px;">Correo Comprobante:</td>
+          <td style="font-weight: 800; color: #0f172a; padding: 8px 12px;">${PREVYSEG_COMPANY_INFO.email}</td>
+        </tr>
+      </table>
+
+      <!-- IMAGEN DEL QR ESCANEABLE -->
+      <div style="background-color: #ffffff; padding: 14px; border-radius: 14px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.06); border: 2px solid #0284c7; margin-bottom: 8px;">
+        <img src="${qrUrl}" alt="Código QR Datos de Pago PrevySeg" width="180" height="180" style="display: block; margin: 0 auto; border-radius: 8px;" />
+        <span style="font-size: 10px; font-weight: 700; color: #64748b; display: block; margin-top: 6px;">📲 Escanea con tu cámara o app bancaria</span>
+      </div>
+
+      <p style="font-size: 11px; color: #64748b; margin: 12px 0 0 0;">
+        * Al transferir, incluye en el asunto tu <strong>Nombre y RUT</strong> para acreditar tu reserva de inmediato.
+      </p>
+    </div>
+  `;
+};
+
+/**
+ * 4. Construye el enlace directo a WhatsApp (+56 9 7869 1869) con la ficha formateada
  */
 export const buildWhatsAppEnrollmentUrl = (data = {}) => {
   const {
@@ -89,17 +142,22 @@ export const buildWhatsAppEnrollmentUrl = (data = {}) => {
 };
 
 /**
- * 4. Genera la plantilla HTML del correo para el alumno (con QR escaneable)
+ * 5. Genera la plantilla HTML del correo para el alumno (con QR escaneable y boceto oficial)
  */
 export const buildStudentEmailHtml = (data = {}) => {
   const {
     nombre = 'Estimado/a Alumno/a',
     courseName = 'Curso Oficial OTEC PrevySeg',
     rut = '',
+    telefono = '',
+    ciudad = '',
+    region = '',
+    cuota1 = null,
+    precioTotal = null,
     codigoSolicitud = 'PS-' + Math.floor(100000 + Math.random() * 900000)
   } = data;
 
-  const qrUrl = generatePaymentQrUrl();
+  const abonoCalc = cuota1 || (precioTotal ? Math.round(precioTotal / 2) : 70000);
 
   return `
 <!DOCTYPE html>
@@ -139,7 +197,7 @@ export const buildStudentEmailHtml = (data = {}) => {
         <!-- CAJA DEL CURSO -->
         <div style="background-color: #f8fafc; border-left: 4px solid #0a969b; border-radius: 8px; padding: 14px 18px; margin: 18px 0;">
           <span style="font-size: 11px; font-weight: 700; color: #0a969b; text-transform: uppercase; display: block; margin-bottom: 4px;">Programa Académico Seleccionado</span>
-          <span style="font-size: 16px; font-weight: 800; color: #161630;">${courseName}</span>
+          <span style="font-size: 17px; font-weight: 800; color: #161630;">${courseName}</span>
         </div>
 
         <!-- AVISO DE CONTACTO RÁPIDO -->
@@ -149,47 +207,16 @@ export const buildStudentEmailHtml = (data = {}) => {
           </p>
         </div>
 
-        <!-- SECCIÓN DE PAGO CON QR ESCANEABLE -->
-        <div style="background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%); border-radius: 16px; padding: 24px; margin: 24px 0; border: 1px solid #cbd5e1; text-align: center;">
-          <span style="display: inline-block; background-color: #1b3761; color: #ffffff; font-size: 11px; font-weight: 800; text-transform: uppercase; letter-spacing: 1px; padding: 4px 12px; border-radius: 6px; margin-bottom: 12px;">
-            Datos Oficiales de Transferencia Bancaria
-          </span>
-          <h3 style="margin: 0 0 16px 0; color: #161630; font-size: 18px; font-weight: 800;">
-            Abono de Reserva / Matrícula
-          </h3>
+        <!-- SECCIÓN DE PAGO CON QR ESCANEABLE (BOCETO OFICIAL) -->
+        ${generateOfficialTransferHtmlBlock(abonoCalc)}
 
-          <table align="center" border="0" cellpadding="6" cellspacing="0" style="font-size: 13px; color: #334155; text-align: left; margin: 0 auto 18px auto; max-width: 440px; width: 100%;">
-            <tr style="border-bottom: 1px solid #cbd5e1;">
-              <td style="font-weight: 700; color: #64748b; padding: 6px 8px;">Razón Social:</td>
-              <td style="font-weight: 800; color: #0f172a; padding: 6px 8px;">${PREVYSEG_COMPANY_INFO.nombre}</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #cbd5e1;">
-              <td style="font-weight: 700; color: #64748b; padding: 6px 8px;">RUT:</td>
-              <td style="font-weight: 800; color: #0f172a; padding: 6px 8px; font-family: monospace;">${PREVYSEG_COMPANY_INFO.rut}</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #cbd5e1;">
-              <td style="font-weight: 700; color: #64748b; padding: 6px 8px;">Tipo de Cuenta:</td>
-              <td style="font-weight: 800; color: #0f172a; padding: 6px 8px;">${PREVYSEG_COMPANY_INFO.tipoCuenta}</td>
-            </tr>
-            <tr style="border-bottom: 1px solid #cbd5e1;">
-              <td style="font-weight: 700; color: #64748b; padding: 6px 8px;">N° de Cuenta:</td>
-              <td style="font-weight: 800; color: #0284c7; padding: 6px 8px; font-family: monospace; font-size: 15px;">${PREVYSEG_COMPANY_INFO.numeroCuenta}</td>
-            </tr>
-            <tr>
-              <td style="font-weight: 700; color: #64748b; padding: 6px 8px;">Correo Comprobante:</td>
-              <td style="font-weight: 800; color: #0f172a; padding: 6px 8px;">${PREVYSEG_COMPANY_INFO.email}</td>
-            </tr>
-          </table>
-
-          <!-- IMAGEN DEL QR ESCANEABLE -->
-          <div style="background-color: #ffffff; padding: 14px; border-radius: 14px; display: inline-block; box-shadow: 0 4px 10px rgba(0,0,0,0.06); border: 2px solid #0284c7; margin-bottom: 8px;">
-            <img src="${qrUrl}" alt="Código QR Datos de Pago PrevySeg" width="180" height="180" style="display: block; margin: 0 auto; border-radius: 8px;" />
-            <span style="font-size: 10px; font-weight: 700; color: #64748b; display: block; margin-top: 6px;">📲 Escanea con tu cámara o app bancaria</span>
-          </div>
-
-          <p style="font-size: 11px; color: #64748b; margin: 12px 0 0 0;">
-            * Al transferir, incluye en el asunto tu <strong>Nombre y RUT</strong> para acreditar tu reserva de inmediato.
-          </p>
+        <!-- REQUISITOS DOCUMENTALES -->
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin: 20px 0; font-size: 12px; color: #334155; line-height: 1.6;">
+          <strong style="color: #0f172a; display: block; margin-bottom: 6px; font-size: 13px;">📋 Recordatorio de Documentos Exigidos:</strong>
+          <ul style="margin: 0; padding-left: 18px;">
+            <li><strong>En OTEC PrevySeg:</strong> Certificado de antecedentes (Fines Especiales) y Certificado de estudios (Licencia de Enseñanza Media).</li>
+            <li><strong>En plataforma de la SPD:</strong> Exámenes médicos, informe psicotécnico y cédula de identidad se gestionan en la plataforma oficial de la Subsecretaría de Prevención del Delito.</li>
+          </ul>
         </div>
 
         <!-- BOTÓN DIRECTO DE WHATSAPP -->
@@ -227,7 +254,8 @@ export const buildStudentEmailHtml = (data = {}) => {
 };
 
 /**
- * 5. Genera la plantilla HTML del correo para la empresa (notificación interna a prevyseg.capacitaciones@gmail.com)
+ * 6. Genera la plantilla HTML del correo para la empresa (notificación interna a prevyseg.capacitaciones@gmail.com)
+ * Incluye el resumen completo del postulante Y EL MISMO BOCETO de "DATOS OFICIALES DE TRANSFERENCIA" con QR.
  */
 export const buildCompanyEmailHtml = (data = {}) => {
   const {
@@ -237,6 +265,10 @@ export const buildCompanyEmailHtml = (data = {}) => {
     telefono = 'Sin teléfono',
     region = '',
     ciudad = '',
+    domicilio = '',
+    observaciones = '',
+    cuota1 = null,
+    precioTotal = null,
     courseName = 'Curso No especificado',
     codigoSolicitud = 'PS-' + Math.floor(100000 + Math.random() * 900000)
   } = data;
@@ -250,6 +282,8 @@ export const buildCompanyEmailHtml = (data = {}) => {
     minute: '2-digit'
   });
 
+  const abonoCalc = cuota1 || (precioTotal ? Math.round(precioTotal / 2) : 70000);
+
   return `
 <!DOCTYPE html>
 <html lang="es">
@@ -258,53 +292,89 @@ export const buildCompanyEmailHtml = (data = {}) => {
   <title>Nueva Inscripción Web - PrevySeg OTEC</title>
 </head>
 <body style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background-color: #f1f5f9; padding: 20px; color: #0f172a;">
-  <div style="max-width: 600px; margin: 0 auto; background-color: #ffffff; border-radius: 16px; overflow: hidden; border: 1px solid #cbd5e1; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+  <div style="max-width: 620px; margin: 0 auto; background-color: #ffffff; border-radius: 18px; overflow: hidden; border: 1px solid #cbd5e1; box-shadow: 0 6px 20px rgba(0,0,0,0.06);">
     
-    <div style="background-color: #161630; padding: 24px; color: #ffffff;">
-      <span style="background-color: #0a969b; color: #ffffff; font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 4px 10px; border-radius: 4px;">
-        Alerta de Admisiones
+    <!-- HEADER EMPRESA -->
+    <div style="background: linear-gradient(135deg, #161630 0%, #1b3761 100%); padding: 26px; color: #ffffff;">
+      <span style="background-color: #0a969b; color: #ffffff; font-size: 10px; font-weight: 800; text-transform: uppercase; padding: 4px 10px; border-radius: 4px; letter-spacing: 1px;">
+        Alerta de Admisiones PrevySeg
       </span>
-      <h2 style="margin: 10px 0 0 0; font-size: 20px;">Nueva Ficha de Inscripción Registrada</h2>
-      <p style="margin: 4px 0 0 0; font-size: 12px; color: #94a3b8;">Código: ${codigoSolicitud} • Fecha: ${fechaStr}</p>
+      <h2 style="margin: 10px 0 0 0; font-size: 21px; font-weight: 800;">
+        ¡Nueva Ficha de Inscripción Web Confirmada!
+      </h2>
+      <p style="margin: 6px 0 0 0; font-size: 12px; color: #94a3b8;">
+        Código: <strong style="color: #00FFE0; font-family: monospace;">${codigoSolicitud}</strong> • Fecha: ${fechaStr}
+      </p>
     </div>
 
-    <div style="padding: 24px;">
-      <h3 style="color: #0284c7; font-size: 15px; margin-top: 0; border-bottom: 2px solid #e2e8f0; padding-bottom: 6px;">
-        🎓 Programa Solicitado: ${courseName}
-      </h3>
+    <div style="padding: 26px;">
+      
+      <!-- PROGRAMA SOLICITADO -->
+      <div style="background-color: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 14px 18px; margin-bottom: 20px;">
+        <span style="font-size: 11px; font-weight: 700; color: #166534; text-transform: uppercase; display: block; margin-bottom: 2px;">Programa Académico Solicitado:</span>
+        <span style="font-size: 17px; font-weight: 800; color: #0f172a;">${courseName}</span>
+      </div>
 
-      <table border="0" cellpadding="8" cellspacing="0" width="100%" style="font-size: 13px; color: #1e293b; background-color: #f8fafc; border-radius: 8px; margin: 16px 0;">
-        <tr>
+      <!-- TABLA DETALLADA DEL POSTULANTE -->
+      <table border="0" cellpadding="8" cellspacing="0" width="100%" style="font-size: 13px; color: #1e293b; background-color: #f8fafc; border-radius: 10px; border: 1px solid #e2e8f0; margin-bottom: 20px;">
+        <tr style="border-bottom: 1px solid #e2e8f0;">
           <td style="font-weight: 700; width: 35%; color: #64748b;">Postulante:</td>
-          <td style="font-weight: 800; font-size: 14px;">${nombre}</td>
+          <td style="font-weight: 800; font-size: 14px; color: #0f172a;">${nombre}</td>
         </tr>
-        <tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
           <td style="font-weight: 700; color: #64748b;">RUT:</td>
-          <td style="font-family: monospace; font-weight: 700;">${rut}</td>
+          <td style="font-family: monospace; font-weight: 800; color: #0284c7;">${rut}</td>
         </tr>
-        <tr>
-          <td style="font-weight: 700; color: #64748b;">Teléfono:</td>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="font-weight: 700; color: #64748b;">Teléfono / WhatsApp:</td>
           <td><a href="tel:${telefono}" style="color: #0284c7; font-weight: 700;">${telefono}</a></td>
         </tr>
-        <tr>
-          <td style="font-weight: 700; color: #64748b;">Correo:</td>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="font-weight: 700; color: #64748b;">Correo Electrónico:</td>
           <td><a href="mailto:${email}" style="color: #0284c7; font-weight: 700;">${email}</a></td>
         </tr>
-        <tr>
+        <tr style="border-bottom: 1px solid #e2e8f0;">
           <td style="font-weight: 700; color: #64748b;">Ubicación:</td>
           <td>${ciudad}, ${region}</td>
         </tr>
+        ${domicilio ? `
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="font-weight: 700; color: #64748b;">Domicilio Particular:</td>
+          <td>${domicilio}</td>
+        </tr>
+        ` : ''}
+        ${observaciones ? `
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="font-weight: 700; color: #64748b;">Consultas / Buzón:</td>
+          <td style="font-style: italic; color: #475569;">"${observaciones}"</td>
+        </tr>
+        ` : ''}
         <tr>
           <td style="font-weight: 700; color: #64748b;">Declaración Jurada:</td>
           <td style="color: #166534; font-weight: 700;">Aceptada ✓ (Requisitos OTEC y SPD)</td>
         </tr>
       </table>
 
-      <div style="margin-top: 20px; text-align: center;">
-        <a href="https://wa.me/56${String(telefono).replace(/[^0-9]/g, '')}?text=Hola%20${encodeURIComponent(nombre)},%20te%20contactamos%20de%20OTEC%20PrevySeg%20respecto%20a%20tu%20inscripci%C3%B3n%20para%20${encodeURIComponent(courseName)}." target="_blank" style="display: inline-block; background-color: #10b981; color: #ffffff; text-decoration: none; font-size: 13px; font-weight: 800; padding: 12px 20px; border-radius: 10px;">
-          📲 Contactar al Alumno por WhatsApp
+      <!-- AVISO DE BOCETO OFICIAL ENVIADO AL CLIENTE -->
+      <div style="background-color: #f1f5f9; border-left: 4px solid #0284c7; padding: 12px 16px; border-radius: 8px; margin-bottom: 16px; font-size: 12px; color: #334155; line-height: 1.5;">
+        📌 <strong>Copia del Boceto Oficial Entregado al Cliente:</strong> El siguiente apartado de datos bancarios oficiales de PREVYSEG SPA y código QR escaneable fue enviado idénticamente al correo de <strong>${email}</strong> para la acreditación de su vacante.
+      </div>
+
+      <!-- EL MISMO BOCETO DE DATOS OFICIALES DE TRANSFERENCIA CON QR -->
+      ${generateOfficialTransferHtmlBlock(abonoCalc)}
+
+      <!-- BOTÓN DIRECTO PARA CONTACTAR AL ALUMNO POR WHATSAPP -->
+      <div style="margin-top: 24px; text-align: center;">
+        <a href="https://wa.me/56${String(telefono).replace(/[^0-9]/g, '')}?text=Hola%20${encodeURIComponent(nombre)},%20te%20contactamos%20de%20OTEC%20PrevySeg%20respecto%20a%20tu%20inscripci%C3%B3n%20para%20${encodeURIComponent(courseName)}." target="_blank" style="display: inline-block; background-color: #10b981; color: #ffffff; text-decoration: none; font-size: 14px; font-weight: 800; padding: 14px 26px; border-radius: 12px; box-shadow: 0 4px 12px rgba(16,185,129,0.25);">
+          📲 Contactar al Alumno por WhatsApp (${telefono})
         </a>
       </div>
+
+    </div>
+
+    <!-- FOOTER EMPRESA -->
+    <div style="background-color: #0f172a; padding: 20px; text-align: center; color: #94a3b8; font-size: 11px;">
+      Central OTEC PrevySeg • Blanco Encalada #666, Arica • prevyseg.capacitaciones@gmail.com
     </div>
 
   </div>
@@ -314,7 +384,7 @@ export const buildCompanyEmailHtml = (data = {}) => {
 };
 
 /**
- * 6. Despachador principal con soporte para Resend (Opción A)
+ * 7. Despachador principal con soporte para Resend (Opción A)
  * Envía tanto al alumno como a prevyseg.capacitaciones@gmail.com
  */
 export const dispatchEnrollmentEmails = async (enrollmentData = {}) => {
@@ -327,13 +397,13 @@ export const dispatchEnrollmentEmails = async (enrollmentData = {}) => {
   const payload = {
     studentEmail: targetEmail,
     companyEmail: PREVYSEG_COMPANY_INFO.email,
-    courseName: enrollmentData.courseName || 'Curso de Seguridad Privada',
+    courseName: enrollmentData.courseName || 'Curso de Capacitación PrevySeg',
     studentHtml,
     companyHtml,
     studentName: enrollmentData.nombre || 'Postulante'
   };
 
-  // 1. Intentar llamar al endpoint API si está disponible en Vercel o backend
+  // 1. Intentar llamar al endpoint API (Vercel Serverless o Vite Dev Server Middleware)
   try {
     const apiResponse = await fetch('/api/send-enrollment-email', {
       method: 'POST',
@@ -342,35 +412,39 @@ export const dispatchEnrollmentEmails = async (enrollmentData = {}) => {
     });
 
     if (apiResponse.ok) {
-      const jsonRes = await apiResponse.json();
-      console.log('[NOTIFICACIONES] ✅ Correos enviados vía /api/send-enrollment-email:', jsonRes);
-      return { success: true, via: 'api', result: jsonRes };
+      const contentType = apiResponse.headers.get('content-type') || '';
+      if (contentType.includes('application/json')) {
+        const jsonRes = await apiResponse.json();
+        console.log('[NOTIFICACIONES] ✅ Correos enviados vía /api/send-enrollment-email:', jsonRes);
+        return { success: true, via: 'api', result: jsonRes };
+      }
     }
   } catch (apiErr) {
-    // Si no está corriendo el backend /api (ej. dev local estático), continuar con fallback
-    console.warn('[NOTIFICACIONES] Endpoint /api no disponible, usando despachador alternativo:', apiErr.message);
+    console.warn('[NOTIFICACIONES] Endpoint /api no disponible, probando despacho directo:', apiErr.message);
   }
 
-  // 2. Si se configuró VITE_RESEND_API_KEY directamente en el cliente
-  if (resendApiKey) {
+  // 2. Si se configuró VITE_RESEND_API_KEY en el cliente
+  if (resendApiKey && resendApiKey !== 're_tu_clave_aqui') {
     try {
       // Envío al alumno
-      const resStudent = await fetch('https://api.resend.com/emails', {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${resendApiKey}`,
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          from: 'PrevySeg Capacitaciones <onboarding@resend.dev>',
-          to: [targetEmail],
-          subject: `Ficha Recibida y Datos de Pago • ${enrollmentData.courseName || 'OTEC PrevySeg'}`,
-          html: studentHtml
-        })
-      });
+      if (targetEmail) {
+        await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${resendApiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            from: 'PrevySeg Capacitaciones <onboarding@resend.dev>',
+            to: [targetEmail],
+            subject: `Ficha Recibida y Datos de Pago • ${enrollmentData.courseName || 'OTEC PrevySeg'}`,
+            html: studentHtml
+          })
+        });
+      }
 
       // Envío a la empresa
-      const resCompany = await fetch('https://api.resend.com/emails', {
+      await fetch('https://api.resend.com/emails', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${resendApiKey}`,
@@ -379,7 +453,7 @@ export const dispatchEnrollmentEmails = async (enrollmentData = {}) => {
         body: JSON.stringify({
           from: 'PrevySeg Sistema Web <onboarding@resend.dev>',
           to: [PREVYSEG_COMPANY_INFO.email],
-          subject: `[NUEVA INSCRIPCIÓN] - ${enrollmentData.nombre} - ${enrollmentData.courseName || 'Curso'}`,
+          subject: `[NUEVA INSCRIPCIÓN] - ${enrollmentData.nombre || 'Postulante'} - ${enrollmentData.courseName || 'Curso'}`,
           html: companyHtml
         })
       });
@@ -400,4 +474,3 @@ export const dispatchEnrollmentEmails = async (enrollmentData = {}) => {
 
   return { success: true, via: 'queued' };
 };
-

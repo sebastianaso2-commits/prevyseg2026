@@ -713,15 +713,19 @@ const EnrollmentForm = ({
           }
         }
         // Despachar correos automáticos (Opción A: Resend) con datos bancarios y QR tanto al alumno como a prevyseg.capacitaciones@gmail.com
-        dispatchEnrollmentEmails({
+        await dispatchEnrollmentEmails({
           nombre: formData.nombre.trim(),
           rut: formattedRut,
           email: formData.email.trim(),
           telefono: formData.telefono.trim(),
           region: formData.region,
           ciudad: effectiveCity,
+          domicilio: formData.domicilio?.trim() || '',
           courseName: currentCourse.name,
-          codigoSolicitud: generatedCode
+          codigoSolicitud: generatedCode,
+          observaciones: formData.observaciones?.trim() || '',
+          cuota1: cuota1Amount,
+          precioTotal: totalAmount
         }).catch(errNotif => console.warn('[NOTIFICACIONES] Aviso:', errNotif));
       }
 

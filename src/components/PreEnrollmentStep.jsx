@@ -183,7 +183,9 @@ export const PreEnrollmentStep = ({
       region: formData.region,
       ciudad: effectiveCity,
       courseName: selectedCourse?.name || defaultCourseName || 'Curso de Capacitación',
-      codigoSolicitud: generatedCode
+      codigoSolicitud: generatedCode,
+      cuota1: Math.round((selectedCourse?.price || 140000) / 2),
+      precioTotal: selectedCourse?.price || 140000
     };
 
     try {
