@@ -667,6 +667,26 @@ const EnrollmentForm = ({
     setEnrollmentCode(generatedCode);
 
     try {
+      // Redirección automática inmediata al WhatsApp oficial (+56 9 7869 1869) con toda la información
+      const targetWhatsAppUrl = buildWhatsAppEnrollmentUrl({
+        nombre: formData.nombre.trim(),
+        rut: formattedRut,
+        email: formData.email.trim(),
+        telefono: formData.telefono.trim(),
+        region: formData.region,
+        ciudad: effectiveCity,
+        courseName: currentCourse.name,
+        codigoSolicitud: generatedCode
+      });
+
+      // Abrir WhatsApp de inmediato
+      let waWin = null;
+      try {
+        waWin = window.open(targetWhatsAppUrl, '_blank');
+      } catch (e) {
+        console.warn('Popup bloqueado, se usará redirección directa:', e);
+      }
+
       if (formData.rut && formData.rut.trim()) {
         const cleanR = cleanRut(formData.rut);
         const formattedRut = formatRut(cleanR) || formData.rut.trim();
@@ -732,6 +752,11 @@ const EnrollmentForm = ({
       setIsSubmitting(false);
       setPaymentCompleted(true);
       setShowSuccessScreen(true);
+
+      // Si no abrió la ventana (bloqueador estricto), redirigir
+      if (!waWin || waWin.closed || typeof waWin.closed === 'undefined') {
+        window.location.href = targetWhatsAppUrl;
+      }
     } catch (err) {
       console.error('Enrollment registration error:', err);
       setIsSubmitting(false);

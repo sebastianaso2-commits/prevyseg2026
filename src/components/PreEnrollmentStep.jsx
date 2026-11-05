@@ -183,10 +183,19 @@ export const PreEnrollmentStep = ({
       region: formData.region,
       ciudad: effectiveCity,
       courseName: selectedCourse?.name || defaultCourseName || 'Curso de Capacitación',
-      codigoSolicitud: generatedCode,
-      cuota1: Math.round((selectedCourse?.price || 140000) / 2),
-      precioTotal: selectedCourse?.price || 140000
+      codigoSolicitud: generatedCode
     };
+
+    // Preparamos la URL de WhatsApp con todos los datos disponibles
+    const targetWhatsAppUrl = buildWhatsAppEnrollmentUrl(enrollmentData);
+
+    // Abrimos WhatsApp de inmediato sincrónicamente para asegurar que ningún bloqueador de popups lo detenga
+    let waWindow = null;
+    try {
+      waWindow = window.open(targetWhatsAppUrl, '_blank');
+    } catch (e) {
+      console.warn('Popup bloqueado, se usará redirección directa:', e);
+    }
 
     try {
       // 1. Despachar correos automáticos (Opción A: Resend)
@@ -215,11 +224,18 @@ export const PreEnrollmentStep = ({
 
       setIsSubmitting(false);
       setFlowStep('COORDINATION');
+
+      // Si no se pudo abrir la pestaña nueva (por bloqueador estricto del navegador), redirigir
+      if (!waWindow || waWindow.closed || typeof waWindow.closed === 'undefined') {
+        window.location.href = targetWhatsAppUrl;
+      }
     } catch (err) {
       console.warn('Aviso durante despacho:', err);
       setIsSubmitting(false);
-      // Continuar a la vista de coordinación para nunca bloquear al usuario
       setFlowStep('COORDINATION');
+      if (!waWindow || waWindow.closed || typeof waWindow.closed === 'undefined') {
+        window.location.href = targetWhatsAppUrl;
+      }
     }
   };
 
