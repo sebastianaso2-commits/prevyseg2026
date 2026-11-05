@@ -400,3 +400,4 @@ export const dispatchEnrollmentEmails = async (enrollmentData = {}) => {
 
   return { success: true, via: 'queued' };
 };
+

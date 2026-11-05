@@ -85,3 +85,4 @@ export default async function handler(req, res) {
     return res.status(500).json({ error: error.message || 'Error al conectar con Resend' });
   }
 }
+

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   User,
@@ -10,14 +10,15 @@ import {
   ArrowRight,
   CheckCircle2,
   AlertCircle,
-  RefreshCw,
   Sparkles,
-  Lock,
-  Edit3,
-  Award,
   Clock,
   Send,
-  FileCheck
+  FileCheck,
+  Copy,
+  Check,
+  Printer,
+  FileText,
+  ExternalLink
 } from 'lucide-react';
 import { supabase } from '../config/supabase';
 import {
@@ -30,18 +31,15 @@ import { REGIONES_CHILE, OFFICIAL_COURSES, findMatchingCourse } from './Enrollme
 import { 
   dispatchEnrollmentEmails, 
   buildWhatsAppEnrollmentUrl, 
+  generatePaymentQrUrl,
   PREVYSEG_COMPANY_INFO 
 } from '../services/notificationService';
 
 /**
- * Componente Paso 1: Ficha Reducida de Preinscripción & Verificación de Correo OTP con Supabase.
- * Contiene únicamente los 6 campos requeridos:
- * - NombreCompleto
- * - Rut
- * - Correo
- * - Telefono
- * - Region
- * - Ciudad
+ * Componente Ficha de Inscripción y Coordinación (Trabajador - Cliente)
+ * 1. Ficha con los 6 datos personales + Declaración Jurada de Requisitos (OTEC y SPD).
+ * 2. Botón "Enviar Información".
+ * 3. Pantalla de Coordinación de Inscripción directa entre el Trabajador (Ejecutivo PrevySeg) y el Cliente (Postulante).
  */
 export const PreEnrollmentStep = ({
   defaultCourseName = '',
@@ -65,41 +63,18 @@ export const PreEnrollmentStep = ({
   // Ciudad efectiva (si seleccionó 'OTRA')
   const effectiveCity = formData.ciudad === 'OTRA' ? (otherCityName.trim() || 'Otra Localidad') : formData.ciudad;
 
-  // 3. Estados de flujo: 'FORM' | 'VERIFY_OTP'
+  // 3. Estados de flujo: 'FORM' | 'COORDINATION'
   const [flowStep, setFlowStep] = useState('FORM');
 
-  // Estados de envío y validación OTP
-  const [isSendingOtp, setIsSendingOtp] = useState(false);
-  const [isVerifyingOtp, setIsVerifyingOtp] = useState(false);
+  // Estados de envío y validación
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
-  const [successNotice, setSuccessNotice] = useState('');
+  const [applicationCode, setApplicationCode] = useState('');
+  const [submissionDate, setSubmissionDate] = useState('');
+  const [copiedBank, setCopiedBank] = useState(false);
 
   // Declaración jurada de conocimiento de requisitos (con ticket/checkbox)
   const [acceptedRequirementsDeclaration, setAcceptedRequirementsDeclaration] = useState(false);
-
-  // 6 casillas fijas para el código OTP de 6 dígitos
-  const [otpDigits, setOtpDigits] = useState(['', '', '', '', '', '']);
-  const inputRefs = useRef([]);
-
-  // Temporizador de reenvío (60 segundos)
-  const [countdown, setCountdown] = useState(60);
-  const [canResend, setCanResend] = useState(false);
-
-  useEffect(() => {
-    let timer;
-    if (flowStep === 'VERIFY_OTP' && countdown > 0) {
-      timer = setInterval(() => {
-        setCountdown(prev => {
-          if (prev <= 1) {
-            setCanResend(true);
-            return 0;
-          }
-          return prev - 1;
-        });
-      }, 1000);
-    }
-    return () => clearInterval(timer);
-  }, [flowStep, countdown]);
 
   // Validaciones en tiempo real
   const rutValidation = validateRut(formData.rut);
@@ -118,7 +93,7 @@ export const PreEnrollmentStep = ({
   // ¿Todos los 6 datos son 100% válidos?
   const isFormValid = isNameValid && isRutValid && isEmailValid && isPhoneValid && isRegionValid && isCityValid;
 
-  // ¿Formulario listo con declaración jurada marcada por el alumno?
+  // ¿Listo para enviar con declaración jurada marcada?
   const isReadyToSubmit = isFormValid && acceptedRequirementsDeclaration;
 
   // Contador de campos completados (de 6)
@@ -152,202 +127,116 @@ export const PreEnrollmentStep = ({
     }
   };
 
-  // Enviar Código de Verificación OTP usando Supabase Auth
-  const handleSendOtp = async (e) => {
+  // Copiar datos bancarios al portapapeles
+  const handleCopyBankData = () => {
+    const text = [
+      `DATOS DE TRANSFERENCIA - ${PREVYSEG_COMPANY_INFO.nombre}`,
+      `RUT: ${PREVYSEG_COMPANY_INFO.rut}`,
+      `Tipo: ${PREVYSEG_COMPANY_INFO.tipoCuenta}`,
+      `N° Cuenta: ${PREVYSEG_COMPANY_INFO.numeroCuenta}`,
+      `Banco: ${PREVYSEG_COMPANY_INFO.banco}`,
+      `Correo: ${PREVYSEG_COMPANY_INFO.email}`
+    ].join('\n');
+
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(text);
+      setCopiedBank(true);
+      setTimeout(() => setCopiedBank(false), 3000);
+    }
+  };
+
+  // Imprimir ficha de coordinación
+  const handlePrint = () => {
+    window.print();
+  };
+
+  // Enviar Información de Inscripción
+  const handleSendInformation = async (e) => {
     if (e) e.preventDefault();
     if (!isReadyToSubmit) return;
 
-    setIsSendingOtp(true);
+    setIsSubmitting(true);
     setErrorMessage('');
-    setSuccessNotice('');
+
+    const generatedCode = `PS-${Math.floor(100000 + Math.random() * 900000)}`;
+    setApplicationCode(generatedCode);
+
+    const nowStr = new Date().toLocaleDateString('es-CL', {
+      day: '2-digit',
+      month: '2-digit',
+      year: 'numeric',
+      hour: '2-digit',
+      minute: '2-digit'
+    });
+    setSubmissionDate(nowStr);
+
+    const cleanEmail = formData.email.trim().toLowerCase();
+    const cleanName = formData.nombre.trim();
+    const cleanRut = formData.rut.trim();
+    const cleanPhone = formData.telefono.trim();
+
+    const enrollmentData = {
+      nombre: cleanName,
+      rut: cleanRut,
+      email: cleanEmail,
+      telefono: cleanPhone,
+      region: formData.region,
+      ciudad: effectiveCity,
+      courseName: selectedCourse?.name || defaultCourseName || 'Curso de Capacitación',
+      codigoSolicitud: generatedCode
+    };
 
     try {
-      const cleanEmail = formData.email.trim().toLowerCase();
+      // 1. Despachar correos automáticos (Opción A: Resend)
+      // Al alumno (con datos de transferencia y QR) y a la empresa (prevyseg.capacitaciones@gmail.com)
+      await dispatchEnrollmentEmails(enrollmentData);
 
-      // Llamada oficial a Supabase Auth OTP
-      const { data, error } = await supabase.auth.signInWithOtp({
-        email: cleanEmail,
-        options: {
-          shouldCreateUser: true,
-          data: {
-            nombre: formData.nombre.trim(),
-            rut: formData.rut.trim(),
-            telefono: formData.telefono.trim(),
-            region: formData.region,
-            ciudad: effectiveCity
-          }
-        }
-      });
-
-      if (error) {
-        console.error('Error enviando OTP Supabase:', error);
-        if (error.message && error.message.includes('rate limit')) {
-          setErrorMessage('Has alcanzado el límite de intentos temporales. Por favor espera unos minutos antes de solicitar otro código.');
-        } else {
-          setErrorMessage(error.message || 'Error al enviar el código de confirmación. Verifica tu correo.');
-        }
-        setIsSendingOtp(false);
-        return;
-      }
-
-      // Éxito: pasar a la pantalla de verificación OTP y despachar correos (Opción A: Resend)
-      setIsSendingOtp(false);
-      setFlowStep('VERIFY_OTP');
-      setCountdown(60);
-      setCanResend(false);
-      setOtpDigits(Array(6).fill(''));
-
-      // Despachar correos automáticos al alumno (con QR y datos de pago) y a prevyseg.capacitaciones@gmail.com
-      dispatchEnrollmentEmails({
-        nombre: formData.nombre.trim(),
-        rut: formData.rut.trim(),
-        email: cleanEmail,
-        telefono: formData.telefono.trim(),
-        region: formData.region,
-        ciudad: effectiveCity,
-        courseName: selectedCourse?.name || defaultCourseName || 'Curso de Capacitación'
-      }).catch(notifErr => console.warn('[NOTIFICACIONES] Aviso:', notifErr));
-
-      // Foco automático en la primera casilla después de la animación
-      setTimeout(() => {
-        if (inputRefs.current[0]) {
-          inputRefs.current[0].focus();
-        }
-      }, 300);
-    } catch (err) {
-      console.error('Error en handleSendOtp:', err);
-      setIsSendingOtp(false);
-      setErrorMessage(err.message || 'Error inesperado al conectar con el servidor de correo.');
-    }
-  };
-
-  // Reenviar código OTP
-  const handleResendOtp = async () => {
-    if (!canResend) return;
-    setCanResend(false);
-    setCountdown(60);
-    setErrorMessage('');
-    setSuccessNotice('Reenviando código a tu correo...');
-
-    try {
-      const cleanEmail = formData.email.trim().toLowerCase();
-      const { error } = await supabase.auth.signInWithOtp({
-        email: cleanEmail
-      });
-
-      if (error) {
-        setErrorMessage(error.message || 'No se pudo reenviar el código. Intenta nuevamente.');
-      } else {
-        setSuccessNotice('¡Nuevo código enviado con éxito a tu correo!');
-        setTimeout(() => setSuccessNotice(''), 4000);
-      }
-    } catch (err) {
-      setErrorMessage(err.message || 'Error al reenviar el código.');
-    }
-  };
-
-  // Manejo de entrada de casillas OTP (fijo 6 dígitos)
-  const handleOtpChange = (index, value) => {
-    const cleanVal = value.replace(/[^0-9]/g, '');
-    if (!cleanVal && value !== '') return;
-
-    const newDigits = [...otpDigits];
-    newDigits[index] = cleanVal.slice(-1);
-    setOtpDigits(newDigits);
-    setErrorMessage('');
-
-    // Si escribió un dígito, avanzar al siguiente input (hasta el 6to, index 5)
-    if (cleanVal && index < 5) {
-      inputRefs.current[index + 1]?.focus();
-    }
-
-    // Si completó los 6 dígitos, auto-verificar de inmediato
-    const allFilled = newDigits.every(d => d !== '');
-    if (allFilled) {
-      const token = newDigits.join('');
-      executeVerifyOtp(token);
-    }
-  };
-
-  // Manejo de tecla Retroceso (Backspace) en OTP
-  const handleOtpKeyDown = (index, e) => {
-    if (e.key === 'Backspace' && !otpDigits[index] && index > 0) {
-      inputRefs.current[index - 1]?.focus();
-    }
-  };
-
-  // Soporte para pegar código de 6 dígitos desde el portapapeles
-  const handleOtpPaste = (e) => {
-    e.preventDefault();
-    const pastedData = e.clipboardData.getData('text').replace(/[^0-9]/g, '');
-    if (!pastedData) return;
-
-    const newDigits = Array(6).fill('');
-    for (let i = 0; i < Math.min(pastedData.length, 6); i++) {
-      newDigits[i] = pastedData[i] || '';
-    }
-    setOtpDigits(newDigits);
-
-    if (pastedData.length >= 6) {
-      executeVerifyOtp(pastedData.slice(0, 6));
-    } else {
-      const nextIdx = Math.min(pastedData.length, 5);
-      inputRefs.current[nextIdx]?.focus();
-    }
-  };
-
-  // Ejecutar verificación del código con Supabase Auth (estricto 6 dígitos)
-  const executeVerifyOtp = async (tokenToVerify) => {
-    const token = tokenToVerify || otpDigits.join('');
-    if (token.length < 6) {
-      setErrorMessage('Por favor ingresa los 6 dígitos del código.');
-      return;
-    }
-
-    setIsVerifyingOtp(true);
-    setErrorMessage('');
-
-    try {
-      const cleanEmail = formData.email.trim().toLowerCase();
-
-      const { data, error } = await supabase.auth.verifyOtp({
-        email: cleanEmail,
-        token: token.trim(),
-        type: 'email'
-      });
-
-      if (error) {
-        console.error('Error verificando OTP Supabase:', error);
-        setIsVerifyingOtp(false);
-        setErrorMessage('El código ingresado es incorrecto o ha expirado. Por favor verifica tu correo.');
-        return;
-      }
-
-      // Verificación exitosa 100% confirmada
-      setIsVerifyingOtp(false);
-      setSuccessNotice('¡Correo verificado con éxito! Redirigiendo a tu ficha de inscripción...');
-
-      setTimeout(() => {
-        if (onVerified) {
-          onVerified({
-            nombre: formData.nombre.trim(),
-            rut: formData.rut.trim(),
+      // 2. Registro local / Supabase opcional
+      try {
+        if (supabase) {
+          await supabase.from('enrollment_submissions').insert([{
+            code: generatedCode,
+            nombre: cleanName,
+            rut: cleanRut,
             email: cleanEmail,
-            telefono: formData.telefono.trim(),
+            telefono: cleanPhone,
             region: formData.region,
             ciudad: effectiveCity,
-            supabaseSession: data?.session || null,
-            supabaseUser: data?.user || null
-          });
+            course_name: enrollmentData.courseName,
+            accepted_declaration: true,
+            created_at: new Date().toISOString()
+          }]).select();
         }
-      }, 700);
+      } catch (dbErr) {
+        console.info('[INSCRIPCIÓN] Información guardada localmente:', dbErr?.message);
+      }
 
+      setIsSubmitting(false);
+      setFlowStep('COORDINATION');
+
+      // Notificar al contenedor padre si existe callback
+      if (onVerified) {
+        onVerified(enrollmentData);
+      }
     } catch (err) {
-      console.error('Error en executeVerifyOtp:', err);
-      setIsVerifyingOtp(false);
-      setErrorMessage(err.message || 'Error al validar el código.');
+      console.warn('Aviso durante despacho:', err);
+      setIsSubmitting(false);
+      // Continuar a la vista de coordinación para nunca bloquear al usuario
+      setFlowStep('COORDINATION');
     }
   };
+
+  const qrImageUrl = generatePaymentQrUrl();
+  const whatsappUrl = buildWhatsAppEnrollmentUrl({
+    nombre: formData.nombre.trim(),
+    rut: formData.rut.trim(),
+    email: formData.email.trim(),
+    telefono: formData.telefono.trim(),
+    region: formData.region,
+    ciudad: effectiveCity,
+    courseName: selectedCourse?.name || defaultCourseName,
+    codigoSolicitud: applicationCode || 'PS-PROCESO'
+  });
 
   return (
     <div className="w-full bg-white rounded-3xl border border-slate-200 shadow-2xl overflow-hidden">
@@ -382,7 +271,7 @@ export const PreEnrollmentStep = ({
             </p>
           </div>
 
-          {/* Arancel y Abono del 50% */}
+          {/* Arancel y Abono de Reserva */}
           <div className="flex-shrink-0 bg-white/10 backdrop-blur-md p-3.5 rounded-2xl border border-white/15 text-left sm:text-right">
             <span className="text-[10px] text-slate-300 uppercase font-bold block">Arancel Oficial:</span>
             <span className="text-base sm:text-lg font-black text-white font-mono block">
@@ -395,10 +284,10 @@ export const PreEnrollmentStep = ({
         </div>
       </div>
 
-      {/* ================= CONTENIDO INTERACTIVO (PASO 1A: FORMULARIO vs PASO 1B: VERIFICACIÓN) ================= */}
+      {/* ================= CONTENIDO INTERACTIVO ================= */}
       <div className="p-6 sm:p-8">
         
-        {/* ================= VISTA 1: FICHA REDUCIDA A 6 CAMPOS ================= */}
+        {/* ================= VISTA 1: FICHA DE DATOS + BOTÓN "ENVIAR INFORMACIÓN" ================= */}
         {flowStep === 'FORM' && (
           <motion.div
             initial={{ opacity: 0, y: 10 }}
@@ -418,7 +307,7 @@ export const PreEnrollmentStep = ({
                   </h4>
                 </div>
                 <p className="text-xs text-slate-500 mt-1">
-                  Ingresa tus 6 datos personales para validar tu correo y acceder a la matrícula oficial.
+                  Ingresa tus datos personales para enviar tu postulación y coordinar tu inscripción oficial.
                 </p>
               </div>
 
@@ -445,8 +334,8 @@ export const PreEnrollmentStep = ({
               </div>
             )}
 
-            {/* Cuadrícula limpia y ordenada de los 6 campos (2 columnas) */}
-            <form onSubmit={handleSendOtp} className="space-y-5">
+            {/* Cuadrícula de los 6 campos */}
+            <form onSubmit={handleSendInformation} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 text-xs">
                 
                 {/* 1. NOMBRE COMPLETO */}
@@ -483,11 +372,11 @@ export const PreEnrollmentStep = ({
                     {formData.rut && (
                       isRutValid ? (
                         <span className="text-[10px] text-emerald-600 font-bold flex items-center gap-1">
-                          <CheckCircle2 size={12} /> RUT Válido
+                          <CheckCircle2 size={12} /> Válido
                         </span>
                       ) : (
-                        <span className="text-[10px] text-amber-600 font-bold">
-                          RUT incompleto
+                        <span className="text-[10px] text-rose-600 font-bold">
+                          RUT Incorrecto
                         </span>
                       )
                     )}
@@ -500,9 +389,9 @@ export const PreEnrollmentStep = ({
                     placeholder="Ej. 18.643.817-5"
                     value={formData.rut}
                     onChange={handleInputChange}
-                    className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 font-mono focus:bg-white focus:outline-none focus:ring-2 transition-all ${
+                    className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-xs sm:text-sm font-mono text-slate-900 focus:bg-white focus:outline-none focus:ring-2 transition-all ${
                       formData.rut && !isRutValid
-                        ? 'border-amber-300 focus:ring-amber-500'
+                        ? 'border-rose-300 focus:ring-rose-500'
                         : isRutValid
                           ? 'border-emerald-300 focus:ring-emerald-500'
                           : 'border-slate-200 focus:ring-[#0284c7]'
@@ -545,7 +434,7 @@ export const PreEnrollmentStep = ({
                     }`}
                   />
                   <span className="text-[10px] text-slate-500 block">
-                    Aquí recibirás el código de confirmación oficial de 6 dígitos.
+                    Aquí recibirás el comprobante oficial con los datos de transferencia y código QR.
                   </span>
                 </div>
 
@@ -572,7 +461,7 @@ export const PreEnrollmentStep = ({
                     className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 font-mono focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
                   />
                   <span className="text-[10px] text-slate-500 block">
-                    Para coordinar recepción de documentación y aula virtual.
+                    Para coordinar recepción de documentación y matrícula con el trabajador de PrevySeg.
                   </span>
                 </div>
 
@@ -652,7 +541,7 @@ export const PreEnrollmentStep = ({
                   </div>
                 </div>
 
-                {/* Dos Bloques Claramente Separados */}
+                {/* Dos Bloques Separados */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
                   
                   {/* BLOQUE 1: INSCRIPCIÓN A CURSO DE CAPACITACIÓN (OTEC PREVYSEG) */}
@@ -733,11 +622,11 @@ export const PreEnrollmentStep = ({
 
               </div>
 
-              {/* ================= BOTÓN REACTIVO DE CONFIRMACIÓN ================= */}
+              {/* ================= BOTÓN: "ENVIAR INFORMACIÓN" ================= */}
               <div className="pt-4 border-t border-slate-200">
                 <AnimatePresence mode="wait">
                   {isReadyToSubmit ? (
-                    // Botón Habilitado con Animación y Efecto Glow
+                    // Botón Habilitado con "Enviar Información"
                     <motion.div
                       key="btn-confirm-active"
                       initial={{ opacity: 0, y: 15, scale: 0.98 }}
@@ -748,25 +637,25 @@ export const PreEnrollmentStep = ({
                     >
                       <button
                         type="submit"
-                        disabled={isSendingOtp}
+                        disabled={isSubmitting}
                         className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-[#0284c7] via-sky-600 to-[#00c2b2] hover:from-sky-600 hover:to-teal-600 text-white font-black text-sm sm:text-base shadow-xl shadow-sky-500/20 flex items-center justify-center gap-3 cursor-pointer transition-all border border-sky-300/40"
                       >
-                        {isSendingOtp ? (
+                        {isSubmitting ? (
                           <span className="flex items-center gap-2">
                             <span className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                            <span>Enviando Código de Confirmación a tu Correo...</span>
+                            <span>Enviando Información de Inscripción...</span>
                           </span>
                         ) : (
                           <>
                             <Send size={18} />
-                            <span>Confirmar Datos y Enviar Código al Correo</span>
+                            <span>Enviar Información</span>
                             <ArrowRight size={18} />
                           </>
                         )}
                       </button>
                       <p className="text-[11px] text-center text-slate-500 flex items-center justify-center gap-1.5">
-                        <Lock size={12} className="text-emerald-600" />
-                        <span>Enviaremos un código numérico seguro de 6 dígitos a <strong>{formData.email}</strong></span>
+                        <Sparkles size={12} className="text-[#0284c7]" />
+                        <span>Se enviará tu ficha a Admisiones y recibirás el respaldo con datos bancarios y QR en <strong>{formData.email}</strong></span>
                       </p>
                     </motion.div>
                   ) : isFormValid && !acceptedRequirementsDeclaration ? (
@@ -781,7 +670,7 @@ export const PreEnrollmentStep = ({
                     >
                       <div className="flex items-center justify-center gap-2 text-xs font-bold text-amber-900">
                         <AlertCircle size={16} className="text-amber-600" />
-                        <span>Marca la casilla de Declaración Jurada de requisitos arriba para habilitar el envío</span>
+                        <span>Marca la casilla de Declaración Jurada de requisitos arriba para habilitar "Enviar Información"</span>
                       </div>
                       <p className="text-[11px] text-amber-700">
                         Haz clic en el recuadro de Declaración Jurada para confirmar que leíste y conoces las exigencias.
@@ -798,7 +687,7 @@ export const PreEnrollmentStep = ({
                     >
                       <div className="flex items-center justify-center gap-2 text-xs font-bold text-slate-600">
                         <Sparkles size={15} className="text-[#0284c7]" />
-                        <span>Completa los 6 datos personales y marca la declaración jurada para habilitar el botón de confirmación</span>
+                        <span>Completa los 6 datos personales y marca la declaración jurada para habilitar "Enviar Información"</span>
                       </div>
                       <p className="text-[11px] text-slate-400">
                         Asegúrate de ingresar un RUT y correo electrónico válidos.
@@ -811,154 +700,282 @@ export const PreEnrollmentStep = ({
           </motion.div>
         )}
 
-        {/* ================= VISTA 2: PANTALLA DE VERIFICACIÓN OTP (6 DÍGITOS) ================= */}
-        {flowStep === 'VERIFY_OTP' && (
+        {/* ================= VISTA 2: INFORMACIÓN DE INSCRIPCIÓN (TRABAJADOR - CLIENTE) ================= */}
+        {flowStep === 'COORDINATION' && (
           <motion.div
-            initial={{ opacity: 0, scale: 0.95 }}
+            initial={{ opacity: 0, scale: 0.97 }}
             animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
-            className="max-w-lg mx-auto text-center space-y-6 py-2"
+            exit={{ opacity: 0, scale: 0.97 }}
+            className="space-y-6"
           >
-            {/* Ícono animado */}
-            <div className="w-16 h-16 rounded-3xl bg-sky-50 text-[#0284c7] flex items-center justify-center mx-auto border-2 border-sky-200 shadow-md">
-              <Mail size={32} className="animate-bounce" />
+            {/* Banner de Éxito y Código Oficial */}
+            <div className="p-6 rounded-2xl bg-gradient-to-r from-[#161630] via-[#1b3761] to-[#0a969b] text-white shadow-xl relative overflow-hidden">
+              <div className="relative z-10 space-y-2">
+                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-[11px] font-black uppercase tracking-wider bg-emerald-500/20 text-emerald-300 border border-emerald-400/30">
+                  <CheckCircle2 size={13} /> Información Enviada con Éxito
+                </span>
+                <h3 className="text-xl sm:text-2xl font-black text-white tracking-tight">
+                  Ficha de Inscripción Registrada
+                </h3>
+                <p className="text-xs sm:text-sm text-slate-200 max-w-2xl leading-relaxed">
+                  Tu ficha ha sido remitida exitosamente. A continuación se detallan los antecedentes de inscripción coordinados entre el <strong>Cliente (Postulante)</strong> y el <strong>Trabajador / Ejecutivo PrevySeg</strong>.
+                </p>
+                <div className="pt-2 flex flex-wrap items-center gap-3 text-xs font-mono">
+                  <span className="bg-white/10 px-3 py-1 rounded-lg border border-white/15">
+                    N° Solicitud: <strong className="text-[#00FFE0]">{applicationCode}</strong>
+                  </span>
+                  {submissionDate && (
+                    <span className="bg-white/10 px-3 py-1 rounded-lg border border-white/15 text-slate-300">
+                      Fecha: {submissionDate}
+                    </span>
+                  )}
+                </div>
+              </div>
             </div>
 
-            {/* Títulos informativos */}
-            <div className="space-y-2">
-              <span className="text-[10px] font-black uppercase tracking-wider bg-emerald-50 text-emerald-700 px-3 py-1 rounded-full border border-emerald-200">
-                Capa de Seguridad PrevySeg
-              </span>
-              <h3 className="text-xl sm:text-2xl font-black text-slate-900 tracking-tight">
-                Verifica tu Correo Electrónico
-              </h3>
-              <p className="text-xs sm:text-sm text-slate-600 leading-relaxed">
-                Hemos enviado un código oficial de 6 dígitos a:
-              </p>
+            {/* Cuadrícula de Resumen: Cliente & Programa */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               
-              {/* Tarjeta con el correo y botón de editar */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-100 border border-slate-200 font-mono font-bold text-xs sm:text-sm text-slate-900">
-                <Mail size={14} className="text-[#0284c7]" />
-                <span>{formData.email}</span>
+              {/* Tarjeta 1: Datos del Cliente / Postulante */}
+              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
+                  <User size={16} className="text-[#0284c7]" />
+                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-900">
+                    Datos del Cliente (Postulante)
+                  </h4>
+                </div>
+                <div className="space-y-2 text-xs">
+                  <div className="flex justify-between py-1 border-b border-slate-100">
+                    <span className="text-slate-500">Nombre:</span>
+                    <strong className="text-slate-900">{formData.nombre}</strong>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-slate-100">
+                    <span className="text-slate-500">RUT:</span>
+                    <strong className="font-mono text-slate-900">{formData.rut}</strong>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-slate-100">
+                    <span className="text-slate-500">Teléfono:</span>
+                    <strong className="font-mono text-emerald-700">{formData.telefono}</strong>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-slate-100">
+                    <span className="text-slate-500">Correo:</span>
+                    <strong className="text-slate-900">{formData.email}</strong>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-slate-100">
+                    <span className="text-slate-500">Ubicación:</span>
+                    <strong className="text-slate-900">{effectiveCity}, {formData.region}</strong>
+                  </div>
+                  <div className="flex justify-between pt-1">
+                    <span className="text-slate-500">Declaración Jurada:</span>
+                    <span className="text-emerald-700 font-bold flex items-center gap-1">
+                      <CheckCircle2 size={12} /> Aceptada (OTEC y SPD)
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Tarjeta 2: Programa Académico y Arancel */}
+              <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
+                <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
+                  <FileText size={16} className="text-[#0a969b]" />
+                  <h4 className="text-xs font-black uppercase tracking-wider text-slate-900">
+                    Programa Académico & Arancel
+                  </h4>
+                </div>
+                <div className="space-y-2 text-xs">
+                  <div className="flex justify-between py-1 border-b border-slate-100">
+                    <span className="text-slate-500">Curso:</span>
+                    <strong className="text-slate-900 text-right">{selectedCourse.name}</strong>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-slate-100">
+                    <span className="text-slate-500">Escuela:</span>
+                    <strong className="text-slate-900">
+                      {selectedCourse.school === 'seguridad' ? 'Seguridad Privada' : 'Oficios y Habilidades'}
+                    </strong>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-slate-100">
+                    <span className="text-slate-500">Duración:</span>
+                    <strong className="text-slate-900">{selectedCourse.hours || 'Horas Oficiales'}</strong>
+                  </div>
+                  <div className="flex justify-between py-1 border-b border-slate-100">
+                    <span className="text-slate-500">Arancel Oficial:</span>
+                    <strong className="font-mono text-slate-900 text-sm">
+                      ${(selectedCourse.price || 140000).toLocaleString('es-CL')} CLP
+                    </strong>
+                  </div>
+                  <div className="flex justify-between pt-1">
+                    <span className="text-slate-500">Abono Inicial (50%):</span>
+                    <strong className="font-mono text-emerald-700 text-sm">
+                      ${Math.round((selectedCourse.price || 140000) / 2).toLocaleString('es-CL')} CLP
+                    </strong>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+
+            {/* Protocolo de Coordinación Trabajador - Cliente */}
+            <div className="p-5 rounded-2xl bg-sky-50/60 border border-sky-200 space-y-3">
+              <h4 className="text-xs sm:text-sm font-black text-sky-950 flex items-center gap-2">
+                <Sparkles size={16} className="text-[#0284c7]" />
+                <span>¿Cómo proseguimos con la inscripción entre el trabajador y tú?</span>
+              </h4>
+              
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
+                
+                <div className="p-3.5 rounded-xl bg-white border border-sky-100 space-y-1.5 shadow-2xs">
+                  <span className="w-5 h-5 rounded-full bg-sky-100 text-[#0284c7] font-black text-[10px] flex items-center justify-center">
+                    1
+                  </span>
+                  <strong className="text-slate-900 block font-bold">Notificación Inmediata</strong>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">
+                    Hemos enviado el respaldo con datos bancarios a <strong>{formData.email}</strong> y la alerta a nuestra central de admisiones.
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-white border border-sky-100 space-y-1.5 shadow-2xs">
+                  <span className="w-5 h-5 rounded-full bg-sky-100 text-[#0284c7] font-black text-[10px] flex items-center justify-center">
+                    2
+                  </span>
+                  <strong className="text-slate-900 block font-bold">Entrega de Documentos</strong>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">
+                    El trabajador de PrevySeg te solicitará tu <strong>Certificado de Antecedentes</strong> y <strong>Estudios</strong>. Los demás se suben a la SPD.
+                  </p>
+                </div>
+
+                <div className="p-3.5 rounded-xl bg-white border border-sky-100 space-y-1.5 shadow-2xs">
+                  <span className="w-5 h-5 rounded-full bg-sky-100 text-[#0284c7] font-black text-[10px] flex items-center justify-center">
+                    3
+                  </span>
+                  <strong className="text-slate-900 block font-bold">Reserva de Cupo</strong>
+                  <p className="text-[11px] text-slate-500 leading-relaxed">
+                    Podrás coordinar directamente con el trabajador la forma de pago (transferencia bancaria oficial o presencial).
+                  </p>
+                </div>
+
+              </div>
+            </div>
+
+            {/* BOTÓN PRINCIPAL: CONTINUAR COORDINACIÓN POR WHATSAPP CON EL TRABAJADOR */}
+            <div className="space-y-2 pt-1">
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-emerald-600 via-teal-600 to-emerald-700 hover:from-emerald-500 hover:to-teal-500 text-white font-black text-sm sm:text-base shadow-xl shadow-emerald-600/25 flex items-center justify-center gap-3 cursor-pointer transition-all border border-emerald-400/40 text-center"
+              >
+                <Phone size={20} />
+                <span>Continuar Inscripción por WhatsApp con Trabajador PrevySeg ({PREVYSEG_COMPANY_INFO.whatsappDisplay})</span>
+                <ArrowRight size={20} />
+              </a>
+              <p className="text-[11px] text-center text-slate-500">
+                Al presionar se abrirá el chat oficial con el trabajador llevando tu número de solicitud y antecedentes pre-cargados.
+              </p>
+            </div>
+
+            {/* DATOS DE TRANSFERENCIA BANCARIA Y CÓDIGO QR EN PANTALLA */}
+            <div className="p-5 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200">
+              <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+                
+                {/* Datos en texto */}
+                <div className="space-y-3 flex-1 text-xs">
+                  <div className="space-y-1">
+                    <span className="text-[10px] font-black uppercase tracking-wider text-[#0284c7] bg-sky-50 px-2.5 py-0.5 rounded border border-sky-200 inline-block">
+                      Datos Oficiales de Transferencia
+                    </span>
+                    <h5 className="text-sm sm:text-base font-black text-slate-900">
+                      Abono de Reserva (50%) • PREVYSEG SPA
+                    </h5>
+                  </div>
+
+                  <table className="w-full text-xs">
+                    <tbody>
+                      <tr className="border-b border-slate-200/60">
+                        <td className="py-1 text-slate-500 font-medium">Titular:</td>
+                        <td className="py-1 font-bold text-slate-900">{PREVYSEG_COMPANY_INFO.nombre}</td>
+                      </tr>
+                      <tr className="border-b border-slate-200/60">
+                        <td className="py-1 text-slate-500 font-medium">RUT:</td>
+                        <td className="py-1 font-mono font-bold text-slate-900">{PREVYSEG_COMPANY_INFO.rut}</td>
+                      </tr>
+                      <tr className="border-b border-slate-200/60">
+                        <td className="py-1 text-slate-500 font-medium">Tipo de Cuenta:</td>
+                        <td className="py-1 font-bold text-slate-900">{PREVYSEG_COMPANY_INFO.tipoCuenta}</td>
+                      </tr>
+                      <tr className="border-b border-slate-200/60">
+                        <td className="py-1 text-slate-500 font-medium">N° de Cuenta:</td>
+                        <td className="py-1 font-mono font-black text-[#0284c7] text-sm">{PREVYSEG_COMPANY_INFO.numeroCuenta}</td>
+                      </tr>
+                      <tr>
+                        <td className="py-1 text-slate-500 font-medium">Correo Comprobante:</td>
+                        <td className="py-1 font-bold text-slate-900">{PREVYSEG_COMPANY_INFO.email}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <button
+                    type="button"
+                    onClick={handleCopyBankData}
+                    className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-slate-300 hover:border-[#0284c7] text-slate-700 hover:text-[#0284c7] font-bold text-xs shadow-2xs transition-all cursor-pointer"
+                  >
+                    {copiedBank ? (
+                      <>
+                        <Check size={14} className="text-emerald-600" />
+                        <span className="text-emerald-700">¡Datos Bancarios Copiados!</span>
+                      </>
+                    ) : (
+                      <>
+                        <Copy size={14} />
+                        <span>Copiar Datos Bancarios</span>
+                      </>
+                    )}
+                  </button>
+                </div>
+
+                {/* Código QR Escaneable */}
+                <div className="flex flex-col items-center justify-center p-4 bg-white rounded-2xl border-2 border-sky-100 shadow-sm text-center flex-shrink-0">
+                  <img
+                    src={qrImageUrl}
+                    alt="Código QR Datos de Pago PrevySeg"
+                    width={150}
+                    height={150}
+                    className="rounded-xl border border-slate-100 shadow-2xs"
+                  />
+                  <span className="text-[10px] font-bold text-slate-500 mt-2 block">
+                    📲 Escanea para transferir
+                  </span>
+                </div>
+
+              </div>
+            </div>
+
+            {/* BARRA DE ACCIONES SECUNDARIAS */}
+            <div className="pt-2 flex flex-wrap items-center justify-between gap-3 border-t border-slate-200">
+              <button
+                type="button"
+                onClick={handlePrint}
+                className="px-4 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-50 text-slate-700 text-xs font-bold flex items-center gap-1.5 cursor-pointer transition-all"
+              >
+                <Printer size={15} />
+                <span>Imprimir / Guardar Respaldo</span>
+              </button>
+
+              <div className="flex items-center gap-2 ml-auto">
                 <button
                   type="button"
                   onClick={() => setFlowStep('FORM')}
-                  className="text-xs font-bold text-[#0284c7] hover:underline flex items-center gap-1 ml-2 cursor-pointer"
-                  title="Cambiar correo si te equivocaste"
+                  className="px-4 py-2.5 rounded-xl border border-slate-200 hover:bg-slate-50 text-slate-600 text-xs font-bold cursor-pointer transition-all"
                 >
-                  <Edit3 size={12} />
-                  <span>Modificar</span>
+                  Modificar Datos
                 </button>
-              </div>
-            </div>
-
-            {/* Mensajes de error o éxito */}
-            {errorMessage && (
-              <div className="p-3.5 rounded-xl bg-rose-50 border border-rose-200 text-xs text-rose-700 flex items-center gap-2 text-left">
-                <AlertCircle size={16} className="text-rose-600 flex-shrink-0" />
-                <span>{errorMessage}</span>
-              </div>
-            )}
-
-            {successNotice && (
-              <div className="p-3.5 rounded-xl bg-emerald-50 border border-emerald-200 text-xs text-emerald-800 flex items-center gap-2 text-left">
-                <CheckCircle2 size={16} className="text-emerald-600 flex-shrink-0" />
-                <span>{successNotice}</span>
-              </div>
-            )}
-
-            {/* ================= CASILLAS DE CÓDIGO OTP (6 DÍGITOS FIJOS) ================= */}
-            <div className="space-y-3">
-              <label className="text-xs font-bold text-slate-700 block">
-                Ingresa los 6 dígitos recibidos:
-              </label>
-
-              <div className="flex justify-center items-center gap-2 sm:gap-3" onPaste={handleOtpPaste}>
-                {otpDigits.map((digit, idx) => (
-                  <input
-                    key={idx}
-                    ref={el => (inputRefs.current[idx] = el)}
-                    type="text"
-                    inputMode="numeric"
-                    maxLength={1}
-                    value={digit}
-                    onChange={e => handleOtpChange(idx, e.target.value)}
-                    onKeyDown={e => handleOtpKeyDown(idx, e)}
-                    className="w-11 h-14 sm:w-13 sm:h-16 text-center font-black font-mono bg-slate-50 border-2 border-slate-200 rounded-2xl focus:bg-white focus:border-[#0284c7] focus:ring-4 focus:ring-sky-100 focus:outline-none transition-all text-slate-900 shadow-sm text-xl sm:text-2xl"
-                  />
-                ))}
-              </div>
-            </div>
-
-            {/* Botón manual de validación */}
-            <button
-              type="button"
-              disabled={isVerifyingOtp || otpDigits.some(d => !d)}
-              onClick={() => executeVerifyOtp()}
-              className={`w-full py-3.5 px-6 rounded-2xl font-black text-sm flex items-center justify-center gap-2 transition-all shadow-lg ${
-                otpDigits.every(d => d !== '')
-                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white cursor-pointer shadow-emerald-500/20'
-                  : 'bg-slate-200 text-slate-400 cursor-not-allowed shadow-none'
-              }`}
-            >
-              {isVerifyingOtp ? (
-                <span className="flex items-center gap-2">
-                  <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                  <span>Verificando con Supabase...</span>
-                </span>
-              ) : (
-                <>
-                  <ShieldCheck size={18} />
-                  <span>Validar Código y Continuar a la Matrícula</span>
-                  <ArrowRight size={18} />
-                </>
-              )}
-            </button>
-
-            {/* Temporizador de reenvío de correo */}
-            <div className="pt-2 text-xs text-slate-500 flex flex-col items-center gap-1.5">
-              {canResend ? (
                 <button
                   type="button"
-                  onClick={handleResendOtp}
-                  className="font-bold text-[#0284c7] hover:underline flex items-center gap-1.5 cursor-pointer"
+                  onClick={onClose}
+                  className="px-5 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs font-black shadow-md cursor-pointer transition-all"
                 >
-                  <RefreshCw size={14} />
-                  <span>¿No recibiste el correo? Haz clic para reenviar código</span>
+                  Finalizar y Cerrar
                 </button>
-              ) : (
-                <span className="text-slate-400 flex items-center gap-1.5">
-                  <Clock size={13} />
-                  <span>Podrás solicitar otro código en: <strong className="font-mono text-slate-600">{countdown}s</strong></span>
-                </span>
-              )}
-              <span className="text-[11px] text-slate-400">
-                Revisa también tu bandeja de Spam o Correo no deseado si no lo ves de inmediato.
-              </span>
-            </div>
-
-            {/* Acceso directo al WhatsApp Oficial de la Empresa (+56 9 7869 1869) */}
-            <div className="pt-4 border-t border-slate-200 mt-2 space-y-2">
-              <span className="text-[11px] text-slate-500 block font-medium">
-                ¿Prefieres enviar tu ficha y coordinar la recepción de documentos directamente por WhatsApp?
-              </span>
-              <a
-                href={buildWhatsAppEnrollmentUrl({
-                  nombre: formData.nombre.trim(),
-                  rut: formData.rut.trim(),
-                  email: formData.email.trim(),
-                  telefono: formData.telefono.trim(),
-                  region: formData.region,
-                  ciudad: effectiveCity,
-                  courseName: selectedCourse?.name || defaultCourseName || 'Curso de Capacitación'
-                })}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer"
-              >
-                <Phone size={16} />
-                <span>Enviar Ficha al WhatsApp de la Empresa ({PREVYSEG_COMPANY_INFO.whatsappDisplay})</span>
-              </a>
+              </div>
             </div>
 
           </motion.div>
