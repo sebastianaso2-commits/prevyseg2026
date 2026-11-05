@@ -213,11 +213,6 @@ export const PreEnrollmentStep = ({
 
       setIsSubmitting(false);
       setFlowStep('COORDINATION');
-
-      // Notificar al contenedor padre si existe callback
-      if (onVerified) {
-        onVerified(enrollmentData);
-      }
     } catch (err) {
       console.warn('Aviso durante despacho:', err);
       setIsSubmitting(false);

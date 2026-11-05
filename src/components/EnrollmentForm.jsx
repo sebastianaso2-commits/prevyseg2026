@@ -803,7 +803,7 @@ const EnrollmentForm = ({
                 Ficha de Inscripción Registrada
               </span>
               <h2 className="text-2xl sm:text-4xl font-black text-slate-900 tracking-tight">
-                ¡Inscripción y Abono del 50% Registrado!
+                ¡Ficha de Inscripción Registrada con Éxito!
               </h2>
               <p className="text-slate-600 text-sm sm:text-base leading-relaxed">
                 Tu postulación para <strong className="text-slate-900">{courseFullName}</strong> ha sido reservada con éxito con el código <strong className="text-[#0284c7] font-mono">{enrollmentCode}</strong>.
@@ -837,12 +837,12 @@ const EnrollmentForm = ({
                 </span>
               </div>
               <div className="flex justify-between border-b border-slate-200 pb-2">
-                <span className="text-slate-500">Abono Realizado (Cuota N°1):</span>
+                <span className="text-slate-500">Abono de Reserva (50%):</span>
                 <span className="font-black text-[#0284c7] text-base">${amountToPayNow.toLocaleString('es-CL')} CLP</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-slate-500">Saldo Pendiente (Cuota N°2 al iniciar):</span>
-                <span className="font-bold text-amber-700">${pendingAmount.toLocaleString('es-CL')} CLP</span>
+                <span className="text-slate-500">Datos Bancarios y QR:</span>
+                <span className="font-bold text-emerald-700">Enviados a tu correo electrónico</span>
               </div>
             </div>
 
@@ -990,8 +990,8 @@ const EnrollmentForm = ({
                   <Printer size={14} className="text-[#0284c7]" />
                   <span className="hidden sm:inline">Imprimir Ficha PDF</span>
                 </button>
-                <span className="text-[11px] font-mono text-[#0284c7] bg-sky-50 px-3 py-1.5 rounded-xl border border-sky-200 font-bold">
-                  Abono 50% Online
+                <span className="text-[11px] font-mono text-emerald-700 bg-emerald-50 px-3 py-1.5 rounded-xl border border-emerald-200 font-bold flex items-center gap-1">
+                  <Mail size={12} /> Datos de Pago por Correo
                 </span>
               </div>
             </div>
@@ -1779,266 +1779,50 @@ const EnrollmentForm = ({
             )}
           </div>
 
-          {/* ================= 3.- ABONOS (50% CUOTA INICIAL) & PASARELA DE PAGO ================= */}
-          <div className="space-y-5 border-t border-slate-200 pt-6">
+          {/* ================= 3.- INFORMACIÓN DE PAGO & TRANSFERENCIA BANCARIA (ENVIADOS POR CORREO) ================= */}
+          <div className="space-y-4 border-t border-slate-200 pt-6">
             <div className="flex items-center justify-between border-b border-slate-200 pb-2">
               <h2 className="text-base sm:text-lg font-black text-slate-900 flex items-center gap-2.5">
                 <span className="w-7 h-7 rounded-xl bg-sky-50 text-[#0284c7] flex items-center justify-center text-xs font-black border border-sky-200">
                   3
                 </span>
-                <span>3.- ABONOS (PLAN DE CUOTAS DEL 50%)</span>
+                <span>3.- INFORMACIÓN DE PAGO & TRANSFERENCIA BANCARIA</span>
               </h2>
-              <span className="text-xs text-slate-500 font-mono">Ficha física Sección 3</span>
+              <span className="text-xs text-emerald-700 font-bold bg-emerald-50 px-2.5 py-1 rounded-lg border border-emerald-200 flex items-center gap-1">
+                <Mail size={13} /> Envío Oficial por Correo
+              </span>
             </div>
 
-            {/* Selector de Plan de Abono / Pasarela Adaptada */}
-            {isVigilanteCourse ? (
-              <div className="p-6 rounded-3xl bg-slate-50 border border-slate-200 text-center space-y-3">
-                <div className="w-12 h-12 bg-amber-100 text-amber-800 rounded-2xl flex items-center justify-center mx-auto">
-                  <MessageCircle size={24} />
+            {/* Notificación informativa: Los datos se enviarán por correo */}
+            <div className="p-5 sm:p-6 rounded-2xl bg-gradient-to-r from-sky-50 via-teal-50/40 to-emerald-50 border border-sky-200 space-y-4">
+              <div className="flex items-start gap-3">
+                <div className="w-10 h-10 rounded-xl bg-white text-[#0284c7] flex items-center justify-center shadow-xs flex-shrink-0 border border-sky-100">
+                  <Mail size={20} />
                 </div>
-                <h4 className="text-base font-black text-slate-900">Arancel y Cupos Sujetos a Cotización Directa</h4>
-                <p className="text-xs text-slate-600 max-w-md mx-auto leading-relaxed">
-                  Para el curso de Formación de Vigilantes Privados (100 hrs), el arancel y la reserva de cupos en polígono se gestionan directamente a través de nuestro canal comercial oficial conforme a las pautas del SERNAC.
-                </p>
-                <a
-                  href="https://wa.me/56982312128?text=Hola%20PrevySeg,%20deseo%20consultar%20el%20valor%20y%20cupos%20del%20curso%20de%20Formaci%C3%B3n%20de%20Vigilantes%20Privados."
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-xs shadow-md transition-all cursor-pointer"
-                >
-                  <MessageCircle size={15} />
-                  <span>Consultar valor y cupos por WhatsApp (+56 9 8231 2128)</span>
-                </a>
-              </div>
-            ) : isCctvCourse ? (
-              /* CCTV: MODALIDAD DE PAGO ÚNICO OBLIGATORIO (1 CUOTA) */
-              <div className="space-y-4">
-                <div className="p-4 rounded-2xl bg-amber-50 border border-amber-300 text-xs text-amber-900 flex items-start gap-2.5">
-                  <AlertCircle size={16} className="text-amber-600 flex-shrink-0 mt-0.5" />
-                  <div>
-                    <strong className="block font-bold">Modalidad de Pago Exclusiva CCTV:</strong>
-                    <span>Este programa cuenta con modalidad de pago único (1 cuota total). La opción de pago en 2 cuotas se encuentra bloqueada conforme a las directivas de la OTEC.</span>
-                  </div>
-                </div>
-
-                <div className="p-5 rounded-3xl border-2 border-[#0284c7] bg-sky-50/80 shadow-lg shadow-sky-500/10 ring-2 ring-[#0284c7]/30 flex flex-col justify-between gap-3">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <span className="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full border border-emerald-200 mb-1">
-                        PAGO ÚNICO (1 CUOTA TOTAL)
-                      </span>
-                      <h4 className="text-sm font-black text-slate-900">ARANCEL COMPLETO CURSO CCTV</h4>
-                      <p className="text-xs text-slate-600">Cancelas la totalidad del arancel en una sola transacción sin cuotas pendientes.</p>
-                    </div>
-                    <div className="w-6 h-6 rounded-full bg-[#0284c7] text-white flex items-center justify-center font-bold shadow-sm">
-                      <Check size={14} className="stroke-[3]" />
-                    </div>
-                  </div>
-
-                  <div className="pt-2 border-t border-slate-200 flex justify-between items-end">
-                    <div>
-                      <span className="text-xs text-slate-500 font-mono">Total a Pagar Hoy:</span>
-                      <span className="text-[11px] text-emerald-700 block font-bold">Promo Exalumnos PrevySeg: $70.000 CLP</span>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-2xl font-black text-slate-900 font-mono">
-                        ${(totalAmount || 100000).toLocaleString('es-CL')}
-                      </span>
-                      <span className="text-[10px] text-emerald-600 block font-mono">Arancel 100% Cancelado</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            ) : (
-              /* RESTO DE LOS PROGRAMAS (PLAN 50% O TOTALIDAD) */
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                
-                {/* Cuota N° 1: 50% de Abono */}
-                <div 
-                  onClick={() => setPaymentOption('cuota1')}
-                  className={`p-5 rounded-3xl border-2 transition-all cursor-pointer flex flex-col justify-between gap-3 ${
-                    paymentOption === 'cuota1'
-                      ? 'bg-sky-50/80 border-[#0284c7] shadow-lg shadow-sky-500/10 ring-2 ring-[#0284c7]/30'
-                      : 'bg-slate-50 border-slate-200 hover:border-sky-300'
-                  }`}
-                >
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <span className="inline-block bg-sky-100 text-sky-800 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full border border-sky-200 mb-1">
-                        OPCIÓN RECOMENDADA (50%)
-                      </span>
-                      <h4 className="text-sm font-black text-slate-900">CUOTA Nº 1 ENTREGA DE DOC. / RESERVA</h4>
-                      <p className="text-xs text-slate-600">Pagas el 50% ahora para abrir expediente y reservar cupo oficial SENCE.</p>
-                    </div>
-                    {paymentOption === 'cuota1' && (
-                      <div className="w-6 h-6 rounded-full bg-[#0284c7] text-white flex items-center justify-center font-bold shadow-sm">
-                        <Check size={14} className="stroke-[3]" />
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="pt-2 border-t border-slate-200 flex justify-between items-end">
-                    <span className="text-xs text-slate-500 font-mono">Abono Inicial Hoy:</span>
-                    <div className="text-right">
-                      <span className="text-2xl font-black text-[#0284c7] font-mono">
-                        ${cuota1Amount.toLocaleString('es-CL')}
-                      </span>
-                      <span className="text-[10px] text-slate-500 block font-mono">Saldo 50% ($ {cuota2Amount.toLocaleString('es-CL')}) al inicio</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Cuota Total: 100% */}
-                <div 
-                  onClick={() => setPaymentOption('total')}
-                  className={`p-5 rounded-3xl border-2 transition-all cursor-pointer flex flex-col justify-between gap-3 ${
-                    paymentOption === 'total'
-                      ? 'bg-sky-50/80 border-[#0284c7] shadow-lg shadow-sky-500/10 ring-2 ring-[#0284c7]/30'
-                      : 'bg-slate-50 border-slate-200 hover:border-sky-300'
-                  }`}
-                >
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <span className="inline-block bg-emerald-100 text-emerald-800 text-[10px] font-black uppercase px-2.5 py-0.5 rounded-full border border-emerald-200 mb-1">
-                        PAGO COMPLETO (100%)
-                      </span>
-                      <h4 className="text-sm font-black text-slate-900">CUOTA Nº 1 + CUOTA Nº 2 (TOTALIDAD)</h4>
-                      <p className="text-xs text-slate-600">Cancelas la totalidad del arancel en una sola transacción sin cuotas pendientes.</p>
-                    </div>
-                    {paymentOption === 'total' && (
-                      <div className="w-6 h-6 rounded-full bg-[#0284c7] text-white flex items-center justify-center font-bold shadow-sm">
-                        <Check size={14} className="stroke-[3]" />
-                      </div>
-                    )}
-                  </div>
-
-                  <div className="pt-2 border-t border-slate-200 flex justify-between items-end">
-                    <span className="text-xs text-slate-500 font-mono">Total a Pagar Hoy:</span>
-                    <div className="text-right">
-                      <span className="text-2xl font-black text-slate-900 font-mono">
-                        ${totalAmount.toLocaleString('es-CL')}
-                      </span>
-                      <span className="text-[10px] text-emerald-600 block font-mono">Arancel 100% Cancelado</span>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            )}
-
-            {/* Medios de Pago */}
-            <div className="bg-slate-50 p-6 rounded-3xl border border-slate-200 space-y-4">
-              
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-slate-200 pb-3">
-                <span className="text-xs font-bold text-slate-800 uppercase tracking-wider">
-                  Selecciona el Medio de Pago para el Abono:
-                </span>
-                
-                <div className="flex flex-wrap gap-2">
-                  {[
-                    { id: 'tarjeta', label: '💳 Tarjetas (Webpay / Débito / Crédito)', icon: CreditCard },
-                    { id: 'transferencia', label: '🏦 Transferencia Electrónica', icon: Building2 },
-                    { id: 'efectivo', label: '💵 Pago Presencial en Sede', icon: DollarSign },
-                  ].map((m) => (
-                    <button
-                      key={m.id}
-                      type="button"
-                      onClick={() => setPaymentMethod(m.id)}
-                      className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer border ${
-                        paymentMethod === m.id
-                          ? 'bg-[#0284c7] text-white border-sky-400 shadow-md'
-                          : 'bg-white text-slate-600 border-slate-200 hover:text-slate-900'
-                      }`}
-                    >
-                      {m.label}
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Opción 1: Tarjetas Webpay Plus */}
-              {paymentMethod === 'tarjeta' && (
-                <div className="space-y-4 pt-1">
-                  <div className="p-4 bg-sky-50 rounded-2xl border border-sky-200 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2">
-                    <div>
-                      <span className="text-xs text-slate-500 block font-bold uppercase">Monto a cargar con Tarjeta:</span>
-                      <span className="text-2xl font-black text-[#0284c7] font-mono">
-                        ${amountToPayNow.toLocaleString('es-CL')} CLP
-                      </span>
-                    </div>
-                    <div className="text-xs text-sky-800 font-mono bg-sky-100 px-3 py-1.5 rounded-xl border border-sky-200">
-                      🔒 Pasarela Webpay Plus • Transbank Encriptada
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
-                    <div className="sm:col-span-2">
-                      <label className="font-semibold text-slate-700 block mb-1">Número de Tarjeta</label>
-                      <input
-                        type="text"
-                        value={cardData.cardNumber}
-                        onChange={(e) => setCardData({ ...cardData, cardNumber: e.target.value })}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-900 font-mono focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30"
-                      />
-                    </div>
-                    <div>
-                      <label className="font-semibold text-slate-700 block mb-1">Vencimiento (MM/AA)</label>
-                      <input
-                        type="text"
-                        value={cardData.cardExpiry}
-                        onChange={(e) => setCardData({ ...cardData, cardExpiry: e.target.value })}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-900 font-mono focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30"
-                      />
-                    </div>
-                    <div>
-                      <label className="font-semibold text-slate-700 block mb-1">CVV / CVC</label>
-                      <input
-                        type="text"
-                        value={cardData.cardCvv}
-                        onChange={(e) => setCardData({ ...cardData, cardCvv: e.target.value })}
-                        className="w-full bg-white border border-slate-200 rounded-xl px-3.5 py-2.5 text-slate-900 font-mono focus:outline-none focus:border-sky-500 focus:ring-2 focus:ring-sky-500/30"
-                      />
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {/* Opción 2: Transferencia Bancaria */}
-              {paymentMethod === 'transferencia' && (
-                <div className="p-4 bg-white rounded-2xl border border-slate-200 space-y-3 text-xs">
-                  <h4 className="font-bold text-slate-900 text-sm flex items-center gap-2">
-                    <Building2 size={16} className="text-[#0284c7]" />
-                    <span>Datos Oficiales para Transferencia Electrónica:</span>
+                <div className="space-y-1">
+                  <h4 className="text-sm sm:text-base font-black text-slate-900">
+                    Los datos oficiales de pago y código QR se enviarán a tu correo electrónico
                   </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-700 bg-slate-50 p-3.5 rounded-xl border border-slate-200 font-mono text-xs">
-                    <div><strong className="text-slate-500">Nombre Titular:</strong> PREVYSEG SPA</div>
-                    <div><strong className="text-slate-500">RUT Titular:</strong> 76.256.947-7</div>
-                    <div><strong className="text-slate-500">Tipo de Cuenta:</strong> CUENTA CORRIENTE</div>
-                    <div><strong className="text-slate-500">N° Cuenta:</strong> 1000163399</div>
-                    <div className="sm:col-span-2"><strong className="text-slate-500">Correo Confirmación:</strong> prevyseg.capacitaciones@gmail.com</div>
-                  </div>
-                  <p className="text-[11px] text-slate-500">
-                    * Al transferir, incluye en el asunto tu <strong>Nombre y RUT</strong>. Una vez completada la inscripción, podrás enviar el comprobante directamente al WhatsApp de admisiones.
+                  <p className="text-xs text-slate-600 leading-relaxed">
+                    Al confirmar tu ficha de inscripción, recibirás automáticamente un correo oficial en <strong>{formData.email || 'tu correo registrado'}</strong> con los datos completos de la cuenta corriente de <strong>PREVYSEG SPA</strong> y un <strong>código QR escaneable</strong> para transferir el abono de reserva del 50% ({cuota1Amount ? `$${cuota1Amount.toLocaleString('es-CL')} CLP` : 'según arancel'}).
                   </p>
                 </div>
-              )}
+              </div>
 
-              {/* Opción 3: Efectivo en Sede */}
-              {paymentMethod === 'efectivo' && (
-                <div className="p-4 bg-amber-50 rounded-2xl border border-amber-200 text-xs text-amber-900 space-y-2">
-                  <h4 className="font-bold text-amber-900 text-sm">Pago Presencial en Sede Arica:</h4>
-                  <p>
-                    Puedes abonar tu 50% o el total en efectivo o tarjeta física en nuestras oficinas de atención:
-                  </p>
-                  <div className="font-bold text-slate-900 bg-white p-3 rounded-xl border border-amber-200">
-                    📍 Blanco Encalada N°666, 2do Piso, Arica (Lunes a Viernes de 09:00 a 19:00 hrs).
-                  </div>
-                </div>
-              )}
+              {/* Tarjeta de Resumen Bancario Oficial de Referencia */}
+              <div className="p-4 rounded-xl bg-white border border-slate-200/90 grid grid-cols-1 sm:grid-cols-2 gap-2 text-xs font-mono">
+                <div><span className="text-slate-500 font-sans font-bold">Razón Social:</span> PREVYSEG SPA</div>
+                <div><span className="text-slate-500 font-sans font-bold">RUT:</span> 76.256.947-7</div>
+                <div><span className="text-slate-500 font-sans font-bold">Tipo Cuenta:</span> CUENTA CORRIENTE</div>
+                <div><span className="text-slate-500 font-sans font-bold">N° Cuenta:</span> 1000163399</div>
+                <div className="sm:col-span-2"><span className="text-slate-500 font-sans font-bold">Email Comprobante:</span> prevyseg.capacitaciones@gmail.com</div>
+              </div>
 
+              <div className="flex items-center gap-2 text-[11px] text-slate-600">
+                <Sparkles size={14} className="text-[#0284c7] flex-shrink-0" />
+                <span>No necesitas ingresar tarjetas ni realizar pagos en esta pantalla. El abono se coordina directamente a través de tu correo o con el equipo de admisiones vía WhatsApp.</span>
+              </div>
             </div>
-
           </div>
 
           {/* ================= 4.- BUZÓN DE PREGUNTAS O DUDAS ================= */}
@@ -2078,38 +1862,38 @@ const EnrollmentForm = ({
 
 
 
-          {/* ================= BOTÓN PRINCIPAL DE ENVÍO Y ABONO ================= */}
+          {/* ================= BOTÓN PRINCIPAL DE ENVÍO DE INSCRIPCIÓN ================= */}
           <div className="border-t border-slate-200 pt-6 space-y-4">
             
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-2xl bg-sky-50 border border-sky-200">
+            <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-5 rounded-2xl bg-slate-50 border border-slate-200">
               <div className="space-y-1 text-center sm:text-left">
-                <span className="text-xs text-sky-800 font-bold uppercase block">
-                  Total a abonar para completar inscripción:
+                <span className="text-xs text-slate-500 font-bold uppercase block">
+                  Programa de Capacitación Seleccionado:
                 </span>
-                <span className="text-3xl font-black text-slate-900 font-mono">
-                  ${amountToPayNow.toLocaleString('es-CL')} CLP
+                <span className="text-lg sm:text-xl font-black text-slate-900">
+                  {currentCourse.name}
                 </span>
-                <span className="text-[11px] text-slate-600 block">
-                  {paymentOption === 'cuota1' ? 'Abono 50% (Cuota N°1 Reserva)' : 'Pago Total 100%'} • {currentCourse.name}
+                <span className="text-[11px] text-emerald-700 block font-bold flex items-center justify-center sm:justify-start gap-1">
+                  <Mail size={12} /> Datos oficiales de transferencia y código QR se enviarán a tu correo registrado
                 </span>
               </div>
 
               <motion.button
-                whileHover={{ scale: 1.04, boxShadow: '0 0 25px rgba(2, 132, 199, 0.3)' }}
-                whileTap={{ scale: 0.96 }}
+                whileHover={{ scale: 1.03, boxShadow: '0 0 25px rgba(2, 132, 199, 0.3)' }}
+                whileTap={{ scale: 0.97 }}
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-[#0284c7] to-[#00c2b2] hover:from-sky-600 hover:to-teal-600 text-white font-black text-sm shadow-xl flex items-center justify-center gap-2 cursor-pointer transition-all border border-sky-300/40"
+                className="w-full sm:w-auto px-8 py-4 rounded-2xl bg-gradient-to-r from-[#0284c7] via-sky-600 to-[#00c2b2] hover:from-sky-600 hover:to-teal-600 text-white font-black text-sm sm:text-base shadow-xl flex items-center justify-center gap-2 cursor-pointer transition-all border border-sky-300/40"
               >
                 {isSubmitting ? (
                   <span className="flex items-center gap-2">
                     <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                    <span>Procesando Ficha y Abono...</span>
+                    <span>Enviando Información de Inscripción...</span>
                   </span>
                 ) : (
                   <>
-                    <Sparkles size={16} />
-                    <span>Confirmar Ficha y Abonar ${amountToPayNow.toLocaleString('es-CL')}</span>
+                    <Send size={16} />
+                    <span>Enviar Información de Inscripción</span>
                     <ArrowRight size={16} />
                   </>
                 )}
@@ -2124,7 +1908,7 @@ const EnrollmentForm = ({
               <span>•</span>
               <span className="flex items-center gap-1.5">
                 <Phone size={13} className="text-emerald-600" />
-                <span>Contacto directo vía WhatsApp (+56 9 8231 2128)</span>
+                <span>Contacto directo vía WhatsApp (+56 9 7869 1869)</span>
               </span>
             </div>
 
