@@ -2052,14 +2052,14 @@ const EnrollmentForm = ({
             />
 
             {/* Aviso informativo de contacto para documentación */}
-            <div className="p-4 rounded-2xl bg-teal-50 border border-teal-200 flex items-start gap-3 shadow-sm">
-              <Phone size={18} className="text-teal-600 flex-shrink-0 mt-0.5 animate-pulse" />
+            <div className="p-4 rounded-2xl bg-sky-50 border border-sky-200 flex items-start gap-3 shadow-2xs">
+              <FileCheck size={18} className="text-[#0284c7] flex-shrink-0 mt-0.5" />
               <div className="space-y-1 text-xs">
-                <span className="font-bold text-teal-900 block">
-                  Aviso Importante sobre Documentación:
+                <span className="font-bold text-sky-950 block">
+                  Documentación del Alumno (Ley N° 21.659 / Admisión PrevySeg):
                 </span>
                 <p className="text-slate-700 leading-relaxed">
-                  Una vez que te inscribas, nuestro equipo de admisiones de <strong className="text-slate-900">PrevySeg</strong> se comunicará directamente contigo vía <strong>WhatsApp o teléfono</strong> por si llegases a necesitar presentar o validar algún documento específico según tu curso o capacitación.
+                  Para tu inscripción al curso de capacitación en OTEC PrevySeg debes presentar tu <strong>Certificado de antecedentes</strong> y <strong>Certificado de estudios</strong>. Los demás requisitos habilitantes se gestionan y suben directamente en la plataforma oficial de la <strong>Subsecretaría de Prevención del Delito (SPD)</strong>.
                 </p>
               </div>
             </div>

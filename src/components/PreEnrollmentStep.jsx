@@ -16,7 +16,8 @@ import {
   Edit3,
   Award,
   Clock,
-  Send
+  Send,
+  FileCheck
 } from 'lucide-react';
 import { supabase } from '../config/supabase';
 import {
@@ -68,6 +69,9 @@ export const PreEnrollmentStep = ({
   const [errorMessage, setErrorMessage] = useState('');
   const [successNotice, setSuccessNotice] = useState('');
 
+  // Declaración jurada de conocimiento de requisitos (con ticket/checkbox)
+  const [acceptedRequirementsDeclaration, setAcceptedRequirementsDeclaration] = useState(false);
+
   // 6 casillas fijas para el código OTP de 6 dígitos
   const [otpDigits, setOtpDigits] = useState(['', '', '', '', '', '']);
   const inputRefs = useRef([]);
@@ -109,6 +113,9 @@ export const PreEnrollmentStep = ({
   // ¿Todos los 6 datos son 100% válidos?
   const isFormValid = isNameValid && isRutValid && isEmailValid && isPhoneValid && isRegionValid && isCityValid;
 
+  // ¿Formulario listo con declaración jurada marcada por el alumno?
+  const isReadyToSubmit = isFormValid && acceptedRequirementsDeclaration;
+
   // Contador de campos completados (de 6)
   const completedCount = [
     isNameValid,
@@ -143,7 +150,7 @@ export const PreEnrollmentStep = ({
   // Enviar Código de Verificación OTP usando Supabase Auth
   const handleSendOtp = async (e) => {
     if (e) e.preventDefault();
-    if (!isFormValid) return;
+    if (!isReadyToSubmit) return;
 
     setIsSendingOtp(true);
     setErrorMessage('');
@@ -613,10 +620,107 @@ export const PreEnrollmentStep = ({
 
               </div>
 
+              {/* ================= REQUISITOS DEL PROGRAMA (SEPARADOS POR ENTIDAD) ================= */}
+              <div className="p-4 sm:p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-4">
+                <div className="flex items-center gap-2.5">
+                  <div className="w-8 h-8 rounded-xl bg-sky-100 text-[#0284c7] flex items-center justify-center font-bold flex-shrink-0">
+                    <FileCheck size={18} />
+                  </div>
+                  <div>
+                    <h5 className="text-xs sm:text-sm font-black text-slate-900">
+                      Requisitos de Admisión y Documentación Exigida
+                    </h5>
+                    <p className="text-[11px] text-slate-500">
+                      Conoce los antecedentes obligatorios y dónde se tramita cada uno:
+                    </p>
+                  </div>
+                </div>
+
+                {/* Dos Bloques Claramente Separados */}
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+                  
+                  {/* BLOQUE 1: INSCRIPCIÓN A CURSO DE CAPACITACIÓN (OTEC PREVYSEG) */}
+                  <div className="p-4 rounded-xl bg-white border border-sky-200 shadow-2xs space-y-2">
+                    <div className="flex items-center gap-2 text-sky-800 font-black text-xs">
+                      <span className="w-5 h-5 rounded-full bg-sky-100 text-[#0284c7] flex items-center justify-center text-[10px] font-black flex-shrink-0">
+                        1
+                      </span>
+                      <span className="uppercase tracking-wider text-[11px]">Inscripción a Curso de Capacitación:</span>
+                    </div>
+                    <p className="text-[11px] text-slate-500 leading-tight">
+                      Documentación obligatoria para formalizar tu matrícula en OTEC PrevySeg:
+                    </p>
+                    <ul className="space-y-2 pt-1 text-xs text-slate-800">
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 size={15} className="text-emerald-600 flex-shrink-0 mt-0.5" />
+                        <span><strong>Certificado de antecedentes:</strong> Para Fines Especiales, emitido por el Registro Civil, intachable y vigente.</span>
+                      </li>
+                      <li className="flex items-start gap-2">
+                        <CheckCircle2 size={15} className="text-emerald-600 flex-shrink-0 mt-0.5" />
+                        <span><strong>Certificado de estudios:</strong> Licencia de Enseñanza Media completa validada por MINEDUC (o título técnico/profesional).</span>
+                      </li>
+                    </ul>
+                  </div>
+
+                  {/* BLOQUE 2: PLATAFORMA SUBSECRETARÍA DE PREVENCIÓN DEL DELITO */}
+                  <div className="p-4 rounded-xl bg-white border border-amber-200 shadow-2xs space-y-2">
+                    <div className="flex items-center gap-2 text-amber-900 font-black text-xs">
+                      <span className="w-5 h-5 rounded-full bg-amber-100 text-amber-800 flex items-center justify-center text-[10px] font-black flex-shrink-0">
+                        2
+                      </span>
+                      <span className="uppercase tracking-wider text-[11px]">Subsecretaría de Prevención del Delito:</span>
+                    </div>
+                    <p className="text-[11px] text-slate-500 leading-tight">
+                      Plataforma oficial del Estado (Ley N° 21.659 / Autoridad Fiscalizadora):
+                    </p>
+                    <div className="p-2.5 rounded-lg bg-amber-50/70 border border-amber-100 text-xs text-slate-700 space-y-1.5">
+                      <div className="flex items-start gap-2">
+                        <ShieldCheck size={16} className="text-[#0284c7] flex-shrink-0 mt-0.5" />
+                        <span className="leading-relaxed">
+                          <strong>Los demás requisitos</strong> (evaluación médica, informe psicotécnico de idoneidad, cédula de identidad y antecedentes complementarios) <strong>se suben directamente en la plataforma oficial de la Subsecretaría de Prevención del Delito (SPD)</strong>.
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+
+                {/* DECLARACIÓN JURADA CON TICKET (CHECKBOX) */}
+                <div className="pt-2 border-t border-slate-200">
+                  <div 
+                    onClick={() => setAcceptedRequirementsDeclaration(!acceptedRequirementsDeclaration)}
+                    className={`flex items-start gap-3 p-3.5 sm:p-4 rounded-xl border-2 transition-all cursor-pointer select-none ${
+                      acceptedRequirementsDeclaration
+                        ? 'border-[#0284c7] bg-sky-50/40 shadow-xs'
+                        : 'border-slate-300 bg-white hover:border-slate-400 hover:bg-slate-50/50'
+                    }`}
+                  >
+                    <div className="mt-0.5 flex-shrink-0">
+                      {acceptedRequirementsDeclaration ? (
+                        <div className="w-5 h-5 rounded-md bg-[#0284c7] text-white flex items-center justify-center shadow-xs">
+                          <CheckCircle2 size={16} className="stroke-[3]" />
+                        </div>
+                      ) : (
+                        <div className="w-5 h-5 rounded-md border-2 border-slate-400 bg-white" />
+                      )}
+                    </div>
+                    <div className="space-y-1 text-xs">
+                      <span className="font-black text-slate-900 block text-xs sm:text-sm">
+                        Declaración Jurada de Conocimiento de Requisitos *
+                      </span>
+                      <p className="text-slate-600 leading-relaxed text-[11px] sm:text-xs">
+                        Declaro bajo fe de juramento que he leído y conozco los requisitos de admisión: presentar mi <strong>Certificado de antecedentes</strong> y <strong>Certificado de estudios</strong> para la inscripción al curso de capacitación en OTEC PrevySeg, y que <strong>los demás requisitos se suben en la plataforma de la Subsecretaría de Prevención del Delito</strong>.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+
               {/* ================= BOTÓN REACTIVO DE CONFIRMACIÓN ================= */}
               <div className="pt-4 border-t border-slate-200">
                 <AnimatePresence mode="wait">
-                  {isFormValid ? (
+                  {isReadyToSubmit ? (
                     // Botón Habilitado con Animación y Efecto Glow
                     <motion.div
                       key="btn-confirm-active"
@@ -649,6 +753,24 @@ export const PreEnrollmentStep = ({
                         <span>Enviaremos un código numérico seguro de 6 dígitos a <strong>{formData.email}</strong></span>
                       </p>
                     </motion.div>
+                  ) : isFormValid && !acceptedRequirementsDeclaration ? (
+                    // Falta solo la declaración jurada
+                    <motion.div
+                      key="btn-needs-declaration"
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0 }}
+                      className="p-4 rounded-2xl bg-amber-50 border border-amber-300 text-center space-y-1.5 cursor-pointer hover:bg-amber-100/60 transition-colors"
+                      onClick={() => setAcceptedRequirementsDeclaration(true)}
+                    >
+                      <div className="flex items-center justify-center gap-2 text-xs font-bold text-amber-900">
+                        <AlertCircle size={16} className="text-amber-600" />
+                        <span>Marca la casilla de Declaración Jurada de requisitos arriba para habilitar el envío</span>
+                      </div>
+                      <p className="text-[11px] text-amber-700">
+                        Haz clic en el recuadro de Declaración Jurada para confirmar que leíste y conoces las exigencias.
+                      </p>
+                    </motion.div>
                   ) : (
                     // Mensaje Guía Mientras Completa los Datos
                     <motion.div
@@ -660,7 +782,7 @@ export const PreEnrollmentStep = ({
                     >
                       <div className="flex items-center justify-center gap-2 text-xs font-bold text-slate-600">
                         <Sparkles size={15} className="text-[#0284c7]" />
-                        <span>Completa los 6 datos personales para habilitar el botón de confirmación</span>
+                        <span>Completa los 6 datos personales y marca la declaración jurada para habilitar el botón de confirmación</span>
                       </div>
                       <p className="text-[11px] text-slate-400">
                         Asegúrate de ingresar un RUT y correo electrónico válidos.
