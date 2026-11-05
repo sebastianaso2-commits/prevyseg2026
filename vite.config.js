@@ -21,6 +21,60 @@ export default defineConfig(({ mode }) => {
               req.on('end', async () => {
                 try {
                   const data = JSON.parse(body || '{}');
+                  const gmailUser = env.GMAIL_USER || process.env.GMAIL_USER || 'prevysegconfirm@gmail.com';
+                  const gmailPass = env.GMAIL_APP_PASSWORD || process.env.GMAIL_APP_PASSWORD;
+
+                  // ==========================================
+                  // 1. PRIORIDAD: GMAIL SMTP DIRECTO (NODEMAILER)
+                  // No requiere dominios propios, 100% gratuito
+                  // ==========================================
+                  if (gmailPass && gmailPass !== 'tu_clave_de_aplicacion_aqui') {
+                    try {
+                      const nodemailerModule = await import('nodemailer');
+                      const nodemailer = nodemailerModule.default || nodemailerModule;
+                      const transporter = nodemailer.createTransport({
+                        service: 'gmail',
+                        auth: {
+                          user: gmailUser,
+                          pass: gmailPass.replace(/\s+/g, '')
+                        }
+                      });
+
+                      const mailPromises = [];
+
+                      // Enviar correo al alumno dinámico
+                      if (data.studentEmail) {
+                        mailPromises.push(transporter.sendMail({
+                          from: `"PrevySeg Capacitaciones" <${gmailUser}>`,
+                          to: data.studentEmail.trim(),
+                          subject: `Ficha Recibida y Datos de Pago • ${data.courseName || 'OTEC PrevySeg'}`,
+                          html: data.studentHtml
+                        }).then(r => ({ student: r })));
+                      }
+
+                      // Enviar correo de respaldo a la empresa
+                      mailPromises.push(transporter.sendMail({
+                        from: `"PrevySeg Sistema Web" <${gmailUser}>`,
+                        to: data.companyEmail || 'prevyseg.capacitaciones@gmail.com',
+                        subject: `[NUEVA INSCRIPCIÓN WEB] - ${data.studentName || 'Postulante'} - ${data.courseName || 'Curso'}`,
+                        html: data.companyHtml
+                      }).then(r => ({ company: r })));
+
+                      const results = await Promise.all(mailPromises);
+                      console.log('[NOTIFICACIONES] ✅ Correos enviados en simultáneo vía Gmail SMTP:', results);
+
+                      res.statusCode = 200;
+                      res.setHeader('Content-Type', 'application/json');
+                      res.end(JSON.stringify({ success: true, provider: 'gmail', results }));
+                      return;
+                    } catch (gmailErr) {
+                      console.error('[NOTIFICACIONES GMAIL ERROR]:', gmailErr);
+                    }
+                  }
+
+                  // ==========================================
+                  // 2. ALTERNATIVA: RESEND API
+                  // ==========================================
                   const apiKey = env.RESEND_API_KEY || env.VITE_RESEND_API_KEY || process.env.RESEND_API_KEY;
 
                   if (!apiKey || apiKey === 're_tu_clave_aqui') {

@@ -31,6 +31,52 @@ export default async function handler(req, res) {
     studentName = 'Postulante'
   } = req.body || {};
 
+  const gmailUser = process.env.GMAIL_USER || 'prevysegconfirm@gmail.com';
+  const gmailPass = process.env.GMAIL_APP_PASSWORD;
+
+  // ==========================================
+  // 1. PRIORIDAD: GMAIL SMTP DIRECTO (NODEMAILER)
+  // ==========================================
+  if (gmailPass && gmailPass !== 'tu_clave_de_aplicacion_aqui') {
+    try {
+      const nodemailerModule = await import('nodemailer');
+      const nodemailer = nodemailerModule.default || nodemailerModule;
+      const transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+          user: gmailUser,
+          pass: gmailPass.replace(/\s+/g, '')
+        }
+      });
+
+      const mailPromises = [];
+
+      if (studentEmail) {
+        mailPromises.push(transporter.sendMail({
+          from: `"PrevySeg Capacitaciones" <${gmailUser}>`,
+          to: studentEmail.trim(),
+          subject: `Ficha Recibida y Datos de Pago • ${courseName}`,
+          html: studentHtml
+        }).then(r => ({ student: r })));
+      }
+
+      mailPromises.push(transporter.sendMail({
+        from: `"PrevySeg Sistema Web" <${gmailUser}>`,
+        to: companyEmail.trim(),
+        subject: `[NUEVA INSCRIPCIÓN WEB] - ${studentName} - ${courseName}`,
+        html: companyHtml
+      }).then(r => ({ company: r })));
+
+      const results = await Promise.all(mailPromises);
+      return res.status(200).json({ success: true, provider: 'gmail', results });
+    } catch (gmailErr) {
+      console.error('[SERVERLESS GMAIL ERROR]:', gmailErr);
+    }
+  }
+
+  // ==========================================
+  // 2. ALTERNATIVA: RESEND API
+  // ==========================================
   const apiKey = process.env.RESEND_API_KEY || process.env.VITE_RESEND_API_KEY;
 
   if (!apiKey) {

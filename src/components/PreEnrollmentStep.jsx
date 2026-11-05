@@ -186,17 +186,6 @@ export const PreEnrollmentStep = ({
       codigoSolicitud: generatedCode
     };
 
-    // Preparamos la URL de WhatsApp con todos los datos disponibles
-    const targetWhatsAppUrl = buildWhatsAppEnrollmentUrl(enrollmentData);
-
-    // Abrimos WhatsApp de inmediato sincrónicamente para asegurar que ningún bloqueador de popups lo detenga
-    let waWindow = null;
-    try {
-      waWindow = window.open(targetWhatsAppUrl, '_blank');
-    } catch (e) {
-      console.warn('Popup bloqueado, se usará redirección directa:', e);
-    }
-
     try {
       // 1. Despachar correos automáticos (Opción A: Resend)
       // Al alumno (con datos de transferencia y QR) y a la empresa (prevyseg.capacitaciones@gmail.com)
@@ -224,18 +213,11 @@ export const PreEnrollmentStep = ({
 
       setIsSubmitting(false);
       setFlowStep('COORDINATION');
-
-      // Si no se pudo abrir la pestaña nueva (por bloqueador estricto del navegador), redirigir
-      if (!waWindow || waWindow.closed || typeof waWindow.closed === 'undefined') {
-        window.location.href = targetWhatsAppUrl;
-      }
     } catch (err) {
       console.warn('Aviso durante despacho:', err);
       setIsSubmitting(false);
+      // Continuar a la vista de coordinación para nunca bloquear al usuario
       setFlowStep('COORDINATION');
-      if (!waWindow || waWindow.closed || typeof waWindow.closed === 'undefined') {
-        window.location.href = targetWhatsAppUrl;
-      }
     }
   };
 
