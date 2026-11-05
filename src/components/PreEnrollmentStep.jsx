@@ -28,11 +28,11 @@ import {
   validatePhone
 } from '../utils/validation';
 import { REGIONES_CHILE, OFFICIAL_COURSES, findMatchingCourse } from './EnrollmentForm';
-import { 
-  dispatchEnrollmentEmails, 
-  buildWhatsAppEnrollmentUrl, 
+import {
+  dispatchEnrollmentEmails,
+  buildWhatsAppEnrollmentUrl,
   generatePaymentQrUrl,
-  PREVYSEG_COMPANY_INFO 
+  PREVYSEG_COMPANY_INFO
 } from '../services/notificationService';
 
 /**
@@ -253,21 +253,19 @@ export const PreEnrollmentStep = ({
 
   return (
     <div className="w-full bg-white rounded-3xl border border-slate-200 shadow-2xl overflow-hidden">
-      
+
       {/* ================= CABECERA DEL CURSO SELECCIONADO ================= */}
-      <div className={`p-5 sm:p-6 border-b transition-all ${
-        selectedCourse.school === 'seguridad'
+      <div className={`p-5 sm:p-6 border-b transition-all ${selectedCourse.school === 'seguridad'
           ? 'bg-gradient-to-r from-slate-900 via-[#071626] to-[#0A7D8C] text-white border-sky-900'
           : 'bg-gradient-to-r from-slate-900 via-[#062422] to-[#00A896] text-white border-teal-900'
-      }`}>
+        }`}>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1.5">
             <div className="flex flex-wrap items-center gap-2">
-              <span className={`text-[10px] font-black uppercase px-2.5 py-0.5 rounded-md tracking-wider ${
-                selectedCourse.school === 'seguridad'
+              <span className={`text-[10px] font-black uppercase px-2.5 py-0.5 rounded-md tracking-wider ${selectedCourse.school === 'seguridad'
                   ? 'bg-sky-500/20 text-sky-300 border border-sky-400/30'
                   : 'bg-teal-500/20 text-teal-300 border border-teal-400/30'
-              }`}>
+                }`}>
                 {selectedCourse.school === 'seguridad' ? '🛡️ Escuela de Seguridad Privada' : '⚙️ Escuela de Oficios y SENCE'}
               </span>
               <span className="text-[10px] text-slate-300 bg-white/10 px-2 py-0.5 rounded-md flex items-center gap-1">
@@ -299,7 +297,7 @@ export const PreEnrollmentStep = ({
 
       {/* ================= CONTENIDO INTERACTIVO ================= */}
       <div className="p-6 sm:p-8">
-        
+
         {/* ================= VISTA 1: FICHA DE DATOS + BOTÓN "ENVIAR INFORMACIÓN" ================= */}
         {flowStep === 'FORM' && (
           <motion.div
@@ -350,7 +348,7 @@ export const PreEnrollmentStep = ({
             {/* Cuadrícula de los 6 campos */}
             <form onSubmit={handleSendInformation} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 text-xs">
-                
+
                 {/* 1. NOMBRE COMPLETO */}
                 <div className="space-y-1.5">
                   <label className="font-bold text-slate-700 flex items-center justify-between">
@@ -402,13 +400,12 @@ export const PreEnrollmentStep = ({
                     placeholder="Ej. 18.643.817-5"
                     value={formData.rut}
                     onChange={handleInputChange}
-                    className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-xs sm:text-sm font-mono text-slate-900 focus:bg-white focus:outline-none focus:ring-2 transition-all ${
-                      formData.rut && !isRutValid
+                    className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-xs sm:text-sm font-mono text-slate-900 focus:bg-white focus:outline-none focus:ring-2 transition-all ${formData.rut && !isRutValid
                         ? 'border-rose-300 focus:ring-rose-500'
                         : isRutValid
                           ? 'border-emerald-300 focus:ring-emerald-500'
                           : 'border-slate-200 focus:ring-[#0284c7]'
-                    }`}
+                      }`}
                   />
                 </div>
 
@@ -438,13 +435,12 @@ export const PreEnrollmentStep = ({
                     placeholder="tu.correo@ejemplo.com"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 transition-all ${
-                      formData.email && !isEmailValid
+                    className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 transition-all ${formData.email && !isEmailValid
                         ? 'border-amber-300 focus:ring-amber-500'
                         : isEmailValid
                           ? 'border-emerald-300 focus:ring-emerald-500'
                           : 'border-slate-200 focus:ring-[#0284c7]'
-                    }`}
+                      }`}
                   />
                   <span className="text-[10px] text-slate-500 block">
                     Aquí recibirás el comprobante oficial con los datos de transferencia y código QR.
@@ -556,7 +552,7 @@ export const PreEnrollmentStep = ({
 
                 {/* Dos Bloques Separados */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3.5">
-                  
+
                   {/* BLOQUE 1: INSCRIPCIÓN A CURSO DE CAPACITACIÓN (OTEC PREVYSEG) */}
                   <div className="p-4 rounded-xl bg-white border border-sky-200 shadow-2xs space-y-2">
                     <div className="flex items-center gap-2 text-sky-800 font-black text-xs">
@@ -605,13 +601,12 @@ export const PreEnrollmentStep = ({
 
                 {/* DECLARACIÓN JURADA CON TICKET (CHECKBOX) */}
                 <div className="pt-2 border-t border-slate-200">
-                  <div 
+                  <div
                     onClick={() => setAcceptedRequirementsDeclaration(!acceptedRequirementsDeclaration)}
-                    className={`flex items-start gap-3 p-3.5 sm:p-4 rounded-xl border-2 transition-all cursor-pointer select-none ${
-                      acceptedRequirementsDeclaration
+                    className={`flex items-start gap-3 p-3.5 sm:p-4 rounded-xl border-2 transition-all cursor-pointer select-none ${acceptedRequirementsDeclaration
                         ? 'border-[#0284c7] bg-sky-50/40 shadow-xs'
                         : 'border-slate-300 bg-white hover:border-slate-400 hover:bg-slate-50/50'
-                    }`}
+                      }`}
                   >
                     <div className="mt-0.5 flex-shrink-0">
                       {acceptedRequirementsDeclaration ? (
@@ -748,7 +743,7 @@ export const PreEnrollmentStep = ({
 
             {/* Cuadrícula de Resumen: Cliente & Programa */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              
+
               {/* Tarjeta 1: Datos del Cliente / Postulante */}
               <div className="p-5 rounded-2xl bg-slate-50 border border-slate-200 space-y-3">
                 <div className="flex items-center gap-2 border-b border-slate-200 pb-2">
@@ -833,9 +828,9 @@ export const PreEnrollmentStep = ({
                 <Sparkles size={16} className="text-[#0284c7]" />
                 <span>¿Cómo proseguimos con la inscripción entre el trabajador y tú?</span>
               </h4>
-              
+
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
-                
+
                 <div className="p-3.5 rounded-xl bg-white border border-sky-100 space-y-1.5 shadow-2xs">
                   <span className="w-5 h-5 rounded-full bg-sky-100 text-[#0284c7] font-black text-[10px] flex items-center justify-center">
                     1
@@ -889,7 +884,7 @@ export const PreEnrollmentStep = ({
             {/* DATOS DE TRANSFERENCIA BANCARIA Y CÓDIGO QR EN PANTALLA */}
             <div className="p-5 sm:p-6 rounded-2xl bg-slate-50 border border-slate-200">
               <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-                
+
                 {/* Datos en texto */}
                 <div className="space-y-3 flex-1 text-xs">
                   <div className="space-y-1">

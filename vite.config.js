@@ -35,6 +35,7 @@ export default defineConfig(({ mode }) => {
                   }
 
                   const responses = {};
+                  let registeredOwnerEmail = 'sebastianmotox21@gmail.com';
 
                   // 1. Enviar correo al alumno
                   if (data.studentEmail) {
@@ -51,7 +52,30 @@ export default defineConfig(({ mode }) => {
                         html: data.studentHtml
                       })
                     });
-                    responses.student = await studentRes.json();
+                    const studentJson = await studentRes.json();
+                    responses.student = studentJson;
+
+                    // Si Resend bloquea por estar en modo sandbox gratuito, detectamos el correo del dueño
+                    if (studentJson?.statusCode === 403 && studentJson?.message) {
+                      const match = studentJson.message.match(/to your own email address \(([^)]+)\)/);
+                      if (match && match[1]) registeredOwnerEmail = match[1];
+
+                      // Reenviar copia de prueba al correo registrado en Resend
+                      const fbRes = await fetch('https://api.resend.com/emails', {
+                        method: 'POST',
+                        headers: {
+                          'Authorization': `Bearer ${apiKey}`,
+                          'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                          from: 'PrevySeg Capacitaciones <onboarding@resend.dev>',
+                          to: [registeredOwnerEmail],
+                          subject: `[PRUEBA ALUMNO: ${data.studentEmail}] Ficha y Datos de Pago • ${data.courseName || 'PrevySeg'}`,
+                          html: data.studentHtml
+                        })
+                      });
+                      responses.studentFallback = await fbRes.json();
+                    }
                   }
 
                   // 2. Enviar correo a la empresa
@@ -68,7 +92,26 @@ export default defineConfig(({ mode }) => {
                       html: data.companyHtml
                     })
                   });
-                  responses.company = await companyRes.json();
+                  const companyJson = await companyRes.json();
+                  responses.company = companyJson;
+
+                  // Si Resend bloquea por estar en modo sandbox gratuito, enviamos la notificación al dueño
+                  if (companyJson?.statusCode === 403 && registeredOwnerEmail) {
+                    const fbCompRes = await fetch('https://api.resend.com/emails', {
+                      method: 'POST',
+                      headers: {
+                        'Authorization': `Bearer ${apiKey}`,
+                        'Content-Type': 'application/json'
+                      },
+                      body: JSON.stringify({
+                        from: 'PrevySeg Sistema Web <onboarding@resend.dev>',
+                        to: [registeredOwnerEmail],
+                        subject: `[NOTIFICACIÓN ADMISIÓN EMPRESA] - ${data.studentName || 'Postulante'} - ${data.courseName || 'Curso'}`,
+                        html: data.companyHtml
+                      })
+                    });
+                    responses.companyFallback = await fbCompRes.json();
+                  }
 
                   res.statusCode = 200;
                   res.setHeader('Content-Type', 'application/json');

@@ -44,6 +44,7 @@ export default async function handler(req, res) {
 
   try {
     const responses = {};
+    let registeredOwnerEmail = 'sebastianmotox21@gmail.com';
 
     // 1. Enviar correo al alumno con datos de pago y QR
     if (studentEmail) {
@@ -60,7 +61,29 @@ export default async function handler(req, res) {
           html: studentHtml
         })
       });
-      responses.student = await studentRes.json();
+      const studentJson = await studentRes.json();
+      responses.student = studentJson;
+
+      // Si Resend bloquea por cuenta en modo sandbox sin dominio verificado
+      if (studentJson?.statusCode === 403 && studentJson?.message) {
+        const match = studentJson.message.match(/to your own email address \(([^)]+)\)/);
+        if (match && match[1]) registeredOwnerEmail = match[1];
+
+        const fbRes = await fetch('https://api.resend.com/emails', {
+          method: 'POST',
+          headers: {
+            'Authorization': `Bearer ${apiKey}`,
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            from: 'PrevySeg Capacitaciones <onboarding@resend.dev>',
+            to: [registeredOwnerEmail],
+            subject: `[PRUEBA ALUMNO: ${studentEmail}] Ficha y Datos de Pago • ${courseName}`,
+            html: studentHtml
+          })
+        });
+        responses.studentFallback = await fbRes.json();
+      }
     }
 
     // 2. Enviar correo a la empresa
@@ -77,7 +100,26 @@ export default async function handler(req, res) {
         html: companyHtml
       })
     });
-    responses.company = await companyRes.json();
+    const companyJson = await companyRes.json();
+    responses.company = companyJson;
+
+    // Si Resend bloquea por estar en modo sandbox gratuito, enviamos copia al correo del administrador
+    if (companyJson?.statusCode === 403 && registeredOwnerEmail) {
+      const fbCompRes = await fetch('https://api.resend.com/emails', {
+        method: 'POST',
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          from: 'PrevySeg Sistema Web <onboarding@resend.dev>',
+          to: [registeredOwnerEmail],
+          subject: `[NOTIFICACIÓN ADMISIÓN EMPRESA] - ${studentName} - ${courseName}`,
+          html: companyHtml
+        })
+      });
+      responses.companyFallback = await fbCompRes.json();
+    }
 
     return res.status(200).json({ success: true, responses });
   } catch (error) {
