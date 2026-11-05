@@ -27,6 +27,11 @@ import {
   validatePhone
 } from '../utils/validation';
 import { REGIONES_CHILE, OFFICIAL_COURSES, findMatchingCourse } from './EnrollmentForm';
+import { 
+  dispatchEnrollmentEmails, 
+  buildWhatsAppEnrollmentUrl, 
+  PREVYSEG_COMPANY_INFO 
+} from '../services/notificationService';
 
 /**
  * Componente Paso 1: Ficha Reducida de Preinscripción & Verificación de Correo OTP con Supabase.
@@ -185,12 +190,23 @@ export const PreEnrollmentStep = ({
         return;
       }
 
-      // Éxito: pasar a la pantalla de verificación OTP
+      // Éxito: pasar a la pantalla de verificación OTP y despachar correos (Opción A: Resend)
       setIsSendingOtp(false);
       setFlowStep('VERIFY_OTP');
       setCountdown(60);
       setCanResend(false);
       setOtpDigits(Array(6).fill(''));
+
+      // Despachar correos automáticos al alumno (con QR y datos de pago) y a prevyseg.capacitaciones@gmail.com
+      dispatchEnrollmentEmails({
+        nombre: formData.nombre.trim(),
+        rut: formData.rut.trim(),
+        email: cleanEmail,
+        telefono: formData.telefono.trim(),
+        region: formData.region,
+        ciudad: effectiveCity,
+        courseName: selectedCourse?.name || defaultCourseName || 'Curso de Capacitación'
+      }).catch(notifErr => console.warn('[NOTIFICACIONES] Aviso:', notifErr));
 
       // Foco automático en la primera casilla después de la animación
       setTimeout(() => {
@@ -919,6 +935,30 @@ export const PreEnrollmentStep = ({
               <span className="text-[11px] text-slate-400">
                 Revisa también tu bandeja de Spam o Correo no deseado si no lo ves de inmediato.
               </span>
+            </div>
+
+            {/* Acceso directo al WhatsApp Oficial de la Empresa (+56 9 7869 1869) */}
+            <div className="pt-4 border-t border-slate-200 mt-2 space-y-2">
+              <span className="text-[11px] text-slate-500 block font-medium">
+                ¿Prefieres enviar tu ficha y coordinar la recepción de documentos directamente por WhatsApp?
+              </span>
+              <a
+                href={buildWhatsAppEnrollmentUrl({
+                  nombre: formData.nombre.trim(),
+                  rut: formData.rut.trim(),
+                  email: formData.email.trim(),
+                  telefono: formData.telefono.trim(),
+                  region: formData.region,
+                  ciudad: effectiveCity,
+                  courseName: selectedCourse?.name || defaultCourseName || 'Curso de Capacitación'
+                })}
+                target="_blank"
+                rel="noreferrer"
+                className="inline-flex items-center justify-center gap-2 w-full py-3.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-700 hover:to-teal-700 text-white font-bold text-xs sm:text-sm shadow-md transition-all cursor-pointer"
+              >
+                <Phone size={16} />
+                <span>Enviar Ficha al WhatsApp de la Empresa ({PREVYSEG_COMPANY_INFO.whatsappDisplay})</span>
+              </a>
             </div>
 
           </motion.div>

@@ -750,11 +750,10 @@ const AdmissionPortalView = ({ currentUser }) => {
               <div className="p-4 bg-white rounded-xl border border-slate-200 space-y-3 text-xs">
                 <h4 className="font-bold text-slate-900 text-sm">Datos para Transferencia Bancaria Oficial:</h4>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 text-slate-700 bg-slate-50 p-3 rounded-lg border border-slate-200 font-mono">
-                  <div><strong>Banco:</strong> Banco Santander / Banco Estado</div>
+                  <div><strong>Nombre Titular:</strong> PREVYSEG SPA</div>
+                  <div><strong>RUT Titular:</strong> 76.256.947-7</div>
                   <div><strong>Tipo de Cuenta:</strong> Cuenta Corriente</div>
-                  <div><strong>N° Cuenta:</strong> 74-88921-01</div>
-                  <div><strong>RUT Titular:</strong> 77.123.456-K</div>
-                  <div><strong>Nombre Titular:</strong> OTEC PREVYSEG SPA</div>
+                  <div><strong>N° Cuenta:</strong> 1000163399</div>
                   <div><strong>Correo Comprobante:</strong> prevyseg.capacitaciones@gmail.com</div>
                 </div>
                 <p className="text-[11px] text-slate-500">

@@ -55,6 +55,7 @@ import {
   requestCctvApproval
 } from '../config/supabase';
 import { getSavedCourses, getCourseModalities } from '../data/coursesData';
+import { dispatchEnrollmentEmails } from '../services/notificationService';
 
 // ================= LISTADO OFICIAL DE REGIONES Y CIUDADES DE CHILE =================
 export const REGIONES_CHILE = [
@@ -711,6 +712,17 @@ const EnrollmentForm = ({
             console.warn('Aviso: Registro de solicitud CCTV:', cctvErr);
           }
         }
+        // Despachar correos automáticos (Opción A: Resend) con datos bancarios y QR tanto al alumno como a prevyseg.capacitaciones@gmail.com
+        dispatchEnrollmentEmails({
+          nombre: formData.nombre.trim(),
+          rut: formattedRut,
+          email: formData.email.trim(),
+          telefono: formData.telefono.trim(),
+          region: formData.region,
+          ciudad: effectiveCity,
+          courseName: currentCourse.name,
+          codigoSolicitud: generatedCode
+        }).catch(errNotif => console.warn('[NOTIFICACIONES] Aviso:', errNotif));
       }
 
       setIsSubmitting(false);
@@ -738,7 +750,7 @@ const EnrollmentForm = ({
   };
 
   // Construir mensaje directo a WhatsApp Oficial de PrevySeg
-  const whatsappNumber = "56982312128"; // Contacto oficial de Admisión
+  const whatsappNumber = "56978691869"; // WhatsApp Oficial de Admisión (+56 9 7869 1869)
 
   const whatsappMessage = encodeURIComponent(
     `*📋 NUEVA FICHA DE INSCRIPCIÓN - PREVYSEG OTEC*\n` +
@@ -902,7 +914,7 @@ const EnrollmentForm = ({
                 <span>RECEPCIÓN Y VALIDACIÓN DE DOCUMENTOS POR WHATSAPP</span>
               </div>
               <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
-                ¡Ya estás registrado! Nuestro equipo de admisiones de <strong className="text-slate-900">PrevySeg</strong> se pondrá en contacto contigo a través de <strong>WhatsApp (+56 9 8231 2128)</strong> para solicitarte y validar las fotografías o PDFs de tus documentos obligatorios (Cédula de Identidad, Certificado de Antecedentes, etc.).
+                ¡Ya estás registrado! Nuestro equipo de admisiones de <strong className="text-slate-900">PrevySeg</strong> se pondrá en contacto contigo a la brevedad a través de <strong>WhatsApp (+56 9 7869 1869)</strong> para coordinar tus datos de pago, comprobante y recepción de certificados.
               </p>
               <div className="pt-2">
                 <a
@@ -2000,12 +2012,11 @@ const EnrollmentForm = ({
                     <span>Datos Oficiales para Transferencia Electrónica:</span>
                   </h4>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-700 bg-slate-50 p-3.5 rounded-xl border border-slate-200 font-mono text-xs">
-                    <div><strong className="text-slate-500">Banco:</strong> Banco Santander / Banco Estado</div>
-                    <div><strong className="text-slate-500">Tipo de Cuenta:</strong> Cuenta Corriente</div>
-                    <div><strong className="text-slate-500">N° Cuenta:</strong> 74-88921-01</div>
-                    <div><strong className="text-slate-500">RUT Titular:</strong> 77.123.456-K</div>
-                    <div><strong className="text-slate-500">Nombre Titular:</strong> OTEC PREVYSEG SPA</div>
-                    <div><strong className="text-slate-500">Correo:</strong> prevyseg.capacitaciones@gmail.com</div>
+                    <div><strong className="text-slate-500">Nombre Titular:</strong> PREVYSEG SPA</div>
+                    <div><strong className="text-slate-500">RUT Titular:</strong> 76.256.947-7</div>
+                    <div><strong className="text-slate-500">Tipo de Cuenta:</strong> CUENTA CORRIENTE</div>
+                    <div><strong className="text-slate-500">N° Cuenta:</strong> 1000163399</div>
+                    <div className="sm:col-span-2"><strong className="text-slate-500">Correo Confirmación:</strong> prevyseg.capacitaciones@gmail.com</div>
                   </div>
                   <p className="text-[11px] text-slate-500">
                     * Al transferir, incluye en el asunto tu <strong>Nombre y RUT</strong>. Una vez completada la inscripción, podrás enviar el comprobante directamente al WhatsApp de admisiones.
