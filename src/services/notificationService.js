@@ -94,8 +94,10 @@ export const buildWhatsAppEnrollmentUrl = (data = {}) => {
   const {
     nombre = '',
     rut = '',
+    fechaNacimiento = '',
     email = '',
     telefono = '',
+    domicilio = '',
     region = '',
     ciudad = '',
     courseName = 'Curso de Seguridad Privada',
@@ -121,8 +123,10 @@ export const buildWhatsAppEnrollmentUrl = (data = {}) => {
     `👤 *DATOS DEL POSTULANTE:*`,
     `• *Nombre:* ${nombre || 'No especificado'}`,
     `• *RUT:* ${rut || 'No especificado'}`,
+    ...(fechaNacimiento ? [`• *Fecha de Nacimiento:* ${fechaNacimiento}`] : []),
     `• *Teléfono:* ${telefono || 'No especificado'}`,
     `• *Correo:* ${email || 'No especificado'}`,
+    ...(domicilio ? [`• *Dirección Particular:* ${domicilio}`] : []),
     `• *Ubicación:* ${ciudad || 'Arica'}, ${region || 'Región de Arica y Parinacota'}`,
     `----------------------------------------`,
     `⚖️ *DECLARACIÓN JURADA:* Aceptada ✓`,
@@ -149,7 +153,10 @@ export const buildStudentEmailHtml = (data = {}) => {
     nombre = 'Estimado/a Alumno/a',
     courseName = 'Curso Oficial OTEC PrevySeg',
     rut = '',
+    fechaNacimiento = '',
     telefono = '',
+    email = '',
+    domicilio = '',
     ciudad = '',
     region = '',
     cuota1 = null,
@@ -198,6 +205,41 @@ export const buildStudentEmailHtml = (data = {}) => {
         <div style="background-color: #f8fafc; border-left: 4px solid #0a969b; border-radius: 8px; padding: 14px 18px; margin: 18px 0;">
           <span style="font-size: 11px; font-weight: 700; color: #0a969b; text-transform: uppercase; display: block; margin-bottom: 4px;">Programa Académico Seleccionado</span>
           <span style="font-size: 17px; font-weight: 800; color: #161630;">${courseName}</span>
+        </div>
+
+        <!-- RESUMEN DE DATOS REGISTRADOS -->
+        <div style="background-color: #f8fafc; border: 1px solid #e2e8f0; border-radius: 12px; padding: 16px; margin: 18px 0;">
+          <strong style="color: #0f172a; display: block; margin-bottom: 8px; font-size: 12px; text-transform: uppercase; letter-spacing: 0.5px;">📋 Tus Datos Registrados:</strong>
+          <table border="0" cellpadding="4" cellspacing="0" width="100%" style="font-size: 12px; color: #334155;">
+            <tr>
+              <td style="font-weight: 700; color: #64748b; width: 40%;">Postulante:</td>
+              <td style="font-weight: 800; color: #0f172a;">${nombre}</td>
+            </tr>
+            <tr>
+              <td style="font-weight: 700; color: #64748b;">RUT:</td>
+              <td style="font-family: monospace; font-weight: 800; color: #0284c7;">${rut}</td>
+            </tr>
+            ${fechaNacimiento ? `
+            <tr>
+              <td style="font-weight: 700; color: #64748b;">Fecha de Nacimiento:</td>
+              <td style="font-weight: 700; color: #0f172a;">${fechaNacimiento}</td>
+            </tr>
+            ` : ''}
+            <tr>
+              <td style="font-weight: 700; color: #64748b;">Teléfono:</td>
+              <td style="font-weight: 700; color: #0f172a;">${telefono}</td>
+            </tr>
+            ${domicilio ? `
+            <tr>
+              <td style="font-weight: 700; color: #64748b;">Dirección Particular:</td>
+              <td style="font-weight: 700; color: #0f172a;">${domicilio}</td>
+            </tr>
+            ` : ''}
+            <tr>
+              <td style="font-weight: 700; color: #64748b;">Ubicación:</td>
+              <td style="color: #475569;">${ciudad}, ${region}</td>
+            </tr>
+          </table>
         </div>
 
         <!-- AVISO DE CONTACTO RÁPIDO -->
@@ -261,6 +303,7 @@ export const buildCompanyEmailHtml = (data = {}) => {
   const {
     nombre = 'Sin nombre',
     rut = 'Sin RUT',
+    fechaNacimiento = '',
     email = 'Sin correo',
     telefono = 'Sin teléfono',
     region = '',
@@ -325,6 +368,12 @@ export const buildCompanyEmailHtml = (data = {}) => {
           <td style="font-weight: 700; color: #64748b;">RUT:</td>
           <td style="font-family: monospace; font-weight: 800; color: #0284c7;">${rut}</td>
         </tr>
+        ${fechaNacimiento ? `
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="font-weight: 700; color: #64748b;">Fecha de Nacimiento:</td>
+          <td style="font-weight: 800; color: #0f172a;">${fechaNacimiento}</td>
+        </tr>
+        ` : ''}
         <tr style="border-bottom: 1px solid #e2e8f0;">
           <td style="font-weight: 700; color: #64748b;">Teléfono / WhatsApp:</td>
           <td><a href="tel:${telefono}" style="color: #0284c7; font-weight: 700;">${telefono}</a></td>
@@ -333,16 +382,16 @@ export const buildCompanyEmailHtml = (data = {}) => {
           <td style="font-weight: 700; color: #64748b;">Correo Electrónico:</td>
           <td><a href="mailto:${email}" style="color: #0284c7; font-weight: 700;">${email}</a></td>
         </tr>
+        ${domicilio ? `
+        <tr style="border-bottom: 1px solid #e2e8f0;">
+          <td style="font-weight: 700; color: #64748b;">Dirección Particular:</td>
+          <td style="font-weight: 800; color: #0f172a;">${domicilio}</td>
+        </tr>
+        ` : ''}
         <tr style="border-bottom: 1px solid #e2e8f0;">
           <td style="font-weight: 700; color: #64748b;">Ubicación:</td>
           <td>${ciudad}, ${region}</td>
         </tr>
-        ${domicilio ? `
-        <tr style="border-bottom: 1px solid #e2e8f0;">
-          <td style="font-weight: 700; color: #64748b;">Domicilio Particular:</td>
-          <td>${domicilio}</td>
-        </tr>
-        ` : ''}
         ${observaciones ? `
         <tr style="border-bottom: 1px solid #e2e8f0;">
           <td style="font-weight: 700; color: #64748b;">Consultas / Buzón:</td>

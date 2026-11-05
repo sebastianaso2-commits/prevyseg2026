@@ -7,6 +7,8 @@ import {
   Phone,
   MapPin,
   Building2,
+  Calendar,
+  Home,
   ArrowRight,
   CheckCircle2,
   AlertCircle,
@@ -37,7 +39,7 @@ import {
 
 /**
  * Componente Ficha de Inscripción y Coordinación (Trabajador - Cliente)
- * 1. Ficha con los 6 datos personales + Declaración Jurada de Requisitos (OTEC y SPD).
+ * 1. Ficha con los 8 datos personales + Declaración Jurada de Requisitos (OTEC y SPD).
  * 2. Botón "Enviar Información".
  * 3. Pantalla de Coordinación de Inscripción directa entre el Trabajador (Ejecutivo PrevySeg) y el Cliente (Postulante).
  */
@@ -49,12 +51,14 @@ export const PreEnrollmentStep = ({
   // 1. Obtener curso seleccionado
   const selectedCourse = findMatchingCourse(defaultCourseName) || OFFICIAL_COURSES[0];
 
-  // 2. Estado de los 6 datos solicitados
+  // 2. Estado de los 8 datos solicitados
   const [formData, setFormData] = useState({
     nombre: '',
     rut: '',
+    fechaNacimiento: '',
     email: '',
     telefono: '',
+    domicilio: '',
     region: 'Región de Arica y Parinacota (XV)',
     ciudad: 'Arica'
   });
@@ -80,28 +84,33 @@ export const PreEnrollmentStep = ({
   const rutValidation = validateRut(formData.rut);
   const isRutValid = rutValidation.isValid;
 
+  const isBirthValid = Boolean(formData.fechaNacimiento && formData.fechaNacimiento.trim());
+
   const emailValidation = validateEmail(formData.email);
   const isEmailValid = emailValidation.isValid;
 
   const phoneValidation = validatePhone(formData.telefono);
   const isPhoneValid = phoneValidation.isValid;
 
+  const isAddressValid = formData.domicilio.trim().length >= 4;
   const isNameValid = formData.nombre.trim().length >= 3;
   const isRegionValid = Boolean(formData.region);
   const isCityValid = formData.ciudad === 'OTRA' ? otherCityName.trim().length >= 2 : Boolean(formData.ciudad);
 
-  // ¿Todos los 6 datos son 100% válidos?
-  const isFormValid = isNameValid && isRutValid && isEmailValid && isPhoneValid && isRegionValid && isCityValid;
+  // ¿Todos los 8 datos son 100% válidos?
+  const isFormValid = isNameValid && isRutValid && isBirthValid && isEmailValid && isPhoneValid && isAddressValid && isRegionValid && isCityValid;
 
   // ¿Listo para enviar con declaración jurada marcada?
   const isReadyToSubmit = isFormValid && acceptedRequirementsDeclaration;
 
-  // Contador de campos completados (de 6)
+  // Contador de campos completados (de 8)
   const completedCount = [
     isNameValid,
     isRutValid,
+    isBirthValid,
     isEmailValid,
     isPhoneValid,
+    isAddressValid,
     isRegionValid,
     isCityValid
   ].filter(Boolean).length;
@@ -174,20 +183,35 @@ export const PreEnrollmentStep = ({
     const cleanName = formData.nombre.trim();
     const cleanRut = formData.rut.trim();
     const cleanPhone = formData.telefono.trim();
+    const cleanFechaNacimiento = formData.fechaNacimiento.trim();
+    const cleanDomicilio = formData.domicilio.trim();
 
     const enrollmentData = {
       nombre: cleanName,
       rut: cleanRut,
+      fechaNacimiento: cleanFechaNacimiento,
       email: cleanEmail,
       telefono: cleanPhone,
+      domicilio: cleanDomicilio,
       region: formData.region,
       ciudad: effectiveCity,
       courseName: selectedCourse?.name || defaultCourseName || 'Curso de Capacitación',
       codigoSolicitud: generatedCode
     };
 
+    // Preparamos la URL de WhatsApp con todos los datos disponibles
+    const targetWhatsAppUrl = buildWhatsAppEnrollmentUrl(enrollmentData);
+
+    // Abrimos WhatsApp de inmediato sincrónicamente para asegurar que ningún bloqueador de popups lo detenga
+    let waWindow = null;
     try {
-      // 1. Despachar correos automáticos (Opción A: Resend)
+      waWindow = window.open(targetWhatsAppUrl, '_blank');
+    } catch (e) {
+      console.warn('Popup bloqueado, se usará redirección directa:', e);
+    }
+
+    try {
+      // 1. Despachar correos automáticos (Gmail SMTP / Resend)
       // Al alumno (con datos de transferencia y QR) y a la empresa (prevyseg.capacitaciones@gmail.com)
       await dispatchEnrollmentEmails(enrollmentData);
 
@@ -198,8 +222,10 @@ export const PreEnrollmentStep = ({
             code: generatedCode,
             nombre: cleanName,
             rut: cleanRut,
+            fecha_nacimiento: cleanFechaNacimiento,
             email: cleanEmail,
             telefono: cleanPhone,
+            domicilio: cleanDomicilio,
             region: formData.region,
             ciudad: effectiveCity,
             course_name: enrollmentData.courseName,
@@ -213,11 +239,19 @@ export const PreEnrollmentStep = ({
 
       setIsSubmitting(false);
       setFlowStep('COORDINATION');
+
+      // Si no se pudo abrir la pestaña nueva (por bloqueador estricto del navegador), redirigir
+      if (!waWindow || waWindow.closed || typeof waWindow.closed === 'undefined') {
+        window.location.href = targetWhatsAppUrl;
+      }
     } catch (err) {
       console.warn('Aviso durante despacho:', err);
       setIsSubmitting(false);
       // Continuar a la vista de coordinación para nunca bloquear al usuario
       setFlowStep('COORDINATION');
+      if (!waWindow || waWindow.closed || typeof waWindow.closed === 'undefined') {
+        window.location.href = targetWhatsAppUrl;
+      }
     }
   };
 
@@ -225,8 +259,10 @@ export const PreEnrollmentStep = ({
   const whatsappUrl = buildWhatsAppEnrollmentUrl({
     nombre: formData.nombre.trim(),
     rut: formData.rut.trim(),
+    fechaNacimiento: formData.fechaNacimiento.trim(),
     email: formData.email.trim(),
     telefono: formData.telefono.trim(),
+    domicilio: formData.domicilio.trim(),
     region: formData.region,
     ciudad: effectiveCity,
     courseName: selectedCourse?.name || defaultCourseName,
@@ -288,7 +324,7 @@ export const PreEnrollmentStep = ({
             exit={{ opacity: 0, y: -10 }}
             className="space-y-6"
           >
-            {/* Título de la sección y barra de progreso de los 6 campos */}
+            {/* Título de la sección y barra de progreso de los 8 campos */}
             <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-200 pb-4">
               <div>
                 <div className="flex items-center gap-2">
@@ -304,16 +340,16 @@ export const PreEnrollmentStep = ({
                 </p>
               </div>
 
-              {/* Indicador visual de 6 campos */}
+              {/* Indicador visual de 8 campos */}
               <div className="flex items-center gap-2 self-start sm:self-auto bg-slate-50 px-3.5 py-1.5 rounded-xl border border-slate-200 text-xs font-bold">
                 <span className="text-slate-500">Progreso:</span>
-                <span className={`font-mono font-black ${completedCount === 6 ? 'text-emerald-600' : 'text-[#0284c7]'}`}>
-                  {completedCount} de 6 datos
+                <span className={`font-mono font-black ${completedCount === 8 ? 'text-emerald-600' : 'text-[#0284c7]'}`}>
+                  {completedCount} de 8 datos
                 </span>
                 <div className="w-16 h-2 bg-slate-200 rounded-full overflow-hidden ml-1">
                   <div
                     className="h-full bg-gradient-to-r from-[#0284c7] to-[#00c2b2] transition-all duration-300"
-                    style={{ width: `${(completedCount / 6) * 100}%` }}
+                    style={{ width: `${(completedCount / 8) * 100}%` }}
                   />
                 </div>
               </div>
@@ -327,7 +363,7 @@ export const PreEnrollmentStep = ({
               </div>
             )}
 
-            {/* Cuadrícula de los 6 campos */}
+            {/* Cuadrícula de los 8 campos */}
             <form onSubmit={handleSendInformation} className="space-y-5">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5 text-xs">
 
@@ -351,7 +387,7 @@ export const PreEnrollmentStep = ({
                     placeholder="Ej. Juan Carlos Pérez González"
                     value={formData.nombre}
                     onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0284c7] transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0284c7] transition-all font-medium"
                   />
                 </div>
 
@@ -391,12 +427,39 @@ export const PreEnrollmentStep = ({
                   />
                 </div>
 
-                {/* 3. CORREO ELECTRÓNICO */}
+                {/* 3. FECHA DE NACIMIENTO */}
+                <div className="space-y-1.5">
+                  <label className="font-bold text-slate-700 flex items-center justify-between">
+                    <span className="flex items-center gap-1.5">
+                      <Calendar size={15} className="text-amber-500" />
+                      <span>3. Fecha de Nacimiento *</span>
+                    </span>
+                    {formData.fechaNacimiento && isBirthValid && (
+                      <span className="text-[10px] text-emerald-600 font-bold flex items-center gap-1">
+                        <CheckCircle2 size={12} /> Listo
+                      </span>
+                    )}
+                  </label>
+                  <input
+                    type="date"
+                    required
+                    name="fechaNacimiento"
+                    value={formData.fechaNacimiento}
+                    onChange={handleInputChange}
+                    max={new Date().toISOString().split('T')[0]}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0284c7] transition-all cursor-pointer font-medium"
+                  />
+                  <span className="text-[10px] text-slate-500 block">
+                    Exigido para validación etaria y registro oficial de matrícula.
+                  </span>
+                </div>
+
+                {/* 4. CORREO ELECTRÓNICO */}
                 <div className="space-y-1.5">
                   <label className="font-bold text-slate-700 flex items-center justify-between">
                     <span className="flex items-center gap-1.5">
                       <Mail size={15} className="text-[#0284c7]" />
-                      <span>3. Correo Electrónico *</span>
+                      <span>4. Correo Electrónico *</span>
                     </span>
                     {formData.email && (
                       isEmailValid ? (
@@ -417,7 +480,7 @@ export const PreEnrollmentStep = ({
                     placeholder="tu.correo@ejemplo.com"
                     value={formData.email}
                     onChange={handleInputChange}
-                    className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 transition-all ${formData.email && !isEmailValid
+                    className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 transition-all font-medium ${formData.email && !isEmailValid
                         ? 'border-amber-300 focus:ring-amber-500'
                         : isEmailValid
                           ? 'border-emerald-300 focus:ring-emerald-500'
@@ -429,12 +492,12 @@ export const PreEnrollmentStep = ({
                   </span>
                 </div>
 
-                {/* 4. TELÉFONO / WHATSAPP */}
+                {/* 5. TELÉFONO / WHATSAPP */}
                 <div className="space-y-1.5">
                   <label className="font-bold text-slate-700 flex items-center justify-between">
                     <span className="flex items-center gap-1.5">
                       <Phone size={15} className="text-emerald-600" />
-                      <span>4. Teléfono / WhatsApp *</span>
+                      <span>5. Teléfono / WhatsApp *</span>
                     </span>
                     {formData.telefono && isPhoneValid && (
                       <span className="text-[10px] text-emerald-600 font-bold flex items-center gap-1">
@@ -449,19 +512,46 @@ export const PreEnrollmentStep = ({
                     placeholder="Ej. +56 9 8231 2128"
                     value={formData.telefono}
                     onChange={handleInputChange}
-                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 font-mono focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all"
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 font-mono focus:bg-white focus:outline-none focus:ring-2 focus:ring-emerald-500 transition-all font-medium"
                   />
                   <span className="text-[10px] text-slate-500 block">
                     Para coordinar recepción de documentación y matrícula con el trabajador de PrevySeg.
                   </span>
                 </div>
 
-                {/* 5. REGIÓN DE RESIDENCIA */}
+                {/* 6. DIRECCIÓN PARTICULAR */}
+                <div className="space-y-1.5">
+                  <label className="font-bold text-slate-700 flex items-center justify-between">
+                    <span className="flex items-center gap-1.5">
+                      <Home size={15} className="text-indigo-500" />
+                      <span>6. Dirección Particular *</span>
+                    </span>
+                    {formData.domicilio && isAddressValid && (
+                      <span className="text-[10px] text-emerald-600 font-bold flex items-center gap-1">
+                        <CheckCircle2 size={12} /> Listo
+                      </span>
+                    )}
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    name="domicilio"
+                    placeholder="Ej. Blanco Encalada #666, Depto 2B"
+                    value={formData.domicilio}
+                    onChange={handleInputChange}
+                    className="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#0284c7] transition-all font-medium"
+                  />
+                  <span className="text-[10px] text-slate-500 block">
+                    Calle, número, pasaje, villa o departamento de residencia actual.
+                  </span>
+                </div>
+
+                {/* 7. REGIÓN DE RESIDENCIA */}
                 <div className="space-y-1.5">
                   <label className="font-bold text-slate-700 flex items-center justify-between">
                     <span className="flex items-center gap-1.5">
                       <MapPin size={15} className="text-rose-500" />
-                      <span>5. Región de Residencia *</span>
+                      <span>7. Región de Residencia *</span>
                     </span>
                     <span className="text-[10px] bg-sky-50 text-[#0284c7] font-bold px-1.5 py-0.5 rounded">
                       16 Regiones
@@ -479,12 +569,12 @@ export const PreEnrollmentStep = ({
                   </select>
                 </div>
 
-                {/* 6. CIUDAD / COMUNA */}
+                {/* 8. CIUDAD / COMUNA */}
                 <div className="space-y-1.5">
                   <label className="font-bold text-slate-700 flex items-center justify-between">
                     <span className="flex items-center gap-1.5">
                       <Building2 size={15} className="text-[#0284c7]" />
-                      <span>6. Ciudad / Comuna *</span>
+                      <span>8. Ciudad / Comuna *</span>
                     </span>
                     <span className="text-[10px] bg-emerald-50 text-emerald-700 font-bold px-1.5 py-0.5 rounded">
                       Seleccionable
@@ -677,7 +767,7 @@ export const PreEnrollmentStep = ({
                     >
                       <div className="flex items-center justify-center gap-2 text-xs font-bold text-slate-600">
                         <Sparkles size={15} className="text-[#0284c7]" />
-                        <span>Completa los 6 datos personales y marca la declaración jurada para habilitar "Enviar Información"</span>
+                        <span>Completa los 8 datos personales y marca la declaración jurada para habilitar "Enviar Información"</span>
                       </div>
                       <p className="text-[11px] text-slate-400">
                         Asegúrate de ingresar un RUT y correo electrónico válidos.
@@ -743,6 +833,12 @@ export const PreEnrollmentStep = ({
                     <span className="text-slate-500">RUT:</span>
                     <strong className="font-mono text-slate-900">{formData.rut}</strong>
                   </div>
+                  {formData.fechaNacimiento && (
+                    <div className="flex justify-between py-1 border-b border-slate-100">
+                      <span className="text-slate-500">Fecha Nacimiento:</span>
+                      <strong className="text-slate-900">{formData.fechaNacimiento}</strong>
+                    </div>
+                  )}
                   <div className="flex justify-between py-1 border-b border-slate-100">
                     <span className="text-slate-500">Teléfono:</span>
                     <strong className="font-mono text-emerald-700">{formData.telefono}</strong>
@@ -751,6 +847,12 @@ export const PreEnrollmentStep = ({
                     <span className="text-slate-500">Correo:</span>
                     <strong className="text-slate-900">{formData.email}</strong>
                   </div>
+                  {formData.domicilio && (
+                    <div className="flex justify-between py-1 border-b border-slate-100">
+                      <span className="text-slate-500">Dirección Particular:</span>
+                      <strong className="text-slate-900">{formData.domicilio}</strong>
+                    </div>
+                  )}
                   <div className="flex justify-between py-1 border-b border-slate-100">
                     <span className="text-slate-500">Ubicación:</span>
                     <strong className="text-slate-900">{effectiveCity}, {formData.region}</strong>
