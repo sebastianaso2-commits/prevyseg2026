@@ -58,6 +58,7 @@ const CourseCurriculumModal = ({
   const isCarnaval = courseId === 'of-08' || courseTitleLower.includes('carnaval');
   const isAdultoMayor = courseId === 'of-09' || courseTitleLower.includes('adulto');
   const isCondominios = courseId === 'of-10' || courseTitleLower.includes('condominio');
+  const isSupervisor = courseId === 'seg-10' || courseTitleLower.includes('supervisor');
 
   // Si es CCTV, temario y profesores se mantienen ocultos
   useEffect(() => {
@@ -289,6 +290,29 @@ const CourseCurriculumModal = ({
                         <p className="text-[11px] text-rose-800 font-medium">
                           <strong>Modalidad Semipresencial:</strong> Teoría 100% online en Aula Virtual para Arica, Iquique o Antofagasta; Práctica presencial en Arica (acondicionamiento físico, defensa personal y reducción, primeros auxilios, armamento y tiro).
                         </p>
+                      </div>
+                    )}
+
+                    {/* BENEFICIO NORMATIVO: SUPERVISOR DE SEGURIDAD (TITULADOS Y EX-UNIFORMADOS) */}
+                    {isSupervisor && (
+                      <div className="p-4 rounded-2xl bg-sky-50 border border-sky-300 text-sky-950 space-y-2">
+                        <div className="flex items-center gap-2 font-black text-xs uppercase tracking-wide text-[#1b3761]">
+                          <Sparkles size={16} className="text-[#0a969b] flex-shrink-0" />
+                          <span>Beneficio Especial: Titulados y Ex-Uniformados (Vigencia 4 Años)</span>
+                        </div>
+                        <p className="text-xs leading-relaxed font-bold text-slate-800">
+                          Todos los que tengan <span className="text-[#1b3761] underline decoration-[#0a969b] decoration-2">título técnico o profesional</span> o sean <span className="text-[#1b3761] underline decoration-[#0a969b] decoration-2">ex-uniformados (FF.AA., Carabineros, PDI o Gendarmería)</span> hacen <strong>solo 20 horas de estudio</strong> con una <strong>vigencia oficial de 4 años</strong>.
+                        </p>
+                        <div className="flex flex-wrap items-center gap-2 pt-1 text-[11px] font-bold">
+                          <span className="px-2.5 py-1 rounded-md bg-[#0a969b] text-white flex items-center gap-1 shadow-2xs">
+                            <Clock size={12} />
+                            <span>Carga Académica Homologada: 20 Horas</span>
+                          </span>
+                          <span className="px-2.5 py-1 rounded-md bg-[#1b3761] text-white flex items-center gap-1 shadow-2xs">
+                            <Shield size={12} />
+                            <span>Vigencia Oficial: 4 Años</span>
+                          </span>
+                        </div>
                       </div>
                     )}
 
@@ -639,9 +663,21 @@ const CourseCurriculumModal = ({
                       <div className="flex items-center gap-2.5">
                         <Clock size={14} className="text-[#0a969b] flex-shrink-0" />
                         <span className="font-bold text-[#161630] text-[11px]">
-                          {syllabus?.totalHours || course.hours || 40} horas de estudio
+                          {isSupervisor 
+                            ? '120 hrs (20 hrs para Titulados o Ex-Uniformados)' 
+                            : `${syllabus?.totalHours || course.hours || 40} horas de estudio`}
                         </span>
                       </div>
+
+                      {/* Vigencia para Supervisor */}
+                      {isSupervisor && (
+                        <div className="flex items-center gap-2.5">
+                          <Shield size={14} className="text-[#0a969b] flex-shrink-0" />
+                          <span className="font-bold text-[#0a969b] text-[11px]">
+                            Vigencia de Acreditación: 4 Años
+                          </span>
+                        </div>
+                      )}
 
                       {/* Inicio */}
                       <div className="flex items-center gap-2.5">

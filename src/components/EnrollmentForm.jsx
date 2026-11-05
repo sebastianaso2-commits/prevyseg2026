@@ -211,13 +211,13 @@ export const OFFICIAL_COURSES = [
     type: 'spd',
     school: 'seguridad',
     category: 'Tecnología y Sistemas de Seguridad',
-    hours: '120 Horas',
+    hours: '120 Horas (20 hrs para Titulados o Ex-Uniformados)',
     price: 180000,
     cuota1: 90000,
     cuota2: 90000,
     modality: '100% Online Aula Virtual',
-    description: 'Gestión de turnos, confección de Directivas de Funcionamiento conforme a la Ley 21.659 y liderazgo operativo en terreno.',
-    certificationNote: 'Certificación de Competencias de Supervisor OTEC PrevySeg.'
+    description: 'Gestión de turnos, confección de Directivas de Funcionamiento conforme a la Ley 21.659 y liderazgo operativo en terreno. Postulantes con título o ex-uniformados realizan solo 20 horas de estudio con vigencia de 4 años.',
+    certificationNote: 'Certificación Oficial de Supervisor con vigencia de 4 años (solo 20 hrs para titulados o ex-uniformados).'
   },
 
   // --- ESCUELA DE OFICIOS Y HABILIDADES ---

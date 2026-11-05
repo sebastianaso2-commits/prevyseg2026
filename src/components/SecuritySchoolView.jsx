@@ -533,6 +533,14 @@ const SecuritySchoolView = ({ onSelectCourse, onReturnHome, onGoToTrades }) => {
                         </p>
                       )}
 
+                      {/* Beneficio o modalidad especial (p. ej. Supervisor de Seguridad) */}
+                      {course.specialNotice && (
+                        <p className="text-[10px] text-[#0a969b] bg-[#0a969b]/10 p-2 rounded-lg border border-[#0a969b]/25 font-bold leading-tight flex items-start gap-1.5">
+                          <Sparkles size={12} className="text-[#0a969b] shrink-0 mt-0.5" />
+                          <span>{course.specialNotice}</span>
+                        </p>
+                      )}
+
                       {/* Botón Ver Ficha y Temario (Abre Modal de Pestañas con tamaño estable) */}
                       <button
                         type="button"

@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Entrar a PrevySeg | Plataforma Virtual</title>
-  
+
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-  
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+
   <style>
     * {
       box-sizing: border-box;
@@ -172,16 +175,13 @@
     }
   </style>
 </head>
+
 <body>
 
   <div class="login-container">
     <div class="login-card">
       <div class="login-header">
-        <img 
-          src="components/prevyseg_logo.png" 
-          alt="PrevySeg Organismos Técnicos de Capacitación" 
-          class="login-logo"
-        >
+        <img src="components/prevyseg_logo.png" alt="PrevySeg Organismos Técnicos de Capacitación" class="login-logo">
       </div>
 
       <!-- Alerta roja de error (idéntica a Moodle) -->
@@ -192,29 +192,14 @@
       <form id="loginForm" class="login-form" autocomplete="on">
         <!-- Campo Nombre de usuario -->
         <div class="form-group">
-          <input 
-            type="text" 
-            id="username" 
-            name="username" 
-            class="input-field" 
-            placeholder="Nombre de usuario" 
-            autocomplete="username" 
-            required 
-            autofocus
-          >
+          <input type="text" id="username" name="username" class="input-field" placeholder="Nombre de usuario"
+            autocomplete="username" required autofocus>
         </div>
 
         <!-- Campo Contraseña -->
         <div class="form-group">
-          <input 
-            type="password" 
-            id="password" 
-            name="password" 
-            class="input-field" 
-            placeholder="Contraseña" 
-            autocomplete="current-password" 
-            required
-          >
+          <input type="password" id="password" name="password" class="input-field" placeholder="Contraseña"
+            autocomplete="current-password" required>
         </div>
 
         <!-- Botón Acceder -->
@@ -248,7 +233,7 @@
   </div>
 
   <script>
-    (function() {
+    (function () {
       const SUPABASE_URL = 'https://clmamemnvttgdvebjnbw.supabase.co';
       const SUPABASE_ANON_KEY = 'sb_publishable__6Wz6iIQr9iWg4aL0PRfhg_geJLzXLw';
 
@@ -281,7 +266,7 @@
       }
 
       // Auto-formato de RUT mientras escribe
-      userInput.addEventListener('input', function(e) {
+      userInput.addEventListener('input', function (e) {
         const val = e.target.value;
         if (val.includes('@')) return;
         const clean = cleanRut(val);
@@ -290,7 +275,7 @@
         }
       });
 
-      userInput.addEventListener('blur', function(e) {
+      userInput.addEventListener('blur', function (e) {
         const val = e.target.value.trim();
         if (val && !val.includes('@')) {
           e.target.value = formatRut(cleanRut(val));
@@ -298,7 +283,7 @@
       });
 
       // LÓGICA PRINCIPAL DE LOGIN CONECTADA A SUPABASE
-      loginForm.addEventListener('submit', async function(e) {
+      loginForm.addEventListener('submit', async function (e) {
         e.preventDefault();
 
         const rawUser = userInput.value.trim();
@@ -453,7 +438,7 @@
       }
 
       // Acceso como persona invitada
-      guestBtn.addEventListener('click', function() {
+      guestBtn.addEventListener('click', function () {
         const guestUser = {
           id: 'guest',
           rut: 'INVITADO',
@@ -466,15 +451,15 @@
         window.location.href = 'aulas-virtuales.html';
       });
 
-      forgotLink.addEventListener('click', function() {
+      forgotLink.addEventListener('click', function () {
         alert('Para recuperar su contraseña, por favor contacte a la mesa de ayuda de PrevySeg Capacitaciones o a su coordinador académico.');
       });
 
-      cookiesLink.addEventListener('click', function() {
+      cookiesLink.addEventListener('click', function () {
         alert('Aviso de Cookies: PrevySeg utiliza cookies de sesión necesarias para mantener activa su sesión y resguardar su avance académico.');
       });
     })();
   </script>
 </body>
-</html>
 
+</html>

@@ -206,14 +206,14 @@ const EXTRA_COURSES_DATA = [
     image: securitySupervisorImg,
     price: '$180.000 CLP',
     priceNumber: 180000,
-    priceDetail: 'Nivel Superior y Gestión SPD (Subsecretaría de Prevención del Delito)',
+    priceDetail: 'Nivel Superior y Gestión SPD • Vigencia 4 años (20 hrs titulados/ex-uniformados)',
     days: 'Martes y Viernes',
     hours: '19:00 a 22:00 hrs',
     startDate: '20 Octubre, 2026',
     endDate: '30 Noviembre, 2026',
-    totalHours: '60 Horas',
+    totalHours: '120 Horas (20 hrs Titulados/Ex-Uniformados)',
     senceCode: 'Nivel Superior SPD',
-    highlight: 'Liderazgo & Gestión',
+    highlight: '20 hrs para Titulados o Ex-Uniformados (Vigencia 4 Años)',
     status: 'Disponible'
   },
   {
