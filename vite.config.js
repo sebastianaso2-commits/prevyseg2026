@@ -36,6 +36,23 @@ export default defineConfig(({ mode }) => {
 
                   const responses = {};
                   let registeredOwnerEmail = 'sebastianmotox21@gmail.com';
+                  let fromSender = 'PrevySeg Capacitaciones <onboarding@resend.dev>';
+                  let fromCompanySender = 'PrevySeg Sistema Web <onboarding@resend.dev>';
+
+                  // Detectar si ya existe un dominio verificado (ej: prevyseg.cl)
+                  try {
+                    const domainsRes = await fetch('https://api.resend.com/domains', {
+                      headers: { 'Authorization': `Bearer ${apiKey}` }
+                    });
+                    const domainsJson = await domainsRes.json();
+                    const verifiedDomain = domainsJson?.data?.find(d => d.status === 'verified');
+                    if (verifiedDomain) {
+                      fromSender = `PrevySeg Capacitaciones <admision@${verifiedDomain.name}>`;
+                      fromCompanySender = `PrevySeg Sistema Web <admision@${verifiedDomain.name}>`;
+                    }
+                  } catch (domErr) {
+                    // Mantener remitente sandbox
+                  }
 
                   // 1. Enviar correo al alumno
                   if (data.studentEmail) {
@@ -46,7 +63,7 @@ export default defineConfig(({ mode }) => {
                         'Content-Type': 'application/json'
                       },
                       body: JSON.stringify({
-                        from: 'PrevySeg Capacitaciones <onboarding@resend.dev>',
+                        from: fromSender,
                         to: [data.studentEmail.trim()],
                         subject: `Ficha Recibida y Datos de Pago • ${data.courseName || 'OTEC PrevySeg'}`,
                         html: data.studentHtml
@@ -86,7 +103,7 @@ export default defineConfig(({ mode }) => {
                       'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({
-                      from: 'PrevySeg Sistema Web <onboarding@resend.dev>',
+                      from: fromCompanySender,
                       to: [data.companyEmail || 'prevyseg.capacitaciones@gmail.com'],
                       subject: `[NUEVA INSCRIPCIÓN WEB] - ${data.studentName || 'Postulante'} - ${data.courseName || 'Curso'}`,
                       html: data.companyHtml

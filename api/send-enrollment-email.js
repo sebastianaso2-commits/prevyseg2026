@@ -45,6 +45,23 @@ export default async function handler(req, res) {
   try {
     const responses = {};
     let registeredOwnerEmail = 'sebastianmotox21@gmail.com';
+    let fromSender = 'PrevySeg Capacitaciones <onboarding@resend.dev>';
+    let fromCompanySender = 'PrevySeg Sistema Web <onboarding@resend.dev>';
+
+    // Detectar si ya existe un dominio verificado (ej: prevyseg.cl)
+    try {
+      const domainsRes = await fetch('https://api.resend.com/domains', {
+        headers: { 'Authorization': `Bearer ${apiKey}` }
+      });
+      const domainsJson = await domainsRes.json();
+      const verifiedDomain = domainsJson?.data?.find(d => d.status === 'verified');
+      if (verifiedDomain) {
+        fromSender = `PrevySeg Capacitaciones <admision@${verifiedDomain.name}>`;
+        fromCompanySender = `PrevySeg Sistema Web <admision@${verifiedDomain.name}>`;
+      }
+    } catch (domErr) {
+      // Mantener remitente sandbox
+    }
 
     // 1. Enviar correo al alumno con datos de pago y QR
     if (studentEmail) {
@@ -55,7 +72,7 @@ export default async function handler(req, res) {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          from: 'PrevySeg Capacitaciones <onboarding@resend.dev>',
+          from: fromSender,
           to: [studentEmail.trim()],
           subject: `Ficha Recibida y Datos de Pago • ${courseName}`,
           html: studentHtml
@@ -94,7 +111,7 @@ export default async function handler(req, res) {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        from: 'PrevySeg Sistema Web <onboarding@resend.dev>',
+        from: fromCompanySender,
         to: [companyEmail.trim()],
         subject: `[NUEVA INSCRIPCIÓN WEB] - ${studentName} - ${courseName}`,
         html: companyHtml
