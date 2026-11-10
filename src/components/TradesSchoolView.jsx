@@ -521,11 +521,6 @@ const TradesSchoolView = ({ onSelectCourse, onReturnHome, onGoToSecurity }) => {
                           ✨ Beneficio: Incluye gratis el Curso Resolución de Conflictos (SENCE 1238088725)
                         </p>
                       )}
-                      {course.id === 'of-01' && (
-                        <p className="text-[10px] text-sky-800 bg-sky-50 p-2 rounded-lg border border-sky-200 font-semibold leading-tight">
-                          🧠 Relator Especialista: Psicólogo Clínico Felipe I. Cisterna Farias
-                        </p>
-                      )}
 
                       {/* Botón Ver Ficha y Temario (Abre Modal de Pestañas con tamaño estable) */}
                       <button

@@ -98,9 +98,6 @@ const CourseCurriculumModal = ({
     if (isVigilante) {
       whatsappPhone = '56982312128';
       text = 'Hola PrevySeg, deseo consultar el valor y cupos del curso de Formación de Vigilantes Privados (100 hrs).';
-    } else if (isConflictos) {
-      whatsappPhone = '56972210629';
-      text = 'Hola Felipe, te contacto desde la página web respecto al curso de Resolución de Conflictos (SENCE 1238088725).';
     }
 
     const encoded = encodeURIComponent(text);
@@ -595,21 +592,6 @@ const CourseCurriculumModal = ({
                                   {teaBio}
                                 </p>
                               )}
-
-                              {/* Contacto Directo WhatsApp si es Felipe Cisterna */}
-                              {tea.whatsapp && (
-                                <div className="pt-2 border-t border-slate-100">
-                                  <a
-                                    href={`https://wa.me/${tea.whatsapp}?text=Hola%20Felipe,%20te%20contacto%20desde%20la%20p%C3%A1gina%20web%20respecto%20al%20curso%20de%20Resoluci%C3%B3n%20de%20Conflictos.`}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold text-white bg-emerald-600 hover:bg-emerald-700 transition-colors shadow-xs"
-                                  >
-                                    <MessageCircle size={14} />
-                                    <span>Contactar al Psicólogo Clínico</span>
-                                  </a>
-                                </div>
-                              )}
                             </div>
                           );
                         })}
@@ -779,7 +761,7 @@ const CourseCurriculumModal = ({
                       className="w-full py-2 px-3 rounded-lg text-xs font-bold text-[#1b3761] bg-white hover:bg-[#0a969b]/10 border border-[#1b3761]/30 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
                     >
                       <MessageCircle size={13} className="text-[#0a969b]" />
-                      <span>{isConflictos ? 'WhatsApp Psicólogo Felipe Cisterna' : 'Contactar Asesor WhatsApp'}</span>
+                      <span>Contactar Asesor WhatsApp</span>
                     </button>
 
                     {/* BOTÓN ¡CONVENCE A TU JEFE! */}

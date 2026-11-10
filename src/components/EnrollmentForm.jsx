@@ -233,10 +233,8 @@ export const OFFICIAL_COURSES = [
     price: 150000,
     cuota1: 75000,
     cuota2: 75000,
-    relator: 'Felipe I. Cisterna Farias (Psicólogo Clínico)',
-    relatorWhatsapp: '56972210629',
     modality: 'Online Asíncrona (Plataforma 24/7)',
-    description: 'Resolución asertiva y mediación laboral a cargo del Psicólogo Clínico Felipe I. Cisterna Farias. Franquicia SENCE disponible (Código 1238088725).',
+    description: 'Resolución asertiva y mediación laboral con franquicia SENCE disponible (Código 1238088725).',
     certificationNote: 'Certificación Directa OTEC PrevySeg con Código SENCE 1238088725.'
   },
   {

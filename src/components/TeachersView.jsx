@@ -27,37 +27,17 @@ import {
 } from 'lucide-react';
 import { UNIFIED_TEACHERS_TEAM } from '../data/syllabusData';
 
-// Docentes completos de PrevySeg (Seguridad Privada + Escuela de Oficios + Psicología Clínica)
-const ALL_DOCENTES = [
-  ...UNIFIED_TEACHERS_TEAM.map(t => ({
-    ...t,
-    school: 'seguridad',
-    coursesTaught: [
-      'Formación de Guardias de Seguridad (90 hrs • Ley 21.659)',
-      'Formación de Vigilantes Privados (100 hrs)',
-      'Perfeccionamiento de Guardias OS-10',
-      'Supervisor de Seguridad Privada'
-    ]
-  })),
-  {
-    name: 'Felipe I. Cisterna Farias',
-    nombre: 'Felipe I. Cisterna Farias',
-    role: 'Psicólogo Clínico • Relator Especialista',
-    cargo: 'Psicólogo Clínico & Mediador Laboral',
-    badge: 'Psicólogo Clínico Acreditado',
-    area: 'Psicología Clínica · Resolución de Conflictos · Mediación Laboral',
-    credentials: 'Psicólogo Clínico • Fundador de Tu Espacio Terapéutico',
-    bio: 'Psicólogo Clínico especializado en contención emocional, manejo asertivo del estrés en ambientes de alta exigencia, resolución de crisis interpersonales y mediación laboral constructiva. Relator titular del curso oficial SENCE.',
-    avatar: null,
-    whatsapp: '56972210629',
-    website: 'https://www.tuespacioterapeutico.cl',
-    email: 'felipecisternaf@gmail.com',
-    school: 'oficios',
-    coursesTaught: [
-      'Resolución de Conflictos y Manejo de Situaciones Difíciles (Código SENCE: 1238088725)'
-    ]
-  }
-];
+// Docentes oficiales de PrevySeg (Seguridad Privada y Oficios Técnicos)
+const ALL_DOCENTES = UNIFIED_TEACHERS_TEAM.map(t => ({
+  ...t,
+  school: 'seguridad',
+  coursesTaught: [
+    'Formación de Guardias de Seguridad (90 hrs • Ley 21.659)',
+    'Formación de Vigilantes Privados (100 hrs)',
+    'Perfeccionamiento de Guardias OS-10',
+    'Supervisor de Seguridad Privada'
+  ]
+}));
 
 const CATEGORIES = [
   { id: 'all', label: 'Todos los Docentes', icon: Users },
@@ -65,7 +45,6 @@ const CATEGORIES = [
   { id: 'legislacion', label: 'Legislación & DDHH', icon: Scale },
   { id: 'prevencion', label: 'Prevención & Emergencias', icon: FileCheck2 },
   { id: 'salud', label: 'Salud & Primeros Auxilios', icon: Stethoscope },
-  { id: 'psicologia', label: 'Psicología & Mediación', icon: HeartPulse },
 ];
 
 const TeachersView = ({
@@ -98,9 +77,6 @@ const TeachersView = ({
       }
       if (selectedCategory === 'salud') {
         return t.area.toLowerCase().includes('primeros auxilios') || t.area.toLowerCase().includes('enferm');
-      }
-      if (selectedCategory === 'psicologia') {
-        return t.school === 'oficios' || t.name.includes('Felipe');
       }
       return true;
     });
@@ -232,19 +208,13 @@ const TeachersView = ({
         {/* ================= GRID DE TARJETAS DE DOCENTES ================= */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredTeachers.map((doc, idx) => {
-            const isFelipe = doc.name.includes('Felipe');
-
             return (
               <motion.div
                 key={idx}
                 initial={{ opacity: 0, y: 15 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.25, delay: idx * 0.05 }}
-                className={`rounded-3xl bg-white border shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group ${
-                  isFelipe
-                    ? 'border-emerald-300 ring-2 ring-emerald-200/50 shadow-emerald-500/10'
-                    : 'border-slate-200/90 hover:border-[#0a969b]/40'
-                }`}
+                className="rounded-3xl bg-white border border-slate-200/90 hover:border-[#0a969b]/40 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group"
               >
                 {/* Cabecera de la Tarjeta */}
                 <div className="p-6 space-y-4 flex-1 flex flex-col justify-between">
@@ -252,15 +222,9 @@ const TeachersView = ({
                     
                     <div className="flex items-start gap-3.5">
                       {/* Avatar / Icono */}
-                      {isFelipe ? (
-                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-emerald-600 to-teal-700 text-white flex items-center justify-center font-bold shadow-md shadow-emerald-600/20 flex-shrink-0">
-                          <HeartPulse size={28} className="text-white" />
-                        </div>
-                      ) : (
-                        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#161630] to-[#1b3761] text-[#00FFE0] flex items-center justify-center font-bold shadow-md shadow-blue-900/10 flex-shrink-0">
-                          <GraduationCap size={28} />
-                        </div>
-                      )}
+                      <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-[#161630] to-[#1b3761] text-[#00FFE0] flex items-center justify-center font-bold shadow-md shadow-blue-900/10 flex-shrink-0">
+                        <GraduationCap size={28} />
+                      </div>
 
                       <div className="min-w-0 flex-1 space-y-1">
                         <div className="flex flex-wrap items-center gap-1.5">
@@ -273,11 +237,7 @@ const TeachersView = ({
                           {doc.role}
                         </span>
 
-                        <span className={`inline-block text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full border ${
-                          isFelipe
-                            ? 'bg-emerald-50 text-emerald-800 border-emerald-300'
-                            : 'bg-sky-50 text-sky-800 border-sky-200'
-                        }`}>
+                        <span className="inline-block text-[9px] font-black uppercase tracking-wider px-2 py-0.5 rounded-full border bg-sky-50 text-sky-800 border-sky-200">
                           {doc.badge}
                         </span>
                       </div>
@@ -333,31 +293,6 @@ const TeachersView = ({
                     )}
 
                   </div>
-
-                  {/* Acciones de Contacto Especiales (Felipe Cisterna) */}
-                  {isFelipe && (
-                    <div className="pt-4 border-t border-emerald-100 space-y-2 mt-4">
-                      <a
-                        href={`https://wa.me/${doc.whatsapp}?text=Hola%20Felipe,%20te%20contacto%20desde%20la%20página%20web.`}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full py-2.5 px-3 rounded-xl text-xs font-black text-white bg-emerald-600 hover:bg-emerald-700 transition-all flex items-center justify-center gap-1.5 shadow-md shadow-emerald-600/20 cursor-pointer"
-                      >
-                        <MessageCircle size={14} />
-                        <span>Contactar por WhatsApp (+56 9 7221 0629)</span>
-                      </a>
-
-                      <a
-                        href={doc.website}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="w-full py-2 px-3 rounded-xl text-xs font-bold text-emerald-800 bg-white hover:bg-emerald-50 border border-emerald-200 transition-all flex items-center justify-center gap-1.5 cursor-pointer"
-                      >
-                        <ExternalLink size={13} />
-                        <span>Sitio Web: Tu Espacio Terapéutico</span>
-                      </a>
-                    </div>
-                  )}
 
                 </div>
 

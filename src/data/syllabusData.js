@@ -503,15 +503,14 @@ export const SYLLABUS_DETAILS = {
     ],
     teachers: [
       {
-        nombre: 'Felipe I. Cisterna Farias',
-        name: 'Felipe I. Cisterna Farias',
-        cargo: 'Relator Asignado • Psicólogo Clínico',
-        role: 'Relator Asignado • Psicólogo Clínico',
-        area: 'Salud Mental & Mediación',
-        badge: 'Psicólogo Clínico',
-        credentials: 'Tu Espacio Terapéutico • felipecisternaf@gmail.com',
-        bio: 'Psicólogo Clínico de Tu Espacio Terapéutico. Especialista en mediación de controversias, desarrollo de habilidades blandas, contención emocional y salud mental laboral.',
-        whatsapp: 'https://wa.me/56972210629'
+        nombre: 'Cuerpo Docente Escuela de Oficios SENCE',
+        name: 'Cuerpo Docente Escuela de Oficios SENCE',
+        cargo: 'Relatores Acreditados OTEC PrevySeg',
+        role: 'Relatores Especialistas en Mediación Laboral',
+        area: 'Desarrollo de Habilidades Blandas & Mediación',
+        badge: 'Acreditado SENCE',
+        credentials: 'Especialistas en Gestión del Clima y Mediación Organizacional',
+        bio: 'Equipo multidisciplinario especializado en negociación, mediación de controversias laborales, contención y resolución constructiva de problemas en ambientes de trabajo.'
       }
     ],
     bibliography: [

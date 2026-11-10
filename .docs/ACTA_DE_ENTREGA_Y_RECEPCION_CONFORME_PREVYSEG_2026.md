@@ -138,3 +138,4 @@ Ingeniería en Informática — Santo Tomás Arica              OTEC PrevySeg Sp
 
 ---
 *Acta de Recepción Conforme — OTEC PrevySeg SpA (RUT: 76.256.947-7) & IP Santo Tomás Sede Arica • Noviembre 2026*
+

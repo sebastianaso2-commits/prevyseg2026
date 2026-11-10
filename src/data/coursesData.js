@@ -37,8 +37,6 @@ export const DEFAULT_COURSES = [
     depositPrice: '$75.000 CLP (50%)',
     codigo_sence: '1238088725',
     priceDetail: 'Código SENCE 1238088725 • Franquicia Tributaria',
-    relator: 'Felipe I. Cisterna Farias (Psicólogo Clínico - Tu Espacio Terapéutico)',
-    whatsappRelator: 'https://wa.me/56972210629',
     disponible: true,
     cupos: 25,
     fecha_inicio: '15 de Octubre, 2026',
@@ -46,7 +44,7 @@ export const DEFAULT_COURSES = [
     badgeText: 'Código SENCE 1238088725',
     highlight: 'Habilidades Blandas & Contención',
     image: conflictImg,
-    description: 'Estrategias de negociación, contención emocional, mediación de controversias laborales y resolución constructiva de problemas en entornos de trabajo exigentes. Relator asignado: Psicólogo Clínico Felipe Cisterna.'
+    description: 'Estrategias de negociación, contención emocional, mediación de controversias laborales y resolución constructiva de problemas en entornos de trabajo exigentes.'
   },
   {
     id: 'of-02',
