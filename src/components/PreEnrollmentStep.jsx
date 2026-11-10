@@ -274,15 +274,15 @@ export const PreEnrollmentStep = ({
 
       {/* ================= CABECERA DEL CURSO SELECCIONADO ================= */}
       <div className={`p-5 sm:p-6 border-b transition-all ${selectedCourse.school === 'seguridad'
-          ? 'bg-gradient-to-r from-slate-900 via-[#071626] to-[#0A7D8C] text-white border-sky-900'
-          : 'bg-gradient-to-r from-slate-900 via-[#062422] to-[#00A896] text-white border-teal-900'
+        ? 'bg-gradient-to-r from-slate-900 via-[#071626] to-[#0A7D8C] text-white border-sky-900'
+        : 'bg-gradient-to-r from-slate-900 via-[#062422] to-[#00A896] text-white border-teal-900'
         }`}>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="space-y-1.5">
             <div className="flex flex-wrap items-center gap-2">
               <span className={`text-[10px] font-black uppercase px-2.5 py-0.5 rounded-md tracking-wider ${selectedCourse.school === 'seguridad'
-                  ? 'bg-sky-500/20 text-sky-300 border border-sky-400/30'
-                  : 'bg-teal-500/20 text-teal-300 border border-teal-400/30'
+                ? 'bg-sky-500/20 text-sky-300 border border-sky-400/30'
+                : 'bg-teal-500/20 text-teal-300 border border-teal-400/30'
                 }`}>
                 {selectedCourse.school === 'seguridad' ? '🛡️ Escuela de Seguridad Privada' : '⚙️ Escuela de Oficios y SENCE'}
               </span>
@@ -419,10 +419,10 @@ export const PreEnrollmentStep = ({
                     value={formData.rut}
                     onChange={handleInputChange}
                     className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-xs sm:text-sm font-mono text-slate-900 focus:bg-white focus:outline-none focus:ring-2 transition-all ${formData.rut && !isRutValid
-                        ? 'border-rose-300 focus:ring-rose-500'
-                        : isRutValid
-                          ? 'border-emerald-300 focus:ring-emerald-500'
-                          : 'border-slate-200 focus:ring-[#0284c7]'
+                      ? 'border-rose-300 focus:ring-rose-500'
+                      : isRutValid
+                        ? 'border-emerald-300 focus:ring-emerald-500'
+                        : 'border-slate-200 focus:ring-[#0284c7]'
                       }`}
                   />
                 </div>
@@ -481,10 +481,10 @@ export const PreEnrollmentStep = ({
                     value={formData.email}
                     onChange={handleInputChange}
                     className={`w-full bg-slate-50 border rounded-xl px-4 py-3 text-xs sm:text-sm text-slate-900 focus:bg-white focus:outline-none focus:ring-2 transition-all font-medium ${formData.email && !isEmailValid
-                        ? 'border-amber-300 focus:ring-amber-500'
-                        : isEmailValid
-                          ? 'border-emerald-300 focus:ring-emerald-500'
-                          : 'border-slate-200 focus:ring-[#0284c7]'
+                      ? 'border-amber-300 focus:ring-amber-500'
+                      : isEmailValid
+                        ? 'border-emerald-300 focus:ring-emerald-500'
+                        : 'border-slate-200 focus:ring-[#0284c7]'
                       }`}
                   />
                   <span className="text-[10px] text-slate-500 block">
@@ -676,8 +676,8 @@ export const PreEnrollmentStep = ({
                   <div
                     onClick={() => setAcceptedRequirementsDeclaration(!acceptedRequirementsDeclaration)}
                     className={`flex items-start gap-3 p-3.5 sm:p-4 rounded-xl border-2 transition-all cursor-pointer select-none ${acceptedRequirementsDeclaration
-                        ? 'border-[#0284c7] bg-sky-50/40 shadow-xs'
-                        : 'border-slate-300 bg-white hover:border-slate-400 hover:bg-slate-50/50'
+                      ? 'border-[#0284c7] bg-sky-50/40 shadow-xs'
+                      : 'border-slate-300 bg-white hover:border-slate-400 hover:bg-slate-50/50'
                       }`}
                   >
                     <div className="mt-0.5 flex-shrink-0">

@@ -171,331 +171,298 @@ async function createFormalEngineeringRequirementsDoc() {
   };
 
   /* ==========================================================================
-     REQUERIMIENTOS FUNCIONALES FORMALES (RF-01 A RF-17)
+     REQUERIMIENTOS FUNCIONALES FORMALES (RF-01 A RF-22)
      ========================================================================== */
   const functionalRequirements = [
     {
       code: "RF-01",
-      module: "Módulo Público / Catálogo",
-      name: "Catálogo Oficial de Cursos SENCE y Especializaciones",
-      desc: "El sistema debe desplegar el catálogo académico con los 6 programas de capacitación autorizados y vigentes por SENCE y la Prefectura de Seguridad Privada OS-10 de Carabineros de Chile. Cada tarjeta debe incluir portada gráfica, categoría, arancel en CLP, código referencial y botón de acción directa.",
-      inputs: "Navegación al sitio web público o selección de filtro de área.",
-      process: "Renderizado dinámico en cuadrícula adaptativa desde la estructura de datos `moodleCoursesData`, calculando badges de modalidad e información de financiamiento.",
-      outputs: "Grilla responsiva de cursos con modal de detalle e inscripción.",
-      actor: "Público General / Empresas Clientes",
+      module: "Módulo Catálogo Oficial",
+      name: "Catálogo Oficial Cerrado de 20 Cursos (Seguridad y Oficios)",
+      desc: "Despliegue interactivo de exactamente 10 cursos de la Escuela de Seguridad Privada (Ley N° 21.659 / D.S. N° 867) y 10 cursos de la Escuela de Oficios Industriales y Técnicos (Macro Zona Norte). Cada tarjeta incluye arancel oficial en CLP, horas pedagógicas/cronológicas, modalidad y desglose de cuotas del abono del 50%.",
+      inputs: "Navegación por el portal web o selección de pestañas de escuela.",
+      process: "Renderizado reactivo desacoplado en grilla responsiva con cálculo en tiempo real de cuotas de abono y visualización de temarios oficiales.",
+      outputs: "Vitrina académica completa con apertura de modales de temario y admisión.",
+      actor: "Público General / Empresas / Alumnos",
       priority: "Must Have (Crítica)",
-      acceptance: "Renderizado de exactamente los 6 cursos activos con metadatos oficiales y enlaces a WhatsApp sin errores de renderizado."
+      acceptance: "Despliegue exacto de los 20 cursos oficiales con precios, horas y conmutador entre ambas escuelas sin inconsistencias."
     },
     {
       code: "RF-02",
-      module: "Módulo Público / Catálogo",
-      name: "Mecanismo de Filtrado Instantáneo por Área Formativa",
-      desc: "El sistema debe proveer controles interactivos (píldoras de filtrado) para segmentar la oferta académica entre las categorías: Seguridad Privada, Sistemas Internos, Asistencias y Todos los Cursos.",
-      inputs: "Interacción del usuario mediante clic en la píldora de filtro deseada.",
-      process: "Filtrado en memoria (React State) en tiempo real con latencia < 50ms sin recargar la página.",
-      outputs: "Actualización inmediata del subconjunto de cursos visibles con animación fluida.",
-      actor: "Público General / Alumnos",
-      priority: "Should Have (Alta)",
-      acceptance: "Filtrado estricto que oculta cursos no coincidentes y restaura la vista completa al pulsar 'Todos'."
+      module: "Módulo Académico",
+      name: "Cuerpo Docente Oficial OS-10 Acreditado",
+      desc: "Presentación curricular de los instructores acreditados ante la Prefectura de Seguridad Privada OS-10 de Carabineros de Chile: Marco Antonio Gallardo Sáez e Ing. Patricio Melgarejo Araníbar, asociados a la impartición de la malla pedagógica.",
+      inputs: "Consulta de información institucional y programas de seguridad.",
+      process: "Vinculación curricular y despliegue de perfiles de instructores autorizados.",
+      outputs: "Bloque de docentes acreditados con sello de validación policial.",
+      actor: "Alumnos / Empresas / OTEC",
+      priority: "Must Have (Crítica)",
+      acceptance: "Exhibición visible y precisa de ambos instructores acreditados en la plataforma."
     },
     {
       code: "RF-03",
-      module: "Módulo Comercial / Contacto",
-      name: "Enlace y Cotización Directa vía WhatsApp Business API",
-      desc: "El sistema debe integrar el formulario modal de cotización y matrícula con la API de mensajería de WhatsApp (+56 9 7869 1869), enviando un mensaje pre-estructurado con los datos del curso, nombre, correo y RUT del solicitante.",
-      inputs: "Formulario de contacto completado (Nombre, Teléfono, Correo, Curso seleccionado, Mensaje).",
-      process: "Codificación URI del payload de texto y redirección al endpoint `https://api.whatsapp.com/send`.",
-      outputs: "Apertura de la sesión de WhatsApp Web o aplicación nativa móvil con el mensaje listo para envío.",
-      actor: "Público General / Empresas",
+      module: "Módulo Admisión",
+      name: "Ficha de Admisión Digital con 8 Campos Obligatorios",
+      desc: "Captura, validación de integridad y procesamiento de 8 datos personales obligatorios: 1. Nombre Completo, 2. RUT / Cédula, 3. Fecha de Nacimiento (validación etaria), 4. Correo Electrónico (RFC 5322), 5. Teléfono / WhatsApp (+56 9...), 6. Dirección Particular (residencia actual), 7. Región de Residencia (16 regiones) y 8. Ciudad / Comuna.",
+      inputs: "Ingreso de datos en el modal de postulación interactivo.",
+      process: "Comprobación sincrónica campo a campo con indicadores visuales de completitud y estado de validación.",
+      outputs: "Formulario apto para despacho y preinscripción académica.",
+      actor: "Postulante",
       priority: "Must Have (Crítica)",
-      acceptance: "Transferencia 100% fidedigna de los campos del formulario al chat oficial sin truncamiento de caracteres."
+      acceptance: "Bloqueo estricto del botón de envío si falta cualquiera de los 8 datos obligatorios o si alguno presenta formato inválido."
     },
     {
       code: "RF-04",
-      module: "Módulo Normativo / SENCE",
-      name: "Matriz Informativa de Tramos de Franquicia Tributaria SENCE",
-      desc: "El sistema debe exponer la estructura de imputación tributaria bajo la Ley N° 19.518, describiendo los 4 tramos normativos: 100% SENCE (Hasta 25 UTM), 50% SENCE (25 a 50 UTM), 15% SENCE (Sobre 50 UTM) y Pago Directo con descuento por volumen, sin divulgar valores paramétricos variables.",
-      inputs: "Visualización de la sección 'Franquicia Tributaria SENCE' en la página de inicio.",
-      process: "Renderizado estático de tarjetas normativas con acreditación OTEC NCh 2728:2015.",
-      outputs: "Cuadrícula informativa con beneficios tributarios y llamada a cotización corporativa.",
-      actor: "Empresas / Encargados de RRHH y Capacitación",
+      module: "Módulo Validación",
+      name: "Algoritmo Módulo 11 y Formateador Dinámico para RUT",
+      desc: "Validación matemática del dígito verificador del RUT chileno (calculateRutDv y validateRut) y formateo dinámico en tiempo real a la estructura estándar XX.XXX.XXX-X mientras el usuario escribe.",
+      inputs: "Caracteres numéricos y dígito verificador ingresados por el postulante.",
+      process: "Cálculo aritmético ponderado (serie 2,3,4,5,6,7) con detección instantánea de errores y badge de validación.",
+      outputs: "RUT formateado correctamente y habilitación del campo.",
+      actor: "Todos los Usuarios",
       priority: "Must Have (Crítica)",
-      acceptance: "Despliegue claro de los 4 tramos legales y acreditación OTEC con enlace de consulta a WhatsApp."
+      acceptance: "Rechazo inmediato de RUTs matemáticamente inválidos y aceptación sin fallos de RUTs válidos con o sin guion inicial."
     },
     {
       code: "RF-05",
-      module: "Módulo Público / Búsqueda",
-      name: "Motor de Búsqueda Global en Tiempo Real",
-      desc: "El sistema debe proveer un modal de búsqueda global accesible desde la barra superior, permitiendo consultar cursos por palabra clave, código SENCE o temática formativa con resultados instantáneos.",
-      inputs: "Cadena de texto ingresada en el input del buscador.",
-      process: "Búsqueda substring insensible a mayúsculas/minúsculas y acentos sobre títulos y etiquetas.",
-      outputs: "Lista de coincidencias con botón de acceso directo a ficha y cotización.",
-      actor: "Público General / Estudiantes",
-      priority: "Should Have (Alta)",
-      acceptance: "Búsqueda interactiva que devuelve resultados en tiempo de ejecución sin peticiones sincrónicas al servidor."
+      module: "Módulo Normativo",
+      name: "Declaración Jurada Formal con Ticket Interactivo",
+      desc: "Casilla de verificación obligatoria con fe de juramento que diferencia expresamente los requisitos exigidos para formalizar matrícula en OTEC PrevySeg (Certificado de Antecedentes Especiales y Licencia Media MINEDUC) de los gestionados ante la plataforma oficial de la Subsecretaría de Prevención del Delito (evaluación médica, informe psicotécnico y cédula).",
+      inputs: "Activación del checkbox de declaración jurada interactiva.",
+      process: "Validación booleana de conformidad normativa antes de habilitar el procesamiento de la postulación.",
+      outputs: "Estado de aceptación registrado en la ficha y transmitido en los respaldos.",
+      actor: "Postulante",
+      priority: "Must Have (Crítica)",
+      acceptance: "Impedimento de envío si el postulante no ha marcado el ticket de declaración jurada de conocimiento de requisitos."
     },
     {
       code: "RF-06",
-      module: "Módulo Institucional / Blog",
-      name: "Centro de Publicaciones Técnicas y Artículos de Seguridad",
-      desc: "El sistema debe presentar artículos técnicos sobre protocolos de seguridad física, normativa OS-10, seguridad portuaria y primeros auxilios en modales de lectura extendida.",
-      inputs: "Clic en tarjeta de publicación o experiencia técnica.",
-      process: "Apertura de modal con renderizado de contenido tipográfico y botón de contacto asociado.",
-      outputs: "Visor modal con texto completo, imágenes institucionales y cierre por tecla ESC o backdrop.",
-      actor: "Público General / Postulantes",
-      priority: "Could Have (Media)",
-      acceptance: "Apertura limpia del modal con bloqueo de scroll de fondo y botón de cotización contextual."
+      module: "Módulo Notificaciones",
+      name: "Motor Dual de Correo en Tiempo Real (Gmail SMTP y Resend API)",
+      desc: "Despacho automatizado y simultáneo de comprobantes oficiales mediante Gmail SMTP (con autenticación de dos pasos y App Password para prevysegconfirm@gmail.com) y Resend API en paralelo (Promise.all con keepalive: true), enviando réplica al postulante y a la casilla institucional prevyseg.capacitaciones@gmail.com.",
+      inputs: "Pulsación del botón 'Enviar Información' en la ficha de admisión.",
+      process: "Construcción de plantilla HTML corporativa con diseño responsivo y despacho concurrente a ambas casillas.",
+      outputs: "Correos electrónicos entregados en bandeja de entrada con ficha completa, código de solicitud y datos bancarios.",
+      actor: "Sistema / Postulante / OTEC",
+      priority: "Must Have (Crítica)",
+      acceptance: "Llegada efectiva y sincrónica de las dos copias de correo electrónico con la ficha idéntica y acuse de recibo."
     },
     {
       code: "RF-07",
-      module: "Módulo de Seguridad / Auth",
-      name: "Autenticación Segura y Control de Acceso Basado en Roles (RBAC)",
-      desc: "El sistema debe autenticar a los usuarios mediante RUT chileno y contraseña, validando el formato del identificador y segregando el acceso entre el rol ADMINISTRADOR (acceso total a consola) y ESTUDIANTE (acceso exclusivo a su área y cursos).",
-      inputs: "Credenciales de acceso: RUT (formato 12345678-K) y Contraseña.",
-      process: "Validación sintáctica del RUT con algoritmo Módulo 11, contraste contra el almacén de identidades y generación del estado de sesión autenticado con asignación de rol RBAC.",
-      outputs: "Redirección al layout LMS personalizado según rol o denegación con mensaje de error seguro.",
-      actor: "Administradores / Estudiantes Matriculados",
+      module: "Módulo Financiero",
+      name: "Bloque Oficial de Transferencia Bancaria y Código QR Dinámico",
+      desc: "Exhibición en pantalla y en el cuerpo de ambos correos del boceto oficial de datos bancarios: PREVYSEG SPA, RUT 76.256.947-7, Cuenta Corriente 1000163399 Banco Estado / Chile, correo comprobante y código QR escaneable generado dinámicamente vía API para pago asistido.",
+      inputs: "Confirmación de curso seleccionado y arancel pactado.",
+      process: "Generación de código QR de transferencia bancaria e incrustación en la ficha y plantilla de email.",
+      outputs: "Boceto bancario institucional idéntico en web y correos de respaldo.",
+      actor: "Postulante / Finanzas OTEC",
       priority: "Must Have (Crítica)",
-      acceptance: "Bloqueo absoluto de vistas administrativas para usuarios con rol ESTUDIANTE y prevención de accesos sin sesión."
+      acceptance: "Visualización clara de datos bancarios oficiales y código QR escaneable y operativo en dispositivos móviles."
     },
     {
       code: "RF-08",
-      module: "Campus Virtual LMS / Alumno",
-      name: "Dashboard y Área Personal del Estudiante",
-      desc: "El sistema debe proveer al estudiante un panel de control con su estado de matrícula activa SENCE 2026, línea de tiempo de progreso formativo, cursos activos y banner de notificación de diplomas emitidos.",
-      inputs: "Inicio de sesión exitoso con rol ESTUDIANTE.",
-      process: "Cálculo del porcentaje de avance curricular, verificación de visto bueno administrativo y renderizado de la línea de tiempo.",
-      outputs: "Vista de Área Personal con estadísticas de avance, accesos directos y estado de certificación.",
-      actor: "Estudiante",
+      module: "Módulo Admisión",
+      name: "Redirección Instantánea a WhatsApp Admisiones (+56 9 7869 1869)",
+      desc: "Apertura sincrónica e inmediata en una nueva pestaña del enlace a WhatsApp de Admisiones al pulsar 'Enviar Información', precargando la ficha de 8 campos y el código de postulación sin sufrir bloqueo por ventanas emergentes (popups).",
+      inputs: "Pulsación de confirmación en la ficha de postulación.",
+      process: "Disparo sincrónico de window.open() previo a operaciones asíncronas de red para preservar la interacción del usuario.",
+      outputs: "Chat de WhatsApp abierto en la línea +56 9 7869 1869 con el mensaje listo para ser enviado.",
+      actor: "Postulante / Admisiones",
       priority: "Must Have (Crítica)",
-      acceptance: "Cálculo matemático correcto de porcentajes de progreso y renderizado de banners condicionales."
+      acceptance: "Apertura sin bloqueo en Google Chrome, Microsoft Edge, Safari y navegadores móviles Android/iOS."
     },
     {
       code: "RF-09",
-      module: "Campus Virtual LMS / Alumno",
-      name: "Vista Centralizada 'Mis Cursos' con Avance Curricular",
-      desc: "El sistema debe listar los cursos en los que el estudiante se encuentra formalmente matriculado, mostrando tarjetas dinámicas con barra de progreso porcentual, código del programa y botón de acceso a contenidos.",
-      inputs: "Navegación a la pestaña 'Mis Cursos' dentro del Campus Virtual.",
-      process: "Consulta de cursos asociados al ID del alumno y renderizado de tarjetas curriculares.",
-      outputs: "Grilla de cursos del alumno con indicadores visuales de completitud.",
-      actor: "Estudiante",
+      module: "Módulo Financiero",
+      name: "Deshabilitación de Pasarela Web Directa (Canal Asistido)",
+      desc: "Desactivación explícita de pasarelas de pago automatizadas directas en línea, priorizando el modelo de transferencia bancaria asistida con confirmación y respaldo humano del equipo de admisión.",
+      inputs: "Proceso de pago y formalización de matrícula.",
+      process: "Enrutamiento administrativo hacia validación de comprobante bancario por parte del personal de finanzas.",
+      outputs: "Flujo asistido de matrícula transparente y trazable.",
+      actor: "OTEC / Postulante",
       priority: "Must Have (Crítica)",
-      acceptance: "Despliegue individualizado de los cursos con estado de avance exacto y enlace a la malla."
+      acceptance: "Ausencia de cargos no asistidos; canalización exclusiva vía transferencia con acuse oficial."
     },
     {
       code: "RF-10",
-      module: "Campus Virtual LMS / Servicios",
-      name: "Portal de Bolsa de Empleo Regional de Arica",
-      desc: "El sistema debe ofrecer una bolsa laboral exclusiva para alumnos y egresados de PrevySeg con ofertas activas de empresas de seguridad y faenas de la Región de Arica y Parinacota, incluyendo filtros por jornada (Completa, Turnos 4x4, Part-Time).",
-      inputs: "Acceso al módulo 'Bolsa de Empleo' desde el menú lateral del Campus.",
-      process: "Carga de convocatorias laborales activas con requisitos de acreditación OS-10 y renta estimada.",
-      outputs: "Catálogo de ofertas de empleo con botón de postulación en línea.",
-      actor: "Estudiante / Egresado OS-10",
-      priority: "Should Have (Alta)",
-      acceptance: "Listado de vacantes actualizado con filtros operativos y formulario modal de postulación."
+      module: "Módulo Persistencia",
+      name: "Procedimiento Atómico `process_enrollment_registration`",
+      desc: "Procedimiento almacenado PL/pgSQL transaccional en PostgreSQL (Supabase) con cláusulas ACID que crea el usuario, la cohorte y la matrícula, garantizando la regla de matrícula única sin registros huérfanos ni duplicidades.",
+      inputs: "Payload de inscripción autenticado desde el frontend.",
+      process: "Transacción atómica segura con commit/rollback que vincula auth.users, public.users y public.enrollments.",
+      outputs: "Matrícula persistida con identificador único y cupo reservado.",
+      actor: "Sistema / Base de Datos",
+      priority: "Must Have (Crítica)",
+      acceptance: "0% fallos de integridad referencial y prevención matemática de inscripciones duplicadas para un mismo RUT."
     },
     {
       code: "RF-11",
-      module: "Campus Virtual LMS / Servicios",
-      name: "Módulo de Postulación Curricular Directa a Ofertas Laborales",
-      desc: "El estudiante podrá enviar su postulación a las vacantes laborales disponibles, cargando automáticamente sus datos de perfil (RUT, Nombre, Estado de Certificación OS-10) y registrando el interés ante la empresa reclutadora.",
-      inputs: "Clic en 'Postular a esta Vacante' y confirmación en modal.",
-      process: "Registro de postulación en estado 'Enviada' con timestamp y notificación de éxito.",
-      outputs: "Confirmación visual en pantalla con código de seguimiento de postulación.",
-      actor: "Estudiante",
-      priority: "Should Have (Alta)",
-      acceptance: "Bloqueo de postulaciones duplicadas para una misma vacante y confirmación inmediata."
+      module: "Módulo Seguridad",
+      name: "Criptografía Blowfish Bcrypt 256-bit (pgcrypto)",
+      desc: "Hasheo unidireccional de contraseñas mediante algoritmo Bcrypt con factor de costo 10 utilizando la extensión oficial pgcrypto en PostgreSQL. Prohibición estricta de almacenar texto plano.",
+      inputs: "Contraseña ingresada en registros o actualizaciones.",
+      process: "Cifrado no reversible `crypt(plain_pwd, gen_salt('bf', 10))` a nivel de base de datos.",
+      outputs: "Hash Bcrypt de 60 caracteres almacenado en auth.users y public.users.",
+      actor: "Seguridad / Sistema",
+      priority: "Must Have (Crítica)",
+      acceptance: "100% de las contraseñas del padrón protegidas con hash Bcrypt; imposibilidad de recuperación en texto plano."
     },
     {
       code: "RF-12",
-      module: "Campus Virtual LMS / Servicios",
-      name: "Catálogo de Fidelización y Capacitaciones Extras con Descuento",
-      desc: "El sistema debe presentar a los estudiantes matriculados un catálogo de perfeccionamiento continuo con un 15% de descuento preferencial aplicado sobre el arancel oficial, facilitando su inscripción directa.",
-      inputs: "Acceso a la vista 'Capacitaciones Extras' en el LMS.",
-      process: "Cálculo automatizado del 15% de rebaja sobre el precio de lista y generación de botón de reserva.",
-      outputs: "Tarjetas de cursos con precio normal tachado, precio con descuento y enlace comercial.",
-      actor: "Estudiante",
-      priority: "Could Have (Media)",
-      acceptance: "Cálculo aritmético exacto del descuento y enlace directo con WhatsApp pre-configurado."
+      module: "Módulo Seguridad",
+      name: "Procedimientos de Seguridad `admin_create_user` y `change_user_password`",
+      desc: "Funciones PL/pgSQL con elevación controlada (`SECURITY DEFINER`) que permiten al administrador enrolar nuevos usuarios y resetear/cambiar contraseñas re-hasheadas de forma atómica en ambas tablas de autenticación.",
+      inputs: "Identificador de usuario y nueva contraseña proporcionada por el administrador.",
+      process: "Ejecución de RPC administrativo con validación de privilegios RBAC y actualización simultánea.",
+      outputs: "Contraseña actualizada exitosamente con registro en bitácora de auditoría.",
+      actor: "Administrador OTEC",
+      priority: "Must Have (Crítica)",
+      acceptance: "Cambio inmediato de contraseña efectivo en login de prueba sin desincronización de sesiones."
     },
     {
       code: "RF-13",
-      module: "Panel Administrativo / Certificación",
-      name: "Panel de Validación y Visto Bueno Administrativo para Diplomas",
-      desc: "El sistema debe proveer al Administrador una vista para auditar a los alumnos que han cumplido con los requisitos formativos y legales, permitiendo otorgar el 'Visto Bueno' oficial para la emisión de diplomas.",
-      inputs: "Selección del estudiante en estado 'Pendiente de Aprobación' y clic en 'Otorgar Visto Bueno'.",
-      process: "Validación de requisitos normativos, cambio de estado a 'Aprobado & Emitido', generación del registro de certificación y disparo del flujo de despacho digital.",
-      outputs: "Actualización inmediata del estado a 'Emitido' y habilitación de la descarga del diploma.",
-      actor: "Administrador Académico",
+      module: "Módulo Comercial",
+      name: "Calculadora de Franquicia Tributaria SENCE (Tramos UTM)",
+      desc: "Módulo interactivo que calcula el porcentaje de cobertura de la Franquicia Tributaria SENCE en base al sueldo del trabajador en UTM: 100% de franquicia (hasta 25 UTM), 50% de franquicia (entre 25 y 50 UTM), 15% (sobre 50 UTM) y costo particular.",
+      inputs: "Ingreso de renta imponible o selección directa del tramo tributario.",
+      process: "Aplicación aritmética de las tasas legales según la Ley N° 19.518 y cálculo de copago de la empresa.",
+      outputs: "Desglose claro de cobertura fiscal y copago neto por alumno.",
+      actor: "Empresas / Recursos Humanos",
       priority: "Must Have (Crítica)",
-      acceptance: "Registro de fecha y hora exacta del visto bueno con actualización en tiempo real de la base de datos."
+      acceptance: "Cálculo matemático exacto conforme a la normativa vigente SENCE."
     },
     {
       code: "RF-14",
-      module: "Panel Administrativo / Certificación",
-      name: "Servicio de Despacho Automático de Diplomas PDF por Correo",
-      desc: "Al conceder el visto bueno administrativo, el sistema debe ejecutar el despacho automatizado del diploma en formato PDF vía correo electrónico institucional, estructurando los marcadores `///CORREO REMITENTE///` hacia `///CORREO DE RECEPCION///` del alumno.",
-      inputs: "Trigger automático originado por el evento de aprobación de diploma en RF-13.",
-      process: "Composición del mensaje MIME con plantilla HTML institucional, adjunción del diploma PDF y envío vía SMTP / Webhook.",
-      outputs: "Registro en bitácora del despacho con timestamp, estado 'Enviado' y opción de reenvío manual.",
-      actor: "Sistema / Administrador",
+      module: "Módulo Comercial",
+      name: "Enrutamiento Multicanal de WhatsApp",
+      desc: "Mecanismo inteligente de enlace a los dos canales de atención corporativa: Canal de Admisiones Generales (+56 9 7869 1869) y Canal de Coordinación Académica (+56 9 8231 2128), según la sección del portal visitada.",
+      inputs: "Clic en los botones de contacto flotantes o contextuales.",
+      process: "Construcción de URI con mensaje contextualizado según la consulta del usuario.",
+      outputs: "Derivación al canal telefónico oficial correspondiente.",
+      actor: "Público General / Alumnos",
       priority: "Must Have (Crítica)",
-      acceptance: "Verificación de marcadores estandarizados en código fuente y registro en bitácora de envío."
+      acceptance: "Enlace operativo y comprobado hacia ambos números telefónicos institucionales."
     },
     {
       code: "RF-15",
-      module: "Certificación Digital / Alumno",
-      name: "Emisión de Certificado Digital de Idoneidad (Sin Calificaciones)",
-      desc: "El sistema debe generar un diploma digital oficial en PDF para el alumno, acreditando su aprobación satisfactoria e idoneidad técnica conforme a la Ley N° 19.628 de Protección de Datos Personales, resguardando la confidencialidad sin exponer notas numéricas.",
-      inputs: "Clic en 'Descargar Diploma' desde el Área Personal del estudiante aprobado.",
-      process: "Generación vectorial del certificado con sellos SENCE, código QR de verificación, firmas de Dirección Académica y cláusula legal de idoneidad.",
-      outputs: "Archivo PDF descargable e imprimible con estándar de calidad gráfica profesional.",
-      actor: "Estudiante Aprobado / Empresa",
+      module: "Módulo Acceso",
+      name: "Modal de Acceso 1-Click Demo con Conmutador de Visibilidad",
+      desc: "Modal de autenticación institucional que incluye botón de visibilidad de contraseña (ojo/candado) y accesos rápidos preconfigurados de demostración para los tres roles del sistema (ADMIN, TEACHER, STUDENT).",
+      inputs: "Pulsación de credenciales demo o ingreso manual de credenciales.",
+      process: "Autocompletado de formulario y verificación de credenciales con hash en Supabase.",
+      outputs: "Inicio de sesión seguro y redirección al entorno correspondiente según el rol.",
+      actor: "Todos los Usuarios",
       priority: "Must Have (Crítica)",
-      acceptance: "Comprobación estricta de que el documento no contiene notas numéricas, incorporando sellos y QR válidos."
+      acceptance: "Acceso fluido a los tres perfiles sin bloqueos y alternancia correcta del estado de visualización de clave."
     },
     {
       code: "RF-16",
-      module: "Administración Global",
-      name: "Consola de Administración del Sitio con 15 Categorías Desplegables",
-      desc: "El sistema debe proveer una consola administrativa completa que replique la estructura de gestión de Moodle/LMS con 15 categorías expandibles (Usuarios, Cursos, Calificaciones, Extensiones, Seguridad, Servidor, Informes, etc.) y buscador en vivo.",
-      inputs: "Navegación del Administrador a 'Administración del Sitio'.",
-      process: "Renderizado jerárquico de categorías en acordeón con filtrado dinámico de opciones administrativas.",
-      outputs: "Panel de control integral con accesos rápidos y configuración del sistema.",
-      actor: "Administrador del Sistema",
-      priority: "Should Have (Alta)",
-      acceptance: "Despliegue de las 15 categorías con buscador en tiempo real y bloqueo para roles no administradores."
+      module: "Módulo LMS Admin",
+      name: "Consola de Gestión de Participantes y Claves",
+      desc: "Panel administrativo con grilla interactiva de participantes, filtros por curso, cohorte, búsqueda por RUT, exportación a CSV/Excel y modal dedicado para restablecimiento inmediato de contraseñas Bcrypt.",
+      inputs: "Interacción del administrador en la vista de participantes.",
+      process: "Consulta optimizada en PostgreSQL con paginación, filtros dinámicos y modal de reseteo.",
+      outputs: "Tabla de usuarios actualizada en tiempo real con acciones de gestión activas.",
+      actor: "Administrador OTEC",
+      priority: "Must Have (Crítica)",
+      acceptance: "Búsqueda instantánea por RUT y ejecución exitosa del modal de reseteo de claves con notificación visual."
     },
     {
       code: "RF-17",
-      module: "Administración Global / OTEC",
-      name: "Gestión Dinámica de Participantes y Matrículas SENCE",
-      desc: "El sistema debe gestionar la nómina de estudiantes matriculados en cada curso, permitiendo filtrar por estado de matrícula SENCE, buscar por RUT o nombre, y exportar la nómina de asistencia y participación para auditorías OTEC.",
-      inputs: "Filtros de búsqueda o selección de curso en el módulo de participantes.",
-      process: "Consulta estructurada de la tabla de participantes con cálculo de estado de avance curricular.",
-      outputs: "Tabla dinámica con paginación, indicador de estado SENCE y acciones de gestión.",
-      actor: "Administrador Académico / Auditor SENCE",
+      module: "Módulo LMS Alumno",
+      name: "Área Personal y Monitoreo Curricular",
+      desc: "Panel de control del estudiante con indicador porcentual de avance académico, estado de matrícula SENCE y acceso rápido a los módulos formativos y certificaciones emitidas.",
+      inputs: "Inicio de sesión del alumno regular.",
+      process: "Cálculo reactivo de avance curricular ponderado y consulta de estado de matrícula.",
+      outputs: "Dashboard personal con métricas académicas claras y accesos directos a lecciones.",
+      actor: "Estudiante",
       priority: "Must Have (Crítica)",
-      acceptance: "Despliegue dinámico de la nómina con actualización de registros en tiempo real."
+      acceptance: "Visualización correcta del progreso del alumno sin inconsistencias numéricas."
+    },
+    {
+      code: "RF-18",
+      module: "Módulo LMS Alumno",
+      name: "Aula Virtual y Visor Didáctico Multimedia",
+      desc: "Entorno interactivo de aprendizaje organizado por unidades temáticas con visor de documentos técnicos (PDFs), reproducción de material audiovisual y cuestionarios de autoevaluación formativa.",
+      inputs: "Navegación del alumno por los módulos del curso matriculado.",
+      process: "Carga dinámica de recursos didácticos y registro de completitud de actividades.",
+      outputs: "Visualización fluida de material de estudio y retroalimentación interactiva.",
+      actor: "Estudiante",
+      priority: "Must Have (Crítica)",
+      acceptance: "Reproducción multimedia estable y avance progresivo entre las lecciones del curso."
+    },
+    {
+      code: "RF-19",
+      module: "Módulo Certificación",
+      name: "Visto Bueno Administrativo para Emisión de Diplomas",
+      desc: "Módulo de auditoría interna que permite a la dirección del OTEC verificar el cumplimiento de asistencia (mínimo 75% SENCE) y aprobación académica antes de autorizar la generación y emisión del diploma oficial.",
+      inputs: "Revisión de actas finales de cohorte por parte de la administración.",
+      process: "Validación de requisitos y cambio de estado a 'AUTORIZADO PARA EMISIÓN'.",
+      outputs: "Diploma habilitado para descarga por el estudiante con sello institucional.",
+      actor: "Administrador OTEC",
+      priority: "Must Have (Crítica)",
+      acceptance: "Bloqueo de certificados para alumnos no aprobados o con asistencia insuficiente."
+    },
+    {
+      code: "RF-20",
+      module: "Módulo Certificación",
+      name: "Confidencialidad Legal de Diplomas (Ley N° 19.628)",
+      desc: "Los diplomas y certificados emitidos consignan exclusivamente la condición cualitativa de 'APROBADO', omitiendo notas numéricas para proteger la vida privada y datos sensibles del estudiante según la Ley N° 19.628.",
+      inputs: "Generación de documento digital de certificación.",
+      process: "Renderizado de plantilla PDF oficial sin inclusión de calificaciones cuantitativas.",
+      outputs: "Diploma oficial con formato legalmente conforme y presentación profesional.",
+      actor: "Sistema / OTEC",
+      priority: "Must Have (Crítica)",
+      acceptance: "0% de calificaciones numéricas expuestas en los certificados públicos emitidos."
+    },
+    {
+      code: "RF-21",
+      module: "Módulo Certificación",
+      name: "Verificación Criptográfica QR Antifraude",
+      desc: "Inclusión en cada diploma emitido de un código QR con firma criptográfica que enlaza a un endpoint público de validación para que empleadores y Carabineros OS-10 comprueben la autenticidad y vigencia del documento.",
+      inputs: "Escaneo del código QR presente en el diploma físico o digital.",
+      process: "Consulta pública del identificador de certificación en la base de datos de PrevySeg.",
+      outputs: "Página de validación con datos del egresado, curso, fecha y estado de vigencia.",
+      actor: "Empleadores / Fiscalizadores OS-10",
+      priority: "Must Have (Crítica)",
+      acceptance: "Validación instantánea en línea de certificados emitidos y rechazo de códigos adulterados."
+    },
+    {
+      code: "RF-22",
+      module: "Módulo Empleabilidad",
+      name: "Bolsa de Empleo Regional Arica y Parinacota",
+      desc: "Vitrina de ofertas laborales exclusivas para el sector de seguridad privada e industrias técnicas de la Macro Zona Norte con postulación directa del alumno utilizando su perfil y RUT validado en la plataforma.",
+      inputs: "Postulación a una vacante laboral desde el área del estudiante.",
+      process: "Registro de postulación en la base de datos con vinculación de antecedentes académicos.",
+      outputs: "Confirmación de postulación y reporte disponible para la empresa contratante.",
+      actor: "Estudiante / Empresas",
+      priority: "Should Have (Alta)",
+      acceptance: "Postulación exitosa con verificación de requisitos mínimos exigidos por el aviso de empleo."
     }
   ];
 
   /* ==========================================================================
-     REQUERIMIENTOS NO FUNCIONALES FORMALES (ISO/IEC 25010)
+     REQUERIMIENTOS NO FUNCIONALES (RNF-01 A RNF-12)
      ========================================================================== */
   const nonFunctionalRequirements = [
-    {
-      code: "RNF-01",
-      category: "Eficiencia de Desempeño",
-      subcat: "Comportamiento Temporal",
-      desc: "El tiempo de carga inicial de la aplicación (First Contentful Paint) no debe exceder los 1.5 segundos en conexiones de banda ancha estándar (10 Mbps) y redes 4G/5G. El Time to First Byte (TTFB) de los recursos estáticos no debe superar los 200 ms.",
-      metric: "FCP ≤ 1.5 s | TTFB ≤ 200 ms | Lighthouse Performance ≥ 90/100"
-    },
-    {
-      code: "RNF-02",
-      category: "Confiabilidad & Disponibilidad",
-      subcat: "Disponibilidad Operacional",
-      desc: "La plataforma debe garantizar una disponibilidad de servicio mínima del 99.8% en régimen 24/7/365, con un tiempo máximo de indisponibilidad no planificada inferior a 1.44 horas al mes.",
-      metric: "Disponibilidad (Uptime) ≥ 99.8% mensual (SLA)"
-    },
-    {
-      code: "RNF-03",
-      category: "Seguridad de la Información",
-      subcat: "Confidencialidad & Privacidad",
-      desc: "El sistema debe dar estricto cumplimiento a la Ley N° 19.628 sobre Protección de la Vida Privada. Las calificaciones numéricas de los alumnos tienen carácter confidencial y no deben exponerse públicamente ni en los diplomas de acreditación de idoneidad laboral.",
-      metric: "0% de exposición de notas numéricas en certificados públicos y diplomas"
-    },
-    {
-      code: "RNF-04",
-      category: "Seguridad de la Información",
-      subcat: "Control de Acceso (RBAC)",
-      desc: "Todas las rutas y vistas administrativas deben estar resguardadas por verificación estricta de roles. Las sesiones deben expirar por inactividad tras 60 minutos y las credenciales deben procesarse bajo canales seguros HTTPS con TLS 1.3.",
-      metric: "100% de rutas protegidas mediante guardas de navegación RBAC"
-    },
-    {
-      code: "RNF-05",
-      category: "Usabilidad & Accesibilidad",
-      subcat: "Diseño Responsivo (UI/UX)",
-      desc: "La interfaz de usuario debe adaptarse fluidamente a resoluciones móviles (desde 360px de ancho) hasta pantallas 4K, utilizando paleta cromática de alto contraste (#121316 / #0F3B7A / #0284C7) y tipografía legible 'Inter' conforme a WCAG 2.1 Nivel AA.",
-      metric: "100% Responsivo | Contraste de texto ≥ 4.5:1 (WCAG AA)"
-    },
-    {
-      code: "RNF-06",
-      category: "Portabilidad & Compatibilidad",
-      subcat: "Multi-Navegador",
-      desc: "El sistema debe funcionar de manera idéntica y sin degradación visual ni funcional en las últimas tres versiones estables de Google Chrome, Mozilla Firefox, Microsoft Edge, Apple Safari y Opera, tanto en entornos de escritorio como móviles.",
-      metric: "Compatibilidad garantizada en 100% de navegadores modernos estándar"
-    },
-    {
-      code: "RNF-07",
-      category: "Conformidad Normativa",
-      subcat: "Estándar SENCE & NCh 2728",
-      desc: "El diseño del sistema de información, gestión de matrículas y emisión de certificados debe satisfacer los requerimientos de auditoría y trazabilidad exigidos por el SENCE y la Norma Chilena de Calidad para OTEC NCh 2728:2015.",
-      metric: "Cumplimiento del 100% de los criterios de auditoría SENCE / NCh 2728"
-    },
-    {
-      code: "RNF-08",
-      category: "Conformidad Legal",
-      subcat: "Seguridad Privada OS-10",
-      desc: "La estructura de los cursos de seguridad privada debe ajustarse a las disposiciones del Decreto Ley N° 3.607 y las directivas técnicas de la Prefectura de Seguridad Privada OS-10 de Carabineros de Chile.",
-      metric: "Alineación total con las directivas curriculares OS-10 vigentes"
-    },
-    {
-      code: "RNF-09",
-      category: "Mantenibilidad & Arquitectura",
-      subcat: "Modularidad del Código",
-      desc: "El código fuente debe seguir una arquitectura modular basada en componentes desacoplados de React 19, con separación estricta entre capa de presentación, capa de estado y adaptadores de servicios externos.",
-      metric: "Cohesión alta, acoplamiento bajo y 0 advertencias de linting (Oxlint/ESLint)"
-    },
-    {
-      code: "RNF-10",
-      category: "Interoperabilidad",
-      subcat: "Despacho de Correo Electrónico",
-      desc: "El subsistema de despacho de correos debe desacoplarse mediante marcadores estandarizados `///CORREO REMITENTE///` y `///CORREO DE RECEPCION///`, permitiendo su conexión plug-and-play con proveedores SMTP (SendGrid, AWS SES, Resend o Postfix).",
-      metric: "Integración desacoplada con 100% de compatibilidad SMTP / REST"
-    },
-    {
-      code: "RNF-11",
-      category: "Portabilidad Documental",
-      subcat: "Estándar PDF/A para Diplomas",
-      desc: "Los certificados y diplomas generados deben respetar las directivas de formato PDF vectorial de alta fidelidad, asegurando su visualización e impresión exacta en cualquier dispositivo y visor sin pérdida de resolución.",
-      metric: "Salida PDF vectorial estándar imprimible a 300 DPI"
-    },
-    {
-      code: "RNF-12",
-      category: "Gestión de Configuración",
-      subcat: "Versionamiento & Trazabilidad",
-      desc: "Todo el ciclo de vida del software debe estar versionado en Git mediante la convención de commits descriptivos en español, vinculados cronológicamente con la Carta Gantt maestra en Excel (`Carta_Gantt_PrevySeg_2026.xlsx`).",
-      metric: "100% de trazabilidad entre commits de GitHub y WBS de la Carta Gantt"
-    },
-    {
-      code: "RNF-13",
-      category: "Integridad & Validación de Datos",
-      subcat: "Sanitización de Entradas",
-      desc: "Todas las entradas de datos provenientes de formularios (RUT, Nombres, Teléfonos, Correos, Textos de consulta) deben ser validadas y sanitizadas contra ataques de inyección XSS y caracteres maliciosos antes de ser procesadas o renderizadas.",
-      metric: "0 vulnerabilidades de inyección XSS o Cross-Site Scripting"
-    },
-    {
-      code: "RNF-14",
-      category: "Recuperabilidad & Tolerancia a Fallos",
-      subcat: "Manejo de Errores",
-      desc: "El frontend debe implementar límites de error (React Error Boundaries) para capturar excepciones en tiempo de ejecución, desplegando mensajes amigables al usuario sin provocar pantallas blancas ni pérdida de estado de navegación.",
-      metric: "100% de componentes críticos protegidos con Error Boundaries"
-    }
+    { code: "RNF-01", dim: "Seguridad Criptográfica", req: "Todas las contraseñas deben estar hasheadas con Blowfish Bcrypt ($2a$10$) mediante la extensión pgcrypto en PostgreSQL. Cero texto plano.", metric: "100% claves hasheadas con Bcrypt" },
+    { code: "RNF-02", dim: "Integridad de Datos", req: "Persistencia atómica de matrícula e idempotencia (ON CONFLICT) entre auth.users, auth.identities y public.users mediante RPC transaccional.", metric: "0 fallos de integridad referencial" },
+    { code: "RNF-03", dim: "Seguridad (RBAC)", req: "Aislamiento estricto de rutas, vistas y endpoints de base de datos según el rol autenticado del usuario (ADMIN, TEACHER, STUDENT).", metric: "100% rutas y acciones protegidas" },
+    { code: "RNF-04", dim: "Eficiencia de Rendimiento", req: "Tiempo de renderizado inicial (FCP) inferior a 1.2 segundos y compilación en producción sin advertencias ni errores con Vite.", metric: "FCP ≤ 1.2s • 0 errores de build" },
+    { code: "RNF-05", dim: "Disponibilidad Operacional", req: "Disponibilidad del servicio 24/7 con un Acuerdo de Nivel de Servicio (SLA) del 99.8% mensual en la infraestructura cloud de Supabase.", metric: "Uptime mensual ≥ 99.8%" },
+    { code: "RNF-06", dim: "Usabilidad y Accesibilidad", req: "Interfaz con contraste conforme a WCAG 2.1 Nivel AA (bg-slate-50, bg-white, text-slate-900), diseño adaptativo y tipografía legible.", metric: "Ratio de contraste ≥ 4.5:1" },
+    { code: "RNF-07", dim: "Compatibilidad Cross-Browser", req: "Funcionamiento garantizado en navegadores modernos de escritorio y móviles: Google Chrome, Microsoft Edge, Mozilla Firefox, Safari y navegadores Android/iOS.", metric: "100% compatibilidad estándar" },
+    { code: "RNF-08", dim: "Mantenibilidad del Código", req: "Arquitectura desacoplada en React con librerías y utilidades dedicadas (supabase.js, notificationService.js, validation.js) sin deuda técnica.", metric: "Arquitectura modular y limpia" },
+    { code: "RNF-09", dim: "Cumplimiento Normativo SENCE", req: "Trazabilidad de registros de asistencia y participantes bajo los estándares de la Norma Chilena NCh 2728:2015 para organismos de capacitación.", metric: "Conformidad auditoría SENCE 100%" },
+    { code: "RNF-10", dim: "Privacidad Legal (Ley 19.628)", req: "Diplomas emitidos con certificación cualitativa ('APROBADO') omitiendo notas numéricas para resguardar la privacidad del participante.", metric: "0% notas en certificados públicos" },
+    { code: "RNF-11", dim: "Tolerancia a Fallos", req: "Captura de excepciones en tiempo de ejecución con React Error Boundaries y mecanismo de fallback transparente en el motor dual de correo.", metric: "0 pantallas blancas ante fallos" },
+    { code: "RNF-12", dim: "Trazabilidad en Git", req: "Registro cronológico de commits descriptivos en español sincronizados en el repositorio GitHub oficial (Sebastianaso/PrevySeg2026, rama main).", metric: "Trazabilidad 100% en rama main" }
   ];
 
-  /* ==========================================================================
-     CONSTRUCCIÓN DEL DOCUMENTO DOCX FORMAL
-     ========================================================================== */
   const doc = new Document({
     styles: {
       default: {
         document: {
-          run: {
-            font: "Calibri",
-            size: 20,
-            color: COLOR_TEXT
-          }
+          run: { font: "Calibri", size: 21, color: COLOR_TEXT }
         }
       }
     },
@@ -503,7 +470,7 @@ async function createFormalEngineeringRequirementsDoc() {
       {
         properties: {
           page: {
-            margin: { top: 1200, bottom: 1200, left: 1300, right: 1300 }
+            margin: { top: 1440, bottom: 1440, left: 1440, right: 1440 }
           }
         },
         headers: {
@@ -513,10 +480,9 @@ async function createFormalEngineeringRequirementsDoc() {
                 alignment: AlignmentType.RIGHT,
                 children: [
                   new TextRun({
-                    text: "PREVYSEG OTEC • ESPECIFICACIÓN DE REQUERIMIENTOS DE SOFTWARE (ISO/IEC/IEEE 29148)",
-                    size: 15,
+                    text: "OTEC PrevySeg SpA | ERS-PREVYSEG-2026-V2.6-FINAL",
+                    size: 16,
                     color: COLOR_MUTED,
-                    bold: true,
                     font: "Calibri"
                   })
                 ]
@@ -528,29 +494,37 @@ async function createFormalEngineeringRequirementsDoc() {
           default: new Footer({
             children: [
               new Paragraph({
-                alignment: AlignmentType.RIGHT,
+                alignment: AlignmentType.SPACE_BETWEEN,
                 children: [
                   new TextRun({
-                    text: "Documento Confidencial • Versión 2.0 • Página ",
-                    size: 15,
-                    color: COLOR_MUTED
+                    text: "Confidencial - Norma NCh 2728:2015 & SENCE - IP Santo Tomás Arica",
+                    size: 16,
+                    color: COLOR_MUTED,
+                    font: "Calibri"
+                  }),
+                  new TextRun({
+                    text: "    Página ",
+                    size: 16,
+                    color: COLOR_MUTED,
+                    font: "Calibri"
                   }),
                   new TextRun({
                     children: [PageNumber.CURRENT],
-                    size: 15,
+                    size: 16,
                     color: COLOR_MUTED,
-                    bold: true
+                    font: "Calibri"
                   }),
                   new TextRun({
                     text: " de ",
-                    size: 15,
-                    color: COLOR_MUTED
+                    size: 16,
+                    color: COLOR_MUTED,
+                    font: "Calibri"
                   }),
                   new TextRun({
                     children: [PageNumber.TOTAL_PAGES],
-                    size: 15,
+                    size: 16,
                     color: COLOR_MUTED,
-                    bold: true
+                    font: "Calibri"
                   })
                 ]
               })
@@ -558,72 +532,18 @@ async function createFormalEngineeringRequirementsDoc() {
           })
         },
         children: [
-
           // ==================================================================
-          // PORTADA FORMAL DE INGENIERÍA DE SOFTWARE (SIN TABLAS)
+          // PORTADA / ENCABEZADO FORMAL
           // ==================================================================
           new Paragraph({
             alignment: AlignmentType.CENTER,
-            spacing: { before: 240, after: 60 },
+            spacing: { after: 120 },
             children: [
               new TextRun({
-                text: "PREVYSEG CAPACITACIONES LTDA.",
+                text: "ORGANISMO TÉCNICO DE CAPACITACIÓN PREVYSEG SPA",
                 bold: true,
-                size: 32,
                 color: COLOR_PRIMARY,
-                font: "Calibri"
-              })
-            ]
-          }),
-          new Paragraph({
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 40 },
-            children: [
-              new TextRun({
-                text: "ORGANISMO TÉCNICO DE CAPACITACIÓN (OTEC)",
-                bold: true,
-                size: 19,
-                color: COLOR_TEAL,
-                font: "Calibri"
-              })
-            ]
-          }),
-          new Paragraph({
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 180 },
-            children: [
-              new TextRun({
-                text: "Registro SENCE N° 1238088725 • Norma Chilena NCh 2728:2015",
-                size: 17,
-                color: COLOR_MUTED,
-                font: "Calibri"
-              })
-            ]
-          }),
-
-          // Línea divisoria superior
-          new Paragraph({
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 300 },
-            children: [
-              new TextRun({
-                text: "_______________________________________________________________________________",
-                color: COLOR_BORDER,
-                size: 16
-              })
-            ]
-          }),
-
-          // Título Central
-          new Paragraph({
-            alignment: AlignmentType.CENTER,
-            spacing: { before: 180, after: 80 },
-            children: [
-              new TextRun({
-                text: "ESPECIFICACIÓN DE REQUERIMIENTOS DE SOFTWARE",
-                bold: true,
                 size: 28,
-                color: COLOR_DARK_SLATE,
                 font: "Calibri"
               })
             ]
@@ -633,473 +553,443 @@ async function createFormalEngineeringRequirementsDoc() {
             spacing: { after: 100 },
             children: [
               new TextRun({
-                text: "(SRS / ERS)",
+                text: "RUT Oficial: 76.256.947-7 • Registro SENCE N° 1238088725 • Norma NCh 2728:2015",
                 bold: true,
-                size: 24,
-                color: COLOR_SECONDARY,
-                font: "Calibri"
-              })
-            ]
-          }),
-          new Paragraph({
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 160 },
-            children: [
-              new TextRun({
-                text: "Ecosistema Digital: Portal Web Corporativo, Campus Virtual LMS,\nBolsa de Empleo Regional y Sistema de Acreditación Digital 2026",
-                italics: true,
+                color: "D97706",
                 size: 20,
-                color: COLOR_MUTED,
                 font: "Calibri"
               })
             ]
           }),
-          new Paragraph({
-            alignment: AlignmentType.CENTER,
-            spacing: { after: 280 },
-            children: [
-              new TextRun({
-                text: "Estándar de Ingeniería: ISO/IEC/IEEE 29148:2018 / IEEE Std 830-1998",
-                bold: true,
-                size: 17,
-                color: COLOR_PRIMARY,
-                font: "Calibri"
-              })
-            ]
-          }),
-
-          // Línea divisoria intermedia
           new Paragraph({
             alignment: AlignmentType.CENTER,
             spacing: { after: 260 },
             children: [
               new TextRun({
-                text: "_______________________________________________________________________________",
-                color: COLOR_BORDER,
-                size: 16
+                text: "Sede Central: Blanco Encalada N° 666, 2do Piso, Arica, Chile",
+                size: 18,
+                color: COLOR_MUTED,
+                italics: true,
+                font: "Calibri"
               })
             ]
           }),
 
-          // Bloque Formal de Datos de Control (Sin Tablas)
-          new Paragraph({
-            alignment: AlignmentType.LEFT,
-            spacing: { before: 80, after: 60, line: 280 },
-            indent: { left: 720 },
-            children: [
-              new TextRun({ text: "CÓDIGO DOCUMENTAL:        ", bold: true, color: COLOR_DARK_SLATE, size: 19 }),
-              new TextRun({ text: "ERS-PREVYSEG-2026-V2.0", bold: true, color: COLOR_SECONDARY, size: 19 })
-            ]
-          }),
-          new Paragraph({
-            alignment: AlignmentType.LEFT,
-            spacing: { after: 60, line: 280 },
-            indent: { left: 720 },
-            children: [
-              new TextRun({ text: "SISTEMA / PROYECTO:          ", bold: true, color: COLOR_DARK_SLATE, size: 19 }),
-              new TextRun({ text: "Plataforma Web Institucional & Campus Virtual LMS PrevySeg 2026", color: COLOR_TEXT, size: 19 })
-            ]
-          }),
-          new Paragraph({
-            alignment: AlignmentType.LEFT,
-            spacing: { after: 60, line: 280 },
-            indent: { left: 720 },
-            children: [
-              new TextRun({ text: "ORGANIZACIÓN TITULAR:    ", bold: true, color: COLOR_DARK_SLATE, size: 19 }),
-              new TextRun({ text: "PrevySeg Capacitaciones Arica • Acreditación SENCE & Carabineros OS-10", color: COLOR_TEXT, size: 19 })
-            ]
-          }),
-          new Paragraph({
-            alignment: AlignmentType.LEFT,
-            spacing: { after: 60, line: 280 },
-            indent: { left: 720 },
-            children: [
-              new TextRun({ text: "RESPONSABLES TÉCNICOS:  ", bold: true, color: COLOR_DARK_SLATE, size: 19 }),
-              new TextRun({ text: "Viviane Montesillo (Directora Académica) / Sebastián Araya (Coordinador OS-10 / TI)", color: COLOR_TEXT, size: 19 })
-            ]
-          }),
-          new Paragraph({
-            alignment: AlignmentType.LEFT,
-            spacing: { after: 60, line: 280 },
-            indent: { left: 720 },
-            children: [
-              new TextRun({ text: "ESTADO DE REVISIÓN:          ", bold: true, color: COLOR_DARK_SLATE, size: 19 }),
-              new TextRun({ text: "Aprobado para Implementación y Auditoría de Calidad", bold: true, color: COLOR_TEAL, size: 19 })
-            ]
-          }),
-          new Paragraph({
-            alignment: AlignmentType.LEFT,
-            spacing: { after: 200, line: 280 },
-            indent: { left: 720 },
-            children: [
-              new TextRun({ text: "FECHA Y LUGAR:                    ", bold: true, color: COLOR_DARK_SLATE, size: 19 }),
-              new TextRun({ text: "Septiembre de 2026 • Arica, Chile", color: COLOR_TEXT, size: 19 })
-            ]
-          }),
+          createHeading1("ESPECIFICACIÓN FORMAL DE REQUERIMIENTOS DE SOFTWARE"),
+          createParagraph("Sistema Integral de Gestión Académica, Matrícula Atómica y Campus Virtual LMS\nEcosistema PrevySeg 2026 — Versión 2.6.0 Final de Producción", { bold: true, size: 22, color: COLOR_PRIMARY, align: AlignmentType.CENTER, after: 300 }),
 
-          // Salto de página para que el contenido inicie en página 2
-          new Paragraph({
-            children: [ new PageBreak() ]
-          }),
-
-          // ==================================================================
-          // HISTORIAL DE VERSIONES DEL DOCUMENTO
-          // ==================================================================
-          createHeading2("Historial de Control de Versiones del Documento"),
+          // TABLA DE METADATOS TÉCNICOS
           new Table({
             width: { size: 100, type: WidthType.PERCENTAGE },
             alignment: AlignmentType.CENTER,
             rows: [
               new TableRow({
                 children: [
-                  createCell("Versión", { isHeader: true, width: 14 }),
-                  createCell("Fecha", { isHeader: true, width: 14 }),
-                  createCell("Autor / Rol", { isHeader: true, width: 22 }),
-                  createCell("Descripción Detallada del Cambio", { isHeader: true, width: 36 }),
-                  createCell("Aprobador", { isHeader: true, width: 14 })
+                  createCell("PARÁMETRO DOCUMENTAL", { isHeader: true, width: 35 }),
+                  createCell("VALOR OFICIAL / REGISTRO", { isHeader: true, width: 65 })
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("v1.0.0", { bold: true }),
-                  createCell("01/09/2026"),
-                  createCell("Equipo Frontend"),
-                  createCell("Levantamiento inicial de requerimientos para el portal web corporativo y vitrina de cursos."),
-                  createCell("PM / OTEC")
+                  createCell("Código de Especificación", { bold: true }),
+                  createCell("ERS-PREVYSEG-2026-V2.6-FINAL", { bold: true, textColor: COLOR_PRIMARY })
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("v1.5.0", { bold: true, bgColor: COLOR_BG_LIGHT }),
-                  createCell("08/09/2026", { bgColor: COLOR_BG_LIGHT }),
-                  createCell("Equipo Fullstack", { bgColor: COLOR_BG_LIGHT }),
-                  createCell("Especificación funcional del Campus Virtual LMS, autenticación con RUT y roles RBAC.", { bgColor: COLOR_BG_LIGHT }),
-                  createCell("Dir. Académica", { bgColor: COLOR_BG_LIGHT })
+                  createCell("Estudiante en Práctica Profesional", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Sebastián Ignacio Acuña Valderrama (RUT: 21.778.425-5)\nIngeniería en Informática — IP Santo Tomás Sede Arica", { bgColor: COLOR_BG_LIGHT })
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("v1.9.0", { bold: true }),
-                  createCell("15/09/2026"),
-                  createCell("Ingeniería de Software"),
-                  createCell("Incorporación de Bolsa de Empleo Regional de Arica, Fidelización y Panel de Visto Bueno Administrativo."),
-                  createCell("Dir. Académica")
+                  createCell("Centro de Práctica / Mandante", { bold: true }),
+                  createCell("OTEC PrevySeg SpA (RUT: 76.256.947-7 • SENCE N° 1238088725)")
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("v2.0.0", { bold: true, bgColor: "EFF6FF", textColor: COLOR_SECONDARY }),
-                  createCell("22/09/2026", { bgColor: "EFF6FF" }),
-                  createCell("Ingeniero Líder TI", { bgColor: "EFF6FF" }),
-                  createCell("Reescritura formal integral bajo estándar ISO/IEC/IEEE 29148:2018. Depuración a 6 cursos SENCE, eliminación de componentes redundantes, formalización de despacho por correo y confidencialidad Ley 19.628.", { bgColor: "EFF6FF" }),
-                  createCell("Dirección OTEC", { bgColor: "EFF6FF", bold: true, textColor: COLOR_PRIMARY })
+                  createCell("Supervisora del Centro de Práctica", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Viviane Montesillo — Dirección General OTEC PrevySeg SpA", { bgColor: COLOR_BG_LIGHT })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  createCell("Docente Guía Santo Tomás", { bold: true }),
+                  createCell("Paola Andrea Cifuentes Berríos — Santo Tomás Sede Arica")
+                ]
+              }),
+              new TableRow({
+                children: [
+                  createCell("Estándares de Ingeniería", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("ISO/IEC/IEEE 29148:2018 / IEEE Std 830-1998 / ISO/IEC 25010 / NCh 2728:2015", { bgColor: COLOR_BG_LIGHT })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  createCell("Fecha de Cierre y Emisión", { bold: true }),
+                  createCell("Noviembre de 2026 — Arica, Chile")
+                ]
+              }),
+              new TableRow({
+                children: [
+                  createCell("Repositorio y Trazabilidad Git", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("https://github.com/Sebastianaso/PrevySeg2026 (Rama main)", { bgColor: COLOR_BG_LIGHT })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  createCell("Estado de Conformidad", { bold: true }),
+                  createCell("APROBADO 100% — AUDITADO, PROBADO Y CONFORME A ACTA DE ENTREGA", { bold: true, textColor: "15803D" })
                 ]
               })
             ]
           }),
 
-          new Paragraph({ spacing: { before: 300, after: 150 } }),
-
-          // ==================================================================
-          // SECCIÓN 1: INTRODUCCIÓN Y FUNDAMENTOS DE INGENIERÍA
-          // ==================================================================
-          createHeading1("1. Introducción y Fundamentos del Documento"),
-          
-          createHeading2("1.1 Propósito"),
-          createParagraph("El presente documento de Especificación de Requerimientos de Software (SRS / ERS) tiene como finalidad formalizar, delimitar y describir de manera rigurosa y verificable la totalidad de las necesidades funcionales, restricciones técnicas y atributos de calidad de la plataforma web y campus virtual del Organismo Técnico de Capacitación (OTEC) PrevySeg Ltda."),
-          createParagraph("Este documento constituye el contrato técnico y base de ingeniería para el desarrollo, pruebas de aseguramiento de calidad (QA), auditorías de certificación SENCE / NCh 2728:2015 y despliegue continuo del sistema."),
-
-          createHeading2("1.2 Alcance del Producto de Software"),
-          createParagraph("La solución de software desarrollada para PrevySeg abarca un ecosistema digital compuesto por cuatro subsistemas integrados:"),
-          createBullet("1. Portal Web Corporativo y Vitrina SENCE:", "Plataforma pública de difusión institucional, catálogo depurado de los 6 programas activos autorizados, calculadora informativa de tramos de Franquicia Tributaria SENCE e integración directa de cotizaciones comerciales a WhatsApp Business."),
-          createBullet("2. Núcleo de Seguridad y Control de Acceso (RBAC):", "Mecanismo de autenticación estricta basado en RUT chileno con segregación de privilegios entre los roles ESTUDIANTE y ADMINISTRADOR."),
-          createBullet("3. Campus Virtual del Estudiante (LMS Alumno):", "Entorno e-learning con panel de control, seguimiento de avance curricular por lecciones, bolsa de empleo regional en Arica con postulación en línea, catálogo de cursos de especialización con descuento y descarga de copias digitales de diplomas."),
-          createBullet("4. Consola de Administración y Emisión de Diplomas (LMS Admin):", "Módulo de gestión académica con 15 categorías administrativas, nómina dinámica de participantes y panel de validación con 'Visto Bueno' para la emisión y despacho automático de diplomas en PDF por correo electrónico."),
-
-          createHeading2("1.3 Glosario de Términos y Acrónimos"),
-          createBullet("OTEC:", "Organismo Técnico de Capacitación, acreditado ante SENCE bajo la Norma Chilena NCh 2728:2015."),
-          createBullet("SENCE:", "Servicio Nacional de Capacitación y Empleo de la República de Chile."),
-          createBullet("OS-10:", "Prefectura de Seguridad Privada OS-10 de Carabineros de Chile, autoridad fiscalizadora del rubro."),
-          createBullet("RBAC:", "Role-Based Access Control (Control de Acceso Basado en Roles)."),
-          createBullet("SRS / ERS:", "Software Requirements Specification / Especificación de Requerimientos de Software."),
-          createBullet("SPA:", "Single-Page Application (Aplicación web de página única)."),
-          createBullet("UTM:", "Unidad Tributaria Mensual, parámetro monetario oficial utilizado en los tramos SENCE."),
-          createBullet("PDF/A:", "Formato estándar internacional ISO 19005 para preservación digital de documentos a largo plazo."),
-          createBullet("SLA:", "Service Level Agreement (Acuerdo de Nivel de Servicio)."),
-
-          createHeading2("1.4 Marco Regulatorio y Referencias Normativas"),
-          createParagraph("El diseño de requerimientos y la arquitectura del sistema dan estricto cumplimiento al marco legal vigente en la República de Chile:"),
-          createBullet("• Ley N° 19.518:", "Estatuto de Capacitación y Empleo (Franquicia Tributaria SENCE)."),
-          createBullet("• Decreto Ley N° 3.607 y D.S. N° 93:", "Normativa de Seguridad Privada y acreditaciones OS-10 de Carabineros."),
-          createBullet("• Norma Chilena NCh 2728:2015:", "Sistema de Gestión de Calidad para Organismos Técnicos de Capacitación."),
-          createBullet("• Ley N° 19.628:", "Protección de la Vida Privada y Datos Personales (Confidencialidad estricta de notas de los alumnos)."),
-          createBullet("• ISO/IEC/IEEE 29148:2018:", "Systems and software engineering — Life cycle processes — Requirements engineering."),
-
           new Paragraph({ spacing: { before: 240, after: 120 } }),
 
           // ==================================================================
-          // SECCIÓN 2: DESCRIPCIÓN GENERAL Y ARQUITECTURA
+          // HISTORIAL DE VERSIONES
           // ==================================================================
-          createHeading1("2. Descripción General del Sistema"),
-
-          createHeading2("2.1 Perspectiva del Producto y Arquitectura de Capas"),
-          createParagraph("La solución se estructura bajo una arquitectura de Cliente Ligero (Single-Page Application) construida en React 19 y empaquetada con Vite, garantizando un renderizado ultra-rápido, desacoplamiento de componentes y alta mantenibilidad."),
-          createBullet("• Capa de Presentación (UI/UX):", "Componentes atómicos estilizados con Tailwind CSS v4, soporte para modo oscuro (#121316), glassmorphism y microinteracciones fluidas con Framer Motion."),
-          createBullet("• Capa de Lógica de Negocio y Estado:", "Gestión de estado reactivo mediante React Hooks (`useState`, `useEffect`, `useMemo`), validación de reglas de negocio, cálculo de tramos SENCE y verificación algorítmica de RUT."),
-          createBullet("• Capa de Integración Externa:", "Conexión a endpoints de WhatsApp Business API, servicios de generación de documentos PDF y marcadores estandarizados para despacho SMTP de correos electrónicos (`///CORREO REMITENTE///` a `///CORREO DE RECEPCION///`)."),
-
-          createHeading2("2.2 Matriz de Actores y Caracterización de Usuarios"),
+          createHeading2("Historial de Revisiones y Control de Versiones"),
           new Table({
             width: { size: 100, type: WidthType.PERCENTAGE },
             alignment: AlignmentType.CENTER,
             rows: [
               new TableRow({
                 children: [
-                  createCell("Rol / Actor", { isHeader: true, width: 22 }),
-                  createCell("Perfil y Competencias", { isHeader: true, width: 28 }),
-                  createCell("Responsabilidades y Objetivos en el Sistema", { isHeader: true, width: 50 })
+                  createCell("VERSIÓN", { isHeader: true, width: 12, align: AlignmentType.CENTER }),
+                  createCell("FECHA", { isHeader: true, width: 14, align: AlignmentType.CENTER }),
+                  createCell("AUTOR / ROL", { isHeader: true, width: 22 }),
+                  createCell("DETALLE DE MODIFICACIONES", { isHeader: true, width: 37 }),
+                  createCell("APROBACIÓN", { isHeader: true, width: 15, align: AlignmentType.CENTER })
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("Administrador Académico", { bold: true }),
-                  createCell("Personal de gestión OTEC con conocimientos informáticos y normativos."),
-                  createCell("Auditar el cumplimiento formativo de los alumnos, otorgar el Visto Bueno administrativo, emitir diplomas oficiales, gestionar participantes y configurar el LMS.")
+                  createCell("v1.0.0", { bold: true, align: AlignmentType.CENTER, bgColor: COLOR_BG_LIGHT }),
+                  createCell("01/09/2026", { align: AlignmentType.CENTER, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Sebastián Acuña", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("Levantamiento inicial de requerimientos para portal web y vitrina de cursos.", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("Supervisión OTEC", { align: AlignmentType.CENTER, bgColor: COLOR_BG_LIGHT })
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("Estudiante / Guardia OS-10", { bold: true, bgColor: COLOR_BG_LIGHT }),
-                  createCell("Usuario matriculado en cursos de seguridad privada o especializaciones.", { bgColor: COLOR_BG_LIGHT }),
-                  createCell("Acceder al Campus Virtual, consultar temarios, postular a la bolsa de empleo regional de Arica y descargar su copia oficial del diploma de idoneidad.", { bgColor: COLOR_BG_LIGHT })
+                  createCell("v1.5.0", { bold: true, align: AlignmentType.CENTER }),
+                  createCell("08/09/2026", { align: AlignmentType.CENTER }),
+                  createCell("Sebastián Acuña"),
+                  createCell("Especificación funcional del Campus Virtual LMS, autenticación con RUT y roles RBAC."),
+                  createCell("Dirección Académica", { align: AlignmentType.CENTER })
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("Empresa / Cliente Corporativo", { bold: true }),
-                  createCell("Encargados de RRHH, capacitación y prevención de riesgos de empresas."),
-                  createCell("Consultar la oferta de 6 cursos SENCE, revisar los tramos de franquicia tributaria y solicitar cotizaciones masivas para sus trabajadores vía WhatsApp.")
+                  createCell("v2.0.0", { bold: true, align: AlignmentType.CENTER, bgColor: COLOR_BG_LIGHT }),
+                  createCell("22/09/2026", { align: AlignmentType.CENTER, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Sebastián Acuña", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("Depuración a cursos SENCE, emisión de diplomas y confidencialidad Ley N° 19.628.", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("Dirección General", { align: AlignmentType.CENTER, bgColor: COLOR_BG_LIGHT })
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("Público General / Postulante", { bold: true, bgColor: COLOR_BG_LIGHT }),
-                  createCell("Personas naturales interesadas en certificar su credencial OS-10.", { bgColor: COLOR_BG_LIGHT }),
-                  createCell("Buscar información académica, consultar artículos técnicos y contactar a la academia para formalizar matrícula.", { bgColor: COLOR_BG_LIGHT })
+                  createCell("v2.4.0", { bold: true, align: AlignmentType.CENTER }),
+                  createCell("15/10/2026", { align: AlignmentType.CENTER }),
+                  createCell("Sebastián Acuña"),
+                  createCell("Seguridad pgcrypto Bcrypt 256-bit y calculadora de Franquicia SENCE (tramos UTM)."),
+                  createCell("Supervisión Práctica", { align: AlignmentType.CENTER })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  createCell("v2.6.0", { bold: true, align: AlignmentType.CENTER, bgColor: "EFF6FF" }),
+                  createCell("10/11/2026", { align: AlignmentType.CENTER, bgColor: "EFF6FF" }),
+                  createCell("Sebastián Ignacio Acuña Valderrama", { bold: true, bgColor: "EFF6FF" }),
+                  createCell("VERSIÓN FINAL DE PRODUCCIÓN: Catálogo oficial cerrado de 20 cursos, docentes OS-10 (Marco Gallardo Sáez e Ing. Patricio Melgarejo Araníbar), persistencia atómica process_enrollment_registration, Ficha con 8 campos obligatorios (Fecha Nacimiento y Dirección Particular), Declaración Jurada interactiva OTEC vs SPD, motor dual Gmail SMTP y Resend a cliente y prevyseg.capacitaciones@gmail.com, bloque bancario QR oficial y WhatsApp directo.", { bgColor: "EFF6FF" }),
+                  createCell("Viviane Montesillo / Paola Cifuentes", { bold: true, align: AlignmentType.CENTER, bgColor: "EFF6FF" })
                 ]
               })
             ]
           }),
 
-          createHeading2("2.3 Restricciones de Diseño e Implementación"),
-          createBullet("1. Confidencialidad Absoluta de Notas (Ley 19.628):", "Los certificados emitidos por el sistema deben certificar la condición de 'Capacitado e Idóneo' sin exhibir bajo ninguna circunstancia calificaciones numéricas."),
-          createBullet("2. Catálogo Oficial Depurado:", "El catálogo público debe restringirse estrictamente a los 6 cursos autorizados vigentes, eliminando ofertas no regularizadas ante SENCE."),
-          createBullet("3. Despacho Desacoplado de Correos:", "El sistema debe utilizar marcadores tipográficos estandarizados (`///CORREO REMITENTE///` y `///CORREO DE RECEPCION///`) para posibilitar su enlace inmediato con servidores SMTP o webhooks transaccionales."),
+          new Paragraph({ spacing: { before: 240, after: 120 } }),
+
+          // ==================================================================
+          // SECCIÓN 1: INTRODUCCIÓN Y ALCANCE
+          // ==================================================================
+          createHeading1("1. Introducción, Alcance y Marco Regulatorio"),
+          createParagraph("El presente documento formaliza los Requerimientos Funcionales y No Funcionales del Ecosistema PrevySeg 2026 (Versión 2.6.0 Final de Producción), desarrollado para el Organismo Técnico de Capacitación PrevySeg SpA bajo estándares internacionales de ingeniería de software (ISO/IEC/IEEE 29148:2018 e ISO/IEC 25010)."),
+          createBullet("Propósito:", "Formalizar la plataforma tecnológica integral que articula el Portal Web Institucional, la Ficha Oficial de Admisión y Matrícula Atómica con pasarela bancaria asistida, el Motor Dual de Notificaciones en tiempo real y el Campus Virtual LMS multi-rol."),
+          createBullet("Norma NCh 2728:2015:", "Sistema de Gestión de Calidad para OTEC en Chile, exigiendo trazabilidad curricular, control de asistencia y respaldo documental."),
+          createBullet("Ley N° 21.659 y Decreto N° 867:", "Nueva Ley de Seguridad Privada, regulando la formación impartida por instructores acreditados ante Carabineros OS-10 y la Subsecretaría de Prevención del Delito (SPD)."),
+          createBullet("Ley N° 19.518:", "Estatuto de Capacitación y Empleo, rigiendo la Franquicia Tributaria SENCE y los tramos impositivos en UTM."),
+          createBullet("Ley N° 19.628:", "Protección de la Vida Privada, garantizando confidencialidad mediante emisión cualitativa de diplomas sin notas numéricas."),
 
           new Paragraph({ spacing: { before: 240, after: 120 } }),
 
           // ==================================================================
-          // SECCIÓN 3: ESPECIFICACIÓN DE REQUERIMIENTOS FUNCIONALES (RF)
+          // SECCIÓN 2: MATRIZ DE ACTORES
           // ==================================================================
-          createHeading1("3. Especificación Detallada de Requerimientos Funcionales (RF)"),
-          createParagraph("A continuación se detallan los 17 Requerimientos Funcionales que rigen el comportamiento algorítmico y operativo del software:"),
+          createHeading1("2. Matriz de Actores y Perfiles de Acceso (RBAC)"),
+          new Table({
+            width: { size: 100, type: WidthType.PERCENTAGE },
+            alignment: AlignmentType.CENTER,
+            rows: [
+              new TableRow({
+                children: [
+                  createCell("ROL / ACTOR", { isHeader: true, width: 22 }),
+                  createCell("DESCRIPCIÓN Y COMPETENCIAS", { isHeader: true, width: 35 }),
+                  createCell("RESPONSABILIDADES Y ACCIONES PRINCIPALES", { isHeader: true, width: 43 })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  createCell("Administrador OTEC (ADMIN)", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Dirección Ejecutiva y Personal Administrativo de PrevySeg SpA.", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("Control integral del LMS, administración de participantes, reseteo de claves Bcrypt, otorgamiento de visto bueno de certificados y parametrización de cursos.", { bgColor: COLOR_BG_LIGHT })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  createCell("Docente OS-10 (TEACHER)", { bold: true }),
+                  createCell("Instructores acreditados ante Carabineros (Marco Gallardo / Patricio Melgarejo)."),
+                  createCell("Impartición de lecciones, libro de calificaciones SPD/SENCE, publicación de guías didácticas y resolución de dudas formativas.")
+                ]
+              }),
+              new TableRow({
+                children: [
+                  createCell("Estudiante (STUDENT)", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Postulantes formalmente matriculados en cursos de seguridad u oficios.", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("Acceso al aula virtual 24/7, lecciones interactivas, descarga de material didáctico, postulación a bolsa laboral y descarga de diplomas con QR.", { bgColor: COLOR_BG_LIGHT })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  createCell("Postulante / Público", { bold: true }),
+                  createCell("Personas naturales interesadas en certificar competencias laborales."),
+                  createCell("Llenado de Ficha de Admisión (8 datos), aceptación de Declaración Jurada, recepción de comprobante con QR bancario y contacto directo por WhatsApp.")
+                ]
+              }),
+              new TableRow({
+                children: [
+                  createCell("Empresa / RRHH", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Gerencias de Personas y Contratistas Industriales de la Zona Norte.", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("Cotización de cursos con franquicia SENCE mediante calculadora de tramos UTM y coordinación de nóminas corporativas.", { bgColor: COLOR_BG_LIGHT })
+                ]
+              })
+            ]
+          }),
 
-          // Renderizado de cada RF con su ficha técnica de ingeniería
-          ...functionalRequirements.flatMap((rf, index) => [
-            createHeading2(`${rf.code}: ${rf.name}`),
-            new Table({
+          new Paragraph({ spacing: { before: 240, after: 120 } }),
+
+          // ==================================================================
+          // SECCIÓN 3: REQUERIMIENTOS FUNCIONALES DETALLADOS
+          // ==================================================================
+          createHeading1("3. Especificación Exhaustiva de Requerimientos Funcionales"),
+          createParagraph("A continuación se presentan las 22 fichas técnicas normalizadas de los Requerimientos Funcionales (RF-01 a RF-22) que rigen el Ecosistema PrevySeg 2026:"),
+
+          ...functionalRequirements.map((rf) => {
+            return new Table({
               width: { size: 100, type: WidthType.PERCENTAGE },
               alignment: AlignmentType.CENTER,
               rows: [
                 new TableRow({
                   children: [
-                    createCell("CÓDIGO Y MÓDULO:", { isHeader: true, width: 28 }),
-                    createCell(`${rf.code} — ${rf.module}`, { width: 72, bold: true, textColor: COLOR_SECONDARY })
+                    createCell(`${rf.code}: ${rf.name}`, { isHeader: true, colSpan: 2, bgColor: COLOR_PRIMARY, bold: true, fontSize: 19 })
                   ]
                 }),
                 new TableRow({
                   children: [
-                    createCell("PRIORIDAD (MoSCoW):", { isHeader: true }),
-                    createCell(rf.priority, { bold: true, textColor: rf.priority.includes("Crítica") ? COLOR_CRITICAL : rf.priority.includes("Alta") ? COLOR_HIGH : COLOR_MEDIUM })
+                    createCell("Módulo / Dominio", { bold: true, width: 28, bgColor: COLOR_BG_LIGHT }),
+                    createCell(rf.module, { width: 72, bgColor: COLOR_BG_LIGHT })
                   ]
                 }),
                 new TableRow({
                   children: [
-                    createCell("ACTOR PRINCIPAL:", { isHeader: true }),
-                    createCell(rf.actor)
-                  ]
-                }),
-                new TableRow({
-                  children: [
-                    createCell("DESCRIPCIÓN Y REGLA DE NEGOCIO:", { isHeader: true }),
+                    createCell("Descripción Funcional", { bold: true }),
                     createCell(rf.desc)
                   ]
                 }),
                 new TableRow({
                   children: [
-                    createCell("ENTRADAS (INPUTS):", { isHeader: true }),
-                    createCell(rf.inputs, { italic: true })
+                    createCell("Entradas (Inputs)", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                    createCell(rf.inputs, { bgColor: COLOR_BG_LIGHT })
                   ]
                 }),
                 new TableRow({
                   children: [
-                    createCell("PROCESAMIENTO:", { isHeader: true }),
+                    createCell("Procesamiento Técnico", { bold: true }),
                     createCell(rf.process)
                   ]
                 }),
                 new TableRow({
                   children: [
-                    createCell("SALIDAS (OUTPUTS):", { isHeader: true }),
-                    createCell(rf.outputs, { bold: true })
+                    createCell("Salidas (Outputs)", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                    createCell(rf.outputs, { bgColor: COLOR_BG_LIGHT })
                   ]
                 }),
                 new TableRow({
                   children: [
-                    createCell("CRITERIO DE ACEPTACIÓN / QA:", { isHeader: true, bgColor: COLOR_BG_SUBHEADER }),
-                    createCell(rf.acceptance, { bgColor: COLOR_BG_LIGHT, bold: true, textColor: COLOR_TEAL })
+                    createCell("Actor Responsable", { bold: true }),
+                    createCell(rf.actor)
+                  ]
+                }),
+                new TableRow({
+                  children: [
+                    createCell("Prioridad de Negocio", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                    createCell(rf.priority, { bold: true, textColor: rf.priority.includes("Crítica") ? COLOR_CRITICAL : COLOR_MEDIUM, bgColor: COLOR_BG_LIGHT })
+                  ]
+                }),
+                new TableRow({
+                  children: [
+                    createCell("Criterio de Aceptación", { bold: true }),
+                    createCell(rf.acceptance, { italic: true, bold: true, textColor: COLOR_TEXT })
                   ]
                 })
               ]
-            }),
-            new Paragraph({ spacing: { before: 100, after: 120 } })
-          ]),
+            });
+          }),
 
           new Paragraph({ spacing: { before: 240, after: 120 } }),
 
           // ==================================================================
-          // SECCIÓN 4: ESPECIFICACIÓN DE REQUERIMIENTOS NO FUNCIONALES (RNF)
+          // SECCIÓN 4: REQUERIMIENTOS NO FUNCIONALES
           // ==================================================================
-          createHeading1("4. Especificación de Requerimientos No Funcionales (ISO/IEC 25010)"),
-          createParagraph("Los Requerimientos No Funcionales establecen las propiedades emergentes, directrices de calidad y restricciones de ingeniería del sistema:"),
-
+          createHeading1("4. Requerimientos No Funcionales (RNF - ISO/IEC 25010)"),
           new Table({
             width: { size: 100, type: WidthType.PERCENTAGE },
             alignment: AlignmentType.CENTER,
             rows: [
               new TableRow({
                 children: [
-                  createCell("Código", { isHeader: true, width: 10 }),
-                  createCell("Categoría ISO 25010", { isHeader: true, width: 22 }),
-                  createCell("Descripción y Criterio de Calidad", { isHeader: true, width: 44 }),
-                  createCell("Métrica / Umbral de Aceptación", { isHeader: true, width: 24 })
+                  createCell("CÓDIGO", { isHeader: true, width: 12, align: AlignmentType.CENTER }),
+                  createCell("DIMENSIÓN ISO 25010", { isHeader: true, width: 25 }),
+                  createCell("REQUISITO Y CRITERIO TÉCNICO", { isHeader: true, width: 43 }),
+                  createCell("MÉTRICA OBJETIVO", { isHeader: true, width: 20 })
                 ]
               }),
-              ...nonFunctionalRequirements.map((rnf, idx) => {
-                const bg = idx % 2 === 0 ? "FFFFFF" : COLOR_BG_LIGHT;
-                return new TableRow({
+              ...nonFunctionalRequirements.map((rnf, idx) =>
+                new TableRow({
                   children: [
-                    createCell(rnf.code, { bgColor: bg, bold: true, textColor: COLOR_PRIMARY }),
-                    createCell(`${rnf.category}\n(${rnf.subcat})`, { bgColor: bg, bold: true }),
-                    createCell(rnf.desc, { bgColor: bg }),
-                    createCell(rnf.metric, { bgColor: bg, bold: true, textColor: COLOR_SECONDARY })
+                    createCell(rnf.code, { bold: true, align: AlignmentType.CENTER, bgColor: idx % 2 === 0 ? COLOR_BG_LIGHT : null }),
+                    createCell(rnf.dim, { bold: true, bgColor: idx % 2 === 0 ? COLOR_BG_LIGHT : null }),
+                    createCell(rnf.req, { bgColor: idx % 2 === 0 ? COLOR_BG_LIGHT : null }),
+                    createCell(rnf.metric, { bold: true, textColor: COLOR_PRIMARY, bgColor: idx % 2 === 0 ? COLOR_BG_LIGHT : null })
                   ]
-                });
-              })
+                })
+              )
             ]
           }),
 
-          new Paragraph({ spacing: { before: 300, after: 150 } }),
+          new Paragraph({ spacing: { before: 240, after: 120 } }),
 
           // ==================================================================
-          // SECCIÓN 5: MATRIZ DE TRAZABILIDAD DE REQUERIMIENTOS (RTM)
+          // SECCIÓN 5: MATRIZ DE TRAZABILIDAD (RTM)
           // ==================================================================
           createHeading1("5. Matriz de Trazabilidad de Requerimientos (RTM)"),
-          createParagraph("La Matriz de Trazabilidad asegura la correspondencia unívoca entre los requerimientos especificados, los módulos del sistema y los componentes implementados en el código fuente:"),
-
           new Table({
             width: { size: 100, type: WidthType.PERCENTAGE },
             alignment: AlignmentType.CENTER,
             rows: [
               new TableRow({
                 children: [
-                  createCell("Requerimiento", { isHeader: true, width: 14 }),
-                  createCell("Módulo / Subsistema", { isHeader: true, width: 24 }),
-                  createCell("Archivo / Componente en Repositorio", { isHeader: true, width: 34 }),
-                  createCell("Método de Verificación", { isHeader: true, width: 28 })
+                  createCell("REQUERIMIENTOS", { isHeader: true, width: 22 }),
+                  createCell("MÓDULO DEL SISTEMA", { isHeader: true, width: 25 }),
+                  createCell("ARCHIVOS / COMPONENTES IMPLEMENTADOS", { isHeader: true, width: 33 }),
+                  createCell("MÉTODO DE VERIFICACIÓN", { isHeader: true, width: 20 })
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("RF-01, RF-02", { bold: true }),
-                  createCell("Portal Público"),
-                  createCell("src/components/Services.jsx"),
-                  createCell("Prueba funcional UI de catálogo y filtros")
+                  createCell("RF-01, RF-02", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Catálogo 20 Cursos & Docentes OS-10", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("src/components/CoursesSection.jsx\nsrc/components/EnrollmentForm.jsx", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("Auditoría visual y conmutación de escuelas", { bgColor: COLOR_BG_LIGHT })
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("RF-03", { bold: true, bgColor: COLOR_BG_LIGHT }),
-                  createCell("Comercial", { bgColor: COLOR_BG_LIGHT }),
-                  createCell("src/components/ContactFooter.jsx, Modals.jsx", { bgColor: COLOR_BG_LIGHT }),
-                  createCell("Prueba de integración URI WhatsApp", { bgColor: COLOR_BG_LIGHT })
+                  createCell("RF-03, RF-04, RF-05", { bold: true }),
+                  createCell("Ficha 8 Campos & Declaración Jurada"),
+                  createCell("src/components/PreEnrollmentStep.jsx\nsrc/utils/validation.js"),
+                  createCell("Prueba de validación de 8 datos y ticket")
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("RF-04", { bold: true }),
-                  createCell("Franquicia SENCE"),
-                  createCell("src/components/SenceTramosSection.jsx"),
-                  createCell("Inspección visual de tramos normativos")
-                ]
-              }),
-              new TableRow({
-                children: [
-                  createCell("RF-07", { bold: true, bgColor: COLOR_BG_LIGHT }),
-                  createCell("Seguridad / Auth", { bgColor: COLOR_BG_LIGHT }),
-                  createCell("src/lms/LMSLayout.jsx, Modals.jsx", { bgColor: COLOR_BG_LIGHT }),
-                  createCell("Prueba de penetración de roles RBAC", { bgColor: COLOR_BG_LIGHT })
+                  createCell("RF-06, RF-07", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Motor Dual Email & QR Bancario", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("src/services/notificationService.js\nvite.config.js / api/send-enrollment-email.js", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("Prueba de recepción en bandejas de entrada", { bgColor: COLOR_BG_LIGHT })
                 ]
               }),
               new TableRow({
                 children: [
                   createCell("RF-08, RF-09", { bold: true }),
-                  createCell("Campus Alumno"),
-                  createCell("src/lms/views/PersonalAreaView.jsx, MyCoursesView.jsx"),
-                  createCell("Prueba de cálculo de progreso curricular")
+                  createCell("WhatsApp Directo & Cierre Pasarela"),
+                  createCell("src/components/PreEnrollmentStep.jsx"),
+                  createCell("Apertura inmediata sin bloqueo popups")
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("RF-10, RF-11", { bold: true, bgColor: COLOR_BG_LIGHT }),
-                  createCell("Bolsa de Empleo", { bgColor: COLOR_BG_LIGHT }),
-                  createCell("src/lms/views/JobBoardView.jsx", { bgColor: COLOR_BG_LIGHT }),
-                  createCell("Prueba de flujo de postulación laboral", { bgColor: COLOR_BG_LIGHT })
+                  createCell("RF-10, RF-11, RF-12", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Persistencia Atómica & Bcrypt", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("src/config/supabase.js\nsupabase_setup_login.sql", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("Inspección de integridad y hashes BD", { bgColor: COLOR_BG_LIGHT })
                 ]
               }),
               new TableRow({
                 children: [
                   createCell("RF-13, RF-14", { bold: true }),
-                  createCell("Certificación Admin"),
-                  createCell("src/lms/views/CertificateApprovalView.jsx"),
-                  createCell("Prueba de Visto Bueno y disparo de email")
+                  createCell("Calculadora SENCE & WhatsApps"),
+                  createCell("src/components/SenceTramosSection.jsx"),
+                  createCell("Prueba de cálculo UTM y enlaces")
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("RF-15", { bold: true, bgColor: COLOR_BG_LIGHT }),
-                  createCell("Diploma Oficial", { bgColor: COLOR_BG_LIGHT }),
-                  createCell("src/lms/views/CertificateApprovalView.jsx"),
-                  createCell("Auditoría de confidencialidad sin notas", { bgColor: COLOR_BG_LIGHT })
+                  createCell("RF-15, RF-16", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Acceso Demo & Gestión Participantes", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("src/components/Modals.jsx\nsrc/lms/views/ParticipantsView.jsx", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("Prueba de login 1-click y reseteo de claves", { bgColor: COLOR_BG_LIGHT })
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("RF-16, RF-17", { bold: true }),
-                  createCell("Admin Global"),
-                  createCell("src/lms/views/SiteAdminView.jsx"),
-                  createCell("Prueba de gestión de participantes y 15 cat.")
+                  createCell("RF-17, RF-18", { bold: true }),
+                  createCell("Campus Virtual & Aulas Interactivas"),
+                  createCell("src/lms/views/PersonalAreaView.jsx\nsrc/lms/views/CourseClassroomView.jsx"),
+                  createCell("Inspección de avance y visor multimedia")
+                ]
+              }),
+              new TableRow({
+                children: [
+                  createCell("RF-19, RF-20, RF-21", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Certificación, Ley 19.628 & QR", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("src/lms/views/CertificateApprovalView.jsx"),
+                  createCell("Auditoría de confidencialidad y validación QR", { bgColor: COLOR_BG_LIGHT })
+                ]
+              }),
+              new TableRow({
+                children: [
+                  createCell("RF-22", { bold: true }),
+                  createCell("Bolsa de Empleo Regional"),
+                  createCell("src/lms/views/JobBoardView.jsx"),
+                  createCell("Prueba de postulación laboral con RUT")
                 ]
               })
             ]
           }),
 
-          new Paragraph({ spacing: { before: 300, after: 150 } }),
+          new Paragraph({ spacing: { before: 240, after: 120 } }),
 
           // ==================================================================
-          // SECCIÓN 6: CUADRO FORMAL DE APROBACIÓN Y FIRMAS
+          // SECCIÓN 6: APROBACIÓN FORMAL Y FIRMAS
           // ==================================================================
-          createHeading1("6. Aprobación Formal y Validación de Ingeniería"),
-          createParagraph("El presente documento de Especificación de Requerimientos de Software ha sido revisado y aprobado formalmente por los responsables técnicos y directivos del proyecto:"),
+          createHeading1("6. Aprobación Formal y Validación de Entrega"),
+          createParagraph("En conformidad con el Acta de Entrega y Recepción Conforme de Proyecto de Práctica Profesional suscrita en Arica, Chile, se aprueba formalmente la presente Especificación de Requerimientos de Software al 100% de cumplimiento:"),
 
           new Table({
             width: { size: 100, type: WidthType.PERCENTAGE },
@@ -1107,37 +997,37 @@ async function createFormalEngineeringRequirementsDoc() {
             rows: [
               new TableRow({
                 children: [
-                  createCell("ROL / CARGO", { isHeader: true, width: 33 }),
-                  createCell("NOMBRE Y FIRMA", { isHeader: true, width: 34 }),
-                  createCell("FECHA Y ESTADO", { isHeader: true, width: 33 })
+                  createCell("ROL / RESPONSABILIDAD", { isHeader: true, width: 34 }),
+                  createCell("NOMBRE, TÍTULO E INSTITUCIÓN", { isHeader: true, width: 36 }),
+                  createCell("ESTADO DE VALIDACIÓN", { isHeader: true, width: 30, align: AlignmentType.CENTER })
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("Ingeniero Líder de Software / TI", { bold: true }),
-                  createCell("Sebastián Araya\nIngeniería en Informática"),
-                  createCell("Septiembre 2026\n[ APROBADO TÉCNICAMENTE ]", { textColor: COLOR_TEAL, bold: true })
+                  createCell("Estudiante en Práctica Profesional", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Sebastián Ignacio Acuña Valderrama (RUT: 21.778.425-5)\nIngeniería en Informática — IP Santo Tomás Sede Arica", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("ENTREGA CONFORME\nNoviembre 2026", { bold: true, textColor: "15803D", align: AlignmentType.CENTER, bgColor: "DCFCE7" })
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("Director Académico PrevySeg", { bold: true, bgColor: COLOR_BG_LIGHT }),
-                  createCell("Viviane Montesillo\nDirección OTEC PrevySeg", { bgColor: COLOR_BG_LIGHT }),
-                  createCell("Septiembre 2026\n[ APROBADO INSTITUCIONAL ]", { bgColor: COLOR_BG_LIGHT, textColor: COLOR_PRIMARY, bold: true })
+                  createCell("Supervisora Centro de Práctica", { bold: true }),
+                  createCell("Viviane Montesillo\nDirección General — OTEC PrevySeg SpA"),
+                  createCell("RECEPCIÓN CONFORME\nNoviembre 2026", { bold: true, textColor: "15803D", align: AlignmentType.CENTER, bgColor: "DCFCE7" })
                 ]
               }),
               new TableRow({
                 children: [
-                  createCell("Coordinación de Calidad NCh 2728 / SENCE", { bold: true }),
-                  createCell("Comité de Aseguramiento de la Calidad"),
-                  createCell("Septiembre 2026\n[ CONFORME AUDITORÍA ]", { textColor: COLOR_SECONDARY, bold: true })
+                  createCell("Docente Guía Santo Tomás", { bold: true, bgColor: COLOR_BG_LIGHT }),
+                  createCell("Paola Andrea Cifuentes Berríos\nDocente Guía — IP Santo Tomás Sede Arica", { bgColor: COLOR_BG_LIGHT }),
+                  createCell("APROBADO ACADÉMICO\nNoviembre 2026", { bold: true, textColor: "15803D", align: AlignmentType.CENTER, bgColor: "DCFCE7" })
                 ]
               })
             ]
           }),
 
           new Paragraph({ spacing: { before: 200, after: 100 } }),
-          createParagraph("© 2026 PrevySeg Capacitaciones Ltda. Arica, Chile. Todos los derechos reservados. Documento de Ingeniería bajo estándar ISO/IEC/IEEE 29148:2018.", { italic: true, size: 16, color: COLOR_MUTED, align: AlignmentType.CENTER })
+          createParagraph("© 2026 OTEC PrevySeg SpA • Blanco Encalada N° 666, Arica, Chile • Estándar ISO/IEC/IEEE 29148:2018.", { italic: true, size: 16, color: COLOR_MUTED, align: AlignmentType.CENTER })
         ]
       }
     ]
@@ -1146,7 +1036,7 @@ async function createFormalEngineeringRequirementsDoc() {
   const buffer = await Packer.toBuffer(doc);
   const outputPath = path.join(__dirname, '..', 'Requerimientos_Funcionales_y_No_Funcionales_PrevySeg.docx');
   fs.writeFileSync(outputPath, buffer);
-  console.log('Documento Word de Requerimientos generado con éxito en:', outputPath);
+  console.log('✅ Documento Word de Requerimientos generado con éxito en:', outputPath);
 }
 
 createFormalEngineeringRequirementsDoc().catch(console.error);

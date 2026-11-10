@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Especificación de Requerimientos de Software - PrevySeg 2026</title>
+  <title>Especificación de Requerimientos de Software - PrevySeg 2026 (v2.6.0 Final)</title>
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
   <style>
     :root {
@@ -22,7 +22,7 @@
       padding: 40px 20px;
     }
     .document-container {
-      max-width: 960px;
+      max-width: 980px;
       margin: 0 auto;
       background: #FFFFFF;
       padding: 50px 60px;
@@ -152,13 +152,15 @@
       </button>
     </div>
 
-    <div class="header-badge">CÓDIGO: ERS-PREVYSEG-2026-V3.0 • NORMA NCH 2728:2015</div>
+    <div class="header-badge">CÓDIGO: ERS-PREVYSEG-2026-V2.6-FINAL • REGISTRO SENCE N° 1238088725</div>
     <h1>Especificación de Requerimientos de Software (SRS / ERS)</h1>
     <p style="font-size: 16px; color: #475569; margin-top: -4px;">
-      <strong>Ecosistema Digital PrevySeg 2026</strong> | OTEC Registro SENCE N° 1238088725 • Estándar ISO/IEC/IEEE 29148:2018 & ISO/IEC 25010
+      <strong>Ecosistema PrevySeg 2026 — Versión 2.6.0 Final de Producción</strong><br>
+      OTEC PrevySeg SpA (RUT: 76.256.947-7) • Sede Central: Blanco Encalada N° 666, Arica, Chile<br>
+      Estudiante: <strong>Sebastián Ignacio Acuña Valderrama (RUT: 21.778.425-5)</strong> — IP Santo Tomás Sede Arica
     </p>
 
-    <h2>1. Control de Versiones</h2>
+    <h2>1. Control de Versiones del Documento</h2>
     <table>
       <thead>
         <tr>
@@ -173,62 +175,78 @@
         <tr>
           <td><strong>v1.0.0</strong></td>
           <td>01/09/2026</td>
-          <td>Equipo Frontend</td>
+          <td>Sebastián Acuña</td>
           <td>Levantamiento inicial de requerimientos para portal web y vitrina de cursos.</td>
-          <td>PM / OTEC</td>
+          <td>Supervisión OTEC</td>
+        </tr>
+        <tr>
+          <td><strong>v1.5.0</strong></td>
+          <td>08/09/2026</td>
+          <td>Sebastián Acuña</td>
+          <td>Especificación del Campus Virtual LMS, autenticación con RUT y roles RBAC.</td>
+          <td>Dirección Académica</td>
         </tr>
         <tr>
           <td><strong>v2.0.0</strong></td>
           <td>22/09/2026</td>
-          <td>Ingeniería Fullstack</td>
-          <td>Depuración a 6 cursos oficiales SENCE, emisión de diplomas y confidencialidad Ley 19.628.</td>
-          <td>Dirección OTEC</td>
+          <td>Sebastián Acuña</td>
+          <td>Depuración a cursos SENCE, emisión de diplomas y confidencialidad Ley 19.628.</td>
+          <td>Dirección General</td>
+        </tr>
+        <tr>
+          <td><strong>v2.4.0</strong></td>
+          <td>15/10/2026</td>
+          <td>Sebastián Acuña</td>
+          <td>Seguridad pgcrypto Bcrypt 256-bit y calculadora de Franquicia SENCE (tramos UTM).</td>
+          <td>Supervisión Práctica</td>
         </tr>
         <tr style="background-color: #EFF6FF;">
-          <td><strong>v3.0.0</strong></td>
-          <td>04/09/2026</td>
-          <td>Arquitecto TI & Seguridad</td>
-          <td><strong>Actualización Integral Post-Push (57f7822):</strong> Encriptación Bcrypt 256-bit (pgcrypto), validación RUT Módulo 11 en tiempo real, abono 50% (Cuota 1 y 2), aviso SPD vs Oficios, reseteo de claves y soporte WhatsApp.</td>
-          <td>Dirección General</td>
+          <td><strong>v2.6.0</strong></td>
+          <td>10/11/2026</td>
+          <td>Sebastián Ignacio Acuña Valderrama</td>
+          <td><strong>VERSIÓN FINAL DE PRODUCCIÓN:</strong> Catálogo oficial cerrado de 20 cursos, docentes OS-10 (Marco Gallardo Sáez e Ing. Patricio Melgarejo Araníbar), persistencia atómica process_enrollment_registration, Ficha con 8 campos obligatorios (Fecha Nacimiento y Dirección Particular), Declaración Jurada interactiva OTEC vs SPD, motor dual Gmail SMTP y Resend a cliente y prevyseg.capacitaciones@gmail.com, bloque bancario QR oficial y WhatsApp directo.</td>
+          <td>Viviane Montesillo / Paola Cifuentes</td>
         </tr>
       </tbody>
     </table>
 
     <h2>2. Diagramas de Arquitectura y Procesos</h2>
     
-    <h3>2.1 Flujo de Admisión y Criptografía Bcrypt (PostgreSQL / Supabase)</h3>
+    <h3>2.1 Flujo de Admisión, Persistencia Atómica y Motor Dual de Notificaciones</h3>
     <div class="mermaid-box">
       <div class="mermaid">
-graph TD
-    P[Postulante / Alumno] -->|1. Completa Formulario| F[Ficha Digital de Inscripción]
-    F -->|2. Formatea en vivo| V1[validation.js: formatRut & Modulo 11]
-    F -->|3. Selecciona Curso| CURSO{Tipo Programa}
-    CURSO -->|Seguridad SPD| N1[Aviso: Examen Externo SPD]
-    CURSO -->|Escuela Oficios| N2[Aviso: Certificación Directa PrevySeg]
-    F -->|4. Calcula Plan Abono| ABONO[Cuota 1: 50% / Cuota 2: Saldo]
-    F -->|5. Confirma Inscripción| WA[WhatsApp Admisiones: +56 9 8231 2128]
-    F -->|6. Invoca RPC Seguro| RPC1[public.admin_create_user / register_new_student]
-    RPC1 -->|Genera Hash Bcrypt 256-bit| CRYPT[pgcrypto: extensions.crypt]
-    CRYPT -->|Persiste| AU[(auth.users)]
-    CRYPT -->|Persiste| PU[(public.users)]
+flowchart TD
+    P[Postulante / Alumno] -->|1. Completa 8 Campos Obligatorios| F[Ficha Digital de Admisión]
+    F -->|2. Validación Matemática| V1[Módulo 11 RUT + RFC 5322 Email + Control Etario]
+    F -->|3. Acepta Términos| DJ[Declaración Jurada Interactiva: OTEC vs SPD]
+    F -->|4. Pulsa 'Enviar Información'| WAPOP[Apertura Instantánea WhatsApp Admisiones: +56 9 7869 1869]
+    F -->|5. Proceso Concurrente| DUAL[Motor Dual de Correo en Paralelo]
+    DUAL -->|Gmail SMTP| C1[prevysegconfirm@gmail.com con App Password]
+    DUAL -->|Resend API| C2[Resend SDK con keepalive: true]
+    C1 & C2 -->|Envío Simultáneo| RCPT1[Bandeja Postulante]
+    C1 & C2 -->|Copia Oficial| RCPT2[prevyseg.capacitaciones@gmail.com]
+    F -->|6. Persistencia Atómica| RPC[PostgreSQL: process_enrollment_registration]
+    RPC -->|Hash Bcrypt 256-bit| PGC[pgcrypto: crypt]
+    PGC -->|Matrícula Única y Segura| DB[(Supabase Cloud Database)]
       </div>
     </div>
 
-    <h3>2.2 Diagrama de Estados del Alumno y Matrícula</h3>
+    <h3>2.2 Diagrama de Ciclo de Vida del Estudiante y Certificación (Ley N° 19.628)</h3>
     <div class="mermaid-box">
       <div class="mermaid">
 stateDiagram-v2
-    [*] --> Postulante_Registrado: Llenado Ficha Digital + Abono 50%
-    Postulante_Registrado --> Documentacion_Pendiente: Derivación a WhatsApp (+56 9 8231 2128)
-    Documentacion_Pendiente --> Alumno_Activo: Validación 10 Documentos
-    Alumno_Activo --> En_Capacitacion: Acceso a Lecciones y Aulas en LMS
-    En_Capacitacion --> Requisitos_Completados: Progreso 100% en Plataforma
-    Requisitos_Completados --> Diploma_Emitido: Emisión PDF con Sello SENCE (Sin Notas)
+    [*] --> Postulante_Inscrito: Ficha 8 Campos + Declaración Jurada + Abono 50%
+    Postulante_Inscrito --> En_Revision_Documental: Recepción en WhatsApp (+56 9 7869 1869)
+    En_Revision_Documental --> Matriculado_Oficial: Validación Antecedentes Especiales + Licencia Media
+    Matriculado_Oficial --> En_Formacion_LMS: Clases Sincrónicas con Docentes OS-10 + Aula Virtual
+    En_Formacion_LMS --> Evaluacion_Completada: Asistencia ≥ 75% + Exámenes Formativos
+    Evaluacion_Completada --> Visto_Bueno_Admin: Auditoría Administrativa PrevySeg
+    Visto_Bueno_Admin --> Diploma_Emitido: Diploma Digital con QR Antifraude (Sin Notas Numéricas)
     Diploma_Emitido --> [*]
       </div>
     </div>
 
-    <h2>3. Matriz de Requerimientos Funcionales (RF)</h2>
+    <h2>3. Matriz Exhaustiva de Requerimientos Funcionales (RF-01 a RF-22)</h2>
     <table>
       <thead>
         <tr>
@@ -240,26 +258,28 @@ stateDiagram-v2
         </tr>
       </thead>
       <tbody>
-        <tr><td><strong>RF-01</strong></td><td>Admisión</td><td><strong>Ficha Digital Oficial</strong></td><td>Captura datos personales y laborales del estudiante (RUT, Nombre, Teléfono, Empresa, etc.).</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-02</strong></td><td>Admisión</td><td><strong>Cálculo Abono 50%</strong></td><td>Desglose dinámico de Cuota N°1 (50% de reserva) y Cuota N°2 (saldo al inicio de clases).</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-03</strong></td><td>Normativo</td><td><strong>Diferenciación SPD vs Oficios</strong></td><td>Aviso normativo claro: Cursos de Guardia requieren examen presencial ante SPD; Oficios con certificación directa.</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-04</strong></td><td>Admisión</td><td><strong>Coordinación WhatsApp</strong></td><td>Mensaje codificado URI hacia WhatsApp (+56 9 8231 2128) con código y detalle de 10 documentos.</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-05</strong></td><td>Admisión</td><td><strong>Buzón de Preguntas / Dudas</strong></td><td>Formulario interactivo con aviso de contacto para orientación y requerimiento de documentos.</td><td>Should Have</td></tr>
-        <tr><td><strong>RF-06</strong></td><td>Seguridad</td><td><strong>Encriptación Bcrypt (256-bit)</strong></td><td>Hasheo Blowfish Bcrypt ($2a$10$) mediante pgcrypto en PostgreSQL y Supabase Auth. Cero texto plano.</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-07</strong></td><td>Seguridad</td><td><strong>Procedimiento register_new_student</strong></td><td>Función PL/pgSQL atómica para registro seguro de usuarios y matrícula.</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-08</strong></td><td>Seguridad</td><td><strong>Procedimiento admin_create_user</strong></td><td>Función PL/pgSQL para creación de usuarios desde consola con rol asignable (ADMIN, TEACHER, STUDENT).</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-09</strong></td><td>Seguridad</td><td><strong>Procedimiento change_user_password</strong></td><td>Función PL/pgSQL para actualización segura y re-hasheo de contraseñas.</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-10</strong></td><td>Validación</td><td><strong>Algoritmo Módulo 11 RUT</strong></td><td>Validación matemática estricta del dígito verificador del RUT chileno.</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-11</strong></td><td>Validación</td><td><strong>Formateador Dinámico de RUT</strong></td><td>Formateo automático de inputs en vivo a estructura XX.XXX.XXX-X al escribir.</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-12</strong></td><td>Validación</td><td><strong>Medidor de Fuerza de Clave</strong></td><td>Evaluación en tiempo real de la robustez de contraseñas con 5 niveles visuales.</td><td>Should Have</td></tr>
-        <tr><td><strong>RF-13</strong></td><td>Seguridad</td><td><strong>Modal de Acceso 1-Click Demo</strong></td><td>Plataforma modal con ver/ocultar clave y accesos demo para los 3 roles.</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-14</strong></td><td>LMS Admin</td><td><strong>Gestión Participantes & Claves</strong></td><td>Consola de alumnos con modal interactivo para Cambiar / Restablecer Contraseña (🔑).</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-15</strong></td><td>LMS Alumno</td><td><strong>Área Personal & Cursos</strong></td><td>Panel de control del estudiante con avance porcentual y estado SENCE.</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-16</strong></td><td>LMS Alumno</td><td><strong>Aula Virtual & Lecciones</strong></td><td>Visualización estructurada de módulos pedagógicos y evaluaciones.</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-17</strong></td><td>Certificación</td><td><strong>Visto Bueno Administrativo</strong></td><td>Panel de validación para emitir diplomas oficiales en PDF con sello SENCE y QR.</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-18</strong></td><td>Certificación</td><td><strong>Confidencialidad Ley 19.628</strong></td><td>Cero exposición de notas numéricas en certificados públicos.</td><td>Must Have</td></tr>
-        <tr><td><strong>RF-19</strong></td><td>Servicios</td><td><strong>Bolsa de Empleo Regional</strong></td><td>Portal de ofertas laborales de seguridad en Arica con postulación con RUT.</td><td>Should Have</td></tr>
-        <tr><td><strong>RF-20</strong></td><td>Comercial</td><td><strong>Matriz Tramos SENCE</strong></td><td>Exposición de los tramos de franquicia tributaria (100%, 50%, 15% y Particular).</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-01</strong></td><td>Catálogo</td><td><strong>Catálogo Cerrado de 20 Cursos Oficiales</strong></td><td>Despliegue de exactamente 10 programas de seguridad (Ley N° 21.659) y 10 cursos de oficios industriales con arancel, horas y abono del 50%.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-02</strong></td><td>Académico</td><td><strong>Cuerpo Docente Oficial OS-10</strong></td><td>Presentación curricular de los instructores acreditados ante Carabineros de Chile (Marco Antonio Gallardo Sáez e Ing. Patricio Melgarejo Araníbar).</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-03</strong></td><td>Admisión</td><td><strong>Ficha de Admisión de 8 Campos Obligatorios</strong></td><td>Captura y validación de 8 datos personales: Nombre completo, RUT, Fecha de Nacimiento, Correo, Teléfono/WhatsApp, Dirección Particular, Región (16 regiones) y Ciudad/Comuna.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-04</strong></td><td>Validación</td><td><strong>Algoritmo Módulo 11 para RUT</strong></td><td>Validación matemática en tiempo real del dígito verificador y formateador automático dinámico a formato XX.XXX.XXX-X.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-05</strong></td><td>Normativo</td><td><strong>Declaración Jurada con Ticket Interactivo</strong></td><td>Casilla obligatoria con fe de juramento que desglosa los requisitos de admisión en OTEC PrevySeg vs requisitos en plataforma de la SPD.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-06</strong></td><td>Notificaciones</td><td><strong>Motor Dual de Correo en Tiempo Real</strong></td><td>Despacho simultáneo vía Gmail SMTP (prevysegconfirm@gmail.com) y Resend API hacia el alumno y hacia prevyseg.capacitaciones@gmail.com con Promise.all y keepalive: true.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-07</strong></td><td>Financiero</td><td><strong>Boceto Oficial de Transferencia y Código QR</strong></td><td>Inserción en pantalla y en ambos correos de los datos bancarios oficiales de PREVYSEG SPA (RUT 76.256.947-7, Cta Cte 1000163399 Banco Estado / Chile) y código QR escaneable generado dinámicamente.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-08</strong></td><td>Admisión</td><td><strong>Redirección Instantánea a WhatsApp</strong></td><td>Apertura inmediata y sincrónica al pulsar Enviar Información hacia la línea oficial (+56 9 7869 1869) con el texto pre-llenado de los 8 datos y sin bloqueo de popups.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-09</strong></td><td>Financiero</td><td><strong>Deshabilitación de Pasarela de Pagos Web</strong></td><td>Desactivación de pasarela directa en línea; el sistema prioriza la transferencia bancaria con respaldo y la coordinación humana asistida por admisiones.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-10</strong></td><td>Persistencia</td><td><strong>Procedimiento Atómico process_enrollment_registration</strong></td><td>Función PL/pgSQL con transacciones seguras que registra usuario, cohorte y matrícula en Supabase, impidiendo registros huérfanos y garantizando matrícula única por cohorte.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-11</strong></td><td>Seguridad</td><td><strong>Criptografía Blowfish Bcrypt 256-bit</strong></td><td>Encriptación unidireccional con costo 10 usando pgcrypto en PostgreSQL para todas las credenciales de acceso. Cero almacenamiento en texto plano.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-12</strong></td><td>Seguridad</td><td><strong>Procedimiento admin_create_user y change_user_password</strong></td><td>Funciones administrativas para enrolamiento de cuentas y reseteo/cambio seguro de claves re-hasheadas con Bcrypt en auth.users y public.users.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-13</strong></td><td>Comercial</td><td><strong>Calculadora de Franquicia Tributaria SENCE</strong></td><td>Módulo de cálculo automático de cobertura según tramos de ingresos en UTM (100% hasta 25 UTM, 50% entre 25 y 50 UTM, 15% sobre 50 UTM y pago particular).</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-14</strong></td><td>Comercial</td><td><strong>Enrutamiento Multicanal de WhatsApp</strong></td><td>Conmutación inteligente de líneas oficiales de atención: Admisiones Generales (+56 9 7869 1869) y Coordinación Académica (+56 9 8231 2128).</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-15</strong></td><td>Acceso</td><td><strong>Modal de Acceso 1-Click Demo</strong></td><td>Interfaz modal con alternancia de visibilidad de contraseña (ojo/candado) y accesos rápidos precargados para evaluación de roles ADMIN, TEACHER y STUDENT.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-16</strong></td><td>LMS Admin</td><td><strong>Gestión de Participantes y Claves</strong></td><td>Consola administrativa con filtros por curso, cohorte, búsqueda por RUT, exportación y modal dedicado para restablecimiento de claves encriptadas.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-17</strong></td><td>LMS Alumno</td><td><strong>Área Personal y Progreso Curricular</strong></td><td>Dashboard del alumno con porcentaje de avance, estado de matrícula SENCE y acceso directo a lecciones.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-18</strong></td><td>LMS Alumno</td><td><strong>Aula Virtual y Visor Didáctico Modular</strong></td><td>Entorno didáctico modular con visor de contenidos interactivos, material descargable y cuestionarios formativos.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-19</strong></td><td>Certificación</td><td><strong>Visto Bueno Administrativo de Diplomas</strong></td><td>Módulo de fiscalización interna para auditar asistencia y evaluaciones antes de autorizar la emisión de certificados oficiales.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-20</strong></td><td>Certificación</td><td><strong>Confidencialidad Ley N° 19.628</strong></td><td>Diplomas públicos emitidos con aprobación cualitativa (APROBADO) sin exhibir notas numéricas, protegiendo los datos personales del estudiante.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-21</strong></td><td>Certificación</td><td><strong>Verificación Criptográfica QR Antifraude</strong></td><td>Generación de código QR en diplomas que enlaza a endpoint público de validación de autenticidad y vigencia institucional.</td><td>Must Have</td></tr>
+        <tr><td><strong>RF-22</strong></td><td>Empleabilidad</td><td><strong>Bolsa de Empleo Regional Arica y Parinacota</strong></td><td>Vitrina de ofertas de trabajo en empresas de seguridad e industrias de la región con postulación directa del alumno con su RUT verificado.</td><td>Should Have</td></tr>
       </tbody>
     </table>
 
@@ -275,44 +295,44 @@ stateDiagram-v2
       </thead>
       <tbody>
         <tr><td><strong>RNF-01</strong></td><td>Seguridad Criptográfica</td><td>Hasheo Blowfish Bcrypt ($2a$10$) para 100% de contraseñas. Prohibido texto plano.</td><td>100% hashes Bcrypt</td></tr>
-        <tr><td><strong>RNF-02</strong></td><td>Integridad de Datos</td><td>Sincronización atómica e idempotente (ON CONFLICT) entre auth y public users.</td><td>0 errores de clave</td></tr>
+        <tr><td><strong>RNF-02</strong></td><td>Integridad de Datos</td><td>Persistencia atómica de matrícula e idempotencia (ON CONFLICT) entre auth y public users.</td><td>0 errores de clave</td></tr>
         <tr><td><strong>RNF-03</strong></td><td>Seguridad (RBAC)</td><td>Aislamiento estricto de vistas y funciones según rol (ADMIN, TEACHER, STUDENT).</td><td>100% rutas protegidas</td></tr>
         <tr><td><strong>RNF-04</strong></td><td>Rendimiento</td><td>Tiempo de renderizado inicial (FCP) inferior a 1.2s y compilación limpia con Vite.</td><td>FCP ≤ 1.2s</td></tr>
         <tr><td><strong>RNF-05</strong></td><td>Disponibilidad</td><td>Disponibilidad del servicio 24/7 con SLA del 99.8% mensual.</td><td>Uptime ≥ 99.8%</td></tr>
         <tr><td><strong>RNF-06</strong></td><td>Usabilidad / Accesibilidad</td><td>Contraste WCAG 2.1 AA (bg-slate-50, text-slate-900) y tipografía legible.</td><td>Ratio ≥ 4.5:1</td></tr>
         <tr><td><strong>RNF-07</strong></td><td>Compatibilidad</td><td>Funcionamiento garantizado en Chrome, Edge, Firefox, Safari y móviles.</td><td>100% estándar</td></tr>
-        <tr><td><strong>RNF-08</strong></td><td>Mantenibilidad</td><td>Código modular desacoplado en React (supabase.js, validation.js).</td><td>Modular sin deuda</td></tr>
+        <tr><td><strong>RNF-08</strong></td><td>Mantenibilidad</td><td>Código modular desacoplado en React (supabase.js, notificationService.js, validation.js).</td><td>Modular sin deuda</td></tr>
         <tr><td><strong>RNF-09</strong></td><td>Cumplimiento SENCE</td><td>Trazabilidad de participantes bajo Norma Chilena NCh 2728:2015.</td><td>Auditoría 100% OK</td></tr>
         <tr><td><strong>RNF-10</strong></td><td>Privacidad (Ley 19.628)</td><td>Certificados con acreditación cualitativa ("APROBADO") sin notas numéricas.</td><td>0% notas expuestas</td></tr>
-        <tr><td><strong>RNF-11</strong></td><td>Tolerancia a Fallos</td><td>Captura de errores con React Error Boundaries y mensajes amigables.</td><td>0 pantallas blancas</td></tr>
-        <tr><td><strong>RNF-12</strong></td><td>Trazabilidad Git</td><td>Commits semánticos y descriptivos en español sincronizados en GitHub.</td><td>100% en main</td></tr>
+        <tr><td><strong>RNF-11</strong></td><td>Tolerancia a Fallos</td><td>Captura de errores con React Error Boundaries y motor dual (Gmail SMTP ↔ Resend).</td><td>0 pantallas blancas</td></tr>
+        <tr><td><strong>RNF-12</strong></td><td>Trazabilidad Git</td><td>Commits semánticos y descriptivos en español sincronizados en GitHub (Sebastianaso/PrevySeg2026).</td><td>100% en main</td></tr>
       </tbody>
     </table>
 
-    <h2>5. Aprobación y Validación de Ingeniería</h2>
+    <h2>5. Aprobación Formal y Validación de Entrega</h2>
     <table>
       <thead>
         <tr>
           <th>Rol / Responsabilidad</th>
-          <th>Nombre y Especialidad</th>
+          <th>Nombre, Título e Institución</th>
           <th>Estado y Validación</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td><strong>Ingeniero Líder de Software / TI</strong></td>
-          <td>Sebastián Araya — Ingeniería Informática</td>
-          <td style="color: #16A34A; font-weight: bold;">APROBADO TÉCNICAMENTE</td>
+          <td><strong>Estudiante en Práctica Profesional</strong></td>
+          <td>Sebastián Ignacio Acuña Valderrama (RUT: 21.778.425-5)<br>Ingeniería en Informática — IP Santo Tomás Sede Arica</td>
+          <td style="color: #16A34A; font-weight: bold;">ENTREGA CONFORME<br>Noviembre 2026</td>
         </tr>
         <tr>
-          <td><strong>Director Académico OTEC</strong></td>
-          <td>Viviane Montesillo — Dirección PrevySeg Ltda.</td>
-          <td style="color: #16A34A; font-weight: bold;">APROBADO INSTITUCIONAL</td>
+          <td><strong>Supervisora Centro de Práctica</strong></td>
+          <td>Viviane Montesillo<br>Dirección General — OTEC PrevySeg SpA</td>
+          <td style="color: #16A34A; font-weight: bold;">RECEPCIÓN CONFORME<br>Noviembre 2026</td>
         </tr>
         <tr>
-          <td><strong>Aseguramiento Calidad NCh 2728 / SENCE</strong></td>
-          <td>Comité de Calidad y Auditoría OTEC</td>
-          <td style="color: #16A34A; font-weight: bold;">CONFORME A NORMATIVA</td>
+          <td><strong>Docente Guía Santo Tomás</strong></td>
+          <td>Paola Andrea Cifuentes Berríos<br>Docente Guía — IP Santo Tomás Sede Arica</td>
+          <td style="color: #16A34A; font-weight: bold;">APROBADO ACADÉMICO<br>Noviembre 2026</td>
         </tr>
       </tbody>
     </table>
